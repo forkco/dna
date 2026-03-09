@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>404 — FORK Design Language</title>
+<meta name="theme-color" content="#F5F5F2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1A1A18" media="(prefers-color-scheme: dark)">
+<link href="https://fonts.googleapis.com/css2?family=Besley:ital,wght@0,400..900;1,400..900&family=Figtree:ital,wght@0,300..700;1,300..700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script>(function(){var t=localStorage.getItem('te-theme');if(!t){t=window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'}document.documentElement.setAttribute('data-theme',t)})()</script>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <a href="index.html" class="header-title"><span class="header-title-accent">FORK</span></a>
+  </div>
+  <div class="header-controls">
+    <button class="toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+      <span class="toggle-label">Light</span>
+      <div class="toggle-track"></div>
+      <span class="toggle-label">Dark</span>
+    </button>
+  </div>
+</div>
+
+<main id="main-content">
+  <div class="landing-hero">
+    <div class="landing-hero-inner">
+      <div class="landing-overline">404</div>
+      <h1 class="landing-title">Page not found</h1>
+      <p style="font-family: var(--fontMono); font-size: var(--typeCode); color: var(--secondaryLabel); margin-top: var(--space16);">
+        <a href="index.html" style="color: var(--tint); text-decoration: none;">Back to FORK</a>
+      </p>
+    </div>
+  </div>
+</main>
+
+<div class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="footer-brand-accent">FORK</span> Design Language
+    </div>
+    <div class="footer-meta">&copy; 2026 FORK Apps, Inc.</div>
+  </div>
+</div>
+
+<script src="scripts.js"></script>
+</body>
+</html>
