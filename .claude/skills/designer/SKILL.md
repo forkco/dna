@@ -92,6 +92,7 @@ FORK's aesthetic sits at the intersection of four traditions:
 - **Surfaces are honest** — glass refracts, shadows follow light, fills show depth. No fake materials.
 - **Motion is physics** — springs, not linear easing. Asymmetric press/release. Objects have weight.
 - **Positioning is relative** — never hardcode pixel offsets between elements. Use flex/grid structure, token-based spacing, and relative positioning so layout adapts when any single element changes size. If element B must sit above element A, make them siblings in a flex container — don't absolute-position B with a magic `bottom: 72px`. Hardcoded spatial relationships are fragile and violate the token system.
+- **Reuse is primary** — before building anything new, check if an existing component or pattern already solves the problem. When implementing a large feature, decompose it into parts and ask: does this part already exist as a component? Can this part be extracted as a reusable component for other contexts? If a pattern appears in 2+ places, it must be a shared component. The tint picker and terminal traffic lights are both "colored dot rows" — that's one component, not two. A progress bar in a terminal is the same progress bar everywhere. Silent duplication is a bug.
 
 ### Never do
 
@@ -123,13 +124,16 @@ For detailed quality guidelines (contrast checking, vertical rhythm, optical siz
 Multi-page architecture with shared styles and scripts:
 
 ```
-index.html         — Landing page with navigation grid
+index.html         — Landing page with hero, navigation card grid, PlanarKit dot pattern
 styles.css         — All CSS: reset, theme tokens (light + dark), component styles, prose, utilities
 scripts.js         — Theme toggle, tint picker, token resolution, copy/toast, scroll spy
+planarkit.js       — Dot pattern physics engine (Canvas 2D)
 pages/
   colors.html      — Color tokens: backgrounds, labels, fills, separators, system, tint, grays, semantic, on-colors
   layout.html      — Shadows, spacing & radius, concentric corner radius
-  components.html  — Button, input, markdown prose
+  components.html  — Button, input, switch, dropdown, avatar, badge, tag, tabs, list, card, modal, empty state, skeleton, markdown, dot indicator, progress bar, chrome bar
+  chat.html        — Message bubbles, rich content, typing indicators, conversation patterns
+  terminal.html    — Console chrome, prompt, output, syntax highlighting, ANSI colors, diff blocks, session
   typography.html  — Display / Besley, body / Figtree, mono / IBM Plex
   visual-direction.html — Liquid glass, glass + dot, dot pattern
   motion.html      — Spring presets, press/release, dot states
@@ -476,3 +480,4 @@ Run through before considering any change done:
 - [ ] **Section template** — every section has: demo, usage ("When to use"), platform notes. No section ships without platform notes.
 - [ ] **Safe area** — on mobile, no content under notch/home indicator. Header uses safe-area-inset-top, footer uses safe-area-inset-bottom.
 - [ ] **Tap targets** — all interactive elements ≥ 44×44px. Check tint dots, nav links, sidebar links, toggles.
+- [ ] **Component reuse** — does the new code introduce a visual pattern that already exists as a component? Could any part be extracted as a reusable component? If a pattern appears in 2+ places, extract it to components.html.

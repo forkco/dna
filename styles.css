@@ -3261,20 +3261,7 @@ a.header-title:hover {
   min-height: 1.6em;
 }
 
-.landing-typewriter-cursor {
-  display: inline-block;
-  width: 2px;
-  height: 1.1em;
-  background: var(--tint);
-  margin-left: 1px;
-  vertical-align: text-bottom;
-  animation: typewriter-blink 0.8s steps(2) infinite;
-}
-
-@keyframes typewriter-blink {
-  0%, 49.9% { opacity: 1; }
-  50%, 100% { opacity: 0; }
-}
+/* Uses shared .cursor.cursor--line component (see cursor-blink keyframes) */
 
 .landing-version {
   font-family: var(--fontMono);
@@ -4741,6 +4728,383 @@ a.header-title:hover {
   flex: 1;
   display: flex;
   flex-direction: column;
+}
+
+/* ── Cursor ── */
+.cursor {
+  animation: cursor-blink 1s steps(2) infinite;
+}
+
+/* Typing state — solid, no blink */
+.cursor--typing {
+  animation: none;
+  opacity: 1;
+}
+
+/* Line cursor — thin 2px bar (typewriter, search, text fields) */
+.cursor--line::before {
+  content: "";
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background: var(--tint);
+  vertical-align: text-bottom;
+}
+
+/* Block cursor — monospace character cell (terminal, code editor) */
+.cursor--block {
+  background: var(--tint);
+  border-radius: 1px;
+  line-height: 1.2; /* slightly taller than em-square for visual weight */
+}
+
+.cursor--block::before {
+  content: "\200b"; /* zero-width space for baseline alignment in flex */
+  display: inline-block;
+  width: 1ch;
+}
+
+@keyframes cursor-blink {
+  0%, 49.9% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+/* ── Window ── */
+.window {
+  background: var(--secondarySystemBackground);
+  border: 1px solid var(--border);
+  border-radius: var(--radius14);
+  overflow: hidden;
+  box-shadow: var(--shadowMedium);
+  transition: background 0.25s var(--easeFluent), border-color 0.25s var(--easeFluent), box-shadow 0.25s var(--easeFluent);
+}
+
+.window-titlebar {
+  display: flex;
+  align-items: center;
+  gap: var(--space8);
+  padding: var(--space12) var(--space16);
+  background: var(--tertiarySystemBackground);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.25s var(--easeFluent), border-color 0.25s var(--easeFluent);
+}
+
+.window-controls {
+  display: flex;
+  gap: 6px;
+}
+
+.window-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+}
+
+.window-dot--close { background: var(--systemRed); }
+.window-dot--minimize { background: var(--systemYellow); }
+.window-dot--maximize { background: var(--systemGreen); }
+
+.window-title {
+  flex: 1;
+  text-align: center;
+  font-family: var(--fontMono);
+  font-size: var(--typeCaption1);
+  color: var(--secondaryLabel);
+  margin-right: 54px; /* offset for centered title (3 dots × 14px + 2 gaps × 6px) */
+}
+
+.window-tabs {
+  display: flex;
+  gap: var(--space2);
+  margin-left: auto;
+}
+
+.window-tab {
+  padding: var(--space4) var(--space12);
+  font-family: var(--fontMono);
+  font-size: var(--typeCaption2);
+  color: var(--tertiaryLabel);
+  border-radius: var(--radius6);
+  cursor: pointer;
+  transition: background 0.15s var(--easeFluent), color 0.15s var(--easeFluent);
+}
+
+.window-tab:hover {
+  background: var(--systemFill);
+  color: var(--secondaryLabel);
+}
+
+.window-tab--active {
+  background: var(--systemFill);
+  color: var(--label);
+}
+
+/* ── Terminal ── */
+.term-surface {
+  padding: var(--space16);
+  font-family: var(--fontMono);
+  font-size: var(--typeCode);
+  line-height: 1.7;
+  color: var(--label);
+  overflow-x: auto;
+  min-height: 120px;
+}
+
+/* ── Terminal Lines ── */
+.term-line {
+  font-family: var(--fontMono);
+  font-size: var(--typeCode);
+  line-height: 1.7;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.term-line--stdin {
+  color: var(--label);
+}
+
+.term-line--stdout {
+  color: var(--secondaryLabel);
+}
+
+.term-line--stderr {
+  color: var(--systemRed);
+}
+
+.term-line--success {
+  color: var(--success);
+}
+
+.term-line--warning {
+  color: var(--warning);
+}
+
+.term-line--info {
+  color: var(--systemBlue);
+}
+
+.term-line--muted {
+  color: var(--tertiaryLabel);
+}
+
+/* ── Terminal Prompt ── */
+.term-prompt {
+  display: flex;
+  align-items: baseline;
+  gap: 0;
+  font-family: var(--fontMono);
+  font-size: var(--typeCode);
+  line-height: 1.7;
+}
+
+.term-prompt-path {
+  color: var(--secondaryLabel);
+}
+
+.term-prompt-symbol {
+  color: var(--tint);
+  margin: 0 var(--space8) 0 var(--space4);
+}
+
+.term-prompt-input {
+  color: var(--label);
+  white-space: pre;
+}
+
+/* Uses shared .cursor.cursor--block component */
+
+.term-prompt-ghost {
+  color: var(--quaternaryLabel);
+}
+
+/* ── Terminal Syntax Highlighting ── */
+.term-kw { color: var(--systemPink); }
+.term-str { color: var(--systemGreen); }
+.term-num { color: var(--systemOrange); }
+.term-comment { color: var(--tertiaryLabel); }
+.term-op { color: var(--label); }
+.term-type { color: var(--systemYellow); }
+.term-fn { color: var(--systemBlue); }
+.term-prop { color: var(--secondaryLabel); }
+.term-punct { color: var(--tertiaryLabel); }
+.term-param { color: var(--label); }
+.term-flag { color: var(--tint); }
+.term-path { color: var(--link); }
+
+/* ── Terminal ANSI Colors ── */
+.term-ansi-black { color: var(--label); }
+.term-ansi-red { color: var(--systemRed); }
+.term-ansi-green { color: var(--systemGreen); }
+.term-ansi-yellow { color: var(--systemYellow); }
+.term-ansi-blue { color: var(--systemBlue); }
+.term-ansi-magenta { color: var(--systemPink); }
+.term-ansi-cyan { color: var(--tintTeal); }
+.term-ansi-white { color: var(--tertiaryLabel); }
+
+/* Bright ANSI — theme shift handles brightness */
+.term-ansi-bright-black { color: var(--secondaryLabel); }
+.term-ansi-bright-red { color: var(--systemRed); }
+.term-ansi-bright-green { color: var(--systemGreen); }
+.term-ansi-bright-yellow { color: var(--systemYellow); }
+.term-ansi-bright-blue { color: var(--systemBlue); }
+.term-ansi-bright-magenta { color: var(--systemPink); }
+.term-ansi-bright-cyan { color: var(--tintTeal); }
+.term-ansi-bright-white { color: var(--label); }
+
+/* ── Terminal Blocks ── */
+.term-block {
+  margin: var(--space8) 0;
+  padding: var(--space12) var(--space16);
+  background: var(--tertiarySystemBackground);
+  border: 1px solid var(--border);
+  border-radius: var(--radius10);
+  overflow-x: auto;
+  transition: background 0.25s var(--easeFluent), border-color 0.25s var(--easeFluent);
+}
+
+.term-diff-add {
+  color: var(--systemGreen);
+  background: rgba(26, 167, 103, 0.06);
+}
+
+[data-theme="dark"] .term-diff-add {
+  background: rgba(48, 209, 88, 0.08);
+}
+
+.term-diff-del {
+  color: var(--systemRed);
+  background: rgba(206, 32, 33, 0.06);
+}
+
+[data-theme="dark"] .term-diff-del {
+  background: rgba(255, 69, 58, 0.08);
+}
+
+.term-diff-hunk {
+  color: var(--systemBlue);
+  font-weight: 600;
+}
+
+/* ── Terminal Progress ── */
+.term-progress {
+  display: flex;
+  align-items: center;
+  gap: var(--space8);
+  font-family: var(--fontMono);
+  font-size: var(--typeCode);
+  line-height: 1.7;
+}
+
+.term-progress-track {
+  flex: 1;
+  height: 4px;
+  background: var(--tertiarySystemFill);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.term-progress-bar {
+  height: 100%;
+  background: var(--tint);
+  border-radius: 2px;
+  transition: width 0.4s var(--easeFluent);
+}
+
+.term-progress-label {
+  color: var(--secondaryLabel);
+  min-width: 3ch;
+  text-align: right;
+}
+
+/* ── Terminal Badge (inline status) ── */
+.term-badge {
+  display: inline-block;
+  font-family: var(--fontMono);
+  font-size: var(--typeOverline);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: var(--space2) var(--space8);
+  border-radius: var(--radius6);
+}
+
+.term-badge--success {
+  color: var(--success);
+  background: rgba(26, 161, 103, 0.12);
+}
+
+.term-badge--error {
+  color: var(--destructive);
+  background: rgba(206, 32, 33, 0.12);
+}
+
+.term-badge--warning {
+  color: var(--warning);
+  background: rgba(229, 172, 0, 0.12);
+}
+
+.term-badge--info {
+  color: var(--systemBlue);
+  background: rgba(18, 112, 184, 0.12);
+}
+
+/* ── Terminal Side-by-Side ── */
+.term-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space16);
+}
+
+@media (max-width: 720px) {
+  .term-pair {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Terminal ANSI Swatch Grid ── */
+.term-ansi-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: var(--space4);
+}
+
+.term-ansi-swatch {
+  aspect-ratio: 1;
+  border-radius: var(--radius6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  font-family: var(--fontMono);
+  font-size: var(--typeOverline);
+  letter-spacing: 0.04em;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: transform 0.15s var(--easeSpring);
+}
+
+.term-ansi-swatch:active {
+  transform: scale(0.95);
+}
+
+.term-ansi-swatch-num {
+  font-weight: 600;
+  color: var(--onLight);
+  text-shadow: var(--textShadowOnFill);
+}
+
+.term-ansi-swatch-label {
+  font-size: 9px;
+  color: var(--onLight);
+  text-shadow: var(--textShadowOnFill);
+  opacity: 0.8;
+}
+
+@media (max-width: 720px) {
+  .term-ansi-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 /* ── Reduced Motion ── */

@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Terminal — FORK Design Language</title>
+<meta name="description" content="FORK terminal components: console chrome, prompt, output, syntax highlighting, ANSI colors, diff blocks, and session patterns.">
+<meta name="theme-color" content="#F5F5F2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1A1A18" media="(prefers-color-scheme: dark)">
+<link href="https://fonts.googleapis.com/css2?family=Besley:ital,wght@0,400..900;1,400..900&family=Figtree:ital,wght@0,300..700;1,300..700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+<script>(function(){var t=localStorage.getItem('te-theme');if(!t){t=window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'}document.documentElement.setAttribute('data-theme',t)})()</script>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Skip to content</a>
+
+<div class="header">
+  <div class="header-left">
+    <a href="../index.html" class="header-title"><span class="header-title-accent">FORK</span></a>
+    <div class="tint-picker" id="tint-picker"></div>
+  </div>
+  <nav class="top-nav" aria-label="Main navigation">
+    <a class="top-nav-link" href="colors.html">Colors</a>
+    <a class="top-nav-link" href="layout.html">Layout</a>
+    <a class="top-nav-link" href="components.html">Components</a>
+    <a class="top-nav-link" href="chat.html">Chat</a>
+    <a class="top-nav-link active" href="terminal.html" aria-current="page">Terminal</a>
+    <a class="top-nav-link" href="typography.html">Typography</a>
+    <a class="top-nav-link" href="visual-direction.html">Visual</a>
+    <a class="top-nav-link" href="motion.html">Motion</a>
+    <a class="top-nav-link" href="reference.html">Reference</a>
+  </nav>
+  <div class="header-controls">
+    <button class="toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+      <span class="toggle-label">Light</span>
+      <div class="toggle-track"></div>
+      <span class="toggle-label">Dark</span>
+    </button>
+  </div>
+</div>
+
+<div class="page-layout">
+
+<nav class="sidebar" id="sidebar" aria-label="Page sections">
+  <div class="sidebar-group">
+    <div class="sidebar-group-label">Surface</div>
+    <a class="sidebar-link" href="#terminal-chrome">Terminal Chrome</a>
+    <a class="sidebar-link" href="#terminal-surface">Terminal Surface</a>
+    <a class="sidebar-link" href="#prompt">Prompt</a>
+  </div>
+  <div class="sidebar-group">
+    <div class="sidebar-group-label">Output</div>
+    <a class="sidebar-link" href="#plain-output">Plain Output</a>
+    <a class="sidebar-link" href="#syntax-highlighting">Syntax Highlighting</a>
+    <a class="sidebar-link" href="#status-output">Status Output</a>
+  </div>
+  <div class="sidebar-group">
+    <div class="sidebar-group-label">Patterns</div>
+    <a class="sidebar-link" href="#ansi-colors">ANSI Colors</a>
+    <a class="sidebar-link" href="#blocks">Blocks</a>
+    <a class="sidebar-link" href="#session">Session</a>
+  </div>
+</nav>
+
+<div class="page-main">
+<main class="container" id="main-content">
+
+<h1 class="page-title">Terminal</h1>
+<p class="page-subtitle">Console chrome, prompt, output, syntax highlighting, and session patterns for the FORK command interface</p>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- TERMINAL CHROME                          -->
+  <!-- ════════════════════════════════════════ -->
+  <div class="section" id="terminal-chrome">
+    <h2 class="section-title">Terminal Chrome</h2>
+
+    <div class="window" id="interactive-term">
+      <div class="window-titlebar">
+        <div class="window-controls">
+          <div class="window-dot window-dot--close"></div>
+          <div class="window-dot window-dot--minimize"></div>
+          <div class="window-dot window-dot--maximize"></div>
+        </div>
+        <div class="window-title">fork — ~/project · <span style="color: var(--tint);">interactive</span></div>
+      </div>
+      <div class="term-surface" id="interactive-surface" tabindex="0" style="cursor: text; outline: none;">
+        <div class="term-line term-line--muted"># Click here and start typing</div>
+        <div class="term-prompt"><span class="term-prompt-path">~/project</span><span class="term-prompt-symbol">$</span><span class="term-prompt-input">echo "Hello, FORK"</span></div>
+        <div class="term-line term-line--stdout">Hello, FORK</div>
+        <div class="term-prompt" id="active-prompt"><span class="term-prompt-path">~/project</span><span class="term-prompt-symbol">$</span><span class="term-prompt-input" id="active-input"></span><span class="cursor cursor--block" id="active-cursor"></span></div>
+      </div>
+    </div>
+
+    <div class="spec-grid" style="margin-top: var(--space12);">
+      <div class="spec-card">
+        <div class="spec-title">Window Frame</div>
+        <div class="spec-row"><span class="spec-label">Background</span><span class="spec-val">secondarySystemBackground</span></div>
+        <div class="spec-row"><span class="spec-label">Border</span><span class="spec-val">1px solid border</span></div>
+        <div class="spec-row"><span class="spec-label">Radius</span><span class="spec-val">radius14</span></div>
+        <div class="spec-row"><span class="spec-label">Shadow</span><span class="spec-val">shadowMedium</span></div>
+        <div class="spec-row"><span class="spec-label">Overflow</span><span class="spec-val">hidden</span></div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-title">Title Bar</div>
+        <div class="spec-row"><span class="spec-label">Background</span><span class="spec-val">tertiarySystemBackground</span></div>
+        <div class="spec-row"><span class="spec-label">Height</span><span class="spec-val">auto (space12 padding)</span></div>
+        <div class="spec-row"><span class="spec-label">Border bottom</span><span class="spec-val">1px solid border</span></div>
+        <div class="spec-row"><span class="spec-label">Dot size</span><span class="spec-val">12 × 12px</span></div>
+        <div class="spec-row"><span class="spec-label">Dot gap</span><span class="spec-val">6px</span></div>
+        <div class="spec-row"><span class="spec-label">Title font</span><span class="spec-val">IBM Plex Mono · caption1</span></div>
+      </div>
+    </div>
+
+    <div class="usage">
+      <div class="usage-title">When to use</div>
+      <ul class="usage-list">
+        <li><span class="token">.window</span><span class="dash">/</span>The outermost terminal container. Use for any standalone console instance — command line, REPL, log viewer.</li>
+        <li><span class="token">.window-titlebar</span><span class="dash">/</span>Window chrome with traffic lights and title. Omit in embedded/inline terminals where chrome is unnecessary.</li>
+        <li><span class="token">.window-dot</span><span class="dash">/</span>Close (red), minimize (yellow), maximize (green). Decorative on Web, functional on native. Always render all three — partial sets look broken.</li>
+      </ul>
+    </div>
+    <div class="usage">
+      <div class="usage-title">Platform notes</div>
+      <ul class="usage-list">
+        <li><span class="tag tag--ios">iOS</span> Use <code class="code-inline">NSWindow</code>-style title bar for macOS Catalyst. On iOS proper, omit traffic lights — use system navigation chrome instead.</li>
+        <li><span class="tag tag--android">Android</span> Title bar maps to a custom <code class="code-inline">TopAppBar</code>. Traffic lights are decorative only — use system back/close affordances.</li>
+        <li><span class="tag tag--web">Web</span> <code class="code-inline">.window-dot</code> elements are purely visual. Do not attach click handlers unless implementing actual window management (electron, PWA).</li>
+        <li><span class="tag tag--all">All</span> The terminal follows the system theme. Do not force dark mode — the warm neutral surface in light theme is intentional, honoring the Braun influence.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- TERMINAL SURFACE                         -->
+  <!-- ════════════════════════════════════════ -->
+  <div class="section" id="terminal-surface">
+    <h2 class="section-title">Terminal Surface</h2>
+
+    <!-- Minimal vs tabbed side by side -->
+    <div class="term-pair">
+      <div class="window">
+        <div class="window-titlebar">
+          <div class="window-controls">
+            <div class="window-dot window-dot--close"></div>
+            <div class="window-dot window-dot--minimize"></div>
+            <div class="window-dot window-dot--maximize"></div>
+          </div>
+          <div class="window-title">minimal</div>
+        </div>
+        <div class="term-surface">
+          <div class="term-line term-line--muted"># Minimal — no tabs, single session</div>
+          <div class="term-prompt"><span class="term-prompt-path">~</span><span class="term-prompt-symbol">$</span><span class="cursor cursor--block"></span></div>
+        </div>
+      </div>
+
+      <div class="window">
+        <div class="window-titlebar">
+          <div class="window-controls">
+            <div class="window-dot window-dot--close"></div>
+            <div class="window-dot window-dot--minimize"></div>
+            <div class="window-dot window-dot--maximize"></div>
+          </div>
+          <div class="window-tabs">
+            <div class="window-tab window-tab--active">main</div>
+            <div class="window-tab">logs</div>
+            <div class="window-tab">build</div>
+          </div>
+        </div>
+        <div class="term-surface">
+          <div class="term-line term-line--muted"># Tabbed — multi-session terminal</div>
+          <div class="term-prompt"><span class="term-prompt-path">~/project</span><span class="term-prompt-symbol">$</span><span class="cursor cursor--block"></span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="spec-grid" style="margin-top: var(--space12);">
+      <div class="spec-card">
+        <div class="spec-title">Surface</div>
+        <div class="spec-row"><span class="spec-label">Background</span><span class="spec-val">secondarySystemBackground</span></div>
+        <div class="spec-row"><span class="spec-label">Padding</span><span class="spec-val">space16</span></div>
+        <div class="spec-row"><span class="spec-label">Font</span><span class="spec-val">IBM Plex Mono · 14px (typeCode)</span></div>
+        <div class="spec-row"><span class="spec-label">Line height</span><span class="spec-val">1.7</span></div>
+        <div class="spec-row"><span class="spec-label">Text color</span><span class="spec-val">label</span></div>
+        <div class="spec-row"><span class="spec-label">Min height</span><span class="spec-val">120px</span></div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-title">Tabs</div>
+        <div class="spec-row"><span class="spec-label">Font</span><span class="spec-val">IBM Plex Mono · caption2</span></div>
+        <div class="spec-row"><span class="spec-label">Padding</span><span class="spec-val">space4 × space12</span></div>
+        <div class="spec-row"><span class="spec-label">Radius</span><span class="spec-val">radius6</span></div>
+        <div class="spec-row"><span class="spec-label">Active bg</span><span class="spec-val">systemFill</span></div>
+        <div class="spec-row"><span class="spec-label">Active text</span><span class="spec-val">label</span></div>
+        <div class="spec-row"><span class="spec-label">Inactive text</span><span class="spec-val">tertiaryLabel</span></div>
+      </div>
+    </div>
+
+    <div class="usage">
+      <div class="usage-title">When to use</div>
+      <ul class="usage-list">
+        <li><span class="token">.term-surface</span><span class="dash">/</span>The scrollable output area inside the terminal window. Contains all lines, prompts, and blocks.</li>
+        <li><span class="token">.window-tab</span><span class="dash">/</span>Use tabs for multi-session terminals (e.g., main shell + log watcher + build output). Single-session terminals omit tabs and show a title instead.</li>
+      </ul>
+    </div>
+    <div class="usage">
+      <div class="usage-title">Platform notes</div>
+      <ul class="usage-list">
+        <li><span class="tag tag--ios">iOS</span> Surface scrolling: use <code class="code-inline">UIScrollView</code> with <code class="code-inline">.alwaysBounceVertical = true</code>. Rubber banding is mandatory — it signals physics-based scrolling (Design DNA).</li>
+        <li><span class="tag tag--android">Android</span> Use <code class="code-inline">LazyColumn</code> with overscroll effect. Tab bar: <code class="code-inline">ScrollableTabRow</code> with custom indicator matching <code class="code-inline">systemFill</code> background.</li>
+        <li><span class="tag tag--web">Web</span> Surface uses <code class="code-inline">overflow-x: auto</code> for horizontal scroll on wide output. Customize scrollbar with <code class="code-inline">::-webkit-scrollbar</code> (thin, warm neutral) — document Firefox fallback in implementation.</li>
+        <li><span class="tag tag--all">All</span> Terminal surface respects system theme (light/dark). The warm neutral background in light mode is not a bug — it follows the Braun-inspired palette.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- PROMPT                                   -->
+  <!-- ════════════════════════════════════════ -->
+  <div class="section" id="prompt">
+    <h2 class="section-title">Prompt</h2>
+
+    <div class="window">
+      <div class="window-titlebar">
+        <div class="window-controls">
+          <div class="window-dot window-dot--close"></div>
+          <div class="window-dot window-dot--minimize"></div>
+          <div class="window-dot window-dot--maximize"></div>
+        </div>
+        <div class="window-title">prompt variants</div>
+      </div>
+      <div class="term-surface">
+        <div class="term-line term-line--muted"># Standard prompt — path + symbol + input</div>
+        <div class="term-prompt"><span class="term-prompt-path">~/project</span><span class="term-prompt-symbol">$</span><span class="term-prompt-input">fork deploy --production</span></div>
+        <div style="height: var(--space16);"></div>
+
+        <div class="term-line term-line--muted"># Minimal prompt — symbol only</div>
+        <div class="term-prompt"><span class="term-prompt-symbol">$</span><span class="term-prompt-input">fork status</span></div>
+        <div style="height: var(--space16);"></div>
+
+        <div class="term-line term-line--muted"># Active prompt with cursor</div>
+        <div class="term-prompt"><span class="term-prompt-path">~/project</span><span class="term-prompt-symbol">$</span><span class="term-prompt-input">fork </span><span class="term-prompt-ghost">build --watch</span><span class="cursor cursor--block"></span></div>
+        <div style="height: var(--space16);"></div>
+
+        <div class="term-line term-line--muted"># Empty prompt — waiting for input</div>
+        <div class="term-prompt"><span class="term-prompt-path">~</span><span class="term-prompt-symbol">$</span><span class="cursor cursor--block"></span></div>
+      </div>
+    </div>
+
+    <div class="spec-grid" style="margin-top: var(--space12);">
+      <div class="spec-card">
+        <div class="spec-title">Prompt</div>
+        <div class="spec-row"><span class="spec-label">Font</span><span class="spec-val">IBM Plex Mono · 14px (typeCode)</span></div>
+        <div class="spec-row"><span class="spec-label">Path color</span><span class="spec-val">secondaryLabel</span></div>
+        <div class="spec-row"><span class="spec-label">Symbol</span><span class="spec-val">tint — the brand "act now" signal</span></div>
+        <div class="spec-row"><span class="spec-label">Input color</span><span class="spec-val">label (full contrast)</span></div>
+        <div class="spec-row"><span class="spec-label">Ghost text</span><span class="spec-val">quaternaryLabel</span></div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-title">Cursor</div>
+        <div class="spec-row"><span class="spec-label">Shape</span><span class="spec-val">Block (8 × 1.15em)</span></div>
+        <div class="spec-row"><span class="spec-label">Color</span><span class="spec-val">tint</span></div>
+        <div class="spec-row"><span class="spec-label">Animation</span><span class="spec-val">1s step blink (on/off)</span></div>
+        <div class="spec-row"><span class="spec-label">Reduced motion</span><span class="spec-val">Static, no blink</span></div>
+      </div>
+    </div>
+
+    <div class="usage">
+      <div class="usage-title">When to use</div>
+      <ul class="usage-list">
+        <li><span class="token">.term-prompt</span><span class="dash">/</span>The interactive input line. Always shows the prompt symbol (<code class="code-inline">$</code>) — it's the entry point to the terminal.</li>
+        <li><span class="token">.term-prompt-symbol</span><span class="dash">/</span>Uses <code class="code-inline">--tint</code> because the prompt symbol is the terminal's primary call to action. The brand color signals "your turn."</li>
+        <li><span class="token">.term-prompt-ghost</span><span class="dash">/</span>Autocomplete suggestion shown inline. Uses <code class="code-inline">--quaternaryLabel</code> so it never competes with actual input. Accept with Tab/Right arrow.</li>
+        <li><span class="token">.term-prompt-path</span><span class="dash">/</span>Optional. Show the working directory when context matters (multi-project workflows). Omit in single-context terminals.</li>
+      </ul>
+    </div>
+    <div class="usage">
+      <div class="usage-title">Platform notes</div>
+      <ul class="usage-list">
+        <li><span class="tag tag--ios">iOS</span> Cursor: use <code class="code-inline">CABasicAnimation</code> with <code class="code-inline">.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)</code>. Block cursor (filled rect), not line cursor — it's more visible on mono text.</li>
+        <li><span class="tag tag--android">Android</span> Cursor: <code class="code-inline">Modifier.drawBehind</code> with a tint-colored rect, toggled via <code class="code-inline">rememberInfiniteTransition()</code>. Use <code class="code-inline">RepeatMode.Restart</code> with 1s period.</li>
+        <li><span class="tag tag--web">Web</span> <code class="code-inline">@keyframes term-blink</code> with <code class="code-inline">steps(2)</code> — sharp on/off, no fade. Respects <code class="code-inline">prefers-reduced-motion</code> (animation stops, cursor stays visible).</li>
+        <li><span class="tag tag--all">All</span> Ghost text is hint-only — never commit it without explicit user action (Tab or right-arrow). Minimum 44pt tap target on the input area for mobile.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- PLAIN OUTPUT                             -->
+  <!-- ════════════════════════════════════════ -->
+  <div class="section" id="plain-output">
+    <h2 class="section-title">Plain Output</h2>
+
+    <div class="window">
+      <div class="window-titlebar">
+        <div class="window-controls">
+          <div class="window-dot window-dot--close"></div>
+          <div class="window-dot window-dot--minimize"></div>
+          <div class="window-dot window-dot--maximize"></div>
+        </div>
+        <div class="window-title">output</div>
+      </div>
+      <div class="term-surface">
+        <div class="term-prompt"><span class="term-prompt-path">~/project</span><span class="term-prompt-symbol">$</span><span class="term-prompt-input">fork info</span></div>
+        <div class="term-line term-line--stdout">FORK Design System v1.0</div>
+        <div class="term-line term-line--stdout">Platform: Web + iOS + Android</div>
+        <div class="term-line term-line--stdout">Tokens: 127 active</div>
+        <div class="term-line term-line--stdout">Components: 15 documented</div>
+        <div class="term-line term-line--stdout"></div>
+        <div class="term-prompt"><span class="term-prompt-path">~/project</span><span class="term-prompt-symbol">$</span><span class="term-prompt-input">fork list --tokens spacing</span></div>
+        <div class="term-line term-line--stdout">  space2    2px</div>
+        <div class="term-line term-line--stdout">  space4    4px</div>
+        <div class="term-line term-line--stdout">  space8    8px</div>
+        <div class="term-line term-line--stdout">  space12   12px</div>
+        <div class="term-line term-line--stdout">  space16   16px</div>
+        <div class="term-line term-line--stdout">  space24   24px</div>
+        <div class="term-line term-line--stdout">  space32   32px</div>
+        <div class="term-line term-line--stdout">  space48   48px</div>
+        <div class="term-line term-line--stdout">  space64   64px</div>
+        <div class="term-line term-line--muted">9 tokens found</div>
+        <div class="term-line term-line--stdout"></div>
+        <div class="term-prompt"><span class="term-prompt-path">~/project</span><span class="term-prompt-symbol">$</span><span class="cursor cursor--block"></span></div>
+      </div>
+    </div>
+
+    <div class="spec-grid" style="margin-top: var(--space12);">
+      <div class="spec-card">
+        <div class="spec-title">Output Lines</div>
+        <div class="spec-row"><span class="spec-label">Font</span><span class="spec-val">IBM Plex Mono · 14px (typeCode)</span></div>
+        <div class="spec-row"><span class="spec-label">Line height</span><span class="spec-val">1.7</span></div>
+        <div class="spec-row"><span class="spec-label">Wrapping</span><span class="spec-val">pre-wrap + break-all</span></div>
+        <div class="spec-row"><span class="spec-label">stdout color</span><span class="spec-val">secondaryLabel</span></div>
+        <div class="spec-row"><span class="spec-label">stdin echo</span><span class="spec-val">label (full contrast)</span></div>
+        <div class="spec-row"><span class="spec-label">Muted color</span><span class="spec-val">tertiaryLabel</span></div>
+      </div>
+    </div>
+
+    <div class="usage">
+      <div class="usage-title">When to use</div>
+      <ul class="usage-list">
+        <li><span class="token">.term-line--stdout</span><span class="dash">/</span>Standard command output. Uses <code class="code-inline">--secondaryLabel</code> — one step below the user's input, creating a clear visual hierarchy: input (bold, full contrast) → output (softer, secondary).</li>
+        <li><span class="token">.term-line--stdin</span><span class="dash">/</span>Echoed user commands in history. Full <code class="code-inline">--label</code> contrast to distinguish "what you typed" from "what the system said."</li>
+        <li><span class="token">.term-line--muted</span><span class="dash">/</span>Metadata, counters, timestamps. Tertiary contrast — visible but doesn't compete with actual content.</li>
+      </ul>
+    </div>
+    <div class="usage">
+      <div class="usage-title">Platform notes</div>
+      <ul class="usage-list">
+        <li><span class="tag tag--ios">iOS</span> Use <code class="code-inline">Text</code> views in a <code class="code-inline">LazyVStack(alignment: .leading, spacing: 0)</code>. Line height: <code class="code-inline">.lineSpacing(14 * 0.7)</code> to match 1.7× at 14pt.</li>
+        <li><span class="tag tag--android">Android</span> <code class="code-inline">LazyColumn</code> with <code class="code-inline">Text</code> items. Set <code class="code-inline">lineHeight = 23.8.sp</code> (14 × 1.7). Use <code class="code-inline">fontFamily = ibmPlexMono</code>.</li>
+        <li><span class="tag tag--web">Web</span> <code class="code-inline">.term-line</code> uses <code class="code-inline">white-space: pre-wrap</code> to preserve indentation while allowing wrapping. <code class="code-inline">word-break: break-all</code> prevents horizontal overflow on long unbroken strings (e.g., URLs, hashes).</li>
+        <li><span class="tag tag--all">All</span> Hierarchy: user input (<code class="code-inline">--label</code>) stands above output (<code class="code-inline">--secondaryLabel</code>). This is the terminal's core contrast rule — "who said what" is always clear.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- SYNTAX HIGHLIGHTING                      -->
+  <!-- ════════════════════════════════════════ -->
+  <div class="section" id="syntax-highlighting">
+    <h2 class="section-title">Syntax Highlighting</h2>
+
+    <div class="window">
+      <div class="window-titlebar">
+        <div class="window-controls">
+          <div class="window-dot window-dot--close"></div>
+          <div class="window-dot window-dot--minimize"></div>
+          <div class="window-dot window-dot--maximize"></div>
+        </div>
+        <div class="window-title">syntax</div>
+      </div>
+      <div class="term-surface">
+        <div class="term-line"><span class="term-comment">// Token resolver — maps CSS custom properties to computed values</span></div>
+        <div class="term-line"><span class="term-kw">function</span> <span class="term-fn">resolveToken</span><span class="term-punct">(</span><span class="term-param">name</span><span class="term-punct">,</span> <span class="term-param">el</span><span class="term-punct">)</span> <span class="term-punct">{</span></div>
+        <div class="term-line">  <span class="term-kw">const</span> <span class="term-param">style</span> <span class="term-op">=</span> <span class="term-fn">getComputedStyle</span><span class="term-punct">(</span><span class="term-param">el</span> <span class="term-op">||</span> <span class="term-param">document</span><span class="term-punct">.</span><span class="term-prop">documentElement</span><span class="term-punct">);</span></div>
+        <div class="term-line">  <span class="term-kw">const</span> <span class="term-param">value</span> <span class="term-op">=</span> <span class="term-param">style</span><span class="term-punct">.</span><span class="term-fn">getPropertyValue</span><span class="term-punct">(</span><span class="term-str">'--'</span> <span class="term-op">+</span> <span class="term-param">name</span><span class="term-punct">).</span><span class="term-fn">trim</span><span class="term-punct">();</span></div>
+        <div class="term-line">  <span class="term-kw">return</span> <span class="term-param">value</span> <span class="term-op">||</span> <span class="term-str">'undefined'</span><span class="term-punct">;</span></div>
+        <div class="term-line"><span class="term-punct">}</span></div>
+        <div class="term-line"></div>
+        <div class="term-line"><span class="term-comment">// Usage</span></div>
+        <div class="term-line"><span class="term-kw">const</span> <span class="term-param">tint</span> <span class="term-op">=</span> <span class="term-fn">resolveToken</span><span class="term-punct">(</span><span class="term-str">'tint'</span><span class="term-punct">);</span> <span class="term-comment">// → "#E86420"</span></div>
+        <div class="term-line"><span class="term-param">console</span><span class="term-punct">.</span><span class="term-fn">log</span><span class="term-punct">(</span><span class="term-str">`Tokens loaded:</span> <span class="term-num">127</span><span class="term-str">`</span><span class="term-punct">);</span></div>
+      </div>
+    </div>
+
+    <div class="spec-grid" style="margin-top: var(--space12);">
+      <div class="spec-card">
+        <div class="spec-title">Syntax Tokens → System Colors</div>
+        <div class="spec-row"><span class="spec-label"><code class="code-inline">.term-kw</code> Keywords</span><span class="spec-val" style="color: var(--systemPink);">systemPink</span></div>
+        <div class="spec-row"><span class="spec-label"><code class="code-inline">.term-str</code> Strings</span><span class="spec-val" style="color: var(--systemGreen);">systemGreen</span></div>
+        <div class="spec-row"><span class="spec-label"><code class="code-inline">.term-num</code> Numbers</span><span class="spec-val" style="color: var(--systemOrange);">systemOrange</span></div>
+        <div class="spec-row"><span class="spec-label"><code class="code-inline">.term-fn</code> Functions</span><span class="spec-val" style="color: var(--systemBlue);">systemBlue</span></div>
+        <div class="spec-row"><span class="spec-label"><code class="code-inline">.term-type</code> Types</span><span class="spec-val" style="color: var(--systemYellow);">systemYellow</span></div>
+        <div class="spec-row"><span class="spec-label"><code class="code-inline">.term-flag</code> CLI flags</span><span class="spec-val" style="color: var(--tint);">tint</span></div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-title">Structural Tokens</div>
+        <div class="spec-row"><span class="spec-label"><code class="code-inline">.term-op</code> Operators</span><span class="spec-val" style="color: var(--label);">label</span></div>
+        <div class="spec-row"><span class="spec-label"><code class="code-inline">.term-param</code> Parameters</span><span class="spec-val" style="color: var(--label);">label</span></div>
+        <div class="spec-row"><span class="spec-label"><code class="code-inline">.term-prop</code> Properties</span><span class="spec-val" style="color: var(--secondaryLabel);">secondaryLabel</span></div>
+        <div class="spec-row"><span class="spec-label"><code class="code-inline">.term-punct</code> Punctuation</span><span class="spec-val" style="color: var(--tertiaryLabel);">tertiaryLabel</span></div>
+        <div class="spec-row"><span class="spec-label"><code class="code-inline">.term-comment</code> Comments</span><span class="spec-val" style="color: var(--tertiaryLabel);">tertiaryLabel</span></div>
+        <div class="spec-row"><span class="spec-label"><code class="code-inline">.term-path</code> Paths</span><span class="spec-val" style="color: var(--link);">link</span></div>
+      </div>
+    </div>
+
+    <div class="usage">
+      <div class="usage-title">When to use</div>
+      <ul class="usage-list">
+        <li>Syntax highlighting maps to existing system colors — <strong>no new tokens</strong>. This keeps the terminal palette in sync with the rest of the design system.</li>
+        <li><span class="token">.term-kw</span><span class="dash">/</span><code class="code-inline">--systemPink</code> — reserved words. Pink is distinctive and unused in semantic UI, so it reads unambiguously as "language construct."</li>
+        <li><span class="token">.term-str</span><span class="dash">/</span><code class="code-inline">--systemGreen</code> — universal convention across every major editor. Green = literal data.</li>
+        <li><span class="token">.term-flag</span><span class="dash">/</span><code class="code-inline">--tint</code> — CLI flags modify behavior, same semantic as the brand action color.</li>
+        <li><span class="token">.term-comment</span><span class="dash">/</span><code class="code-inline">--tertiaryLabel</code> — comments recede. They're metadata, not content.</li>
+      </ul>
+    </div>
+    <div class="usage">
+      <div class="usage-title">Platform notes</div>
+      <ul class="usage-list">
+        <li><span class="tag tag--ios">iOS</span> Use <code class="code-inline">AttributedString</code> with <code class="code-inline">.foregroundColor</code> per token range. Match the system color tokens: <code class="code-inline">.systemPink</code>, <code class="code-inline">.systemGreen</code>, <code class="code-inline">.systemBlue</code>, etc.</li>
+        <li><span class="tag tag--android">Android</span> Use <code class="code-inline">AnnotatedString</code> with <code class="code-inline">SpanStyle(color = ...)</code> per token range. Map to Material <code class="code-inline">Color</code> values matching the system color hex values.</li>
+        <li><span class="tag tag--web">Web</span> Wrap each token in a <code class="code-inline">&lt;span class="term-*"&gt;</code>. CSS custom properties handle theme switching automatically.</li>
+        <li><span class="tag tag--all">All</span> Zero new tokens. Every highlight color is an existing system color that already adapts to light/dark themes.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- STATUS OUTPUT                            -->
+  <!-- ════════════════════════════════════════ -->
+  <div class="section" id="status-output">
+    <h2 class="section-title">Status Output</h2>
+
+    <div class="window">
+      <div class="window-titlebar">
+        <div class="window-controls">
+          <div class="window-dot window-dot--close"></div>
+          <div class="window-dot window-dot--minimize"></div>
+          <div class="window-dot window-dot--maximize"></div>
+        </div>
+        <div class="window-title">status</div>
+      </div>
+      <div class="term-surface">
+        <div class="term-prompt"><span class="term-prompt-path">~/project</span><span class="term-prompt-symbol">$</span><span class="term-prompt-input">fork build</span></div>
+        <div class="term-line term-line--info">ℹ Compiling 42 modules...</div>
+        <div class="term-line term-line--warning">⚠ Deprecated token --oldFill used in card.swift:17</div>
+        <div class="term-line term-line--warning">⚠ Missing platform note in Button section</div>
+        <div class="term-line term-line--stderr">✕ Build failed: unresolved token --systemFil (typo?)</div>
+        <div class="term-line term-line--stdout"></div>
+        <div class="term-prompt"><span class="term-prompt-path">~/project</span><span class="term-prompt-symbol">$</span><span class="term-prompt-input">fork build --fix</span></div>
+        <div class="term-line term-line--info">ℹ Auto-fixing 1 token reference...</div>
+        <div class="term-line term-line--stdout">  --systemFil → --systemFill</div>
+        <div class="term-line term-line--success">✓ Build complete — 42 modules, 0 errors, 1 warning</div>
+        <div class="term-line term-line--stdout"></div>
+
+        <div class="term-prompt"><span class="term-prompt-path">~/project</span><span class="term-prompt-symbol">$</span><span class="term-prompt-input">fork deploy</span></div>
+        <div class="term-progress">
+          <span class="term-line--info">Uploading</span>
+          <div class="term-progress-track"><div class="term-progress-bar" style="width: 73%;"></div></div>
+          <span class="term-progress-label">73%</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: flex; gap: var(--space8); flex-wrap: wrap; margin-top: var(--space16);">
+      <span class="term-badge term-badge--success">Success</span>
+      <span class="term-badge term-badge--error">Error</span>
+      <span class="term-badge term-badge--warning">Warning</span>
+      <span class="term-badge term-badge--info">Info</span>
+    </div>
+
+    <div class="spec-grid" style="margin-top: var(--space12);">
+      <div class="spec-card">
+        <div class="spec-title">Status Line Colors</div>
+        <div class="spec-row"><span class="spec-label">Error (stderr)</span><span class="spec-val" style="color: var(--systemRed);">systemRed</span></div>
+        <div class="spec-row"><span class="spec-label">Warning</span><span class="spec-val" style="color: var(--systemYellow);">warning (systemYellow)</span></div>
+        <div class="spec-row"><span class="spec-label">Success</span><span class="spec-val" style="color: var(--success);">success (systemGreen)</span></div>
+        <div class="spec-row"><span class="spec-label">Info</span><span class="spec-val" style="color: var(--systemBlue);">systemBlue</span></div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-title">Progress Bar</div>
+        <div class="spec-row"><span class="spec-label">Track</span><span class="spec-val">tertiarySystemFill</span></div>
+        <div class="spec-row"><span class="spec-label">Fill</span><span class="spec-val">tint</span></div>
+        <div class="spec-row"><span class="spec-label">Height</span><span class="spec-val">4px</span></div>
+        <div class="spec-row"><span class="spec-label">Radius</span><span class="spec-val">2px</span></div>
+        <div class="spec-row"><span class="spec-label">Animation</span><span class="spec-val">0.4s easeFluent</span></div>
+      </div>
+    </div>
+
+    <div class="usage">
+      <div class="usage-title">When to use</div>
+      <ul class="usage-list">
+        <li><span class="token">.term-line--stderr</span><span class="dash">/</span>Fatal errors that stop execution. <code class="code-inline">--systemRed</code> demands immediate attention.</li>
+        <li><span class="token">.term-line--warning</span><span class="dash">/</span>Non-fatal issues — deprecated tokens, missing fields. <code class="code-inline">--warning</code> signals "fix soon, not now."</li>
+        <li><span class="token">.term-line--success</span><span class="dash">/</span>Completion confirmations. Use sparingly — only for the final "done" message, not every step.</li>
+        <li><span class="token">.term-line--info</span><span class="dash">/</span>Progress updates, step descriptions. Blue is neutral-informational — it doesn't carry urgency.</li>
+        <li><span class="token">.term-badge</span><span class="dash">/</span>Inline status labels. Use in summaries or dashboards, not inline output.</li>
+      </ul>
+    </div>
+    <div class="usage">
+      <div class="usage-title">Platform notes</div>
+      <ul class="usage-list">
+        <li><span class="tag tag--ios">iOS</span> Status prefix symbols (✓, ✕, ⚠, ℹ) — use SF Symbols equivalents: <code class="code-inline">checkmark.circle</code>, <code class="code-inline">xmark.circle</code>, <code class="code-inline">exclamationmark.triangle</code>, <code class="code-inline">info.circle</code>.</li>
+        <li><span class="tag tag--android">Android</span> Use Material Icons equivalents. Progress bar: <code class="code-inline">LinearProgressIndicator</code> with custom <code class="code-inline">color = tint</code> and <code class="code-inline">trackColor = tertiarySystemFill</code>.</li>
+        <li><span class="tag tag--web">Web</span> Progress bar uses CSS <code class="code-inline">transition: width 0.4s var(--easeFluent)</code> for smooth updates. Prefix symbols are Unicode — no icon font needed.</li>
+        <li><span class="tag tag--all">All</span> Color is semantic, not decorative: red = error, yellow = warning, green = success, blue = info. Same mapping as the design system's semantic color tokens.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- ANSI COLORS                              -->
+  <!-- ════════════════════════════════════════ -->
+  <div class="section" id="ansi-colors">
+    <h2 class="section-title">ANSI Colors</h2>
+
+    <p style="color: var(--secondaryLabel); font-size: var(--typeFootnote); margin-bottom: var(--space16);">The 16 standard ANSI terminal colors mapped to FORK system tokens. No new tokens — the existing palette covers all 16 slots.</p>
+
+    <div style="margin-bottom: var(--space8); font-family: var(--fontMono); font-size: var(--typeOverline); letter-spacing: 0.08em; text-transform: uppercase; color: var(--tertiaryLabel);">Standard (0–7)</div>
+    <div class="term-ansi-grid">
+      <div class="term-ansi-swatch" style="background: var(--label);"><span class="term-ansi-swatch-num">0</span><span class="term-ansi-swatch-label">Black</span></div>
+      <div class="term-ansi-swatch" style="background: var(--systemRed);"><span class="term-ansi-swatch-num">1</span><span class="term-ansi-swatch-label">Red</span></div>
+      <div class="term-ansi-swatch" style="background: var(--systemGreen);"><span class="term-ansi-swatch-num">2</span><span class="term-ansi-swatch-label">Green</span></div>
+      <div class="term-ansi-swatch" style="background: var(--systemYellow);"><span class="term-ansi-swatch-num">3</span><span class="term-ansi-swatch-label">Yellow</span></div>
+      <div class="term-ansi-swatch" style="background: var(--systemBlue);"><span class="term-ansi-swatch-num">4</span><span class="term-ansi-swatch-label">Blue</span></div>
+      <div class="term-ansi-swatch" style="background: var(--systemPink);"><span class="term-ansi-swatch-num">5</span><span class="term-ansi-swatch-label">Magenta</span></div>
+      <div class="term-ansi-swatch" style="background: var(--tintTeal);"><span class="term-ansi-swatch-num">6</span><span class="term-ansi-swatch-label">Cyan</span></div>
+      <div class="term-ansi-swatch" style="background: var(--tertiaryLabel);"><span class="term-ansi-swatch-num">7</span><span class="term-ansi-swatch-label">White</span></div>
+    </div>
+
+    <div style="margin: var(--space16) 0 var(--space8); font-family: var(--fontMono); font-size: var(--typeOverline); letter-spacing: 0.08em; text-transform: uppercase; color: var(--tertiaryLabel);">Bright (8–15)</div>
+    <div class="term-ansi-grid">
+      <div class="term-ansi-swatch" style="background: var(--secondaryLabel);"><span class="term-ansi-swatch-num">8</span><span class="term-ansi-swatch-label">Br.Black</span></div>
+      <div class="term-ansi-swatch" style="background: var(--systemRed);"><span class="term-ansi-swatch-num">9</span><span class="term-ansi-swatch-label">Br.Red</span></div>
+      <div class="term-ansi-swatch" style="background: var(--systemGreen);"><span class="term-ansi-swatch-num">10</span><span class="term-ansi-swatch-label">Br.Green</span></div>
+      <div class="term-ansi-swatch" style="background: var(--systemYellow);"><span class="term-ansi-swatch-num">11</span><span class="term-ansi-swatch-label">Br.Yellow</span></div>
+      <div class="term-ansi-swatch" style="background: var(--systemBlue);"><span class="term-ansi-swatch-num">12</span><span class="term-ansi-swatch-label">Br.Blue</span></div>
+      <div class="term-ansi-swatch" style="background: var(--systemPink);"><span class="term-ansi-swatch-num">13</span><span class="term-ansi-swatch-label">Br.Mag</span></div>
+      <div class="term-ansi-swatch" style="background: var(--tintTeal);"><span class="term-ansi-swatch-num">14</span><span class="term-ansi-swatch-label">Br.Cyan</span></div>
+      <div class="term-ansi-swatch" style="background: var(--label);"><span class="term-ansi-swatch-num">15</span><span class="term-ansi-swatch-label">Br.White</span></div>
+    </div>
+
+    <div class="spec-grid" style="margin-top: var(--space16);">
+      <div class="spec-card">
+        <div class="spec-title">ANSI → FORK Mapping</div>
+        <div class="spec-row"><span class="spec-label">0 Black</span><span class="spec-val">label (#1A1A18 / #F5F5F2)</span></div>
+        <div class="spec-row"><span class="spec-label">1 Red</span><span class="spec-val">systemRed</span></div>
+        <div class="spec-row"><span class="spec-label">2 Green</span><span class="spec-val">systemGreen</span></div>
+        <div class="spec-row"><span class="spec-label">3 Yellow</span><span class="spec-val">systemYellow</span></div>
+        <div class="spec-row"><span class="spec-label">4 Blue</span><span class="spec-val">systemBlue</span></div>
+        <div class="spec-row"><span class="spec-label">5 Magenta</span><span class="spec-val">systemPink</span></div>
+        <div class="spec-row"><span class="spec-label">6 Cyan</span><span class="spec-val">tintTeal (no systemCyan)</span></div>
+        <div class="spec-row"><span class="spec-label">7 White</span><span class="spec-val">tertiaryLabel</span></div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-title">Design Decisions</div>
+        <div class="spec-row"><span class="spec-label">Bright = Standard</span><span class="spec-val">Theme shift handles brightness</span></div>
+        <div class="spec-row"><span class="spec-label">Cyan → Teal</span><span class="spec-val">No systemCyan; tintTeal is closest</span></div>
+        <div class="spec-row"><span class="spec-label">Black ≠ #000</span><span class="spec-val">Warm #1A1A18 per Braun DNA</span></div>
+        <div class="spec-row"><span class="spec-label">New tokens</span><span class="spec-val">Zero — full reuse of existing palette</span></div>
+      </div>
+    </div>
+
+    <div class="usage">
+      <div class="usage-title">When to use</div>
+      <ul class="usage-list">
+        <li><span class="token">.term-ansi-*</span><span class="dash">/</span>Use when rendering ANSI escape code output (e.g., from external CLI tools, git diff, test runners). Maps standard terminal colors to FORK's warm palette.</li>
+        <li>Bright variants (8–15) share tokens with standard (0–7) because FORK's system colors already shift between themes. Adding separate bright tokens would violate the Token Economy.</li>
+        <li>ANSI cyan maps to <code class="code-inline">--tintTeal</code> — the closest warm-palette equivalent. No <code class="code-inline">--systemCyan</code> exists because FORK's color system prioritizes warmth over spectral completeness.</li>
+      </ul>
+    </div>
+    <div class="usage">
+      <div class="usage-title">Platform notes</div>
+      <ul class="usage-list">
+        <li><span class="tag tag--ios">iOS</span> Parse ANSI escape sequences with a custom <code class="code-inline">AttributedString</code> builder. Map <code class="code-inline">\033[31m</code> (red) → <code class="code-inline">.systemRed</code>, etc. Strip escape codes from accessibility labels.</li>
+        <li><span class="tag tag--android">Android</span> Use <code class="code-inline">AnnotatedString</code> with <code class="code-inline">SpanStyle</code> for each ANSI code range. Consider a reusable <code class="code-inline">AnsiParser</code> composable that converts raw output to styled text.</li>
+        <li><span class="tag tag--web">Web</span> Parse ANSI codes to <code class="code-inline">&lt;span class="term-ansi-*"&gt;</code>. Libraries like <code class="code-inline">ansi-to-html</code> can be configured with custom class names.</li>
+        <li><span class="tag tag--all">All</span> ANSI 256-color and truecolor (24-bit) are out of scope. FORK terminals use the 16-color palette exclusively — it covers all standard terminal output.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- BLOCKS                                   -->
+  <!-- ════════════════════════════════════════ -->
+  <div class="section" id="blocks">
+    <h2 class="section-title">Blocks</h2>
+
+    <div class="window">
+      <div class="window-titlebar">
+        <div class="window-controls">
+          <div class="window-dot window-dot--close"></div>
+          <div class="window-dot window-dot--minimize"></div>
+          <div class="window-dot window-dot--maximize"></div>
+        </div>
+        <div class="window-title">blocks</div>
+      </div>
+      <div class="term-surface">
+        <div class="term-prompt"><span class="term-prompt-path">~/project</span><span class="term-prompt-symbol">$</span><span class="term-prompt-input">fork diff styles.css</span></div>
+        <div class="term-block">
+          <div class="term-line term-diff-hunk">@@ -93,6 +93,7 @@ :root {</div>
+          <div class="term-line">   --tint: #E86420;</div>
+          <div class="term-line"></div>
+          <div class="term-line">   /* Tint Alternatives */</div>
+          <div class="term-line term-diff-del">-  --tintOrange: #E86420;</div>
+          <div class="term-line term-diff-add">+  --tintOrange: #F07030;</div>
+          <div class="term-line term-diff-add">+  --tintSunrise: #FF8C42;</div>
+          <div class="term-line">   --tintCoral: #E05248;</div>
+          <div class="term-line">   --tintIndigo: #5856D6;</div>
+        </div>
+        <div class="term-line term-line--muted">2 additions, 1 deletion</div>
+        <div class="term-line term-line--stdout"></div>
+
+        <div class="term-prompt"><span class="term-prompt-path">~/project</span><span class="term-prompt-symbol">$</span><span class="term-prompt-input">fork list --tokens radius</span></div>
+        <div class="term-block">
+          <div class="term-line">  Token       Value    Usage</div>
+          <div class="term-line">  ─────────   ──────   ──────────────────</div>
+          <div class="term-line">  radius6     6px      Tags, small pills</div>
+          <div class="term-line">  radius10    10px     Inputs, code blocks</div>
+          <div class="term-line">  radius14    14px     Cards, terminals</div>
+          <div class="term-line">  radius20    20px     Modals, large cards</div>
+          <div class="term-line">  radius24    24px     Sheets, capsule pills</div>
+          <div class="term-line">  radiusFull  9999px   Circles, avatars</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="spec-grid" style="margin-top: var(--space12);">
+      <div class="spec-card">
+        <div class="spec-title">Block Container</div>
+        <div class="spec-row"><span class="spec-label">Background</span><span class="spec-val">tertiarySystemBackground</span></div>
+        <div class="spec-row"><span class="spec-label">Border</span><span class="spec-val">1px solid border</span></div>
+        <div class="spec-row"><span class="spec-label">Radius</span><span class="spec-val">radius10</span></div>
+        <div class="spec-row"><span class="spec-label">Padding</span><span class="spec-val">space12 × space16</span></div>
+        <div class="spec-row"><span class="spec-label">Overflow</span><span class="spec-val">auto-x (horizontal scroll)</span></div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-title">Diff Colors</div>
+        <div class="spec-row"><span class="spec-label"><code class="code-inline">.term-diff-add</code></span><span class="spec-val" style="color: var(--systemGreen);">systemGreen + 6% fill</span></div>
+        <div class="spec-row"><span class="spec-label"><code class="code-inline">.term-diff-del</code></span><span class="spec-val" style="color: var(--systemRed);">systemRed + 6% fill</span></div>
+        <div class="spec-row"><span class="spec-label"><code class="code-inline">.term-diff-hunk</code></span><span class="spec-val" style="color: var(--systemBlue);">systemBlue · bold</span></div>
+      </div>
+    </div>
+
+    <div class="usage">
+      <div class="usage-title">When to use</div>
+      <ul class="usage-list">
+        <li><span class="token">.term-block</span><span class="dash">/</span>Fenced output regions: diffs, tables, code blocks, structured data. The background step (tertiary → secondary) visually separates blocks from the stream.</li>
+        <li><span class="token">.term-diff-add / .term-diff-del</span><span class="dash">/</span>Added and removed lines in diff output. Subtle background fill (6–8% opacity) reinforces the text color without overwhelming the mono layout.</li>
+        <li><span class="token">.term-diff-hunk</span><span class="dash">/</span>Hunk headers (<code class="code-inline">@@ ... @@</code>). Bold blue signals a structural marker, not content.</li>
+      </ul>
+    </div>
+    <div class="usage">
+      <div class="usage-title">Platform notes</div>
+      <ul class="usage-list">
+        <li><span class="tag tag--ios">iOS</span> Render blocks in a <code class="code-inline">VStack</code> with <code class="code-inline">background(tertiarySystemBackground)</code> and <code class="code-inline">clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))</code>.</li>
+        <li><span class="tag tag--android">Android</span> Use <code class="code-inline">Column</code> with <code class="code-inline">Modifier.background(tertiarySystemBg, RoundedCornerShape(10.dp))</code>. For diff line backgrounds, use <code class="code-inline">Modifier.fillMaxWidth().background(addColor.copy(alpha = 0.06f))</code>.</li>
+        <li><span class="tag tag--web">Web</span> <code class="code-inline">.term-block</code> nests inside <code class="code-inline">.term-surface</code>. The background difference (tertiary inside secondary) creates a well effect. <code class="code-inline">overflow-x: auto</code> handles wide table/diff output.</li>
+        <li><span class="tag tag--all">All</span> Diff backgrounds use theme-aware alpha values — light theme at 6%, dark at 8% — to maintain consistent visual weight across themes.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- SESSION                                  -->
+  <!-- ════════════════════════════════════════ -->
+  <div class="section" id="session">
+    <h2 class="section-title">Session</h2>
+
+    <p style="color: var(--secondaryLabel); font-size: var(--typeFootnote); margin-bottom: var(--space16);">A complete terminal session combining all patterns: prompt, output, status, syntax highlighting, diff, and progress.</p>
+
+    <div class="window">
+      <div class="window-titlebar">
+        <div class="window-controls">
+          <div class="window-dot window-dot--close"></div>
+          <div class="window-dot window-dot--minimize"></div>
+          <div class="window-dot window-dot--maximize"></div>
+        </div>
+        <div class="window-title">fork — ~/litme/dna</div>
+      </div>
+      <div class="term-surface">
+        <div class="term-prompt"><span class="term-prompt-path">~/litme/dna</span><span class="term-prompt-symbol">$</span><span class="term-prompt-input">fork audit</span></div>
+        <div class="term-line term-line--info">ℹ Scanning design tokens...</div>
+        <div class="term-line term-line--stdout">  Tokens:      127 defined, 124 referenced</div>
+        <div class="term-line term-line--warning">⚠ 3 unused tokens: --oldShadow, --legacyFill, --tempRadius</div>
+        <div class="term-line term-line--stdout">  Components:  15 documented</div>
+        <div class="term-line term-line--stdout">  Sections:    48 total, 48 with platform notes</div>
+        <div class="term-line term-line--success">✓ Audit complete — 1 warning, 0 errors</div>
+        <div class="term-line term-line--stdout"></div>
+
+        <div class="term-prompt"><span class="term-prompt-path">~/litme/dna</span><span class="term-prompt-symbol">$</span><span class="term-prompt-input">fork token add --name tintSunrise --light "#FF8C42" --dark "#FFa060"</span></div>
+        <div class="term-line term-line--stdout">Adding to :root (light)...</div>
+        <div class="term-line term-line--stdout">Adding to [data-theme="dark"]...</div>
+        <div class="term-line term-line--stdout">Adding to allTokens array...</div>
+        <div class="term-line term-line--success">✓ Token --tintSunrise added</div>
+        <div class="term-line term-line--stdout"></div>
+
+        <div class="term-prompt"><span class="term-prompt-path">~/litme/dna</span><span class="term-prompt-symbol">$</span><span class="term-prompt-input">fork diff</span></div>
+        <div class="term-block">
+          <div class="term-line term-diff-hunk">@@ styles.css @@</div>
+          <div class="term-line term-diff-add">+  --tintSunrise: #FF8C42;</div>
+          <div class="term-line term-diff-hunk">@@ scripts.js — allTokens @@</div>
+          <div class="term-line term-diff-add">+  { token: '--tintSunrise', section: 'tint-alternatives' },</div>
+        </div>
+        <div class="term-line term-line--stdout"></div>
+
+        <div class="term-prompt"><span class="term-prompt-path">~/litme/dna</span><span class="term-prompt-symbol">$</span><span class="term-prompt-input">fork deploy --staging</span></div>
+        <div class="term-line term-line--info">ℹ Building reference site...</div>
+        <div class="term-progress">
+          <span class="term-line--info">Deploying</span>
+          <div class="term-progress-track"><div class="term-progress-bar" style="width: 100%;"></div></div>
+          <span class="term-progress-label">100%</span>
+        </div>
+        <div class="term-line term-line--success">✓ Deployed to staging.fork.design</div>
+        <div class="term-line term-line--muted">  Duration: 4.2s · Size: 127KB</div>
+        <div class="term-line term-line--stdout"></div>
+        <div class="term-prompt"><span class="term-prompt-path">~/litme/dna</span><span class="term-prompt-symbol">$</span><span class="cursor cursor--block"></span></div>
+      </div>
+    </div>
+
+    <div class="usage">
+      <div class="usage-title">Session anatomy</div>
+      <ul class="usage-list">
+        <li><strong>Command → Output → Status</strong> is the fundamental rhythm. Every command produces output, every output ends with a status line (success/error). This consistency is non-negotiable.</li>
+        <li><strong>Visual hierarchy flows down:</strong> prompt (tint-colored symbol) → user input (full contrast) → output (secondary) → metadata (tertiary). Each level recedes, directing attention to the user's commands.</li>
+        <li><strong>Blocks interrupt the stream</strong> — diffs and tables get their own contained surface (tertiary background inside secondary). This creates a visual "well" that signals structured content.</li>
+        <li><strong>Progress is inline</strong> — progress bars sit in the output stream, not in overlays or modals. The terminal is a single, continuous narrative.</li>
+      </ul>
+    </div>
+    <div class="usage">
+      <div class="usage-title">Platform notes</div>
+      <ul class="usage-list">
+        <li><span class="tag tag--ios">iOS</span> Session history: use a <code class="code-inline">NSAttributedString</code>-backed <code class="code-inline">UITextView</code> (non-editable) for output + a separate <code class="code-inline">UITextField</code> for input. Auto-scroll to bottom on new output.</li>
+        <li><span class="tag tag--android">Android</span> Session: <code class="code-inline">LazyColumn</code> for history + <code class="code-inline">TextField</code> at bottom. Use <code class="code-inline">LaunchedEffect</code> to scroll to latest item. Match the <code class="code-inline">ibmPlexMono</code> family across all text elements.</li>
+        <li><span class="tag tag--web">Web</span> Session is a scrollable <code class="code-inline">.term-surface</code> div. New output appends to the DOM. Use <code class="code-inline">scrollIntoView({ behavior: 'smooth' })</code> for auto-scroll. Consider <code class="code-inline">ResizeObserver</code> to maintain scroll-to-bottom on container resize.</li>
+        <li><span class="tag tag--all">All</span> The session is a living document — it grows over time. Virtualize long sessions (>500 lines) to maintain performance. On mobile, ensure the input area stays above the keyboard.</li>
+      </ul>
+    </div>
+  </div>
+
+</main>
+</div>
+
+</div>
+
+<div class="toast" id="toast" aria-hidden="true">Copied</div>
+<script src="../scripts.js"></script>
+<script>
+(function() {
+  var surface = document.getElementById('interactive-surface');
+  var input = document.getElementById('active-input');
+  var cursor = document.getElementById('active-cursor');
+  var prompt = document.getElementById('active-prompt');
+
+  var commands = {
+    help: function() {
+      return [
+        { text: 'Available commands:', cls: 'term-line--stdout' },
+        { text: '  help          Show this message', cls: 'term-line--stdout' },
+        { text: '  status        System status', cls: 'term-line--stdout' },
+        { text: '  tokens        List token count', cls: 'term-line--stdout' },
+        { text: '  theme         Current theme', cls: 'term-line--stdout' },
+        { text: '  tint          Current tint color', cls: 'term-line--stdout' },
+        { text: '  clear         Clear terminal', cls: 'term-line--stdout' },
+        { text: '  echo <text>   Print text', cls: 'term-line--stdout' },
+      ];
+    },
+    status: function() {
+      return [
+        { text: '✓ FORK Design System v1.0', cls: 'term-line--success' },
+        { text: '  Platform: Web + iOS + Android', cls: 'term-line--stdout' },
+        { text: '  Theme: ' + document.documentElement.getAttribute('data-theme'), cls: 'term-line--stdout' },
+      ];
+    },
+    tokens: function() {
+      var all = typeof allTokens !== 'undefined' ? allTokens : [];
+      var count = 0;
+      all.forEach(function(g) { count += g.tokens.length; });
+      return [
+        { text: '  Tokens: ' + count + ' defined', cls: 'term-line--stdout' },
+        { text: '  Groups: ' + all.length, cls: 'term-line--stdout' },
+      ];
+    },
+    theme: function() {
+      var t = document.documentElement.getAttribute('data-theme');
+      return [{ text: 'Current theme: ' + t, cls: 'term-line--info' }];
+    },
+    tint: function() {
+      var v = getComputedStyle(document.documentElement).getPropertyValue('--tint').trim();
+      return [{ text: 'Current tint: ' + v, cls: 'term-line--info' }];
+    },
+    clear: function() { return 'clear'; },
+  };
+
+  function exec(cmd) {
+    var parts = cmd.trim().split(/\s+/);
+    var name = parts[0].toLowerCase();
+    var args = parts.slice(1).join(' ');
+
+    if (name === 'echo') return [{ text: args, cls: 'term-line--stdout' }];
+    if (name === 'clear') return 'clear';
+    if (commands[name]) return commands[name]();
+    if (!name) return [];
+    return [{ text: '✕ Unknown command: ' + name + '. Type help for available commands.', cls: 'term-line--stderr' }];
+  }
+
+  function newPrompt() {
+    var p = document.createElement('div');
+    p.className = 'term-prompt';
+    p.id = 'active-prompt';
+    p.innerHTML = '<span class="term-prompt-path">~/project</span><span class="term-prompt-symbol">$</span><span class="term-prompt-input" id="active-input"></span><span class="cursor cursor--block" id="active-cursor"></span>';
+    surface.appendChild(p);
+    input = document.getElementById('active-input');
+    cursor = document.getElementById('active-cursor');
+    prompt = p;
+    surface.scrollTop = surface.scrollHeight;
+  }
+
+  surface.addEventListener('click', function() { surface.focus(); });
+
+  // Cursor blink: solid during typing, resume blink after 500ms idle.
+  // Blink immediately when input is empty or whitespace-only.
+  var idleTimer = null;
+  function cursorTyping() {
+    cursor.classList.add('cursor--typing');
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(function() {
+      cursor.classList.remove('cursor--typing');
+    }, 500);
+  }
+  function cursorIdle() {
+    clearTimeout(idleTimer);
+    cursor.classList.remove('cursor--typing');
+  }
+
+  surface.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      cursorIdle();
+      var cmd = input.textContent;
+      cursor.remove();
+      prompt.removeAttribute('id');
+      input.removeAttribute('id');
+
+      var result = exec(cmd);
+      if (result === 'clear') {
+        surface.innerHTML = '';
+      } else {
+        result.forEach(function(line) {
+          var el = document.createElement('div');
+          el.className = 'term-line ' + line.cls;
+          el.textContent = line.text;
+          surface.appendChild(el);
+        });
+      }
+      newPrompt();
+    } else if (e.key === 'Backspace') {
+      e.preventDefault();
+      var t = input.textContent;
+      if (t.length) {
+        input.textContent = t.slice(0, -1);
+        if (!input.textContent.trim()) cursorIdle();
+        else cursorTyping();
+      }
+    } else if (e.key.length === 1 && !e.ctrlKey && !e.metaKey) {
+      e.preventDefault();
+      input.textContent += e.key;
+      if (e.key === ' ' && !input.textContent.trim()) cursorIdle();
+      else cursorTyping();
+    }
+  });
+})();
+</script>
+</body>
+</html>

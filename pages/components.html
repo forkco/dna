@@ -25,6 +25,7 @@
     <a class="top-nav-link" href="layout.html">Layout</a>
     <a class="top-nav-link active" href="components.html" aria-current="page">Components</a>
     <a class="top-nav-link" href="chat.html">Chat</a>
+    <a class="top-nav-link" href="terminal.html">Terminal</a>
     <a class="top-nav-link" href="typography.html">Typography</a>
     <a class="top-nav-link" href="visual-direction.html">Visual</a>
     <a class="top-nav-link" href="motion.html">Motion</a>
@@ -67,6 +68,13 @@
   <div class="sidebar-group">
     <div class="sidebar-group-label">Content</div>
     <a class="sidebar-link" href="#markdown">Markdown</a>
+  </div>
+  <div class="sidebar-group">
+    <div class="sidebar-group-label">Chrome</div>
+    <a class="sidebar-link" href="#cursor">Cursor</a>
+    <a class="sidebar-link" href="#dot-indicator">Dot Indicator</a>
+    <a class="sidebar-link" href="#progress-bar">Progress Bar</a>
+    <a class="sidebar-link" href="#window">Window</a>
   </div>
 </nav>
 
@@ -1602,6 +1610,335 @@ document.documentElement.style
         <li><span class="tag tag--web">Web</span> Apply <code class="code-inline">.prose</code> class to any container with rendered HTML from markdown. Works with any markdown-to-HTML library.</li>
         <li><span class="tag tag--ios">iOS</span> Use <code class="code-inline">NSAttributedString</code> with matching font/color attributes. Map h1→title1 (Besley 28pt Bold), body→Figtree 17pt, code→IBM Plex Mono 14pt.</li>
         <li><span class="tag tag--ios">iOS</span> For chat messages, ChatKit's <code class="code-inline">MessageAttributedStringBuilder</code> handles markdown→attributed string conversion with these tokens.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- CURSOR                                   -->
+  <!-- ════════════════════════════════════════ -->
+  <div class="section" id="cursor">
+    <h2 class="section-title">Cursor</h2>
+
+    <p style="color: var(--secondaryLabel); font-size: var(--typeFootnote); margin-bottom: var(--space16);">A blinking insertion point. Two variants: line (thin bar) for text fields, block (filled rect) for terminals.</p>
+
+    <div class="term-pair">
+      <div style="padding: var(--space24); background: var(--secondarySystemGroupedBackground); border: 1px solid var(--border); border-radius: var(--radius14);">
+        <div style="font-family: var(--fontMono); font-size: var(--typeOverline); letter-spacing: 0.08em; text-transform: uppercase; color: var(--tertiaryLabel); margin-bottom: var(--space12);">Line Cursor</div>
+        <div style="font-family: var(--fontMono); font-size: var(--typeCode); line-height: 1.7; color: var(--secondaryLabel);">Design tokens for iOS<span class="cursor cursor--line"></span></div>
+      </div>
+
+      <div style="padding: var(--space24); background: var(--secondarySystemGroupedBackground); border: 1px solid var(--border); border-radius: var(--radius14);">
+        <div style="font-family: var(--fontMono); font-size: var(--typeOverline); letter-spacing: 0.08em; text-transform: uppercase; color: var(--tertiaryLabel); margin-bottom: var(--space12);">Block Cursor</div>
+        <div style="font-family: var(--fontMono); font-size: var(--typeCode); line-height: 1.7; color: var(--secondaryLabel);">~/project <span style="color: var(--tint);">$</span> fork status<span class="cursor cursor--block"></span></div>
+      </div>
+    </div>
+
+    <div class="spec-grid" style="margin-top: var(--space12);">
+      <div class="spec-card">
+        <div class="spec-title">Line Cursor</div>
+        <div class="spec-row"><span class="spec-label">Width</span><span class="spec-val">2px</span></div>
+        <div class="spec-row"><span class="spec-label">Height</span><span class="spec-val">1em (cap-height)</span></div>
+        <div class="spec-row"><span class="spec-label">Color</span><span class="spec-val">tint</span></div>
+        <div class="spec-row"><span class="spec-label">Use</span><span class="spec-val">Typewriter, search, text fields</span></div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-title">Block Cursor</div>
+        <div class="spec-row"><span class="spec-label">Width</span><span class="spec-val">1 character (en space)</span></div>
+        <div class="spec-row"><span class="spec-label">Height</span><span class="spec-val">1em (cap-height)</span></div>
+        <div class="spec-row"><span class="spec-label">Color</span><span class="spec-val">tint (filled)</span></div>
+        <div class="spec-row"><span class="spec-label">Use</span><span class="spec-val">Terminal, code editor, REPL</span></div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-title">Animation</div>
+        <div class="spec-row"><span class="spec-label">Timing</span><span class="spec-val">1s step blink (stops during typing)</span></div>
+        <div class="spec-row"><span class="spec-label">Keyframes</span><span class="spec-val">cursor-blink (shared)</span></div>
+        <div class="spec-row"><span class="spec-label">Reduced motion</span><span class="spec-val">Static, no blink</span></div>
+      </div>
+    </div>
+
+    <div class="usage">
+      <div class="usage-title">When to use</div>
+      <ul class="usage-list">
+        <li><span class="token">.cursor.cursor--line</span><span class="dash">/</span>Thin 2px bar. Use for typewriter effects, search inputs, and text fields where the cursor sits between characters.</li>
+        <li><span class="token">.cursor.cursor--block</span><span class="dash">/</span>Filled character-width rectangle. Use for terminals and code editors where the cursor sits on a character position.</li>
+        <li>Both variants use <code class="code-inline">--tint</code> — the cursor is a call to action ("type here"). Same color as the terminal prompt symbol.</li>
+        <li>Both share the <code class="code-inline">cursor-blink</code> keyframes at 1s — one animation across the system. Add <code class="code-inline">.cursor--typing</code> to stop blinking during active input.</li>
+      </ul>
+    </div>
+    <div class="usage">
+      <div class="usage-title">Platform notes</div>
+      <ul class="usage-list">
+        <li><span class="tag tag--ios">iOS</span> Line cursor: default <code class="code-inline">UITextField</code> tint. Block cursor: custom <code class="code-inline">CALayer</code> with <code class="code-inline">CABasicAnimation</code> on opacity. Use tint color for both.</li>
+        <li><span class="tag tag--android">Android</span> Line cursor: <code class="code-inline">cursorColor = tint</code> on TextField. Block cursor: <code class="code-inline">Modifier.drawBehind</code> with toggled rect via <code class="code-inline">rememberInfiniteTransition()</code>.</li>
+        <li><span class="tag tag--web">Web</span> Line: <code class="code-inline">::before</code> pseudo-element with 2px width. Block: <code class="code-inline">background</code> fill on en space (<code class="code-inline">\2002</code>). Both use <code class="code-inline">line-height: 1</code> for baseline alignment in flex containers.</li>
+        <li><span class="tag tag--all">All</span> Respects <code class="code-inline">prefers-reduced-motion</code> — animation stops, cursor stays visible. Blink must be step-based (on/off), never smooth fade.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- DOT INDICATOR                            -->
+  <!-- ════════════════════════════════════════ -->
+  <div class="section" id="dot-indicator">
+    <h2 class="section-title">Dot Indicator</h2>
+
+    <p style="color: var(--secondaryLabel); font-size: var(--typeFootnote); margin-bottom: var(--space16);">A horizontal row of colored dots. One pattern, multiple uses: tint selection, window controls, status indicators.</p>
+
+    <div class="term-pair">
+      <!-- Tint picker variant -->
+      <div style="padding: var(--space24); background: var(--secondarySystemGroupedBackground); border: 1px solid var(--border); border-radius: var(--radius14);">
+        <div style="font-family: var(--fontMono); font-size: var(--typeOverline); letter-spacing: 0.08em; text-transform: uppercase; color: var(--tertiaryLabel); margin-bottom: var(--space12);">Tint Picker</div>
+        <div style="display: flex; align-items: center; gap: var(--space8);">
+          <div class="tint-dot active" style="background: var(--tintOrange); width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--label);"></div>
+          <div class="tint-dot" style="background: var(--tintCoral); width: 18px; height: 18px; border-radius: 50%; border: 2px solid transparent;"></div>
+          <div class="tint-dot" style="background: var(--tintIndigo); width: 18px; height: 18px; border-radius: 50%; border: 2px solid transparent;"></div>
+          <div class="tint-dot" style="background: var(--tintTeal); width: 18px; height: 18px; border-radius: 50%; border: 2px solid transparent;"></div>
+          <div class="tint-dot" style="background: var(--tintAmber); width: 18px; height: 18px; border-radius: 50%; border: 2px solid transparent;"></div>
+        </div>
+      </div>
+
+      <!-- Traffic light variant -->
+      <div style="padding: var(--space24); background: var(--secondarySystemGroupedBackground); border: 1px solid var(--border); border-radius: var(--radius14);">
+        <div style="font-family: var(--fontMono); font-size: var(--typeOverline); letter-spacing: 0.08em; text-transform: uppercase; color: var(--tertiaryLabel); margin-bottom: var(--space12);">Traffic Light</div>
+        <div style="display: flex; align-items: center; gap: 6px;">
+          <div class="window-dot window-dot--close"></div>
+          <div class="window-dot window-dot--minimize"></div>
+          <div class="window-dot window-dot--maximize"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="spec-grid" style="margin-top: var(--space12);">
+      <div class="spec-card">
+        <div class="spec-title">Tint Picker Dots</div>
+        <div class="spec-row"><span class="spec-label">Size</span><span class="spec-val">18 × 18px</span></div>
+        <div class="spec-row"><span class="spec-label">Gap</span><span class="spec-val">space8</span></div>
+        <div class="spec-row"><span class="spec-label">Border</span><span class="spec-val">2px solid transparent (active: label)</span></div>
+        <div class="spec-row"><span class="spec-label">Hover</span><span class="spec-val">scale(1.15)</span></div>
+        <div class="spec-row"><span class="spec-label">Tap target</span><span class="spec-val">44 × 44px (invisible ::before)</span></div>
+        <div class="spec-row"><span class="spec-label">Interactive</span><span class="spec-val">Yes — selects tint preset</span></div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-title">Traffic Light Dots</div>
+        <div class="spec-row"><span class="spec-label">Size</span><span class="spec-val">14 × 14px</span></div>
+        <div class="spec-row"><span class="spec-label">Gap</span><span class="spec-val">6px</span></div>
+        <div class="spec-row"><span class="spec-label">Close</span><span class="spec-val">systemRed</span></div>
+        <div class="spec-row"><span class="spec-label">Minimize</span><span class="spec-val">systemYellow</span></div>
+        <div class="spec-row"><span class="spec-label">Maximize</span><span class="spec-val">systemGreen</span></div>
+        <div class="spec-row"><span class="spec-label">Interactive</span><span class="spec-val">Decorative on Web, functional on native</span></div>
+      </div>
+    </div>
+
+    <div class="usage">
+      <div class="usage-title">When to use</div>
+      <ul class="usage-list">
+        <li><strong>Same pattern, different semantics.</strong> The tint picker and traffic lights are both "colored dot rows" — they share visual DNA but serve different purposes.</li>
+        <li><span class="token">.tint-dot</span><span class="dash">/</span>Interactive selection. Active state shows a <code class="code-inline">--label</code> border ring. Use for picking presets (tints, themes, accents).</li>
+        <li><span class="token">.window-dot</span><span class="dash">/</span>Status/control indicator. Fixed colors (red/yellow/green) communicate window state. Always show all three.</li>
+        <li>The pattern extends to any scenario with 3–5 colored dots in a row: status indicators, step progress, category markers.</li>
+      </ul>
+    </div>
+    <div class="usage">
+      <div class="usage-title">Platform notes</div>
+      <ul class="usage-list">
+        <li><span class="tag tag--ios">iOS</span> Tint picker: use a horizontal <code class="code-inline">HStack(spacing: 8)</code> of tappable circles. Active dot: <code class="code-inline">.overlay(Circle().stroke(Color.label, lineWidth: 2))</code>. Traffic lights: <code class="code-inline">NSWindowButton</code> on macOS, omit on iOS.</li>
+        <li><span class="tag tag--android">Android</span> Tint picker: <code class="code-inline">Row(horizontalArrangement = Arrangement.spacedBy(8.dp))</code> with <code class="code-inline">Box(Modifier.size(18.dp).clip(CircleShape))</code>. Active: <code class="code-inline">border(2.dp, labelColor, CircleShape)</code>.</li>
+        <li><span class="tag tag--web">Web</span> Both use <code class="code-inline">border-radius: 50%</code>. Tint dots have a 44px invisible <code class="code-inline">::before</code> for tap targets. Traffic lights are pure CSS with no interactivity.</li>
+        <li><span class="tag tag--all">All</span> Minimum 44pt tap target for interactive dots. Decorative dots can be smaller but should remain visually balanced (≥12px).</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- PROGRESS BAR                             -->
+  <!-- ════════════════════════════════════════ -->
+  <div class="section" id="progress-bar">
+    <h2 class="section-title">Progress Bar</h2>
+
+    <div style="padding: var(--space24); background: var(--secondarySystemGroupedBackground); border: 1px solid var(--border); border-radius: var(--radius14); display: flex; flex-direction: column; gap: var(--space16);">
+      <div class="term-progress">
+        <span style="font-family: var(--fontMono); font-size: var(--typeCode); color: var(--label); min-width: 80px;">Uploading</span>
+        <div class="term-progress-track"><div class="term-progress-bar" style="width: 73%;"></div></div>
+        <span class="term-progress-label">73%</span>
+      </div>
+      <div class="term-progress">
+        <span style="font-family: var(--fontMono); font-size: var(--typeCode); color: var(--success); min-width: 80px;">Complete</span>
+        <div class="term-progress-track"><div class="term-progress-bar" style="width: 100%;"></div></div>
+        <span class="term-progress-label">100%</span>
+      </div>
+      <div class="term-progress">
+        <span style="font-family: var(--fontMono); font-size: var(--typeCode); color: var(--secondaryLabel); min-width: 80px;">Waiting</span>
+        <div class="term-progress-track"><div class="term-progress-bar" style="width: 0%;"></div></div>
+        <span class="term-progress-label">0%</span>
+      </div>
+    </div>
+
+    <div class="spec-grid" style="margin-top: var(--space12);">
+      <div class="spec-card">
+        <div class="spec-title">Progress Bar</div>
+        <div class="spec-row"><span class="spec-label">Track bg</span><span class="spec-val">tertiarySystemFill</span></div>
+        <div class="spec-row"><span class="spec-label">Fill color</span><span class="spec-val">tint</span></div>
+        <div class="spec-row"><span class="spec-label">Height</span><span class="spec-val">4px</span></div>
+        <div class="spec-row"><span class="spec-label">Radius</span><span class="spec-val">2px</span></div>
+        <div class="spec-row"><span class="spec-label">Animation</span><span class="spec-val">0.4s easeFluent</span></div>
+        <div class="spec-row"><span class="spec-label">Label font</span><span class="spec-val">IBM Plex Mono · typeCode</span></div>
+      </div>
+    </div>
+
+    <div class="usage">
+      <div class="usage-title">When to use</div>
+      <ul class="usage-list">
+        <li><span class="token">.term-progress</span><span class="dash">/</span>Determinate progress — uploads, builds, scans. Shows label + track + percentage. Use when you can calculate exact completion.</li>
+        <li><span class="token">.term-progress-bar</span><span class="dash">/</span>The filled portion. Set <code class="code-inline">width</code> via inline style or JS. Transitions smoothly via <code class="code-inline">--easeFluent</code>.</li>
+        <li>For indeterminate progress (unknown duration), prefer a spinner or skeleton — not an animated progress bar.</li>
+        <li>Tint-colored fill ties the progress to the brand action color. This is intentional — progress is an action in motion.</li>
+      </ul>
+    </div>
+    <div class="usage">
+      <div class="usage-title">Platform notes</div>
+      <ul class="usage-list">
+        <li><span class="tag tag--ios">iOS</span> Use <code class="code-inline">ProgressView(.linear)</code> with <code class="code-inline">.tint(Color.tint)</code>. Track: <code class="code-inline">tertiarySystemFill</code>. Custom height via <code class="code-inline">.scaleEffect(y: 0.5)</code> or <code class="code-inline">GeometryReader</code>.</li>
+        <li><span class="tag tag--android">Android</span> <code class="code-inline">LinearProgressIndicator(progress, color = tint, trackColor = tertiarySystemFill)</code>. Set <code class="code-inline">Modifier.height(4.dp).clip(RoundedCornerShape(2.dp))</code>.</li>
+        <li><span class="tag tag--web">Web</span> CSS <code class="code-inline">transition: width 0.4s var(--easeFluent)</code> handles smooth updates. Update <code class="code-inline">style.width</code> via JS.</li>
+        <li><span class="tag tag--all">All</span> Always show a percentage label — users need to know "how much is left." The label uses mono font for fixed-width digits that don't jitter as numbers change.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- WINDOW                                   -->
+  <!-- ════════════════════════════════════════ -->
+  <div class="section" id="window">
+    <h2 class="section-title">Window</h2>
+
+    <p style="color: var(--secondaryLabel); font-size: var(--typeFootnote); margin-bottom: var(--space16);">A framed container with optional chrome. The base surface for terminals, code previews, embedded browsers, media players — anything that needs windowed containment.</p>
+
+    <div style="display: flex; flex-direction: column; gap: var(--space16);">
+      <!-- With title -->
+      <div class="window">
+        <div class="window-titlebar">
+          <div class="window-controls">
+            <div class="window-dot window-dot--close"></div>
+            <div class="window-dot window-dot--minimize"></div>
+            <div class="window-dot window-dot--maximize"></div>
+          </div>
+          <div class="window-title">fork — ~/project</div>
+        </div>
+        <div style="padding: var(--space24); color: var(--secondaryLabel); font-size: var(--typeFootnote);">Window with title bar — single-content mode. Title bar shows traffic lights + centered label. Content goes here.</div>
+      </div>
+
+      <!-- With tabs -->
+      <div class="window">
+        <div class="window-titlebar">
+          <div class="window-controls">
+            <div class="window-dot window-dot--close"></div>
+            <div class="window-dot window-dot--minimize"></div>
+            <div class="window-dot window-dot--maximize"></div>
+          </div>
+          <div class="window-tabs">
+            <div class="window-tab window-tab--active">Preview</div>
+            <div class="window-tab">Console</div>
+            <div class="window-tab">Network</div>
+          </div>
+        </div>
+        <div style="padding: var(--space24); color: var(--secondaryLabel); font-size: var(--typeFootnote);">Window with tabs — multi-view mode. Tabs replace the title. Active tab has systemFill background.</div>
+      </div>
+
+      <!-- Chromeless -->
+      <div class="window">
+        <div style="padding: var(--space24); color: var(--secondaryLabel); font-size: var(--typeFootnote);">Chromeless window — no title bar, no traffic lights. Just the framed surface with shadow and radius. Use for embedded content that doesn't need window controls.</div>
+      </div>
+
+      <!-- With terminal content -->
+      <div class="window">
+        <div class="window-titlebar">
+          <div class="window-controls">
+            <div class="window-dot window-dot--close"></div>
+            <div class="window-dot window-dot--minimize"></div>
+            <div class="window-dot window-dot--maximize"></div>
+          </div>
+          <div class="window-title">terminal</div>
+        </div>
+        <div class="term-surface" style="min-height: auto;">
+          <div class="term-prompt"><span class="term-prompt-path">~</span><span class="term-prompt-symbol">$</span><span class="term-prompt-input">fork status</span></div>
+          <div class="term-line term-line--success">✓ All systems operational</div>
+        </div>
+      </div>
+
+      <!-- With rich content -->
+      <div class="window">
+        <div class="window-titlebar">
+          <div class="window-controls">
+            <div class="window-dot window-dot--close"></div>
+            <div class="window-dot window-dot--minimize"></div>
+            <div class="window-dot window-dot--maximize"></div>
+          </div>
+          <div class="window-title">preview.md</div>
+        </div>
+        <div style="padding: var(--space24);">
+          <div class="prose">
+            <h3>Design tokens</h3>
+            <p>FORK uses <strong>warm neutrals</strong> instead of pure gray. The base label color is <code>#1A1A18</code>, not <code>#000000</code>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="spec-grid" style="margin-top: var(--space12);">
+      <div class="spec-card">
+        <div class="spec-title">Window Frame</div>
+        <div class="spec-row"><span class="spec-label">Background</span><span class="spec-val">secondarySystemBackground</span></div>
+        <div class="spec-row"><span class="spec-label">Border</span><span class="spec-val">1px solid border</span></div>
+        <div class="spec-row"><span class="spec-label">Radius</span><span class="spec-val">radius14</span></div>
+        <div class="spec-row"><span class="spec-label">Shadow</span><span class="spec-val">shadowMedium</span></div>
+        <div class="spec-row"><span class="spec-label">Overflow</span><span class="spec-val">hidden</span></div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-title">Title Bar</div>
+        <div class="spec-row"><span class="spec-label">Background</span><span class="spec-val">tertiarySystemBackground</span></div>
+        <div class="spec-row"><span class="spec-label">Border bottom</span><span class="spec-val">1px solid border</span></div>
+        <div class="spec-row"><span class="spec-label">Padding</span><span class="spec-val">space12 × space16</span></div>
+        <div class="spec-row"><span class="spec-label">Title font</span><span class="spec-val">IBM Plex Mono · caption1</span></div>
+        <div class="spec-row"><span class="spec-label">Title color</span><span class="spec-val">secondaryLabel</span></div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-title">Traffic Lights</div>
+        <div class="spec-row"><span class="spec-label">Dot size</span><span class="spec-val">14 × 14px</span></div>
+        <div class="spec-row"><span class="spec-label">Dot gap</span><span class="spec-val">6px</span></div>
+        <div class="spec-row"><span class="spec-label">Close</span><span class="spec-val">systemRed</span></div>
+        <div class="spec-row"><span class="spec-label">Minimize</span><span class="spec-val">systemYellow</span></div>
+        <div class="spec-row"><span class="spec-label">Maximize</span><span class="spec-val">systemGreen</span></div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-title">Tabs</div>
+        <div class="spec-row"><span class="spec-label">Font</span><span class="spec-val">IBM Plex Mono · caption2</span></div>
+        <div class="spec-row"><span class="spec-label">Padding</span><span class="spec-val">space4 × space12</span></div>
+        <div class="spec-row"><span class="spec-label">Radius</span><span class="spec-val">radius6</span></div>
+        <div class="spec-row"><span class="spec-label">Active bg</span><span class="spec-val">systemFill</span></div>
+        <div class="spec-row"><span class="spec-label">Active text</span><span class="spec-val">label</span></div>
+        <div class="spec-row"><span class="spec-label">Inactive text</span><span class="spec-val">tertiaryLabel</span></div>
+      </div>
+    </div>
+
+    <div class="usage">
+      <div class="usage-title">When to use</div>
+      <ul class="usage-list">
+        <li><span class="token">.window</span><span class="dash">/</span>The framed container. Provides background, border, radius, shadow, and overflow:hidden. Content-agnostic — put anything inside.</li>
+        <li><span class="token">.window-titlebar</span><span class="dash">/</span>Optional chrome. Contains traffic lights + title or tabs. Omit for chromeless embedded content.</li>
+        <li><span class="token">.window-title</span><span class="dash">/</span>Centered mono label. Use for single-content windows (terminal, file preview, media).</li>
+        <li><span class="token">.window-tabs</span><span class="dash">/</span>Replace title with tabs for multi-view windows. Active tab gets <code class="code-inline">systemFill</code> background.</li>
+        <li><strong>Chromeless variant</strong> — omit <code class="code-inline">.window-titlebar</code> entirely. The frame still provides elevation and containment without window controls.</li>
+        <li><strong>Content is free.</strong> Terminal puts <code class="code-inline">.term-surface</code> inside. Markdown preview puts <code class="code-inline">.prose</code> inside. Code editor puts syntax-highlighted output inside. The window doesn't care.</li>
+      </ul>
+    </div>
+    <div class="usage">
+      <div class="usage-title">Platform notes</div>
+      <ul class="usage-list">
+        <li><span class="tag tag--ios">iOS</span> On macOS Catalyst: traffic lights map to <code class="code-inline">NSWindowButton</code>. On iOS: omit traffic lights, use system navigation chrome (back button, close X). The title bar becomes a plain header.</li>
+        <li><span class="tag tag--android">Android</span> Title bar maps to a custom <code class="code-inline">TopAppBar</code> with <code class="code-inline">containerColor = tertiarySystemBackground</code>. Traffic lights are decorative only — use system back/close affordances for real interaction.</li>
+        <li><span class="tag tag--web">Web</span> <code class="code-inline">.window</code> uses <code class="code-inline">overflow: hidden</code> to clip child content to the rounded frame. Title is auto-centered via flex + margin offset. Traffic lights are purely visual unless building an Electron/PWA.</li>
+        <li><span class="tag tag--all">All</span> The window follows the system theme — no forced dark mode. Traffic lights always show all three dots. Partial sets (e.g., close only) look broken and signal non-standard behavior.</li>
       </ul>
     </div>
   </div>
