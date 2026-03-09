@@ -12,10 +12,25 @@
 </head>
 <body>
 
+<a href="#main-content" class="skip-link">Skip to content</a>
+
+<canvas id="landing-planar" class="planar-fullscreen" aria-hidden="true"></canvas>
+
 <div class="header">
   <div class="header-left">
     <a href="index.html" class="header-title"><span class="header-title-accent">FORK</span></a>
+    <div class="tint-picker" id="tint-picker"></div>
   </div>
+  <nav class="top-nav" aria-label="Main navigation">
+    <a class="top-nav-link" href="pages/colors.html">Colors</a>
+    <a class="top-nav-link" href="pages/layout.html">Layout</a>
+    <a class="top-nav-link" href="pages/components.html">Components</a>
+    <a class="top-nav-link" href="pages/chat.html">Chat</a>
+    <a class="top-nav-link" href="pages/typography.html">Typography</a>
+    <a class="top-nav-link" href="pages/visual-direction.html">Visual</a>
+    <a class="top-nav-link" href="pages/motion.html">Motion</a>
+    <a class="top-nav-link" href="pages/reference.html">Reference</a>
+  </nav>
   <div class="header-controls">
     <button class="toggle" onclick="toggleTheme()" aria-label="Toggle theme">
       <span class="toggle-label">Light</span>
@@ -25,15 +40,11 @@
   </div>
 </div>
 
-<main id="main-content">
-  <div class="landing-hero">
-    <div class="landing-hero-inner">
-      <div class="landing-overline">404</div>
-      <h1 class="landing-title">Page not found</h1>
-      <p style="font-family: var(--fontMono); font-size: var(--typeCode); color: var(--secondaryLabel); margin-top: var(--space16);">
-        <a href="index.html" style="color: var(--tint); text-decoration: none;">Back to FORK</a>
-      </p>
-    </div>
+<main id="main-content" class="error-page">
+  <div class="error-page-inner">
+    <h1 class="error-page-code">404</h1>
+    <p class="error-page-message">Page not found</p>
+    <a href="index.html" class="btn btn--md btn--primaryTinted error-page-action">Back to FORK</a>
   </div>
 </main>
 
@@ -46,6 +57,47 @@
   </div>
 </div>
 
+<script src="planarkit.js"></script>
 <script src="scripts.js"></script>
+<script>
+(function() {
+  var cvs = document.getElementById('landing-planar');
+  if (!cvs || !window.PlanarKit) return;
+  var PK = window.PlanarKit;
+  PK.syncColors();
+  PK.installThemeObs();
+
+  var sc = PK.create(cvs);
+  sc.keepAlive = true;
+
+  var hoverField = null;
+  function pos(e) {
+    var r = cvs.getBoundingClientRect();
+    var s = e.touches ? (e.touches[0] || e.changedTouches[0]) : e;
+    return {x: s.clientX - r.left, y: s.clientY - r.top};
+  }
+
+  document.addEventListener('mousemove', function(e) {
+    var p = pos(e);
+    if (!hoverField) { hoverField = sc.addField(p.x, p.y, 'attract', 0.4, 0, true, 160, 0.3); }
+    hoverField.x = p.x; hoverField.y = p.y;
+    PK.wake(sc);
+  });
+
+  document.addEventListener('mousedown', function(e) {
+    var p = pos(e);
+    sc.addRipple(p.x, p.y, 1, 13, 10, 3);
+    PK.wake(sc);
+  });
+
+  function resize() {
+    sc.W = window.innerWidth; sc.H = window.innerHeight;
+    cvs.width = Math.round(sc.W * sc.dpr); cvs.height = Math.round(sc.H * sc.dpr);
+    sc.buildGrid(); sc.render(); PK.wake(sc);
+  }
+  window.addEventListener('resize', resize);
+  resize();
+})();
+</script>
 </body>
 </html>

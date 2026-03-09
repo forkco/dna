@@ -3433,6 +3433,44 @@ a.header-title:hover {
 }
 
 
+/* ── Error Page (404) ── */
+.error-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 180px);
+  min-height: calc(100dvh - 180px);
+  text-align: center;
+  padding: var(--space64) var(--space32);
+}
+
+.error-page-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.error-page-code {
+  font-family: var(--fontMono);
+  font-size: var(--typeXlTitle2);
+  font-weight: 700;
+  color: var(--label);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.error-page-action {
+  margin-top: var(--space24);
+  text-decoration: none;
+}
+
+.error-page-message {
+  font-family: var(--fontBody);
+  font-size: var(--typeBody);
+  color: var(--secondaryLabel);
+  margin-top: var(--space8);
+}
+
 /* ── Motion Demos ── */
 
 /* Shared demo card surface */
