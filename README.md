@@ -1,4 +1,4 @@
-# FORK Design System
+# FORK Design Language
 
 Cross-platform design reference for the FORK product family — iOS, Android, and Web.
 
@@ -6,7 +6,7 @@ Cross-platform design reference for the FORK product family — iOS, Android, an
 
 ## What this is
 
-A single-source-of-truth design system documenting every token, component, and interaction pattern used across FORK products. Engineers on any platform open this reference and get exact values: hex colors, pixel sizes, spring constants, corner radii.
+A single-source-of-truth design language documenting every token, component, and interaction pattern used across FORK products. Engineers on any platform open this reference and get exact values: hex colors, pixel sizes, spring constants, corner radii.
 
 ## Structure
 

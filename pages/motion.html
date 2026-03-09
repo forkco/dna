@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Motion — FORK Design System</title>
+<title>Motion — FORK Design Language</title>
 <meta name="description" content="FORK motion tokens: spring presets, CSS equivalents, press/release asymmetry, rubber banding, and dot effects.">
 <meta name="theme-color" content="#F5F5F2" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#1A1A18" media="(prefers-color-scheme: dark)">
@@ -16,7 +16,10 @@
 <a href="#main-content" class="skip-link">Skip to content</a>
 
 <div class="header">
-  <a href="../index.html" class="header-title"><span class="header-title-accent">FORK</span> <span class="header-dot">·</span> iOS + Android + Web</a>
+  <div class="header-left">
+    <a href="../index.html" class="header-title"><span class="header-title-accent">FORK</span></a>
+    <div class="tint-picker" id="tint-picker"></div>
+  </div>
   <nav class="top-nav" aria-label="Main navigation">
     <a class="top-nav-link" href="colors.html">Colors</a>
     <a class="top-nav-link" href="layout.html">Layout</a>
@@ -28,7 +31,6 @@
     <a class="top-nav-link" href="reference.html">Reference</a>
   </nav>
   <div class="header-controls">
-    <div class="tint-picker" id="tint-picker"></div>
     <button class="toggle" onclick="toggleTheme()" aria-label="Toggle theme">
       <span class="toggle-label">Light</span>
       <div class="toggle-track"></div>
@@ -455,9 +457,9 @@
 <div class="footer">
   <div class="footer-inner">
     <div class="footer-brand">
-      <span class="footer-brand-accent">FORK</span> Design System
+      <span class="footer-brand-accent">FORK</span> Design Language
     </div>
-    <div class="footer-meta">Cross-platform design reference</div>
+    <div class="footer-meta">© 2026 FORK Apps, Inc.</div>
   </div>
 </div>
 </div> <!-- /page-main -->

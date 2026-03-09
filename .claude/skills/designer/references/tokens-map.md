@@ -1,6 +1,6 @@
 # Tokens Map — Pages & CSS Architecture
 
-Quick reference for locating sections across the multi-page design system.
+Quick reference for locating sections across the multi-page design language.
 
 ## Page Structure
 

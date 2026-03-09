@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>FORK Design System — iOS + Android + Web</title>
-<meta name="description" content="FORK design system — colors, typography, components, motion, and interaction patterns for iOS, Android, and Web.">
+<title>FORK Design Language — iOS + Android + Web</title>
+<meta name="description" content="FORK design language — colors, typography, components, motion, and interaction patterns for iOS, Android, and Web.">
 <meta name="theme-color" content="#F5F5F2" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#1A1A18" media="(prefers-color-scheme: dark)">
 <link href="https://fonts.googleapis.com/css2?family=Besley:ital,wght@0,400..900;1,400..900&family=Figtree:ital,wght@0,300..700;1,300..700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -18,7 +18,10 @@
 <canvas id="landing-planar" class="planar-fullscreen" aria-hidden="true"></canvas>
 
 <div class="header">
-  <a href="index.html" class="header-title"><span class="header-title-accent">FORK</span> <span class="header-dot">·</span> iOS + Android + Web</a>
+  <div class="header-left">
+    <a href="index.html" class="header-title"><span class="header-title-accent">FORK</span></a>
+    <div class="tint-picker" id="tint-picker"></div>
+  </div>
   <nav class="top-nav" aria-label="Main navigation">
     <a class="top-nav-link" href="pages/colors.html">Colors</a>
     <a class="top-nav-link" href="pages/layout.html">Layout</a>
@@ -30,7 +33,6 @@
     <a class="top-nav-link" href="pages/reference.html">Reference</a>
   </nav>
   <div class="header-controls">
-    <div class="tint-picker" id="tint-picker"></div>
     <button class="toggle" onclick="toggleTheme()" aria-label="Toggle theme">
       <span class="toggle-label">Light</span>
       <div class="toggle-track"></div>
@@ -39,13 +41,20 @@
   </div>
 </div>
 
-<main class="landing-container" id="main-content">
+<main id="main-content">
   <div class="landing-hero">
-    <h1 class="landing-title"><span class="landing-title-accent">FORK</span> Design System</h1>
-    <p class="landing-subtitle">Colors, typography, components, motion, and interaction patterns for iOS, Android, and Web</p>
+    <div class="landing-hero-inner">
+      <div class="landing-overline">Design Language</div>
+      <h1 class="landing-title"><span class="landing-title-accent">FORK</span></h1>
+      <div class="landing-typewriter" aria-live="polite" aria-label="Design language topics">
+        <span class="landing-typewriter-text" id="typewriter-text"></span><span class="landing-typewriter-cursor" aria-hidden="true"></span>
+      </div>
+      <div class="landing-version">v1.0 · Mar 2026</div>
+    </div>
   </div>
 
-  <h2 class="landing-overline">Explore</h2>
+  <div class="landing-container">
+  <h2 class="landing-section-overline">Explore</h2>
   <div class="landing-grid">
     <a href="pages/colors.html" class="landing-card" aria-label="Colors — Backgrounds, labels, fills, separators, system colors, tint alternatives, grays, semantic tokens, on-colors">
       <div class="landing-card-label">Colors</div>
@@ -88,14 +97,19 @@
       <div class="landing-card-count">All tokens</div>
     </a>
   </div>
+  </div> <!-- /landing-container -->
+
+  <div class="landing-dna-container">
+    <p class="landing-dna">FORK draws from <span class="dna-accent">Braun's reduction</span>, <span class="dna-accent">Apple's material honesty</span>, <span class="dna-accent">Teenage Engineering's precision</span>, and <span class="dna-accent">industrial tactility</span>. <strong>Warm neutrals</strong> instead of pure black. <strong>Springs</strong> instead of linear easing. <strong>Semantic color</strong> only — nothing decorative. Three type families with strict roles: <strong>Besley</strong> commands, <strong>Figtree</strong> recedes, <strong>Mono</strong> labels. Glass refracts, shadows follow light, whitespace signals confidence. Every token works at <strong>320pt</strong> under a thumb. Every element earns its place.</p>
+  </div>
 </main>
 
 <div class="footer">
   <div class="footer-inner">
     <div class="footer-brand">
-      <span class="footer-brand-accent">FORK</span> Design System
+      <span class="footer-brand-accent">FORK</span> Design Language
     </div>
-    <div class="footer-meta">Cross-platform design reference</div>
+    <div class="footer-meta">© 2026 FORK Apps, Inc.</div>
   </div>
 </div>
 
@@ -183,6 +197,57 @@
   window.addEventListener('resize', resize);
   new IntersectionObserver(function(ents) { ents.forEach(function(en) { if (en.isIntersecting) { PK.syncColors(); resize(); } }); }, {threshold: 0.01}).observe(cvs);
   resize();
+
+  // Click on FORK title → PlanarKit ripple from title center
+  var title = document.querySelector('.landing-title');
+  if (title) {
+    title.addEventListener('click', function() {
+      var r = cvs.getBoundingClientRect();
+      var t = title.getBoundingClientRect();
+      var cx = t.left + t.width / 2 - r.left;
+      var cy = t.top + t.height / 2 - r.top;
+      sc.addRipple(cx, cy, 1.2, 15, 12, 4);
+      PK.wake(sc);
+    });
+  }
+})();
+
+// Typewriter — character-by-character reveal with cursor
+(function() {
+  var el = document.getElementById('typewriter-text');
+  if (!el) return;
+  var phrases = [
+    '#1A1A18, not #000000.',
+    '42px Besley Bold.',
+    'cubic-bezier(0.2, 0, 0, 1)',
+    '3px dots, 21px spacing.',
+    'var(--tint): #E86420',
+    '44pt minimum tap target.',
+    'iOS \u00b7 Android \u00b7 Web'
+  ];
+  var pi = Math.floor(Math.random() * phrases.length), ci = 0, deleting = false, pause = 0;
+  var typeSpeed = 52, deleteSpeed = 28, holdTime = 2200, pauseTime = 400;
+
+  function tick() {
+    if (pause > 0) { pause--; requestAnimationFrame(tick); return; }
+    var phrase = phrases[pi];
+    if (!deleting) {
+      ci++;
+      el.textContent = phrase.substring(0, ci);
+      if (ci >= phrase.length) { pause = Math.round(holdTime / 16); deleting = true; }
+      else { setTimeout(tick, typeSpeed + Math.random() * 30); return; }
+    } else {
+      ci--;
+      el.textContent = phrase.substring(0, ci);
+      if (ci <= 0) {
+        deleting = false;
+        pi = (pi + 1) % phrases.length;
+        pause = Math.round(pauseTime / 16);
+      } else { setTimeout(tick, deleteSpeed + Math.random() * 12); return; }
+    }
+    requestAnimationFrame(tick);
+  }
+  tick();
 })();
 </script>
 </body>

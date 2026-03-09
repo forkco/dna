@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Chat — FORK Design System</title>
+<title>Chat — FORK Design Language</title>
 <meta name="description" content="FORK chat components: message bubbles, media attachments, link previews, widgets, typing indicators, and conversation patterns for AI social networking.">
 <meta name="theme-color" content="#F5F5F2" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#1A1A18" media="(prefers-color-scheme: dark)">
@@ -16,7 +16,10 @@
 <a href="#main-content" class="skip-link">Skip to content</a>
 
 <div class="header">
-  <a href="../index.html" class="header-title"><span class="header-title-accent">FORK</span> <span class="header-dot">·</span> iOS + Android + Web</a>
+  <div class="header-left">
+    <a href="../index.html" class="header-title"><span class="header-title-accent">FORK</span></a>
+    <div class="tint-picker" id="tint-picker"></div>
+  </div>
   <nav class="top-nav" aria-label="Main navigation">
     <a class="top-nav-link" href="colors.html">Colors</a>
     <a class="top-nav-link" href="layout.html">Layout</a>
@@ -28,7 +31,6 @@
     <a class="top-nav-link" href="reference.html">Reference</a>
   </nav>
   <div class="header-controls">
-    <div class="tint-picker" id="tint-picker"></div>
     <button class="toggle" onclick="toggleTheme()" aria-label="Toggle theme">
       <span class="toggle-label">Light</span>
       <div class="toggle-track"></div>
@@ -134,7 +136,7 @@
 
       <div class="chat-msg chat-msg--incoming">
         <div>
-          <div class="chat-msg-bubble">Sure. The second result focuses on cross-platform token architecture, and the third covers automated design system testing.</div>
+          <div class="chat-msg-bubble">Sure. The second result focuses on cross-platform token architecture, and the third covers automated design language testing.</div>
           <div class="chat-msg-time">3:16 PM</div>
         </div>
       </div>
@@ -197,7 +199,7 @@
         </div>
         <div>
           <div class="chat-msg-name">Julia Kim</div>
-          <div class="chat-msg-bubble">Hey! Did you see the new design system updates? The token architecture is really clean — I love the warm neutrals approach.</div>
+          <div class="chat-msg-bubble">Hey! Did you see the new design language updates? The token architecture is really clean — I love the warm neutrals approach.</div>
           <div class="chat-msg-time">4:30 PM</div>
         </div>
       </div>
@@ -513,7 +515,7 @@
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10A15.3 15.3 0 0112 2z"/></svg>
             </div>
             <div class="chat-link-preview-content">
-              <div class="chat-link-preview-title">FORK — Design System Documentation</div>
+              <div class="chat-link-preview-title">FORK — Design Language Documentation</div>
               <div class="chat-link-preview-desc">Cross-platform token reference for iOS, Android, and Web</div>
               <div class="chat-link-preview-domain">fork.design</div>
             </div>
@@ -550,7 +552,7 @@
     <div class="usage">
       <div class="usage-title">Platform notes</div>
       <ul class="usage-list">
-        <li><span class="tag tag--ios">iOS</span> Use <code class="code-inline">LPLinkMetadata</code> to fetch preview data. Render custom cell — don't use the default <code class="code-inline">LPLinkView</code> to match the design system.</li>
+        <li><span class="tag tag--ios">iOS</span> Use <code class="code-inline">LPLinkMetadata</code> to fetch preview data. Render custom cell — don't use the default <code class="code-inline">LPLinkView</code> to match the design language.</li>
         <li><span class="tag tag--android">Android</span> Fetch Open Graph metadata via network layer. Render a custom Compose composable — avoid system <code class="code-inline">WebView</code> for preview. Use <code class="code-inline">SubcomposeLayout</code> for image + text layout.</li>
         <li><span class="tag tag--web">Web</span> Fetch Open Graph metadata server-side. Render as <code class="code-inline">&lt;a class="chat-link-preview" href="..." target="_blank"&gt;</code> for clickable previews.</li>
         <li><span class="tag tag--all">All</span> Link preview is a sibling of the bubble, not nested inside. This keeps the bubble shape clean and avoids mixed content padding issues.</li>
@@ -758,7 +760,7 @@
 
       <div class="chat-msg chat-msg--outgoing">
         <div>
-          <div class="chat-msg-bubble">Can you find some recent articles about design systems? Specifically around token-based architecture and cross-platform consistency.</div>
+          <div class="chat-msg-bubble">Can you find some recent articles about design languages? Specifically around token-based architecture and cross-platform consistency.</div>
           <div class="chat-msg-time">3:01 PM</div>
         </div>
       </div>
@@ -934,9 +936,9 @@
 <div class="footer">
   <div class="footer-inner">
     <div class="footer-brand">
-      <span class="footer-brand-accent">FORK</span> Design System
+      <span class="footer-brand-accent">FORK</span> Design Language
     </div>
-    <div class="footer-meta">Cross-platform design reference</div>
+    <div class="footer-meta">© 2026 FORK Apps, Inc.</div>
   </div>
 </div>
 </div> <!-- /page-main -->

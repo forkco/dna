@@ -121,7 +121,7 @@ const allTokens = [
   { section: 'System Colors', tokens: ['--systemRed', '--systemOrange', '--systemYellow', '--systemGreen', '--systemBlue', '--systemPink'] },
   { section: 'Grays', tokens: ['--systemGray', '--systemGray2', '--systemGray3', '--systemGray4', '--systemGray5', '--systemGray6'] },
   { section: 'Tint', tokens: ['--tint'] },
-  { section: 'Tint Alternatives', tokens: ['--tintCoral', '--tintIndigo', '--tintTeal', '--tintAmber'] },
+  { section: 'Tint Alternatives', tokens: ['--tintOrange', '--tintCoral', '--tintIndigo', '--tintTeal', '--tintAmber'] },
   { section: 'Semantic', tokens: ['--link', '--destructive', '--success', '--warning', '--disabled', '--disabledLabel', '--selection', '--badge', '--skeleton'] },
   { section: 'On-Colors', tokens: ['--onLight', '--onDark'] },
   { section: 'Border & Separators', tokens: ['--border', '--separator', '--opaqueSeparator'] },
@@ -172,6 +172,21 @@ document.addEventListener('keydown', e => {
   if ((e.key === 'Enter' || e.key === ' ') && e.target.getAttribute('role') === 'button') {
     e.preventDefault();
     e.target.click();
+  }
+});
+
+// ── Keyboard Shortcuts ──
+// T = toggle theme, 1–5 = switch tint preset
+document.addEventListener('keydown', function(e) {
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable) return;
+  if (e.metaKey || e.ctrlKey || e.altKey) return;
+  if (e.code === 'KeyT') {
+    e.preventDefault();
+    toggleTheme();
+  } else if (e.key >= '1' && e.key <= '5') {
+    e.preventDefault();
+    var idx = parseInt(e.key) - 1;
+    if (tintPresets[idx]) setTint(tintPresets[idx].name);
   }
 });
 

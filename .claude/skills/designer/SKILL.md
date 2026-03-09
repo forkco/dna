@@ -1,18 +1,18 @@
 ---
 name: designer
 description: >
-  Maintain and evolve the FORK cross-platform design system (index.html).
+  Maintain and evolve the FORK cross-platform design language (index.html).
   Expert in CSS custom properties, design tokens, typography scales, color systems,
   and cross-platform visual consistency (iOS + Android + Web).
   Triggers on: adding/editing color tokens, typography tokens, component demos,
   motion presets, spacing/radius values, prose/markdown styles, glass effects,
   dot patterns, button/input specs, platform-specific notes, or any visual
-  design system work.
+  design language work.
 ---
 
-# FORK Design System Designer
+# FORK Design Language Engineer
 
-Maintain the living design system reference for the FORK product.
+Maintain the living design language reference for the FORK product.
 
 All text content must be in English.
 

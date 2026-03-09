@@ -93,6 +93,7 @@
   --tint: #E86420;
 
   /* Tint Alternatives */
+  --tintOrange: #E86420;
   --tintCoral: #E05248;
   --tintIndigo: #5856D6;
   --tintTeal: #2CA898;
@@ -260,6 +261,7 @@
   --tint: #F07030;
 
   /* Tint Alternatives */
+  --tintOrange: #F07030;
   --tintCoral: #F06060;
   --tintIndigo: #7B79FF;
   --tintTeal: #38C8B8;
@@ -376,6 +378,13 @@ body {
   background: var(--systemGroupedBackground);
   border-bottom: 1px solid var(--separator);
   transition: background 0.25s var(--easeFluent), border-color 0.25s var(--easeFluent);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: var(--space12);
+  flex-shrink: 0;
 }
 
 .header-title {
@@ -673,6 +682,16 @@ a.header-title:hover {
   .top-nav::-webkit-scrollbar { display: none; }
   .container {
     padding: var(--space24) max(var(--space16), env(safe-area-inset-right)) var(--space24) max(var(--space16), env(safe-area-inset-left));
+  }
+  .landing-hero {
+    min-height: calc(70vh - 60px);
+    min-height: calc(70dvh - 60px);
+  }
+  .landing-title {
+    font-size: clamp(36px, 12vw, 64px);
+  }
+  .landing-container {
+    padding: 0 max(var(--space16), env(safe-area-inset-right)) var(--space32) max(var(--space16), env(safe-area-inset-left));
   }
 }
 
@@ -2527,7 +2546,6 @@ a.header-title:hover {
 /* ── Demo Utilities ── */
 
 /* Header dot separator — semantic: brand divider between product name and platform label */
-.header-dot { color: var(--tertiaryLabel); }
 
 /* Inline code in usage notes — mono 11px */
 .code-inline {
@@ -3195,40 +3213,113 @@ a.header-title:hover {
 }
 
 /* ── Landing Page ── */
-.landing-container {
-  position: relative;
-  max-width: var(--containerMaxWidth);
-  margin: 0 auto;
-  padding: var(--space64) max(var(--space32), env(safe-area-inset-right)) var(--space48) max(var(--space32), env(safe-area-inset-left));
-}
-
-/* Dot pattern — replaced by PlanarKit Canvas (see planarkit.js) */
-
 .landing-hero {
   position: relative;
   z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 80px);
+  min-height: calc(100dvh - 80px);
   text-align: center;
-  margin-bottom: var(--space64);
+  padding: var(--space64) max(var(--space32), env(safe-area-inset-right)) var(--space64) max(var(--space32), env(safe-area-inset-left));
+}
+
+.landing-hero-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
 }
 
 .landing-title {
   font-family: var(--fontDisplay);
-  font-size: var(--typeXlTitle2);
+  font-size: clamp(var(--typeXlTitle2), 10vw, 96px);
   font-weight: 700;
   color: var(--label);
-  line-height: 1.15;
-  letter-spacing: -0.02em;
+  line-height: 1.0;
+  letter-spacing: -0.03em;
   margin-bottom: var(--space16);
 }
 
-.landing-subtitle {
+.landing-overline {
+  font-family: var(--fontMono);
+  font-size: var(--typeOverline);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--tertiaryLabel);
+  margin-bottom: var(--space16);
+}
+
+/* Typewriter — character reveal with blinking cursor */
+.landing-typewriter {
+  font-family: var(--fontMono);
+  font-size: var(--typeCode);
+  color: var(--secondaryLabel);
+  line-height: 1.6;
+  min-height: 1.6em;
+}
+
+.landing-typewriter-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.1em;
+  background: var(--tint);
+  margin-left: 1px;
+  vertical-align: text-bottom;
+  animation: typewriter-blink 0.8s steps(2) infinite;
+}
+
+@keyframes typewriter-blink {
+  0%, 49.9% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+.landing-version {
+  font-family: var(--fontMono);
+  font-size: var(--typeOverline);
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: var(--quaternaryLabel);
+  margin-top: var(--space24);
+}
+
+.landing-dna-container {
+  text-align: center;
+  padding: var(--space48) var(--space32) var(--space64);
+}
+
+.landing-dna {
   font-family: var(--fontBody);
   font-size: var(--typeBody);
   color: var(--secondaryLabel);
-  line-height: 1.5;
+  line-height: 1.7;
+  max-width: 640px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
 }
 
-.landing-overline {
+.landing-dna strong {
+  color: var(--label);
+  font-weight: 600;
+}
+
+.dna-accent {
+  color: var(--tint);
+  font-weight: 500;
+}
+
+
+.landing-container {
+  position: relative;
+  max-width: var(--containerMaxWidth);
+  margin: 0 auto;
+  padding: 0 max(var(--space32), env(safe-area-inset-right)) var(--space48) max(var(--space32), env(safe-area-inset-left));
+}
+
+.landing-section-overline {
   font-family: var(--fontMono);
   font-size: var(--typeOverline);
   font-weight: 600;
@@ -3340,6 +3431,7 @@ a.header-title:hover {
 .landing-title-accent {
   color: var(--tint);
 }
+
 
 /* ── Motion Demos ── */
 

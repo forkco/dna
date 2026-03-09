@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Components — FORK Design System</title>
+<title>Components — FORK Design Language</title>
 <meta name="description" content="FORK component specs: buttons, inputs, and markdown prose rendering with cross-platform implementation notes.">
 <meta name="theme-color" content="#F5F5F2" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#1A1A18" media="(prefers-color-scheme: dark)">
@@ -16,7 +16,10 @@
 <a href="#main-content" class="skip-link">Skip to content</a>
 
 <div class="header">
-  <a href="../index.html" class="header-title"><span class="header-title-accent">FORK</span> <span class="header-dot">·</span> iOS + Android + Web</a>
+  <div class="header-left">
+    <a href="../index.html" class="header-title"><span class="header-title-accent">FORK</span></a>
+    <div class="tint-picker" id="tint-picker"></div>
+  </div>
   <nav class="top-nav" aria-label="Main navigation">
     <a class="top-nav-link" href="colors.html">Colors</a>
     <a class="top-nav-link" href="layout.html">Layout</a>
@@ -28,7 +31,6 @@
     <a class="top-nav-link" href="reference.html">Reference</a>
   </nav>
   <div class="header-controls">
-    <div class="tint-picker" id="tint-picker"></div>
     <button class="toggle" onclick="toggleTheme()" aria-label="Toggle theme">
       <span class="toggle-label">Light</span>
       <div class="toggle-track"></div>
@@ -398,7 +400,7 @@
         <li><span class="tag tag--ios">iOS</span> <span class="token">ActionKit</span><span class="dash">/</span>Async actions with automatic loading state. Gracetime prevents spinner flash on fast operations.</li>
         <li><span class="tag tag--ios">iOS</span> <span class="token">ContentView</span><span class="dash">/</span>StatefulView subclass — constraint swapping animates layout changes (title, image, loading)</li>
         <li><span class="tag tag--ios">iOS</span> <span class="token">.shakeOnError</span><span class="dash">/</span>Option flag — horizontal shake animation when async action completes with error</li>
-        <li><span class="tag tag--web">Web</span> <span class="token">CSS classes</span><span class="dash">/</span><code class="code-inline">.btn .btn--primary .btn--lg</code> — compose style + size. All CSS custom properties from this design system.</li>
+        <li><span class="tag tag--web">Web</span> <span class="token">CSS classes</span><span class="dash">/</span><code class="code-inline">.btn .btn--primary .btn--lg</code> — compose style + size. All CSS custom properties from this design language.</li>
         <li><span class="tag tag--web">Web</span> <span class="token">Markup</span><span class="dash">/</span><code class="code-inline">&lt;button class="btn btn--primary btn--lg"&gt;&lt;span class="btn-label"&gt;...&lt;/span&gt;&lt;span class="btn-spinner"&gt;&lt;/span&gt;&lt;/button&gt;</code></li>
         <li><span class="tag tag--web">Web</span> <span class="token">Loading</span><span class="dash">/</span>Add <code class="code-inline">.btn--loading</code> class. Spinner animates via CSS keyframes. Implement gracetime delay in JS.</li>
         <li><span class="tag tag--web">Web</span> <span class="token">Disabled</span><span class="dash">/</span>HTML <code class="code-inline">disabled</code> attribute. Opacity 38%, no pointer events, no transform.</li>
@@ -1177,7 +1179,7 @@
       <div class="usage-title">Platform notes</div>
       <ul class="usage-list">
         <li><span class="tag tag--ios">iOS</span> <code class="code-inline">List { ForEach(...) }</code> with <code class="code-inline">.listStyle(.insetGrouped)</code>. Swipe actions via <code class="code-inline">.swipeActions()</code>.</li>
-        <li><span class="tag tag--ios">iOS</span> Use <code class="code-inline">.listRowSeparatorTint(.separator)</code> for consistent separator color with the design system.</li>
+        <li><span class="tag tag--ios">iOS</span> Use <code class="code-inline">.listRowSeparatorTint(.separator)</code> for consistent separator color with the design language.</li>
         <li><span class="tag tag--web">Web</span> <code class="code-inline">&lt;div class="list"&gt;&lt;div class="list-item"&gt;...&lt;/div&gt;...&lt;/div&gt;</code>. Hover and active states via CSS. No JS needed for basic lists.</li>
         <li><span class="tag tag--android">Android</span> <code class="code-inline">LazyColumn</code> with custom <code class="code-inline">ListItem</code> composables. Map separators to <code class="code-inline">Divider</code> with FORK separator token color.</li>
         <li><span class="tag tag--all">All</span> Minimum 44pt row height ensures comfortable tap targets. Never reduce below this threshold.</li>
@@ -1573,7 +1575,7 @@ document.documentElement.style
         <li>Toggle themes with <code>data-theme="dark"</code></li>
       </ol>
 
-      <p class="footnote">This example demonstrates all markdown elements styled with the design system. The same visual language applies whether content is authored in a CMS, rendered from an API response, or written inline.</p>
+      <p class="footnote">This example demonstrates all markdown elements styled with the design language. The same visual language applies whether content is authored in a CMS, rendered from an API response, or written inline.</p>
     </div>
 
     <div class="usage">
@@ -1609,9 +1611,9 @@ document.documentElement.style
 <div class="footer">
   <div class="footer-inner">
     <div class="footer-brand">
-      <span class="footer-brand-accent">FORK</span> Design System
+      <span class="footer-brand-accent">FORK</span> Design Language
     </div>
-    <div class="footer-meta">Cross-platform design reference</div>
+    <div class="footer-meta">© 2026 FORK Apps, Inc.</div>
   </div>
 </div>
 </div> <!-- /page-main -->

@@ -1,6 +1,6 @@
 # Design Quality Guidelines
 
-Detailed rules for maintaining visual quality across the FORK design system.
+Detailed rules for maintaining visual quality across the FORK design language.
 Read this when adding or modifying tokens, components, or demos.
 
 ## Table of Contents

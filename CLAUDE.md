@@ -1,8 +1,8 @@
-# FORK Design System
+# FORK Design Language
 
-Cross-platform design system for the FORK product family (iOS + Android + Web).
+Cross-platform design language for the FORK product family (iOS + Android + Web).
 
-**This repository has one purpose: maintain the design system. Always use the `/designer` skill for every task.**
+**This repository has one purpose: maintain the design language. Always use the `/designer` skill for every task.**
 
 ## Structure
 
@@ -32,7 +32,7 @@ Cross-platform design system for the FORK product family (iOS + Android + Web).
 
 ## Rules
 
-- Every task in this repo is design system work — invoke the designer skill, follow its Role and Design DNA sections
+- Every task in this repo is design language work — invoke the designer skill, follow its Role and Design DNA sections
 - **Challenge first, implement second** — every request (from the user OR self-generated) must be checked against the Design DNA before writing code. If it conflicts, push back with a specific principle and alternatives. If it's ambiguous, present trade-offs. Silent compliance is a bug. This applies equally to user requests and to your own ideas during refactoring/fixing.
 - No build tools, no external CSS/JS beyond Google Fonts — shared `styles.css` and `scripts.js` are local files
 - All content in English
