@@ -4910,7 +4910,11 @@ a.header-title:hover {
 
 .term-prompt-input {
   color: var(--label);
-  white-space: pre;
+  white-space: pre-wrap;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
 }
 
 /* Uses shared .cursor.cursor--block component */
@@ -4935,10 +4939,31 @@ a.header-title:hover {
 
 .attach-row::-webkit-scrollbar { display: none; }
 
-/* Input marker — continuation of user prompt */
+/* Input attachments — same layout logic as --lg but capped at 2 rows.
+   With thumbs: thumbs stretch to --attach-h, pills waterfall via .attach-pills.
+   Without thumbs: pills flex-wrap into max 2 rows. */
 .attach-row--input {
+  --attach-h: calc(var(--pill-h) * 2 + var(--space8));
   padding-left: calc(1ch + var(--space8));
   position: relative;
+  flex-wrap: wrap;
+  overflow: hidden;
+  max-height: calc(var(--pill-h) * 2 + var(--space8) * 3);
+}
+
+/* Input thumbs: 2-row height, square */
+.attach-row--input .attach-thumb {
+  height: var(--attach-h);
+  width: var(--attach-h);
+}
+
+/* Input pill waterfall: 2-row column wrap (mirrors --lg .attach-pills) */
+.attach-row--input .attach-pills {
+  height: var(--attach-h);
+}
+
+.attach-row--input .attach-artifact {
+  max-width: 220px;
 }
 
 .attach-row--input::before {
@@ -4955,14 +4980,20 @@ a.header-title:hover {
 /* ── Output Attachments ── */
 /* Layout rules:
    1. --pill-h is the base unit, shared between input and output
-   2. Output media = 2× pill + gap (double height, aspect-ratio width)
-   3. Output pills = same --pill-h, 2-row waterfall
-   4. Media always before pills in DOM order */
+   2. No media: --attach-h = 2 rows (2× pill + gap)
+   3. With media (:has(.attach-thumb)): --attach-h = 3 rows (3× pill + 2× gap)
+   4. Pills = same --pill-h, column-wrap waterfall
+   5. Media always before pills in DOM order */
 
 .attach-row--lg {
   --attach-h: calc(var(--pill-h) * 2 + var(--space8));
   gap: var(--space8);
   padding: var(--space12) 0;
+}
+
+/* With media preview: 3 pill rows to give thumbs more presence */
+.attach-row--lg:has(.attach-thumb) {
+  --attach-h: calc(var(--pill-h) * 3 + var(--space8) * 2);
 }
 
 /* Thumbs: double height, aspect-ratio driven width */
@@ -4972,7 +5003,7 @@ a.header-title:hover {
   aspect-ratio: 4/3; /* default — override per-item with style="" */
 }
 
-/* Pill group wrapper: 2-row horizontal waterfall */
+/* Pill group wrapper: column-wrap waterfall (2 or 3 rows via --attach-h) */
 .attach-pills {
   display: flex;
   flex-direction: column;

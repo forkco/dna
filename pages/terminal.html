@@ -254,6 +254,10 @@
         <div class="term-prompt"><span class="term-prompt-path">~/project</span><span class="term-prompt-symbol">$</span><span class="term-prompt-input">fork </span><span class="term-prompt-ghost">build --watch</span><span class="cursor cursor--block"></span></div>
         <div style="height: var(--space16);"></div>
 
+        <div class="term-line term-line--muted"># Multiline prompt — wraps to max 2 lines</div>
+        <div class="term-prompt"><span class="term-prompt-path">~/project</span><span class="term-prompt-symbol">$</span><span class="term-prompt-input">refactor the authentication module to use JWT tokens instead of session cookies, update all middleware and add refresh token rotation</span></div>
+        <div style="height: var(--space16);"></div>
+
         <div class="term-line term-line--muted"># Empty prompt — waiting for input</div>
         <div class="term-prompt"><span class="term-prompt-path">~</span><span class="term-prompt-symbol">$</span><span class="cursor cursor--block"></span></div>
       </div>
@@ -266,6 +270,7 @@
         <div class="spec-row"><span class="spec-label">Path color</span><span class="spec-val">secondaryLabel</span></div>
         <div class="spec-row"><span class="spec-label">Symbol</span><span class="spec-val">tint — the brand "act now" signal</span></div>
         <div class="spec-row"><span class="spec-label">Input color</span><span class="spec-val">label (full contrast)</span></div>
+        <div class="spec-row"><span class="spec-label">Input lines</span><span class="spec-val">max 2 lines (line-clamp), pre-wrap</span></div>
         <div class="spec-row"><span class="spec-label">Ghost text</span><span class="spec-val">quaternaryLabel</span></div>
       </div>
       <div class="spec-card">
@@ -318,19 +323,29 @@
         <div class="attach-row attach-row--input">
           <div class="attach-thumb"><div style="width:100%;height:100%;background:linear-gradient(135deg, var(--systemBlue), var(--tint));"></div></div>
           <div class="attach-thumb"><div style="width:100%;height:100%;background:linear-gradient(135deg, var(--systemGreen), var(--tintTeal));"></div></div>
-          <div class="attach-artifact">
-            <div class="attach-artifact-icon" style="background: var(--secondarySystemFill); color: var(--secondaryLabel);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <div class="attach-artifact-info"><span class="attach-artifact-name">config.yaml</span></div>
-          </div>
-          <div class="attach-artifact">
-            <div class="attach-artifact-icon" style="background: var(--secondarySystemFill); color: var(--secondaryLabel);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <div class="attach-artifact-info"><span class="attach-artifact-name">deploy.sh</span><span class="attach-artifact-meta">~/project/scripts/</span></div>
+          <div class="attach-pills">
+            <div class="attach-artifact">
+              <div class="attach-artifact-icon" style="background: var(--secondarySystemFill); color: var(--secondaryLabel);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div class="attach-artifact-info"><span class="attach-artifact-name">config.yaml</span></div>
+            </div>
+            <div class="attach-artifact">
+              <div class="attach-artifact-icon" style="background: var(--secondarySystemFill); color: var(--secondaryLabel);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div class="attach-artifact-info"><span class="attach-artifact-name">deploy.sh</span><span class="attach-artifact-meta">scripts/</span></div>
+            </div>
+            <div class="attach-artifact">
+              <div class="attach-artifact-icon" style="background: var(--secondarySystemFill); color: var(--secondaryLabel);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div class="attach-artifact-info"><span class="attach-artifact-name">schema.sql</span><span class="attach-artifact-meta">db/</span></div>
+            </div>
+            <div class="attach-artifact">
+              <div class="attach-artifact-icon" style="background: var(--secondarySystemFill); color: var(--secondaryLabel);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div class="attach-artifact-info"><span class="attach-artifact-name">README.md</span></div>
+            </div>
           </div>
         </div>
 
         <div style="height: var(--space16);"></div>
 
-        <div class="term-line term-line--muted"># File-only attachments</div>
+        <div class="term-line term-line--muted"># File-only attachments (wraps into 2 rows)</div>
         <div class="term-prompt"><span class="term-prompt-path">~/project</span><span class="term-prompt-symbol">$</span><span class="term-prompt-input">fork lint</span></div>
         <div class="attach-row attach-row--input">
           <div class="attach-artifact">
@@ -344,6 +359,26 @@
           <div class="attach-artifact">
             <div class="attach-artifact-icon" style="background: var(--secondarySystemFill); color: var(--secondaryLabel);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
             <div class="attach-artifact-info"><span class="attach-artifact-name">Package.swift</span><span class="attach-artifact-meta">~/project/</span></div>
+          </div>
+          <div class="attach-artifact">
+            <div class="attach-artifact-icon" style="background: var(--secondarySystemFill); color: var(--secondaryLabel);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="attach-artifact-info"><span class="attach-artifact-name">ContentView.swift</span><span class="attach-artifact-meta">Sources/Views/</span></div>
+          </div>
+          <div class="attach-artifact">
+            <div class="attach-artifact-icon" style="background: var(--secondarySystemFill); color: var(--secondaryLabel);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="attach-artifact-info"><span class="attach-artifact-name">Theme.swift</span><span class="attach-artifact-meta">Sources/</span></div>
+          </div>
+          <div class="attach-artifact">
+            <div class="attach-artifact-icon" style="background: var(--secondarySystemFill); color: var(--secondaryLabel);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="attach-artifact-info"><span class="attach-artifact-name">Router.swift</span><span class="attach-artifact-meta">Sources/</span></div>
+          </div>
+          <div class="attach-artifact">
+            <div class="attach-artifact-icon" style="background: var(--secondarySystemFill); color: var(--secondaryLabel);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="attach-artifact-info"><span class="attach-artifact-name">Tokens.swift</span></div>
+          </div>
+          <div class="attach-artifact">
+            <div class="attach-artifact-icon" style="background: var(--secondarySystemFill); color: var(--secondaryLabel);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="attach-artifact-info"><span class="attach-artifact-name">Makefile</span></div>
           </div>
         </div>
 
@@ -412,10 +447,10 @@
 
         <div style="height: var(--space16);"></div>
 
-        <div class="term-line term-line--muted"># Output — mixed: media first, then files waterfall</div>
+        <div class="term-line term-line--muted"># Output — mixed: media first, then 3-row pill waterfall</div>
         <div class="term-prompt"><span class="term-prompt-path">~/project</span><span class="term-prompt-symbol">$</span><span class="term-prompt-input">fork analyze design.fig</span></div>
         <div class="term-line term-line--stdout">Extracting components from design.fig…</div>
-        <div class="term-line term-line--success">✓ Found 6 exportable assets</div>
+        <div class="term-line term-line--success">✓ Found 8 exportable assets</div>
         <div class="attach-row attach-row--lg">
           <div class="attach-thumb" style="aspect-ratio:3/4;"><div style="width:100%;height:100%;background:linear-gradient(135deg, var(--tint), var(--tintCoral));"></div></div>
           <div class="attach-thumb" style="aspect-ratio:16/9;"><div style="width:100%;height:100%;background:linear-gradient(135deg, var(--tintTeal), var(--systemGreen));"></div></div>
@@ -436,6 +471,14 @@
               <div class="attach-artifact-icon" style="background: var(--secondarySystemFill); color: var(--secondaryLabel);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
               <div class="attach-artifact-info"><span class="attach-artifact-name">spacing.swift</span><span class="attach-artifact-meta">Sources/</span></div>
             </div>
+            <div class="attach-artifact">
+              <div class="attach-artifact-icon" style="background: var(--secondarySystemFill); color: var(--secondaryLabel);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div class="attach-artifact-info"><span class="attach-artifact-name">radius.swift</span><span class="attach-artifact-meta">Sources/</span></div>
+            </div>
+            <div class="attach-artifact">
+              <div class="attach-artifact-icon" style="background: var(--secondarySystemFill); color: var(--secondaryLabel);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div class="attach-artifact-info"><span class="attach-artifact-name">motion.swift</span><span class="attach-artifact-meta">Sources/</span></div>
+            </div>
           </div>
         </div>
       </div>
@@ -444,7 +487,7 @@
     <div class="spec-grid" style="margin-top: var(--space12);">
       <div class="spec-card">
         <div class="spec-title">Attachment Row</div>
-        <div class="spec-row"><span class="spec-label">Layout</span><span class="spec-val">flex, horizontal scroll</span></div>
+        <div class="spec-row"><span class="spec-label">Layout</span><span class="spec-val">flex; input wraps (max 2 rows), output scrolls</span></div>
         <div class="spec-row"><span class="spec-label">Gap</span><span class="spec-val">space8</span></div>
         <div class="spec-row"><span class="spec-label">Padding</span><span class="spec-val">space8 0 (vertical only)</span></div>
         <div class="spec-row"><span class="spec-label">Scrollbar</span><span class="spec-val">hidden (all platforms)</span></div>
@@ -452,7 +495,7 @@
       <div class="spec-card">
         <div class="spec-title">Media Thumbnail</div>
         <div class="spec-row"><span class="spec-label">Size (default)</span><span class="spec-val">--pill-h × --pill-h (square)</span></div>
-        <div class="spec-row"><span class="spec-label">Size (--lg)</span><span class="spec-val">--pill-h × 2 + space8, aspect-ratio width</span></div>
+        <div class="spec-row"><span class="spec-label">Size (--lg)</span><span class="spec-val">--pill-h × 2 + space8 (no media) · × 3 + space8 × 2 (with media)</span></div>
         <div class="spec-row"><span class="spec-label">Default ratio</span><span class="spec-val">4:3 — override per-item</span></div>
         <div class="spec-row"><span class="spec-label">Radius</span><span class="spec-val">radius8</span></div>
         <div class="spec-row"><span class="spec-label">Fill</span><span class="spec-val">tertiarySystemFill (placeholder)</span></div>
@@ -471,8 +514,9 @@
       <div class="spec-card">
         <div class="spec-title">Layout Rules</div>
         <div class="spec-row"><span class="spec-label">Base unit</span><span class="spec-val">--pill-h: 48px (on .attach-row)</span></div>
-        <div class="spec-row"><span class="spec-label">Output media</span><span class="spec-val">--pill-h × 2 + space8</span></div>
-        <div class="spec-row"><span class="spec-label">Output pills</span><span class="spec-val">--pill-h, 2-row waterfall</span></div>
+        <div class="spec-row"><span class="spec-label">Output (no media)</span><span class="spec-val">--pill-h × 2 + space8 (2-row waterfall)</span></div>
+        <div class="spec-row"><span class="spec-label">Output (with media)</span><span class="spec-val">--pill-h × 3 + space8 × 2 (3-row waterfall)</span></div>
+        <div class="spec-row"><span class="spec-label">Input</span><span class="spec-val">flex-wrap, max 2 rows</span></div>
         <div class="spec-row"><span class="spec-label">Order</span><span class="spec-val">media first → pills last</span></div>
         <div class="spec-row"><span class="spec-label">Pill wrapper</span><span class="spec-val">.attach-pills (column wrap)</span></div>
       </div>
@@ -481,9 +525,9 @@
     <div class="usage">
       <div class="usage-title">When to use</div>
       <ul class="usage-list">
-        <li><span class="token">.attach-row</span><span class="dash">/</span>Horizontal strip of attachments. Default: compact 48px for input context.</li>
-        <li><span class="token">.attach-row--input</span><span class="dash">/</span>User-sent attachments. Adds a tint-colored <code class="code-inline">&gt;</code> marker before the row to distinguish input from output.</li>
-        <li><span class="token">.attach-row--lg</span><span class="dash">/</span>Output context. Media = 2× <code class="code-inline">--pill-h</code> + gap. Pills stay at <code class="code-inline">--pill-h</code>, 2-row waterfall.</li>
+        <li><span class="token">.attach-row</span><span class="dash">/</span>Base attachment strip. Compact 48px pill height.</li>
+        <li><span class="token">.attach-row--input</span><span class="dash">/</span>User-sent attachments. Wraps into max 2 rows. Tint-colored <code class="code-inline">&gt;</code> marker before the row.</li>
+        <li><span class="token">.attach-row--lg</span><span class="dash">/</span>Output context. Without media: 2-row waterfall. With media (<code class="code-inline">:has(.attach-thumb)</code>): 3-row waterfall, taller thumbnails.</li>
         <li><span class="token">.attach-thumb</span><span class="dash">/</span>Media preview. <code class="code-inline">--pill-h</code> square (input). In --lg: double height, width from aspect-ratio (default 4:3).</li>
         <li><span class="token">.attach-artifact</span><span class="dash">/</span>Universal pill for files and artifacts: square icon + name + optional meta. Fixed height from <code class="code-inline">--pill-h</code>. Max 220px in --lg.</li>
         <li><span class="token">.attach-pills</span><span class="dash">/</span>Wrapper for pills. In --lg: column-wrap layout creates 2-row horizontal waterfall.</li>
