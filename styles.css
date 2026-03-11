@@ -5025,7 +5025,6 @@ a.header-title:hover {
 .attach-thumb {
   width: var(--pill-h);
   height: var(--pill-h);
-  border-radius: var(--radius8);
   background: var(--tertiarySystemFill);
   flex-shrink: 0;
   position: relative;
