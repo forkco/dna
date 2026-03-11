@@ -4920,10 +4920,13 @@ a.header-title:hover {
 }
 
 /* ── Attachments ── */
-/* Shared attachment strip: horizontal row of media thumbs + file pills */
+/* Shared attachment strip: horizontal row of media thumbs + pills.
+   All dimensions derive from --pill-h so pill, thumb, and --lg stay in sync. */
 
 .attach-row {
+  --pill-h: 48px;
   display: flex;
+  align-items: stretch;
   gap: var(--space8);
   padding: var(--space8) 0;
   overflow-x: auto;
@@ -4932,15 +4935,32 @@ a.header-title:hover {
 
 .attach-row::-webkit-scrollbar { display: none; }
 
+/* Input marker — continuation of user prompt */
+.attach-row--input {
+  padding-left: calc(1ch + var(--space8));
+  position: relative;
+}
+
+.attach-row--input::before {
+  content: '>';
+  position: absolute;
+  left: 0;
+  top: var(--space8);
+  font-family: var(--fontMono);
+  font-size: var(--typeCode);
+  line-height: var(--pill-h);
+  color: var(--tint);
+}
+
 /* ── Output Attachments ── */
 /* Layout rules:
-   1. Base height (48px) is shared between input and output
-   2. Output media = 2× base + gap (double height, aspect-ratio width)
-   3. Output file pills = base height (same as input), 2-row waterfall
-   4. Media always before files in DOM order */
+   1. --pill-h is the base unit, shared between input and output
+   2. Output media = 2× pill + gap (double height, aspect-ratio width)
+   3. Output pills = same --pill-h, 2-row waterfall
+   4. Media always before pills in DOM order */
 
 .attach-row--lg {
-  --attach-h: calc(48px * 2 + var(--space8)); /* 104px */
+  --attach-h: calc(var(--pill-h) * 2 + var(--space8));
   gap: var(--space8);
   padding: var(--space12) 0;
 }
@@ -4952,8 +4972,8 @@ a.header-title:hover {
   aspect-ratio: 4/3; /* default — override per-item with style="" */
 }
 
-/* File group wrapper: 2-row horizontal waterfall */
-.attach-files {
+/* Pill group wrapper: 2-row horizontal waterfall */
+.attach-pills {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -4961,20 +4981,19 @@ a.header-title:hover {
   align-content: flex-start;
 }
 
-.attach-row--lg .attach-files {
+.attach-row--lg .attach-pills {
   height: var(--attach-h);
 }
 
-/* File pills inside --lg: same base height as input, capped width */
-.attach-row--lg .attach-file {
+/* Pills inside --lg: capped width */
+.attach-row--lg .attach-artifact {
   max-width: 220px;
 }
 
-
-/* Square media thumbnail */
+/* Square media thumbnail — height = --pill-h base, square */
 .attach-thumb {
-  width: 48px;
-  height: 48px;
+  width: var(--pill-h);
+  height: var(--pill-h);
   border-radius: var(--radius8);
   background: var(--tertiarySystemFill);
   flex-shrink: 0;
@@ -4986,49 +5005,6 @@ a.header-title:hover {
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-/* File pill — icon left, name + path stacked right */
-.attach-file {
-  display: flex;
-  align-items: center;
-  gap: var(--space8);
-  height: 48px;
-  padding: 0 var(--space16);
-  background: var(--tertiarySystemFill);
-  border-radius: var(--radius8);
-  flex-shrink: 0;
-  font-family: var(--fontMono);
-  white-space: nowrap;
-}
-
-.attach-file-icon {
-  color: var(--secondaryLabel);
-  flex-shrink: 0;
-  width: 24px;
-  height: 24px;
-}
-
-.attach-file-info {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space4);
-  min-width: 0;
-}
-
-.attach-file-name {
-  color: var(--label);
-  font-weight: 500;
-  font-size: var(--typeCaption1);
-  line-height: 1.1;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.attach-file-path {
-  color: var(--tertiaryLabel);
-  font-size: var(--typeCaption2);
-  line-height: 1.1;
 }
 
 /* Remove button overlay */
@@ -5051,7 +5027,7 @@ a.header-title:hover {
 }
 
 .attach-thumb:hover .attach-remove,
-.attach-file:hover .attach-remove { opacity: 1; }
+.attach-artifact:hover .attach-remove { opacity: 1; }
 
 /* ── Terminal Syntax Highlighting ── */
 .term-kw { color: var(--systemPink); }
@@ -5174,6 +5150,12 @@ a.header-title:hover {
   font-family: var(--fontMono);
   font-size: var(--typeCode);
   line-height: 1.7;
+}
+
+.term-progress-title {
+  color: var(--label);
+  font-weight: 500;
+  white-space: nowrap;
 }
 
 .term-progress-track {
@@ -5495,6 +5477,332 @@ a.header-title:hover {
 .term-block-copy:active {
   background: var(--secondarySystemFill);
   color: var(--label);
+}
+
+/* ── Artifact Pill ── */
+/* Universal pill for files, artifacts, results.
+   Fixed height from --pill-h, square icon, optional meta + badge. */
+.attach-artifact {
+  --_pad: var(--space8);
+  --_icon: calc(var(--pill-h, 48px) - var(--_pad) * 2);
+  display: flex;
+  align-items: center;
+  gap: var(--space8);
+  height: var(--pill-h, 48px);
+  padding: 0 var(--space12) 0 var(--_pad);
+  background: var(--tertiarySystemFill);
+  border-radius: var(--radius8);
+  flex-shrink: 0;
+  font-family: var(--fontMono);
+  white-space: nowrap;
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.15s var(--easeFluent);
+}
+
+a.attach-artifact:hover {
+  background: var(--secondarySystemFill);
+}
+
+.attach-artifact-icon {
+  width: var(--_icon);
+  height: var(--_icon);
+  border-radius: var(--radius6);
+  background: var(--tint);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--onLight);
+}
+
+.attach-artifact-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+.attach-artifact-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space2);
+  min-width: 0;
+}
+
+.attach-artifact-name {
+  color: var(--label);
+  font-weight: 500;
+  font-size: var(--typeCaption1);
+  line-height: 1.1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.attach-artifact-meta {
+  color: var(--tertiaryLabel);
+  font-size: var(--typeCaption2);
+  line-height: 1.1;
+}
+
+.attach-artifact-badge {
+  margin-left: auto;
+}
+
+/* ── Activity Card ── */
+/* Rich progress card with icon, title · status, progress bar */
+.term-activity {
+  display: flex;
+  align-items: center;
+  gap: var(--space12);
+  padding: var(--space12) var(--space16);
+  margin: var(--space4) 0;
+  background: var(--tertiarySystemFill);
+  border-radius: var(--radius12);
+  font-family: var(--fontMono);
+}
+
+.term-activity-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius8);
+  background: var(--tint);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--onLight);
+}
+
+.term-activity-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.term-activity-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space12);
+}
+
+.term-activity-header {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space8);
+  min-width: 0;
+  font-size: var(--typeCaption1);
+  line-height: 1.2;
+}
+
+.term-activity-title {
+  color: var(--label);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.term-activity-dot {
+  color: var(--tertiaryLabel);
+  flex-shrink: 0;
+}
+
+.term-activity-dot::before {
+  content: '·';
+}
+
+.term-activity-status {
+  color: var(--secondaryLabel);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.term-activity-track {
+  height: 4px;
+  background: var(--quaternarySystemFill);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.term-activity-bar {
+  height: 100%;
+  background: var(--tint);
+  border-radius: 2px;
+  transition: width 0.4s var(--easeFluent);
+}
+
+.term-activity-label {
+  color: var(--secondaryLabel);
+  font-size: var(--typeCaption2);
+  flex-shrink: 0;
+}
+
+/* ── Step List ── */
+/* Multi-step checklist with individual statuses */
+.term-steps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space2);
+  font-family: var(--fontMono);
+  font-size: var(--typeCode);
+  line-height: 1.7;
+}
+
+.term-step {
+  display: flex;
+  align-items: center;
+  gap: var(--space8);
+}
+
+.term-step-icon {
+  width: 1.2em;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.term-step--pending .term-step-icon { color: var(--tertiaryLabel); }
+.term-step--pending .term-step-icon::before { content: '○'; }
+.term-step--pending { color: var(--tertiaryLabel); }
+
+.term-step--active .term-step-icon { color: var(--tint); }
+.term-step--active .term-step-icon::before { content: '◉'; }
+.term-step--active { color: var(--label); }
+
+.term-step--done .term-step-icon { color: var(--success); }
+.term-step--done .term-step-icon::before { content: '✓'; }
+.term-step--done { color: var(--secondaryLabel); }
+
+.term-step--error .term-step-icon { color: var(--destructive); }
+.term-step--error .term-step-icon::before { content: '✕'; }
+.term-step--error { color: var(--destructive); }
+
+/* ── Option Picker ── */
+/* Interactive selection from a set of choices */
+.term-options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space4);
+  font-family: var(--fontMono);
+  font-size: var(--typeCode);
+}
+
+.term-options-prompt {
+  color: var(--label);
+  font-weight: 500;
+  line-height: 1.7;
+  margin-bottom: var(--space4);
+}
+
+.term-option {
+  display: flex;
+  align-items: center;
+  gap: var(--space8);
+  padding: var(--space8) var(--space12);
+  background: var(--tertiarySystemFill);
+  border-radius: var(--radius8);
+  border: 1px solid transparent;
+  cursor: pointer;
+  color: var(--label);
+  line-height: 1.4;
+  transition: background 0.15s var(--easeFluent), border-color 0.15s var(--easeFluent);
+}
+
+.term-option:hover {
+  background: var(--secondarySystemFill);
+}
+
+.term-option--selected {
+  border-color: var(--tint);
+  background: var(--tertiarySystemFill);
+}
+
+.term-option-key {
+  color: var(--secondaryLabel);
+  font-size: var(--typeCaption2);
+  min-width: 2ch;
+  flex-shrink: 0;
+}
+
+/* ── Changeset ── */
+/* Commit / revision summary block */
+.term-changeset {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space4);
+  padding: var(--space12) var(--space16);
+  margin: var(--space4) 0;
+  background: var(--tertiarySystemFill);
+  border-radius: var(--radius12);
+  font-family: var(--fontMono);
+}
+
+.term-changeset-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space8);
+}
+
+.term-changeset-icon {
+  color: var(--secondaryLabel);
+  flex-shrink: 0;
+}
+
+.term-changeset-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+.term-changeset-id {
+  color: var(--tint);
+  font-size: var(--typeCaption2);
+  font-weight: 500;
+}
+
+.term-changeset-seq {
+  color: var(--tertiaryLabel);
+  font-size: var(--typeCaption2);
+  margin-left: auto;
+}
+
+.term-changeset-msg {
+  color: var(--label);
+  font-size: var(--typeCaption1);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.term-changeset-files {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space4);
+}
+
+.term-changeset-file {
+  color: var(--secondaryLabel);
+  font-size: var(--typeCaption2);
+}
+
+/* ── Media Generating ── */
+/* Placeholder state for media being generated — opacity pulse, not shimmer */
+.attach-thumb--generating {
+  position: relative;
+  animation: media-pulse 2s cubic-bezier(0.2, 0, 0, 1) infinite;
+}
+
+@keyframes media-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.attach-thumb--generating .attach-thumb-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--secondaryLabel);
+  font-family: var(--fontMono);
+  font-size: var(--typeCaption2);
 }
 
 /* ── Reduced Motion ── */

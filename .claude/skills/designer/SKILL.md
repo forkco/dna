@@ -94,6 +94,15 @@ FORK's aesthetic sits at the intersection of four traditions:
 - **Positioning is relative** — never hardcode pixel offsets between elements. Use flex/grid structure, token-based spacing, and relative positioning so layout adapts when any single element changes size. If element B must sit above element A, make them siblings in a flex container — don't absolute-position B with a magic `bottom: 72px`. Hardcoded spatial relationships are fragile and violate the token system.
 - **Reuse is primary** — before building anything new, check if an existing component or pattern already solves the problem. When implementing a large feature, decompose it into parts and ask: does this part already exist as a component? Can this part be extracted as a reusable component for other contexts? If a pattern appears in 2+ places, it must be a shared component. The tint picker and terminal traffic lights are both "colored dot rows" — that's one component, not two. A progress bar in a terminal is the same progress bar everywhere. Silent duplication is a bug.
 
+### Abstract naming
+
+All component and class names in the design language must be **abstract and product-agnostic**. Names describe the visual/behavioral pattern, not the internal API or domain concept that triggers it.
+
+- **Do:** `.term-activity`, `.attach-artifact`, `.term-steps`, `.term-changeset`, `.term-options`
+- **Don't:** `.app-progress`, `.app-card`, `.builder-tool`, `.commit-widget`
+
+The design language is a generic toolkit consumed by any product. If a name leaks a backend concept (app, builder, commit, deploy), it's wrong — rename it to the visual pattern it represents. A progress card is a progress card regardless of whether it tracks an app build, a file upload, or a CI pipeline.
+
 ### Never do
 
 - Gradients without purpose (light source or depth transition)
@@ -104,6 +113,7 @@ FORK's aesthetic sits at the intersection of four traditions:
 - Adding tokens when existing ones already solve the problem
 - Hardcoded pixel offsets between related elements (use flex/grid structure instead)
 - Interactive elements in safe area insets (under notch, behind home indicator)
+- Leaking backend/API naming into component classes (use abstract visual names)
 
 ### Token economy
 

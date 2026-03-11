@@ -61,6 +61,12 @@
     <a class="sidebar-link" href="#thinking">Thinking</a>
     <a class="sidebar-link" href="#mono-prose">Mono Prose</a>
     <a class="sidebar-link" href="#tool-activity">Tool Activity</a>
+    <a class="sidebar-link" href="#activity-card">Activity Card</a>
+    <a class="sidebar-link" href="#artifact-pill">Artifact Pill</a>
+    <a class="sidebar-link" href="#step-list">Step List</a>
+    <a class="sidebar-link" href="#option-picker">Option Picker</a>
+    <a class="sidebar-link" href="#changeset">Changeset</a>
+    <a class="sidebar-link" href="#media-generating">Media Generating</a>
   </div>
   <div class="sidebar-group">
     <div class="sidebar-group-label">Patterns</div>
@@ -309,16 +315,16 @@
       <div class="term-surface">
         <div class="term-line term-line--muted"># Prompt with media + file attachments</div>
         <div class="term-prompt"><span class="term-prompt-path">~/project</span><span class="term-prompt-symbol">$</span><span class="term-prompt-input">fork deploy --env staging</span></div>
-        <div class="attach-row">
+        <div class="attach-row attach-row--input">
           <div class="attach-thumb"><div style="width:100%;height:100%;background:linear-gradient(135deg, var(--systemBlue), var(--tint));"></div></div>
           <div class="attach-thumb"><div style="width:100%;height:100%;background:linear-gradient(135deg, var(--systemGreen), var(--tintTeal));"></div></div>
-          <div class="attach-file">
-            <svg class="attach-file-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <div class="attach-file-info"><span class="attach-file-name">config.yaml</span></div>
+          <div class="attach-artifact">
+            <div class="attach-artifact-icon" style="background: var(--secondarySystemFill); color: var(--secondaryLabel);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="attach-artifact-info"><span class="attach-artifact-name">config.yaml</span></div>
           </div>
-          <div class="attach-file">
-            <svg class="attach-file-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <div class="attach-file-info"><span class="attach-file-name">deploy.sh</span><span class="attach-file-path">~/project/scripts/</span></div>
+          <div class="attach-artifact">
+            <div class="attach-artifact-icon" style="background: var(--secondarySystemFill); color: var(--secondaryLabel);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="attach-artifact-info"><span class="attach-artifact-name">deploy.sh</span><span class="attach-artifact-meta">~/project/scripts/</span></div>
           </div>
         </div>
 
@@ -326,18 +332,18 @@
 
         <div class="term-line term-line--muted"># File-only attachments</div>
         <div class="term-prompt"><span class="term-prompt-path">~/project</span><span class="term-prompt-symbol">$</span><span class="term-prompt-input">fork lint</span></div>
-        <div class="attach-row">
-          <div class="attach-file">
-            <svg class="attach-file-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <div class="attach-file-info"><span class="attach-file-name">App.swift</span><span class="attach-file-path">Sources/</span></div>
+        <div class="attach-row attach-row--input">
+          <div class="attach-artifact">
+            <div class="attach-artifact-icon" style="background: var(--secondarySystemFill); color: var(--secondaryLabel);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="attach-artifact-info"><span class="attach-artifact-name">App.swift</span><span class="attach-artifact-meta">Sources/</span></div>
           </div>
-          <div class="attach-file">
-            <svg class="attach-file-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <div class="attach-file-info"><span class="attach-file-name">styles.css</span></div>
+          <div class="attach-artifact">
+            <div class="attach-artifact-icon" style="background: var(--secondarySystemFill); color: var(--secondaryLabel);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="attach-artifact-info"><span class="attach-artifact-name">styles.css</span></div>
           </div>
-          <div class="attach-file">
-            <svg class="attach-file-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <div class="attach-file-info"><span class="attach-file-name">Package.swift</span><span class="attach-file-path">~/project/</span></div>
+          <div class="attach-artifact">
+            <div class="attach-artifact-icon" style="background: var(--secondarySystemFill); color: var(--secondaryLabel);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="attach-artifact-info"><span class="attach-artifact-name">Package.swift</span><span class="attach-artifact-meta">~/project/</span></div>
           </div>
         </div>
 
@@ -345,7 +351,7 @@
 
         <div class="term-line term-line--muted"># Media-only input</div>
         <div class="term-prompt"><span class="term-prompt-path">~/design</span><span class="term-prompt-symbol">$</span><span class="term-prompt-input">fork review</span></div>
-        <div class="attach-row">
+        <div class="attach-row attach-row--input">
           <div class="attach-thumb"><div style="width:100%;height:100%;background:linear-gradient(135deg, var(--tintAmber), var(--systemYellow));"></div></div>
           <div class="attach-thumb"><div style="width:100%;height:100%;background:linear-gradient(135deg, var(--tintIndigo), var(--systemPurple));"></div></div>
           <div class="attach-thumb"><div style="width:100%;height:100%;background:linear-gradient(135deg, var(--tintCoral), var(--systemPink));"></div></div>
@@ -380,26 +386,26 @@
         <div class="term-prompt"><span class="term-prompt-path">~/project</span><span class="term-prompt-symbol">$</span><span class="term-prompt-input">fork build</span></div>
         <div class="term-line term-line--success">✓ Build complete — 5 artifacts</div>
         <div class="attach-row attach-row--lg">
-          <div class="attach-files">
-            <div class="attach-file">
-              <svg class="attach-file-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              <div class="attach-file-info"><span class="attach-file-name">app.min.js</span><span class="attach-file-path">dist/</span></div>
+          <div class="attach-pills">
+            <div class="attach-artifact">
+              <div class="attach-artifact-icon" style="background: var(--secondarySystemFill); color: var(--secondaryLabel);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div class="attach-artifact-info"><span class="attach-artifact-name">app.min.js</span><span class="attach-artifact-meta">dist/</span></div>
             </div>
-            <div class="attach-file">
-              <svg class="attach-file-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              <div class="attach-file-info"><span class="attach-file-name">styles.min.css</span><span class="attach-file-path">dist/</span></div>
+            <div class="attach-artifact">
+              <div class="attach-artifact-icon" style="background: var(--secondarySystemFill); color: var(--secondaryLabel);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div class="attach-artifact-info"><span class="attach-artifact-name">styles.min.css</span><span class="attach-artifact-meta">dist/</span></div>
             </div>
-            <div class="attach-file">
-              <svg class="attach-file-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              <div class="attach-file-info"><span class="attach-file-name">manifest.json</span><span class="attach-file-path">dist/</span></div>
+            <div class="attach-artifact">
+              <div class="attach-artifact-icon" style="background: var(--secondarySystemFill); color: var(--secondaryLabel);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div class="attach-artifact-info"><span class="attach-artifact-name">manifest.json</span><span class="attach-artifact-meta">dist/</span></div>
             </div>
-            <div class="attach-file">
-              <svg class="attach-file-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              <div class="attach-file-info"><span class="attach-file-name">index.html</span><span class="attach-file-path">dist/</span></div>
+            <div class="attach-artifact">
+              <div class="attach-artifact-icon" style="background: var(--secondarySystemFill); color: var(--secondaryLabel);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div class="attach-artifact-info"><span class="attach-artifact-name">index.html</span><span class="attach-artifact-meta">dist/</span></div>
             </div>
-            <div class="attach-file">
-              <svg class="attach-file-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              <div class="attach-file-info"><span class="attach-file-name">favicon.svg</span><span class="attach-file-path">dist/</span></div>
+            <div class="attach-artifact">
+              <div class="attach-artifact-icon" style="background: var(--secondarySystemFill); color: var(--secondaryLabel);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div class="attach-artifact-info"><span class="attach-artifact-name">favicon.svg</span><span class="attach-artifact-meta">dist/</span></div>
             </div>
           </div>
         </div>
@@ -413,22 +419,22 @@
         <div class="attach-row attach-row--lg">
           <div class="attach-thumb" style="aspect-ratio:3/4;"><div style="width:100%;height:100%;background:linear-gradient(135deg, var(--tint), var(--tintCoral));"></div></div>
           <div class="attach-thumb" style="aspect-ratio:16/9;"><div style="width:100%;height:100%;background:linear-gradient(135deg, var(--tintTeal), var(--systemGreen));"></div></div>
-          <div class="attach-files">
-            <div class="attach-file">
-              <svg class="attach-file-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              <div class="attach-file-info"><span class="attach-file-name">tokens.json</span></div>
+          <div class="attach-pills">
+            <div class="attach-artifact">
+              <div class="attach-artifact-icon" style="background: var(--secondarySystemFill); color: var(--secondaryLabel);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div class="attach-artifact-info"><span class="attach-artifact-name">tokens.json</span></div>
             </div>
-            <div class="attach-file">
-              <svg class="attach-file-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              <div class="attach-file-info"><span class="attach-file-name">report.md</span></div>
+            <div class="attach-artifact">
+              <div class="attach-artifact-icon" style="background: var(--secondarySystemFill); color: var(--secondaryLabel);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div class="attach-artifact-info"><span class="attach-artifact-name">report.md</span></div>
             </div>
-            <div class="attach-file">
-              <svg class="attach-file-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              <div class="attach-file-info"><span class="attach-file-name">colors.swift</span><span class="attach-file-path">Sources/</span></div>
+            <div class="attach-artifact">
+              <div class="attach-artifact-icon" style="background: var(--secondarySystemFill); color: var(--secondaryLabel);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div class="attach-artifact-info"><span class="attach-artifact-name">colors.swift</span><span class="attach-artifact-meta">Sources/</span></div>
             </div>
-            <div class="attach-file">
-              <svg class="attach-file-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              <div class="attach-file-info"><span class="attach-file-name">spacing.swift</span><span class="attach-file-path">Sources/</span></div>
+            <div class="attach-artifact">
+              <div class="attach-artifact-icon" style="background: var(--secondarySystemFill); color: var(--secondaryLabel);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div class="attach-artifact-info"><span class="attach-artifact-name">spacing.swift</span><span class="attach-artifact-meta">Sources/</span></div>
             </div>
           </div>
         </div>
@@ -445,29 +451,30 @@
       </div>
       <div class="spec-card">
         <div class="spec-title">Media Thumbnail</div>
-        <div class="spec-row"><span class="spec-label">Size (default)</span><span class="spec-val">48 × 48px</span></div>
-        <div class="spec-row"><span class="spec-label">Size (--lg)</span><span class="spec-val">2 × 48 + 8 = 104px height, aspect-ratio width</span></div>
+        <div class="spec-row"><span class="spec-label">Size (default)</span><span class="spec-val">--pill-h × --pill-h (square)</span></div>
+        <div class="spec-row"><span class="spec-label">Size (--lg)</span><span class="spec-val">--pill-h × 2 + space8, aspect-ratio width</span></div>
         <div class="spec-row"><span class="spec-label">Default ratio</span><span class="spec-val">4:3 — override per-item</span></div>
         <div class="spec-row"><span class="spec-label">Radius</span><span class="spec-val">radius8</span></div>
         <div class="spec-row"><span class="spec-label">Fill</span><span class="spec-val">tertiarySystemFill (placeholder)</span></div>
         <div class="spec-row"><span class="spec-label">Fit</span><span class="spec-val">object-fit: cover</span></div>
       </div>
       <div class="spec-card">
-        <div class="spec-title">File Pill</div>
-        <div class="spec-row"><span class="spec-label">Height</span><span class="spec-val">48px (same in input and output)</span></div>
-        <div class="spec-row"><span class="spec-label">Max width</span><span class="spec-val">220px (truncate name)</span></div>
-        <div class="spec-row"><span class="spec-label">Radius</span><span class="spec-val">radius8</span></div>
+        <div class="spec-title">Artifact Pill</div>
+        <div class="spec-row"><span class="spec-label">Height</span><span class="spec-val">--pill-h (48px)</span></div>
+        <div class="spec-row"><span class="spec-label">Icon</span><span class="spec-val">square: --pill-h − 2 × space8 = 32px</span></div>
+        <div class="spec-row"><span class="spec-label">Icon radius</span><span class="spec-val">radius6</span></div>
+        <div class="spec-row"><span class="spec-label">Max width (--lg)</span><span class="spec-val">220px</span></div>
         <div class="spec-row"><span class="spec-label">Fill</span><span class="spec-val">tertiarySystemFill</span></div>
-        <div class="spec-row"><span class="spec-label">Name font</span><span class="spec-val">caption1 (13px) · 500</span></div>
-        <div class="spec-row"><span class="spec-label">Path font</span><span class="spec-val">caption2 (12px) · tertiaryLabel</span></div>
+        <div class="spec-row"><span class="spec-label">Name</span><span class="spec-val">caption1 · 500 · label</span></div>
+        <div class="spec-row"><span class="spec-label">Meta</span><span class="spec-val">caption2 · tertiaryLabel</span></div>
       </div>
       <div class="spec-card">
         <div class="spec-title">Layout Rules</div>
-        <div class="spec-row"><span class="spec-label">Base height</span><span class="spec-val">48px (shared input/output)</span></div>
-        <div class="spec-row"><span class="spec-label">Output media</span><span class="spec-val">2× base + gap = 104px</span></div>
-        <div class="spec-row"><span class="spec-label">Output files</span><span class="spec-val">base height, 2-row waterfall</span></div>
-        <div class="spec-row"><span class="spec-label">Order</span><span class="spec-val">media first → files last</span></div>
-        <div class="spec-row"><span class="spec-label">File wrapper</span><span class="spec-val">.attach-files (column wrap)</span></div>
+        <div class="spec-row"><span class="spec-label">Base unit</span><span class="spec-val">--pill-h: 48px (on .attach-row)</span></div>
+        <div class="spec-row"><span class="spec-label">Output media</span><span class="spec-val">--pill-h × 2 + space8</span></div>
+        <div class="spec-row"><span class="spec-label">Output pills</span><span class="spec-val">--pill-h, 2-row waterfall</span></div>
+        <div class="spec-row"><span class="spec-label">Order</span><span class="spec-val">media first → pills last</span></div>
+        <div class="spec-row"><span class="spec-label">Pill wrapper</span><span class="spec-val">.attach-pills (column wrap)</span></div>
       </div>
     </div>
 
@@ -475,10 +482,11 @@
       <div class="usage-title">When to use</div>
       <ul class="usage-list">
         <li><span class="token">.attach-row</span><span class="dash">/</span>Horizontal strip of attachments. Default: compact 48px for input context.</li>
-        <li><span class="token">.attach-row--lg</span><span class="dash">/</span>Output context. Output context. Media = 2× base height (104px). File pills stay at base (48px), 2-row waterfall.</li>
-        <li><span class="token">.attach-thumb</span><span class="dash">/</span>Media preview. 48×48 square (input). In --lg: 104px height, width from aspect-ratio (default 4:3, override per-item).</li>
-        <li><span class="token">.attach-file</span><span class="dash">/</span>File pill: icon + name + optional path. Max 220px, truncates long names.</li>
-        <li><span class="token">.attach-files</span><span class="dash">/</span>Wrapper for file pills. In --lg: column-wrap layout creates 2-row horizontal waterfall.</li>
+        <li><span class="token">.attach-row--input</span><span class="dash">/</span>User-sent attachments. Adds a tint-colored <code class="code-inline">&gt;</code> marker before the row to distinguish input from output.</li>
+        <li><span class="token">.attach-row--lg</span><span class="dash">/</span>Output context. Media = 2× <code class="code-inline">--pill-h</code> + gap. Pills stay at <code class="code-inline">--pill-h</code>, 2-row waterfall.</li>
+        <li><span class="token">.attach-thumb</span><span class="dash">/</span>Media preview. <code class="code-inline">--pill-h</code> square (input). In --lg: double height, width from aspect-ratio (default 4:3).</li>
+        <li><span class="token">.attach-artifact</span><span class="dash">/</span>Universal pill for files and artifacts: square icon + name + optional meta. Fixed height from <code class="code-inline">--pill-h</code>. Max 220px in --lg.</li>
+        <li><span class="token">.attach-pills</span><span class="dash">/</span>Wrapper for pills. In --lg: column-wrap layout creates 2-row horizontal waterfall.</li>
         <li><strong>Order rule:</strong> media thumbnails always before file pills. Never interleave.</li>
         <li><strong>Block rule:</strong> attachment rows sit below text, never inline. Sequential: text → attachments → next block.</li>
       </ul>
@@ -664,7 +672,7 @@
 
         <div class="term-prompt"><span class="term-prompt-path">~/project</span><span class="term-prompt-symbol">$</span><span class="term-prompt-input">fork deploy</span></div>
         <div class="term-progress">
-          <span class="term-line--info">Uploading</span>
+          <span class="term-progress-title">Uploading</span>
           <div class="term-progress-track"><div class="term-progress-bar" style="width: 73%;"></div></div>
           <span class="term-progress-label">73%</span>
         </div>
@@ -688,6 +696,7 @@
       </div>
       <div class="spec-card">
         <div class="spec-title">Progress Bar</div>
+        <div class="spec-row"><span class="spec-label">Title</span><span class="spec-val">typeCode · 500 · label</span></div>
         <div class="spec-row"><span class="spec-label">Track</span><span class="spec-val">tertiarySystemFill</span></div>
         <div class="spec-row"><span class="spec-label">Fill</span><span class="spec-val">tint</span></div>
         <div class="spec-row"><span class="spec-label">Height</span><span class="spec-val">4px</span></div>
@@ -703,6 +712,7 @@
         <li><span class="token">.term-line--warning</span><span class="dash">/</span>Non-fatal issues — deprecated tokens, missing fields. <code class="code-inline">--warning</code> signals "fix soon, not now."</li>
         <li><span class="token">.term-line--success</span><span class="dash">/</span>Completion confirmations. Use sparingly — only for the final "done" message, not every step.</li>
         <li><span class="token">.term-line--info</span><span class="dash">/</span>Progress updates, step descriptions. Blue is neutral-informational — it doesn't carry urgency.</li>
+        <li><span class="token">.term-progress-title</span><span class="dash">/</span>Optional title before the progress track. Short label for the task being tracked — "Uploading", "Building", etc.</li>
         <li><span class="token">.term-badge</span><span class="dash">/</span>Inline status labels. Use in summaries or dashboards, not inline output.</li>
       </ul>
     </div>
@@ -969,6 +979,503 @@
   </div>
 
   <!-- ════════════════════════════════════════ -->
+  <!-- ACTIVITY CARD                             -->
+  <!-- ════════════════════════════════════════ -->
+  <div class="section" id="activity-card">
+    <h2 class="section-title">Activity Card</h2>
+
+    <p style="color: var(--secondaryLabel); font-size: var(--typeFootnote); margin-bottom: var(--space16);">Rich progress card with icon, title, progress bar, and status text. Use for long-running tasks that deserve more visibility than an inline progress bar.</p>
+
+    <div class="window">
+      <div class="window-titlebar">
+        <div class="window-controls">
+          <div class="window-dot window-dot--close"></div>
+          <div class="window-dot window-dot--minimize"></div>
+          <div class="window-dot window-dot--maximize"></div>
+        </div>
+        <div class="window-title">activity</div>
+      </div>
+      <div class="term-surface">
+        <div class="term-prompt"><span class="term-prompt-symbol">$</span><span class="term-prompt-input">create a landing page for my portfolio</span></div>
+
+        <div class="term-activity">
+          <div class="term-activity-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+          <div class="term-activity-body">
+            <div class="term-activity-header"><span class="term-activity-title">Portfolio Site</span><span class="term-activity-dot"></span><span class="term-activity-status">Installing dependencies...</span></div>
+            <div class="term-activity-track"><div class="term-activity-bar" style="width: 35%;"></div></div>
+          </div>
+          <span class="term-activity-label">35%</span>
+        </div>
+
+        <div class="term-line term-line--muted"># Completed state — badge replaces percentage</div>
+
+        <div class="term-activity">
+          <div class="term-activity-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+          <div class="term-activity-body">
+            <div class="term-activity-header"><span class="term-activity-title">Portfolio Site</span><span class="term-activity-dot"></span><span class="term-activity-status">Ready</span></div>
+            <div class="term-activity-track"><div class="term-activity-bar" style="width: 100%;"></div></div>
+          </div>
+          <span class="term-badge term-badge--success">live</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="spec-grid" style="margin-top: var(--space12);">
+      <div class="spec-card">
+        <div class="spec-title">Activity Card</div>
+        <div class="spec-row"><span class="spec-label">Layout</span><span class="spec-val">flex row, center-aligned</span></div>
+        <div class="spec-row"><span class="spec-label">Padding</span><span class="spec-val">space12 × space16</span></div>
+        <div class="spec-row"><span class="spec-label">Margin</span><span class="spec-val">space4 vertical (flow gap)</span></div>
+        <div class="spec-row"><span class="spec-label">Gap</span><span class="spec-val">space12</span></div>
+        <div class="spec-row"><span class="spec-label">Background</span><span class="spec-val">tertiarySystemFill</span></div>
+        <div class="spec-row"><span class="spec-label">Radius</span><span class="spec-val">radius12</span></div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-title">Icon</div>
+        <div class="spec-row"><span class="spec-label">Size</span><span class="spec-val">32 × 32px</span></div>
+        <div class="spec-row"><span class="spec-label">Radius</span><span class="spec-val">radius8</span></div>
+        <div class="spec-row"><span class="spec-label">Background</span><span class="spec-val">tint</span></div>
+        <div class="spec-row"><span class="spec-label">Color</span><span class="spec-val">onLight</span></div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-title">Body</div>
+        <div class="spec-row"><span class="spec-label">Header</span><span class="spec-val">Title · Status — single line</span></div>
+        <div class="spec-row"><span class="spec-label">Title</span><span class="spec-val">caption1 · 500 · label · nowrap</span></div>
+        <div class="spec-row"><span class="spec-label">Dot</span><span class="spec-val">· tertiaryLabel</span></div>
+        <div class="spec-row"><span class="spec-label">Status</span><span class="spec-val">caption1 · secondaryLabel · ellipsis</span></div>
+        <div class="spec-row"><span class="spec-label">Track</span><span class="spec-val">4px · quaternarySystemFill</span></div>
+        <div class="spec-row"><span class="spec-label">Bar</span><span class="spec-val">tint · 0.4s easeFluent</span></div>
+      </div>
+    </div>
+
+    <div class="usage">
+      <div class="usage-title">When to use</div>
+      <ul class="usage-list">
+        <li><span class="token">.term-activity</span><span class="dash">/</span>Long-running tasks with distinct phases — builds, deployments, processing. Shows icon, title, status text, and progress in a contained card.</li>
+        <li><span class="token">.term-activity-icon</span><span class="dash">/</span>32px tint-filled square icon. Swap SVG content per task type. Use the same icon throughout the task lifecycle.</li>
+        <li><span class="token">.term-activity-label</span><span class="dash">/</span>Right-aligned percentage or duration. Replaces with a <code class="code-inline">.term-badge</code> on completion.</li>
+        <li>Prefer inline <code class="code-inline">.term-progress</code> for simple one-line progress. Use the activity card when the task has a name, status text, and icon.</li>
+      </ul>
+    </div>
+    <div class="usage">
+      <div class="usage-title">Platform notes</div>
+      <ul class="usage-list">
+        <li><span class="tag tag--ios">iOS</span> Use <code class="code-inline">HStack</code> with rounded rect background. Icon: <code class="code-inline">Image(systemName:)</code> on tint-filled circle. Progress: <code class="code-inline">ProgressView(value:)</code> with custom tint.</li>
+        <li><span class="tag tag--android">Android</span> <code class="code-inline">Row</code> with <code class="code-inline">RoundedCornerShape(12.dp)</code> background. Icon: <code class="code-inline">Box</code> with tint fill. Progress: <code class="code-inline">LinearProgressIndicator</code> with custom colors.</li>
+        <li><span class="tag tag--web">Web</span> Flex row with <code class="code-inline">border-radius: radius12</code>. Progress bar transition animates width changes smoothly.</li>
+        <li><span class="tag tag--all">All</span> The card is a snapshot — update status text and progress in-place. Don't create a new card for each update.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- ARTIFACT PILL                             -->
+  <!-- ════════════════════════════════════════ -->
+  <div class="section" id="artifact-pill">
+    <h2 class="section-title">Artifact Pill</h2>
+
+    <p style="color: var(--secondaryLabel); font-size: var(--typeFootnote); margin-bottom: var(--space16);">Universal pill for files and artifacts. Square icon (tint for results, muted for files), name, optional meta, optional badge. Fixed height from <code class="code-inline">--pill-h</code>.</p>
+
+    <div class="window">
+      <div class="window-titlebar">
+        <div class="window-controls">
+          <div class="window-dot window-dot--close"></div>
+          <div class="window-dot window-dot--minimize"></div>
+          <div class="window-dot window-dot--maximize"></div>
+        </div>
+        <div class="window-title">artifacts</div>
+      </div>
+      <div class="term-surface">
+        <div class="term-prompt"><span class="term-prompt-symbol">$</span><span class="term-prompt-input">create a weather dashboard</span></div>
+        <div class="term-line term-line--success">&#10003; Done</div>
+
+        <div class="attach-row" style="padding: var(--space8) 0;">
+          <a class="attach-artifact" href="#">
+            <div class="attach-artifact-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+            <div class="attach-artifact-info">
+              <span class="attach-artifact-name">Weather Dashboard</span>
+              <span class="attach-artifact-meta">weather-dash.fork.site</span>
+            </div>
+            <span class="attach-artifact-badge"><span class="term-badge term-badge--success">live</span></span>
+          </a>
+        </div>
+
+        <div style="height: var(--space12);"></div>
+        <div class="term-line term-line--muted"># Artifact pills — multiple results</div>
+        <div class="attach-row" style="padding: var(--space8) 0; flex-wrap: wrap;">
+          <div class="attach-artifact">
+            <div class="attach-artifact-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg></div>
+            <div class="attach-artifact-info">
+              <span class="attach-artifact-name">Landing Page</span>
+            </div>
+          </div>
+          <div class="attach-artifact">
+            <div class="attach-artifact-icon" style="background: var(--systemGreen);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg></div>
+            <div class="attach-artifact-info">
+              <span class="attach-artifact-name">API Docs</span>
+              <span class="attach-artifact-meta">Markdown</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="spec-grid" style="margin-top: var(--space12);">
+      <div class="spec-card">
+        <div class="spec-title">Artifact Pill</div>
+        <div class="spec-row"><span class="spec-label">Height</span><span class="spec-val">48px</span></div>
+        <div class="spec-row"><span class="spec-label">Padding</span><span class="spec-val">0 space16</span></div>
+        <div class="spec-row"><span class="spec-label">Gap</span><span class="spec-val">space12</span></div>
+        <div class="spec-row"><span class="spec-label">Background</span><span class="spec-val">tertiarySystemFill</span></div>
+        <div class="spec-row"><span class="spec-label">Radius</span><span class="spec-val">radius8</span></div>
+        <div class="spec-row"><span class="spec-label">Hover (link)</span><span class="spec-val">secondarySystemFill</span></div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-title">Icon</div>
+        <div class="spec-row"><span class="spec-label">Size</span><span class="spec-val">24 × 24px</span></div>
+        <div class="spec-row"><span class="spec-label">Radius</span><span class="spec-val">radius6</span></div>
+        <div class="spec-row"><span class="spec-label">Background</span><span class="spec-val">tint (default, overridable)</span></div>
+        <div class="spec-row"><span class="spec-label">Icon</span><span class="spec-val">14px stroke, onLight</span></div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-title">Text</div>
+        <div class="spec-row"><span class="spec-label">Name</span><span class="spec-val">caption1 · 500 · label</span></div>
+        <div class="spec-row"><span class="spec-label">Meta</span><span class="spec-val">caption2 · tertiaryLabel</span></div>
+        <div class="spec-row"><span class="spec-label">Font</span><span class="spec-val">fontMono</span></div>
+        <div class="spec-row"><span class="spec-label">Overflow</span><span class="spec-val">ellipsis</span></div>
+      </div>
+    </div>
+
+    <div class="usage">
+      <div class="usage-title">When to use</div>
+      <ul class="usage-list">
+        <li><span class="token">.attach-artifact</span><span class="dash">/</span>Universal pill — files, artifacts, results. Tint icon for created artifacts, muted icon (<code class="code-inline">secondarySystemFill</code>) for source files. Linkable when wrapped in <code class="code-inline">&lt;a&gt;</code>.</li>
+        <li><span class="token">.attach-artifact-icon</span><span class="dash">/</span>24px tint-filled rounded icon. Override background color inline for non-default types (e.g. <code class="code-inline">systemGreen</code> for docs).</li>
+        <li><span class="token">.attach-artifact-badge</span><span class="dash">/</span>Optional right-aligned status badge. Use <code class="code-inline">.term-badge</code> variants inside.</li>
+        <li>Place inside <code class="code-inline">.attach-row</code> — same horizontal strip as file pills and thumbnails. Multiple artifact pills wrap naturally.</li>
+      </ul>
+    </div>
+    <div class="usage">
+      <div class="usage-title">Platform notes</div>
+      <ul class="usage-list">
+        <li><span class="tag tag--ios">iOS</span> Use a <code class="code-inline">Button</code> or <code class="code-inline">Link</code> styled as an <code class="code-inline">HStack</code> with rounded rect background. Icon: <code class="code-inline">Image(systemName:)</code> on tint-filled rounded rect. Tap opens the artifact.</li>
+        <li><span class="tag tag--android">Android</span> <code class="code-inline">Card</code> or <code class="code-inline">Surface</code> with <code class="code-inline">onClick</code>. Icon: <code class="code-inline">Box</code> with tint fill + <code class="code-inline">Icon</code>. Use <code class="code-inline">CustomTabsIntent</code> to open web artifacts.</li>
+        <li><span class="tag tag--web">Web</span> When linkable, render as <code class="code-inline">&lt;a class="attach-artifact"&gt;</code>. Hover state darkens fill. When not linkable, use <code class="code-inline">&lt;div&gt;</code> — no hover transition.</li>
+        <li><span class="tag tag--all">All</span> Reuses the attachment row layout. Artifact pills can sit alongside file pills and thumbnails in the same <code class="code-inline">.attach-row</code>.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- STEP LIST                                 -->
+  <!-- ════════════════════════════════════════ -->
+  <div class="section" id="step-list">
+    <h2 class="section-title">Step List</h2>
+
+    <p style="color: var(--secondaryLabel); font-size: var(--typeFootnote); margin-bottom: var(--space16);">Multi-step checklist with individual statuses. Each step transitions through pending → active → done (or error).</p>
+
+    <div class="window">
+      <div class="window-titlebar">
+        <div class="window-controls">
+          <div class="window-dot window-dot--close"></div>
+          <div class="window-dot window-dot--minimize"></div>
+          <div class="window-dot window-dot--maximize"></div>
+        </div>
+        <div class="window-title">steps</div>
+      </div>
+      <div class="term-surface">
+        <div class="term-prompt"><span class="term-prompt-symbol">$</span><span class="term-prompt-input">deploy to production</span></div>
+
+        <div class="term-steps">
+          <div class="term-step term-step--done"><span class="term-step-icon"></span><span>Run tests</span></div>
+          <div class="term-step term-step--done"><span class="term-step-icon"></span><span>Build artifacts</span></div>
+          <div class="term-step term-step--active"><span class="term-step-icon"></span><span>Push to registry</span></div>
+          <div class="term-step term-step--pending"><span class="term-step-icon"></span><span>Update DNS</span></div>
+          <div class="term-step term-step--pending"><span class="term-step-icon"></span><span>Health check</span></div>
+        </div>
+
+        <div style="height: var(--space16);"></div>
+        <div class="term-line term-line--muted"># Completed with error</div>
+
+        <div class="term-steps">
+          <div class="term-step term-step--done"><span class="term-step-icon"></span><span>Validate config</span></div>
+          <div class="term-step term-step--done"><span class="term-step-icon"></span><span>Provision resources</span></div>
+          <div class="term-step term-step--error"><span class="term-step-icon"></span><span>Connect to database — timeout after 30s</span></div>
+          <div class="term-step term-step--pending"><span class="term-step-icon"></span><span>Run migrations</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="spec-grid" style="margin-top: var(--space12);">
+      <div class="spec-card">
+        <div class="spec-title">Step List</div>
+        <div class="spec-row"><span class="spec-label">Layout</span><span class="spec-val">flex column</span></div>
+        <div class="spec-row"><span class="spec-label">Gap</span><span class="spec-val">space2</span></div>
+        <div class="spec-row"><span class="spec-label">Font</span><span class="spec-val">fontMono · typeCode (14px)</span></div>
+        <div class="spec-row"><span class="spec-label">Line height</span><span class="spec-val">1.7</span></div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-title">Step States</div>
+        <div class="spec-row"><span class="spec-label">Pending</span><span class="spec-val">○ tertiaryLabel</span></div>
+        <div class="spec-row"><span class="spec-label">Active</span><span class="spec-val">◉ tint / label</span></div>
+        <div class="spec-row"><span class="spec-label">Done</span><span class="spec-val">✓ success / secondaryLabel</span></div>
+        <div class="spec-row"><span class="spec-label">Error</span><span class="spec-val">✕ destructive</span></div>
+      </div>
+    </div>
+
+    <div class="usage">
+      <div class="usage-title">When to use</div>
+      <ul class="usage-list">
+        <li><span class="token">.term-steps</span><span class="dash">/</span>Ordered multi-step process with visible progress through stages. Each step shows one of four states.</li>
+        <li><span class="token">.term-step--active</span><span class="dash">/</span>Currently executing step. Tint-colored icon and full-contrast text draw attention.</li>
+        <li><span class="token">.term-step--pending</span><span class="dash">/</span>Not yet started. Tertiary color recedes from attention.</li>
+        <li><span class="token">.term-step--done</span><span class="dash">/</span>Completed. Green checkmark + secondary text — confirmed but no longer the focus.</li>
+        <li><span class="token">.term-step--error</span><span class="dash">/</span>Failed. Red cross, full destructive color. Remaining steps stay pending.</li>
+      </ul>
+    </div>
+    <div class="usage">
+      <div class="usage-title">Platform notes</div>
+      <ul class="usage-list">
+        <li><span class="tag tag--ios">iOS</span> <code class="code-inline">VStack(alignment: .leading, spacing: 2)</code>. Icons: SF Symbols <code class="code-inline">circle</code>, <code class="code-inline">circle.inset.filled</code>, <code class="code-inline">checkmark</code>, <code class="code-inline">xmark</code> with matching colors.</li>
+        <li><span class="tag tag--android">Android</span> <code class="code-inline">Column(verticalArrangement = Arrangement.spacedBy(2.dp))</code>. Icons: Material <code class="code-inline">RadioButtonUnchecked</code>, <code class="code-inline">RadioButtonChecked</code>, <code class="code-inline">Check</code>, <code class="code-inline">Close</code>.</li>
+        <li><span class="tag tag--web">Web</span> Icons via CSS <code class="code-inline">::before</code> pseudo-element on <code class="code-inline">.term-step-icon</code> — no icon font needed. Unicode characters (○, ◉, ✓, ✕).</li>
+        <li><span class="tag tag--all">All</span> Steps update in-place as the task progresses. Active step transitions to done/error, next step becomes active. Always show all steps — don't hide pending ones.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- OPTION PICKER                             -->
+  <!-- ════════════════════════════════════════ -->
+  <div class="section" id="option-picker">
+    <h2 class="section-title">Option Picker</h2>
+
+    <p style="color: var(--secondaryLabel); font-size: var(--typeFootnote); margin-bottom: var(--space16);">Interactive selection from a set of choices. The agent presents options, the user picks one.</p>
+
+    <div class="window">
+      <div class="window-titlebar">
+        <div class="window-controls">
+          <div class="window-dot window-dot--close"></div>
+          <div class="window-dot window-dot--minimize"></div>
+          <div class="window-dot window-dot--maximize"></div>
+        </div>
+        <div class="window-title">options</div>
+      </div>
+      <div class="term-surface">
+        <div class="term-prompt"><span class="term-prompt-symbol">$</span><span class="term-prompt-input">create a new project</span></div>
+
+        <div class="term-options">
+          <div class="term-options-prompt">Choose a template:</div>
+          <div class="term-option"><span class="term-option-key">1</span><span>Blank — empty project, no boilerplate</span></div>
+          <div class="term-option term-option--selected"><span class="term-option-key">2</span><span>Landing page — hero, features, CTA</span></div>
+          <div class="term-option"><span class="term-option-key">3</span><span>Dashboard — sidebar nav, charts, data tables</span></div>
+          <div class="term-option"><span class="term-option-key">4</span><span>API service — REST endpoints, auth, database</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="spec-grid" style="margin-top: var(--space12);">
+      <div class="spec-card">
+        <div class="spec-title">Option Picker</div>
+        <div class="spec-row"><span class="spec-label">Layout</span><span class="spec-val">flex column</span></div>
+        <div class="spec-row"><span class="spec-label">Gap</span><span class="spec-val">space4</span></div>
+        <div class="spec-row"><span class="spec-label">Font</span><span class="spec-val">fontMono · typeCode</span></div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-title">Option Item</div>
+        <div class="spec-row"><span class="spec-label">Padding</span><span class="spec-val">space8 × space12</span></div>
+        <div class="spec-row"><span class="spec-label">Background</span><span class="spec-val">tertiarySystemFill</span></div>
+        <div class="spec-row"><span class="spec-label">Radius</span><span class="spec-val">radius8</span></div>
+        <div class="spec-row"><span class="spec-label">Hover</span><span class="spec-val">secondarySystemFill</span></div>
+        <div class="spec-row"><span class="spec-label">Selected border</span><span class="spec-val">1px solid tint</span></div>
+        <div class="spec-row"><span class="spec-label">Key</span><span class="spec-val">caption2 · secondaryLabel</span></div>
+      </div>
+    </div>
+
+    <div class="usage">
+      <div class="usage-title">When to use</div>
+      <ul class="usage-list">
+        <li><span class="token">.term-options</span><span class="dash">/</span>When the agent needs user input to proceed. Present all options at once — never paginate.</li>
+        <li><span class="token">.term-options-prompt</span><span class="dash">/</span>Question or instruction above the choices. Bold mono, label color.</li>
+        <li><span class="token">.term-option</span><span class="dash">/</span>Individual choice. Hoverable. Keyboard-accessible (number keys or arrow keys).</li>
+        <li><span class="token">.term-option--selected</span><span class="dash">/</span>User's selection — tint border highlights the choice.</li>
+        <li><span class="token">.term-option-key</span><span class="dash">/</span>Shortcut key indicator (1, 2, 3...). Aligned left, secondary color.</li>
+      </ul>
+    </div>
+    <div class="usage">
+      <div class="usage-title">Platform notes</div>
+      <ul class="usage-list">
+        <li><span class="tag tag--ios">iOS</span> Use <code class="code-inline">VStack</code> of <code class="code-inline">Button</code> elements. Selected state: <code class="code-inline">.overlay(RoundedRectangle(cornerRadius: 8).stroke(tint, lineWidth: 1))</code>.</li>
+        <li><span class="tag tag--android">Android</span> <code class="code-inline">Column</code> of <code class="code-inline">OutlinedCard</code> or <code class="code-inline">Surface</code> with <code class="code-inline">onClick</code>. Selected: <code class="code-inline">border = BorderStroke(1.dp, tint)</code>.</li>
+        <li><span class="tag tag--web">Web</span> Keyboard: listen for number keys (1-9) to quick-select. Arrow keys navigate, Enter confirms. Focus ring on <code class="code-inline">:focus-visible</code>.</li>
+        <li><span class="tag tag--all">All</span> After selection, the picker collapses and the chosen option appears as a regular <code class="code-inline">.term-line</code> in the output stream.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- CHANGESET                                 -->
+  <!-- ════════════════════════════════════════ -->
+  <div class="section" id="changeset">
+    <h2 class="section-title">Changeset</h2>
+
+    <p style="color: var(--secondaryLabel); font-size: var(--typeFootnote); margin-bottom: var(--space16);">Compact summary of a revision: short ID, message, and affected files.</p>
+
+    <div class="window">
+      <div class="window-titlebar">
+        <div class="window-controls">
+          <div class="window-dot window-dot--close"></div>
+          <div class="window-dot window-dot--minimize"></div>
+          <div class="window-dot window-dot--maximize"></div>
+        </div>
+        <div class="window-title">changeset</div>
+      </div>
+      <div class="term-surface">
+        <div class="term-prompt"><span class="term-prompt-symbol">$</span><span class="term-prompt-input">add dark mode support</span></div>
+
+        <div class="term-changeset">
+          <div class="term-changeset-header">
+            <span class="term-changeset-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 3v2m0 14v2m-7.07-3.93l1.41-1.41m9.9-9.9l1.41-1.41M3 12h2m14 0h2m-3.93 7.07l-1.41-1.41M6.34 6.34L4.93 4.93"/></svg></span>
+            <span class="term-changeset-id">a3f8c1d</span>
+            <span class="term-changeset-seq">#4</span>
+          </div>
+          <div class="term-changeset-msg">Add dark theme tokens and toggle logic</div>
+          <div class="term-changeset-files">
+            <span class="term-changeset-file">styles.css</span>
+            <span class="term-changeset-file">scripts.js</span>
+            <span class="term-changeset-file">index.html</span>
+          </div>
+        </div>
+
+        <div style="height: var(--space8);"></div>
+
+        <div class="term-changeset">
+          <div class="term-changeset-header">
+            <span class="term-changeset-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 3v2m0 14v2m-7.07-3.93l1.41-1.41m9.9-9.9l1.41-1.41M3 12h2m14 0h2m-3.93 7.07l-1.41-1.41M6.34 6.34L4.93 4.93"/></svg></span>
+            <span class="term-changeset-id">b7e2d09</span>
+            <span class="term-changeset-seq">#5</span>
+          </div>
+          <div class="term-changeset-msg">Fix contrast ratio on dark backgrounds</div>
+          <div class="term-changeset-files">
+            <span class="term-changeset-file">styles.css</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="spec-grid" style="margin-top: var(--space12);">
+      <div class="spec-card">
+        <div class="spec-title">Changeset Card</div>
+        <div class="spec-row"><span class="spec-label">Padding</span><span class="spec-val">space12 × space16</span></div>
+        <div class="spec-row"><span class="spec-label">Gap</span><span class="spec-val">space4</span></div>
+        <div class="spec-row"><span class="spec-label">Background</span><span class="spec-val">tertiarySystemFill</span></div>
+        <div class="spec-row"><span class="spec-label">Radius</span><span class="spec-val">radius12</span></div>
+        <div class="spec-row"><span class="spec-label">Font</span><span class="spec-val">fontMono</span></div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-title">Header</div>
+        <div class="spec-row"><span class="spec-label">Icon</span><span class="spec-val">14px · secondaryLabel</span></div>
+        <div class="spec-row"><span class="spec-label">ID</span><span class="spec-val">caption2 · 500 · tint</span></div>
+        <div class="spec-row"><span class="spec-label">Sequence</span><span class="spec-val">caption2 · tertiaryLabel · right</span></div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-title">Content</div>
+        <div class="spec-row"><span class="spec-label">Message</span><span class="spec-val">caption1 · 500 · label</span></div>
+        <div class="spec-row"><span class="spec-label">Files</span><span class="spec-val">caption2 · secondaryLabel · wrap</span></div>
+      </div>
+    </div>
+
+    <div class="usage">
+      <div class="usage-title">When to use</div>
+      <ul class="usage-list">
+        <li><span class="token">.term-changeset</span><span class="dash">/</span>Summary of a discrete revision or save point. Shows what changed without the full diff. Use for real-time commit notifications in agent output.</li>
+        <li><span class="token">.term-changeset-id</span><span class="dash">/</span>Short revision identifier in tint color — clickable to view full diff (if supported).</li>
+        <li><span class="token">.term-changeset-seq</span><span class="dash">/</span>Sequence number — order within the session. Right-aligned, tertiary.</li>
+        <li><span class="token">.term-changeset-files</span><span class="dash">/</span>Horizontal wrapped list of affected file names. Keeps the card compact.</li>
+      </ul>
+    </div>
+    <div class="usage">
+      <div class="usage-title">Platform notes</div>
+      <ul class="usage-list">
+        <li><span class="tag tag--ios">iOS</span> <code class="code-inline">VStack(alignment: .leading, spacing: 4)</code> with rounded rect background. Header: <code class="code-inline">HStack</code> with icon, ID (<code class="code-inline">.foregroundColor(tint)</code>), spacer, sequence. Files: <code class="code-inline">FlowLayout</code> or wrapped <code class="code-inline">HStack</code>.</li>
+        <li><span class="tag tag--android">Android</span> <code class="code-inline">Column</code> with <code class="code-inline">RoundedCornerShape(12.dp)</code>. Header: <code class="code-inline">Row</code> with icon, ID text (tint), spacer, sequence. Files: <code class="code-inline">FlowRow</code> from accompanist or Compose Foundation.</li>
+        <li><span class="tag tag--web">Web</span> Flex column. Files wrap via <code class="code-inline">flex-wrap: wrap</code>. Changeset ID can be an <code class="code-inline">&lt;a&gt;</code> linking to diff view.</li>
+        <li><span class="tag tag--all">All</span> Multiple changesets stack vertically with <code class="code-inline">space8</code> gap. Each changeset is independent — no connecting lines or timeline.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- MEDIA GENERATING                          -->
+  <!-- ════════════════════════════════════════ -->
+  <div class="section" id="media-generating">
+    <h2 class="section-title">Media Generating</h2>
+
+    <p style="color: var(--secondaryLabel); font-size: var(--typeFootnote); margin-bottom: var(--space16);">Placeholder state for media being generated. Shimmer overlay on the thumbnail signals activity. Transitions to the final media when ready.</p>
+
+    <div class="window">
+      <div class="window-titlebar">
+        <div class="window-controls">
+          <div class="window-dot window-dot--close"></div>
+          <div class="window-dot window-dot--minimize"></div>
+          <div class="window-dot window-dot--maximize"></div>
+        </div>
+        <div class="window-title">media</div>
+      </div>
+      <div class="term-surface">
+        <div class="term-prompt"><span class="term-prompt-symbol">$</span><span class="term-prompt-input">generate a hero image for the landing page</span></div>
+
+        <div class="attach-row attach-row--lg" style="padding: var(--space8) 0;">
+          <div class="attach-thumb attach-thumb--generating" style="aspect-ratio: 16/9;">
+            <span class="attach-thumb-label">Generating...</span>
+          </div>
+        </div>
+
+        <div style="height: var(--space8);"></div>
+        <div class="term-line term-line--muted"># Completed — shimmer replaced by image</div>
+
+        <div class="attach-row attach-row--lg" style="padding: var(--space8) 0;">
+          <div class="attach-thumb" style="aspect-ratio: 16/9;"><div style="width:100%;height:100%;background:linear-gradient(135deg, var(--tint), var(--tintCoral));"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="spec-grid" style="margin-top: var(--space12);">
+      <div class="spec-card">
+        <div class="spec-title">Generating State</div>
+        <div class="spec-row"><span class="spec-label">Modifier</span><span class="spec-val">.attach-thumb--generating</span></div>
+        <div class="spec-row"><span class="spec-label">Effect</span><span class="spec-val">opacity pulse (1 → 0.5 → 1)</span></div>
+        <div class="spec-row"><span class="spec-label">Animation</span><span class="spec-val">2s easeFluent infinite</span></div>
+        <div class="spec-row"><span class="spec-label">Label</span><span class="spec-val">caption2 · secondaryLabel · centered</span></div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-title">Transition</div>
+        <div class="spec-row"><span class="spec-label">On complete</span><span class="spec-val">remove --generating, insert &lt;img&gt;</span></div>
+        <div class="spec-row"><span class="spec-label">Image fit</span><span class="spec-val">object-fit: cover</span></div>
+        <div class="spec-row"><span class="spec-label">Aspect ratio</span><span class="spec-val">from backend (width/height)</span></div>
+      </div>
+    </div>
+
+    <div class="usage">
+      <div class="usage-title">When to use</div>
+      <ul class="usage-list">
+        <li><span class="token">.attach-thumb--generating</span><span class="dash">/</span>Add to any <code class="code-inline">.attach-thumb</code> while media is being created. Opacity pulse + optional label.</li>
+        <li><span class="token">.attach-thumb-label</span><span class="dash">/</span>Optional centered text inside the generating placeholder. Short status: "Generating...", "Processing...".</li>
+        <li>When generation completes, remove the <code class="code-inline">--generating</code> modifier and insert the <code class="code-inline">&lt;img&gt;</code> element. The pulse stops and the image appears.</li>
+      </ul>
+    </div>
+    <div class="usage">
+      <div class="usage-title">Platform notes</div>
+      <ul class="usage-list">
+        <li><span class="tag tag--ios">iOS</span> Opacity pulse via <code class="code-inline">withAnimation(.easeInOut(duration: 1).repeatForever()) { opacity = 0.5 }</code>. On complete: <code class="code-inline">AsyncImage</code> with <code class="code-inline">.transition(.opacity)</code>.</li>
+        <li><span class="tag tag--android">Android</span> Pulse via <code class="code-inline">InfiniteTransition</code> with <code class="code-inline">animateFloat(0.5f, 1f, infiniteRepeatable(tween(2000)))</code>. On complete: <code class="code-inline">AsyncImage</code> with <code class="code-inline">crossfade</code>.</li>
+        <li><span class="tag tag--web">Web</span> CSS <code class="code-inline">@keyframes media-pulse</code> — opacity 1 → 0.5 → 1, 2s loop with <code class="code-inline">easeFluent</code> timing. No pseudo-elements needed.</li>
+        <li><span class="tag tag--all">All</span> Respect <code class="code-inline">prefers-reduced-motion</code> — animation duration drops to near-zero. The placeholder still appears, just without pulse.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════ -->
   <!-- ANSI COLORS                              -->
   <!-- ════════════════════════════════════════ -->
   <div class="section" id="ansi-colors">
@@ -1208,7 +1715,7 @@
         <div class="term-prompt"><span class="term-prompt-path">~/litme/dna</span><span class="term-prompt-symbol">$</span><span class="term-prompt-input">fork deploy --staging</span></div>
         <div class="term-line term-line--info">ℹ Building reference site...</div>
         <div class="term-progress">
-          <span class="term-line--info">Deploying</span>
+          <span class="term-progress-title">Deploying</span>
           <div class="term-progress-track"><div class="term-progress-bar" style="width: 100%;"></div></div>
           <span class="term-progress-label">100%</span>
         </div>
