@@ -4782,6 +4782,9 @@ a.header-title:hover {
 }
 
 .window-titlebar {
+  --_dot: 12px;
+  --_dot-gap: 6px;
+  --_controls-w: calc(3 * var(--_dot) + 2 * var(--_dot-gap));
   display: flex;
   align-items: center;
   gap: var(--space8);
@@ -4793,12 +4796,12 @@ a.header-title:hover {
 
 .window-controls {
   display: flex;
-  gap: 6px;
+  gap: var(--_dot-gap);
 }
 
 .window-dot {
-  width: 14px;
-  height: 14px;
+  width: var(--_dot);
+  height: var(--_dot);
   border-radius: 50%;
 }
 
@@ -4812,7 +4815,7 @@ a.header-title:hover {
   font-family: var(--fontMono);
   font-size: var(--typeCaption1);
   color: var(--secondaryLabel);
-  margin-right: 54px; /* offset for centered title (3 dots × 14px + 2 gaps × 6px) */
+  margin-right: var(--_controls-w);
 }
 
 .window-tabs {
@@ -5029,7 +5032,12 @@ a.header-title:hover {
   flex-shrink: 0;
   position: relative;
   overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.18s var(--easeStandard), opacity 0.15s var(--easeFluent);
 }
+
+.attach-thumb:hover { opacity: 0.88; }
+.attach-thumb:active { transform: scale(0.96); }
 
 .attach-thumb img {
   width: 100%;
@@ -5190,16 +5198,16 @@ a.header-title:hover {
 
 .term-progress-track {
   flex: 1;
-  height: 4px;
+  height: var(--space4);
   background: var(--tertiarySystemFill);
-  border-radius: 2px;
+  border-radius: var(--space2);
   overflow: hidden;
 }
 
 .term-progress-bar {
   height: 100%;
   background: var(--tint);
-  border-radius: 2px;
+  border-radius: var(--space2);
   transition: width 0.4s var(--easeFluent);
 }
 
@@ -5253,6 +5261,11 @@ a.header-title:hover {
     grid-template-columns: 1fr;
   }
 }
+
+/* Demo spacer between variants inside .term-surface */
+.term-spacer { height: var(--space16); }
+.term-spacer--sm { height: var(--space12); }
+.term-spacer--xs { height: var(--space8); }
 
 /* ── Terminal ANSI Swatch Grid ── */
 .term-ansi-grid {
@@ -5454,12 +5467,13 @@ a.header-title:hover {
   display: flex;
   align-items: center;
   gap: var(--space8);
+  min-height: 44px;
   cursor: pointer;
   list-style: none;
   font-family: var(--fontMono);
   font-size: var(--typeCode);
   line-height: 1.7;
-  color: var(--tertiaryLabel);
+  color: var(--label);
   padding: var(--space2) 0;
 }
 
@@ -5467,6 +5481,7 @@ a.header-title:hover {
 
 .term-fold summary::before {
   content: '▸';
+  color: var(--tertiaryLabel);
   transition: transform 0.15s var(--easeFluent);
   display: inline-block;
   flex-shrink: 0;
@@ -5480,6 +5495,11 @@ a.header-title:hover {
   padding-left: 2ch;
   padding-bottom: var(--space4);
 }
+
+.term-fold-icon { color: var(--systemBlue); }
+.term-fold-tool { color: var(--secondaryLabel); }
+.term-fold-target { color: var(--label); }
+.term-fold summary .term-badge { margin-left: auto; }
 
 /* ── Terminal Block Copy ── */
 .term-block-copy {
@@ -5496,7 +5516,7 @@ a.header-title:hover {
   background: transparent;
   color: var(--tertiaryLabel);
   cursor: pointer;
-  transition: background 0.15s var(--easeFluent), color 0.15s var(--easeFluent);
+  transition: background 0.15s var(--easeFluent), color 0.15s var(--easeFluent), transform 0.18s var(--easeStandard);
 }
 
 .term-block-copy:hover {
@@ -5507,6 +5527,13 @@ a.header-title:hover {
 .term-block-copy:active {
   background: var(--secondarySystemFill);
   color: var(--label);
+  transform: scale(0.96);
+}
+
+.term-block-copy::after {
+  content: '';
+  position: absolute;
+  inset: -8px;
 }
 
 /* ── Artifact Pill ── */
@@ -5521,17 +5548,21 @@ a.header-title:hover {
   height: var(--pill-h, 48px);
   padding: 0 var(--space12) 0 var(--_pad);
   background: var(--tertiarySystemFill);
-  border-radius: var(--radius8);
   flex-shrink: 0;
   font-family: var(--fontMono);
   white-space: nowrap;
   text-decoration: none;
   color: inherit;
-  transition: background 0.15s var(--easeFluent);
+  cursor: pointer;
+  transition: background 0.15s var(--easeFluent), transform 0.18s var(--easeStandard);
 }
 
-a.attach-artifact:hover {
+.attach-artifact:hover {
   background: var(--secondarySystemFill);
+}
+
+.attach-artifact:active {
+  transform: scale(0.96);
 }
 
 .attach-artifact-icon {
@@ -5549,6 +5580,11 @@ a.attach-artifact:hover {
 .attach-artifact-icon svg {
   width: 14px;
   height: 14px;
+}
+
+.attach-artifact-icon--muted {
+  background: var(--secondarySystemFill);
+  color: var(--secondaryLabel);
 }
 
 .attach-artifact-info {
@@ -5594,7 +5630,7 @@ a.attach-artifact:hover {
 .term-activity-icon {
   width: 32px;
   height: 32px;
-  border-radius: var(--radius8);
+  border-radius: var(--radius6);
   background: var(--tint);
   display: flex;
   align-items: center;
@@ -5648,16 +5684,16 @@ a.attach-artifact:hover {
 }
 
 .term-activity-track {
-  height: 4px;
+  height: var(--space4);
   background: var(--quaternarySystemFill);
-  border-radius: 2px;
+  border-radius: var(--space2);
   overflow: hidden;
 }
 
 .term-activity-bar {
   height: 100%;
   background: var(--tint);
-  border-radius: 2px;
+  border-radius: var(--space2);
   transition: width 0.4s var(--easeFluent);
 }
 
@@ -5727,9 +5763,9 @@ a.attach-artifact:hover {
   display: flex;
   align-items: center;
   gap: var(--space8);
+  min-height: 44px;
   padding: var(--space8) var(--space12);
   background: var(--tertiarySystemFill);
-  border-radius: var(--radius8);
   border: 1px solid transparent;
   cursor: pointer;
   color: var(--label);
