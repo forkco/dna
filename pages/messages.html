@@ -125,7 +125,7 @@
         <li><strong>Text</strong> is markdown (rendered as prose) or plain text. One text block per message.</li>
         <li><strong>Widget</strong> is at most one per message. Link preview, changeset, activity card, artifact pill, map, dashboard — any rich interactive card. Placed below text.</li>
         <li><strong>Minimum content:</strong> a message must have at least one of the three parts. Empty messages are invalid.</li>
-        <li><strong>Media-only bubble:</strong> when a peer/user message has a single media attachment and no text, the media fills the entire bubble edge-to-edge — no padding. The bubble becomes the media.</li>
+        <li><strong>Media-only bubble:</strong> when a peer/user message has a single media attachment and no text, the media fills the entire bubble edge-to-edge — no padding. Use <code class="code-inline">.chat-msg-bubble--media</code>.</li>
         <li><strong>Chat agent:</strong> flat layout — attachments → text → widget all as siblings (not inside bubble). Media scrolls full width.</li>
         <li><strong>Chat peer/user:</strong> attachments + text inside bubble. Widget as sibling below bubble.</li>
         <li><strong>Terminal:</strong> inline flow — attach-row → text lines/prose → card.</li>
@@ -209,6 +209,76 @@
   <div class="section section--rule" id="attachment-rules">
     <h2 class="section-title">Attachment Rules</h2>
     <p class="section-desc">How media and file attachments render inside messages — depends on count, text presence, and sender type.</p>
+
+    <div class="msg-compare">
+      <div class="msg-col">
+        <div class="msg-col-label">Chat</div>
+        <div class="chat-demo">
+          <!-- Single media, no text — image IS the bubble -->
+          <div class="chat-msg chat-msg--outgoing">
+            <div>
+              <div class="chat-msg-bubble chat-msg-bubble--media">
+                <div class="chat-attach-media">
+                  <div class="chat-media"><div style="width:100%;aspect-ratio:4/3;background:linear-gradient(135deg, var(--systemBlue), var(--tint));"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Multiple media — peek scroll -->
+          <div class="chat-msg chat-msg--incoming chat-msg--peer">
+            <div class="avatar avatar--sm"><span>JK</span></div>
+            <div>
+              <div class="chat-msg-name">Julia Kim</div>
+              <div class="chat-msg-bubble chat-msg-bubble--media-scroll">
+                <div class="chat-attach-media">
+                  <div class="chat-media"><div style="width:100%;aspect-ratio:4/3;background:linear-gradient(135deg, var(--tintCoral), var(--systemPink));"></div></div>
+                  <div class="chat-media"><div style="width:100%;aspect-ratio:4/3;background:linear-gradient(135deg, var(--tintTeal), var(--systemGreen));"></div></div>
+                </div>
+                <p class="chat-media-caption">Two screenshots.</p>
+              </div>
+            </div>
+          </div>
+          <!-- File pills -->
+          <div class="chat-msg chat-msg--incoming">
+            <div>
+              <div class="chat-msg-name">Agent</div>
+              <div class="chat-attach-files">
+                <a class="attach-artifact" href="#"><div class="attach-artifact-icon attach-artifact-icon--muted"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="attach-artifact-info"><span class="attach-artifact-name">config.yaml</span></div></a>
+                <a class="attach-artifact" href="#"><div class="attach-artifact-icon attach-artifact-icon--muted"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="attach-artifact-info"><span class="attach-artifact-name">deploy.sh</span></div></a>
+              </div>
+              <div class="chat-msg-bubble chat-msg-bubble--capsule">Config files attached.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="msg-col">
+        <div class="msg-col-label">Terminal</div>
+        <div class="window">
+          <div class="window-titlebar">
+            <div class="window-controls">
+              <div class="window-dot window-dot--close"></div>
+              <div class="window-dot window-dot--minimize"></div>
+              <div class="window-dot window-dot--maximize"></div>
+            </div>
+            <div class="window-title">attachments</div>
+          </div>
+          <div class="term-surface">
+            <!-- Media + pills -->
+            <div class="term-prompt"><span class="term-prompt-symbol">$</span><span class="term-prompt-input">fork deploy</span></div>
+            <div class="attach-row attach-row--lg">
+              <div class="attach-thumb" style="aspect-ratio:16/10;"><div style="width:100%;height:100%;background:linear-gradient(135deg, var(--systemBlue), var(--tint));"></div></div>
+              <div class="attach-pills">
+                <div class="attach-artifact">
+                  <div class="attach-artifact-icon attach-artifact-icon--muted"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                  <div class="attach-artifact-info"><span class="attach-artifact-name">config.yaml</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="term-line term-line--success">&#10003; Deployed</div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div class="spec-grid">
       <div class="spec-card">
@@ -613,6 +683,7 @@
       <div class="usage-title">Platform notes</div>
       <ul class="usage-list">
         <li><span class="tag tag--ios">iOS</span> Chat: <code class="code-inline">AttributedString(markdown:)</code> with Figtree. Terminal: IBM Plex Mono throughout, bold=600.</li>
+        <li><span class="tag tag--android">Android</span> Chat: <code class="code-inline">AnnotatedString</code> with markdown parser, Satoshi body font. Terminal: IBM Plex Mono throughout, bold=600.</li>
         <li><span class="tag tag--web">Web</span> Chat: <code class="code-inline">.prose</code> resets inside bubble. Terminal: <code class="code-inline">.term-prose</code> inherits <code class="code-inline">var(--fontMono)</code>.</li>
         <li><span class="tag tag--all">All</span> Chat = mixed fonts (Figtree + Plex code). Terminal = mono only. Hierarchy via weight, not typeface.</li>
       </ul>
@@ -745,6 +816,17 @@
         <div class="spec-row"><span class="spec-label"><code class="code-inline">.term-diff-del</code></span><span class="spec-val" style="color: var(--systemRed);">systemRed + 6% fill</span></div>
         <div class="spec-row"><span class="spec-label"><code class="code-inline">.term-diff-hunk</code></span><span class="spec-val" style="color: var(--systemBlue);">systemBlue · bold</span></div>
       </div>
+      <div class="spec-card">
+        <div class="spec-title">ANSI → System Tokens</div>
+        <div class="spec-row"><span class="spec-label">0 Black</span><span class="spec-val">ansiBlack</span></div>
+        <div class="spec-row"><span class="spec-label">1 Red</span><span class="spec-val" style="color: var(--systemRed);">systemRed</span></div>
+        <div class="spec-row"><span class="spec-label">2 Green</span><span class="spec-val" style="color: var(--systemGreen);">systemGreen</span></div>
+        <div class="spec-row"><span class="spec-label">3 Yellow</span><span class="spec-val" style="color: var(--systemYellow);">systemYellow</span></div>
+        <div class="spec-row"><span class="spec-label">4 Blue</span><span class="spec-val" style="color: var(--systemBlue);">systemBlue</span></div>
+        <div class="spec-row"><span class="spec-label">5 Magenta</span><span class="spec-val" style="color: var(--systemPink);">systemPink</span></div>
+        <div class="spec-row"><span class="spec-label">6 Cyan</span><span class="spec-val" style="color: var(--tintTeal);">tintTeal</span></div>
+        <div class="spec-row"><span class="spec-label">7 White</span><span class="spec-val">ansiWhite</span></div>
+      </div>
     </div>
 
     <div class="usage">
@@ -863,7 +945,7 @@
         <div class="spec-title">Terminal Status</div>
         <div class="spec-row"><span class="spec-label">Error</span><span class="spec-val" style="color: var(--systemRed);">systemRed</span></div>
         <div class="spec-row"><span class="spec-label">Warning</span><span class="spec-val" style="color: var(--systemYellow);">systemYellow</span></div>
-        <div class="spec-row"><span class="spec-label">Success</span><span class="spec-val" style="color: var(--success);">systemGreen</span></div>
+        <div class="spec-row"><span class="spec-label">Success</span><span class="spec-val" style="color: var(--success);">success</span></div>
         <div class="spec-row"><span class="spec-label">Info</span><span class="spec-val" style="color: var(--systemBlue);">systemBlue</span></div>
       </div>
       <div class="spec-card">
@@ -1721,7 +1803,7 @@
                   <a class="attach-artifact" href="#"><div class="attach-artifact-icon" style="background: var(--systemGreen);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg></div><div class="attach-artifact-info"><span class="attach-artifact-name">API Docs</span><span class="attach-artifact-meta">Markdown</span></div></a>
                   <a class="attach-artifact" href="#"><div class="attach-artifact-icon attach-artifact-icon--muted"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="attach-artifact-info"><span class="attach-artifact-name">schema.sql</span><span class="attach-artifact-meta">db/</span></div></a>
                 </div>
-                Shared the docs and schema.
+                <p class="chat-media-caption">Shared the docs and schema.</p>
               </div>
               <div class="chat-msg-time">3:16 PM</div>
             </div>
@@ -2277,6 +2359,16 @@
             <div class="term-thinking"><span class="cursor cursor--block"></span></div>
           </div>
         </div>
+      </div>
+    </div>
+
+    <div class="spec-grid">
+      <div class="spec-card">
+        <div class="spec-title">Session Rules</div>
+        <div class="spec-row"><span class="spec-label">Max widgets/msg</span><span class="spec-val">1 (anatomy rule)</span></div>
+        <div class="spec-row"><span class="spec-label">Folds</span><span class="spec-val">inline metadata, not widgets — unlimited</span></div>
+        <div class="spec-row"><span class="spec-label">Virtualize at</span><span class="spec-val">&gt;500 items</span></div>
+        <div class="spec-row"><span class="spec-label">Terminal flow</span><span class="spec-val">prompt → folds → steps → prose → card</span></div>
       </div>
     </div>
 
