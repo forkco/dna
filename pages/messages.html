@@ -59,11 +59,16 @@
     <a class="sidebar-link" href="#tool-activity">Tool Activity</a>
     <a class="sidebar-link" href="#steps">Steps</a>
     <a class="sidebar-link" href="#options">Options</a>
-    <a class="sidebar-link" href="#cards">Cards</a>
+    <a class="sidebar-link" href="#link-preview">Link Preview</a>
+    <a class="sidebar-link" href="#changeset">Changeset</a>
+    <a class="sidebar-link" href="#widget">Card</a>
+    <a class="sidebar-link" href="#activity-card">Activity Card</a>
+    <a class="sidebar-link" href="#artifact">Artifact</a>
   </div>
   <div class="sidebar-group">
     <div class="sidebar-group-label">Attachments</div>
-    <a class="sidebar-link" href="#media-files">Media & Files</a>
+    <a class="sidebar-link" href="#file-pills">File Pills</a>
+    <a class="sidebar-link" href="#media-thumbs">Media Thumbnails</a>
   </div>
   <div class="sidebar-group">
     <div class="sidebar-group-label">Input</div>
@@ -557,7 +562,7 @@
         </div>
 
         <!-- Streaming -->
-        <div class="window" style="margin-top: var(--space16);">
+        <div class="window">
           <div class="window-titlebar">
             <div class="window-controls">
               <div class="window-dot window-dot--close"></div>
@@ -831,7 +836,7 @@
         </div>
 
         <!-- Thinking -->
-        <div class="window" style="margin-top: var(--space16);">
+        <div class="window">
           <div class="window-titlebar">
             <div class="window-controls">
               <div class="window-dot window-dot--close"></div>
@@ -972,7 +977,7 @@
       <div class="spec-card">
         <div class="spec-title">Fold</div>
         <div class="spec-row"><span class="spec-label">Element</span><span class="spec-val">&lt;details class="term-fold"&gt;</span></div>
-        <div class="spec-row"><span class="spec-label">Min-height</span><span class="spec-val">44px (touch target)</span></div>
+        <div class="spec-row"><span class="spec-label">Min-height</span><span class="spec-val">32px (full-width row — tap target met by width)</span></div>
         <div class="spec-row"><span class="spec-label">Default</span><span class="spec-val">collapsed</span></div>
         <div class="spec-row"><span class="spec-label">Body indent</span><span class="spec-val">2ch</span></div>
       </div>
@@ -1195,14 +1200,10 @@
   </div>
 
   <!-- ════════════════════════════════════════ -->
-  <!-- CARDS                                    -->
+  <!-- LINK PREVIEW                             -->
   <!-- ════════════════════════════════════════ -->
-  <div class="section" id="cards">
-    <h2 class="section-title">Cards</h2>
-    <p class="section-desc">Each widget type shown per sender: agent, peer, user. One widget per message (anatomy rule).</p>
-
-    <!-- ── Link Preview ── -->
-    <div class="demo-overline" style="margin-top: var(--space24);">Link Preview</div>
+  <div class="section" id="link-preview">
+    <h2 class="section-title">Link Preview</h2>
     <div class="msg-compare">
       <div class="msg-col">
         <div class="msg-col-label">Chat</div>
@@ -1266,8 +1267,30 @@
       </div>
     </div>
 
-    <!-- ── Changeset ── -->
-    <div class="demo-overline" style="margin-top: var(--space24);">Changeset</div>
+    <div class="usage">
+      <div class="usage-title">When to use</div>
+      <ul class="usage-list">
+        <li><span class="token">.chat-link-preview</span><span class="dash">/</span>Rich link card below bubble. Agent, peer, or user can share links. One per message (widget slot).</li>
+        <li><span class="token">.chat-link-preview-icon</span><span class="dash">/</span>40px rounded square with systemFill background. Favicon or generic icon.</li>
+        <li><strong>Terminal:</strong> no card — links render inline as <code class="code-inline">&lt;a&gt;</code> in prose.</li>
+      </ul>
+    </div>
+    <div class="usage">
+      <div class="usage-title">Platform notes</div>
+      <ul class="usage-list">
+        <li><span class="tag tag--ios">iOS</span> <code class="code-inline">LPMetadataProvider</code> fetches OpenGraph data. Card: custom <code class="code-inline">UIView</code> matching spec radius and padding.</li>
+        <li><span class="tag tag--android">Android</span> Custom OG-tag fetcher. Card: <code class="code-inline">Surface</code> composable with <code class="code-inline">RoundedCornerShape(14.dp)</code>.</li>
+        <li><span class="tag tag--web">Web</span> Server-side OG fetch (avoid CORS). <code class="code-inline">.chat-link-preview</code> with flex layout. Hover lifts with <code class="code-inline">shadowSmall</code>.</li>
+        <li><span class="tag tag--all">All</span> Fallback: domain + title only when image/description unavailable. Max width 320px. One per message.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- CHANGESET                                -->
+  <!-- ════════════════════════════════════════ -->
+  <div class="section" id="changeset">
+    <h2 class="section-title">Changeset</h2>
     <div class="msg-compare">
       <div class="msg-col">
         <div class="msg-col-label">Chat</div>
@@ -1333,8 +1356,31 @@
       </div>
     </div>
 
-    <!-- ── Widget (Interactive Preview) ── -->
-    <div class="demo-overline" style="margin-top: var(--space24);">Widget</div>
+    <div class="usage">
+      <div class="usage-title">When to use</div>
+      <ul class="usage-list">
+        <li><span class="token">.term-changeset</span><span class="dash">/</span>Commit summary card. Shows icon, short hash, sequence number, message, and file list.</li>
+        <li><span class="token">.term-changeset-id</span><span class="dash">/</span>Short hash in tint — clickable to view full diff.</li>
+        <li><span class="token">.term-changeset-seq</span><span class="dash">/</span>Sequence number (e.g. #4) — tertiaryLabel, right-aligned. Tracks order within session.</li>
+        <li>Any sender can share changesets — agent commits, peer pushes, user references.</li>
+      </ul>
+    </div>
+    <div class="usage">
+      <div class="usage-title">Platform notes</div>
+      <ul class="usage-list">
+        <li><span class="tag tag--ios">iOS</span> <code class="code-inline">VStack</code> with mono font throughout. Tap navigates to diff viewer.</li>
+        <li><span class="tag tag--android">Android</span> <code class="code-inline">Column</code> inside <code class="code-inline">Surface(shape = RoundedCornerShape(12.dp))</code>. Mono font.</li>
+        <li><span class="tag tag--web">Web</span> <code class="code-inline">.term-changeset</code> with <code class="code-inline">radius12</code>. Same component in chat and terminal.</li>
+        <li><span class="tag tag--all">All</span> Mono font throughout — hash, message, and file list. Radius12 in both contexts.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- CARD                                     -->
+  <!-- ════════════════════════════════════════ -->
+  <div class="section" id="widget">
+    <h2 class="section-title">Card</h2>
     <div class="msg-compare">
       <div class="msg-col">
         <div class="msg-col-label">Chat</div>
@@ -1411,8 +1457,31 @@
       </div>
     </div>
 
-    <!-- ── Activity Card ── -->
-    <div class="demo-overline" style="margin-top: var(--space24);">Activity Card</div>
+    <div class="usage">
+      <div class="usage-title">When to use</div>
+      <ul class="usage-list">
+        <li><span class="token">.chat-widget</span><span class="dash">/</span>Interactive preview card — dashboard, map, poll. One per message (widget slot).</li>
+        <li><span class="token">.chat-widget-preview</span><span class="dash">/</span>160px visual area with tertiarySystemBackground. Hosts live content or placeholder icon.</li>
+        <li><span class="token">.chat-widget-meta</span><span class="dash">/</span>Overline status — LIVE, TAP TO OPEN, count. Mono font, tertiaryLabel.</li>
+        <li>Any sender can share cards — agent presents results, peer shares locations, user posts polls.</li>
+      </ul>
+    </div>
+    <div class="usage">
+      <div class="usage-title">Platform notes</div>
+      <ul class="usage-list">
+        <li><span class="tag tag--ios">iOS</span> Card: <code class="code-inline">UIView</code> with <code class="code-inline">clipsToBounds</code> at radius14. Preview: embedded <code class="code-inline">WKWebView</code> or <code class="code-inline">UIView</code> snapshot.</li>
+        <li><span class="tag tag--android">Android</span> Card: <code class="code-inline">Surface(shape = RoundedCornerShape(14.dp))</code>. Preview: <code class="code-inline">AndroidView</code> or composable snapshot.</li>
+        <li><span class="tag tag--web">Web</span> <code class="code-inline">.chat-widget</code> with <code class="code-inline">overflow: hidden</code> + <code class="code-inline">radius14</code>. Hover: <code class="code-inline">translateY(-1px)</code> + <code class="code-inline">shadowSmall</code>.</li>
+        <li><span class="tag tag--all">All</span> Tap opens full-screen view. Max width 320px. Terminal equivalent is <code class="code-inline">.term-activity</code> card.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- ACTIVITY CARD                            -->
+  <!-- ════════════════════════════════════════ -->
+  <div class="section" id="activity-card">
+    <h2 class="section-title">Activity Card</h2>
     <div class="msg-compare">
       <div class="msg-col">
         <div class="msg-col-label">Chat</div>
@@ -1503,8 +1572,117 @@
       </div>
     </div>
 
-    <!-- ── Attachments (File Pills) ── -->
-    <div class="demo-overline" style="margin-top: var(--space24);">Attachments (media + file pills)</div>
+    <div class="usage">
+      <div class="usage-title">When to use</div>
+      <ul class="usage-list">
+        <li><span class="token">.term-activity</span><span class="dash">/</span>Progress card for long-running tasks — builds, deploys, installs. Shared component in chat and terminal.</li>
+        <li><span class="token">.term-activity-bar</span><span class="dash">/</span>Tint-colored progress fill. Width set via inline style (JS-driven). Animates with easeFluent.</li>
+        <li><span class="token">.term-badge</span><span class="dash">/</span>Status badge (live, error, etc.) replaces percentage label when task completes.</li>
+        <li>Any sender can share activity — agent builds, peer deploys, user runs tests.</li>
+      </ul>
+    </div>
+    <div class="usage">
+      <div class="usage-title">Platform notes</div>
+      <ul class="usage-list">
+        <li><span class="tag tag--ios">iOS</span> Card: <code class="code-inline">HStack</code> with icon + body + badge. Progress: <code class="code-inline">ProgressView</code> with custom tint style.</li>
+        <li><span class="tag tag--android">Android</span> Card: <code class="code-inline">Row</code> composable. Progress: <code class="code-inline">LinearProgressIndicator</code> with <code class="code-inline">animateFloatAsState</code>.</li>
+        <li><span class="tag tag--web">Web</span> <code class="code-inline">.term-activity</code> flex row. Bar width via inline <code class="code-inline">style</code>, transitions with <code class="code-inline">easeFluent 0.4s</code>.</li>
+        <li><span class="tag tag--all">All</span> Radius12 in both contexts. Icon optional. Progress updates in-place — no re-render flicker.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- ARTIFACT                                 -->
+  <!-- ════════════════════════════════════════ -->
+  <div class="section" id="artifact">
+    <h2 class="section-title">Artifact</h2>
+    <p class="section-desc">Large artifact pill for primary outputs — created apps, deployed projects. iOS app-icon scale (60×60).</p>
+    <div class="msg-compare">
+      <div class="msg-col">
+        <div class="msg-col-label">Chat</div>
+        <div class="chat-demo">
+          <!-- Agent: created app -->
+          <div class="chat-msg chat-msg--incoming">
+            <div>
+              <div class="chat-msg-name">Agent</div>
+              <div class="chat-msg-bubble">Your dashboard is live.</div>
+              <div class="chat-attach-files">
+                <a class="attach-artifact attach-artifact--lg" href="#"><div class="attach-artifact-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><div class="attach-artifact-info"><span class="attach-artifact-name">Weather Dashboard</span><span class="attach-artifact-meta">weather.fork.site</span></div><span class="attach-artifact-badge"><span class="term-badge term-badge--success">live</span></span></a>
+              </div>
+              <div class="chat-msg-time">2:24 PM</div>
+            </div>
+          </div>
+          <!-- Peer: shared project -->
+          <div class="chat-msg chat-msg--incoming chat-msg--peer">
+            <div class="avatar avatar--sm"><span>JK</span></div>
+            <div>
+              <div class="chat-msg-name">Julia Kim</div>
+              <div class="chat-msg-bubble chat-msg-bubble--capsule">Check out my app</div>
+              <div class="chat-attach-files">
+                <a class="attach-artifact attach-artifact--lg" href="#"><div class="attach-artifact-icon" style="background: var(--systemGreen);"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div><div class="attach-artifact-info"><span class="attach-artifact-name">Portfolio Site</span><span class="attach-artifact-meta">julia.fork.site</span></div></a>
+              </div>
+              <div class="chat-msg-time">2:25 PM</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="msg-col">
+        <div class="msg-col-label">Terminal</div>
+        <div class="window">
+          <div class="window-titlebar"><div class="window-controls"><div class="window-dot window-dot--close"></div><div class="window-dot window-dot--minimize"></div><div class="window-dot window-dot--maximize"></div></div><div class="window-title">artifact</div></div>
+          <div class="term-surface">
+            <div class="term-prompt"><span class="term-prompt-symbol">$</span><span class="term-prompt-input">deploy dashboard</span></div>
+            <div class="term-line term-line--success">✓ Deployed</div>
+            <div class="attach-row" style="padding:var(--space4) 0;"><a class="attach-artifact attach-artifact--lg" href="#"><div class="attach-artifact-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><div class="attach-artifact-info"><span class="attach-artifact-name">Analytics Dashboard</span><span class="attach-artifact-meta">analytics.fork.site</span></div><span class="attach-artifact-badge"><span class="term-badge term-badge--success">live</span></span></a></div>
+            <div class="term-spacer"></div>
+            <div class="term-prompt"><span class="term-prompt-user">@julia</span><span class="term-prompt-symbol">$</span><span class="term-prompt-input">share portfolio</span></div>
+            <div class="attach-row" style="padding:var(--space4) 0;"><a class="attach-artifact attach-artifact--lg" href="#"><div class="attach-artifact-icon" style="background: var(--systemGreen);"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div><div class="attach-artifact-info"><span class="attach-artifact-name">Portfolio Site</span><span class="attach-artifact-meta">julia.fork.site</span></div></a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="spec-grid">
+      <div class="spec-card">
+        <div class="spec-title">Artifact Pill — Large</div>
+        <div class="spec-row"><span class="spec-label">Modifier</span><span class="spec-val">.attach-artifact--lg</span></div>
+        <div class="spec-row"><span class="spec-label">Pill height</span><span class="spec-val">80px</span></div>
+        <div class="spec-row"><span class="spec-label">Icon</span><span class="spec-val">64 × 64, radius14</span></div>
+        <div class="spec-row"><span class="spec-label">SVG glyph</span><span class="spec-val">28 × 28</span></div>
+        <div class="spec-row"><span class="spec-label">Name</span><span class="spec-val">callout (17px), 600</span></div>
+        <div class="spec-row"><span class="spec-label">Meta</span><span class="spec-val">footnote (14px)</span></div>
+        <div class="spec-row"><span class="spec-label">Chat pill radius</span><span class="spec-val">radius20 (concentric: 14 + 8)</span></div>
+        <div class="spec-row"><span class="spec-label">Terminal pill</span><span class="spec-val">0 (square, per terminal geometry)</span></div>
+      </div>
+    </div>
+
+    <div class="usage">
+      <div class="usage-title">When to use</div>
+      <ul class="usage-list">
+        <li><span class="token">.attach-artifact--lg</span><span class="dash">/</span>Large artifact pill with iOS-scale icon (60×60). Use when the agent creates an application, deploys a project, or generates a primary output artifact.</li>
+        <li><strong>Not for:</strong> regular file references (config.yaml, schema.sql) — use default <code class="code-inline">.attach-artifact</code>.</li>
+        <li><strong>Icon color:</strong> tint (default) for agent-created. Custom color via inline style for peer/external apps.</li>
+      </ul>
+    </div>
+
+    <div class="usage">
+      <div class="usage-title">Platform notes</div>
+      <ul class="usage-list">
+        <li><span class="tag tag--ios">iOS</span> Icon shape: <code class="code-inline">UISmoothCornerPath</code> (continuous corner) at radius14 to match native app icon. Accepts <code class="code-inline">UIImage</code> or SF Symbol at 28pt.</li>
+        <li><span class="tag tag--android">Android</span> Icon shape: <code class="code-inline">RoundedCornerShape(14.dp)</code>. Accepts <code class="code-inline">ImageVector</code> or <code class="code-inline">Painter</code> at 28dp.</li>
+        <li><span class="tag tag--web">Web</span> Modifier <code class="code-inline">.attach-artifact--lg</code> overrides <code class="code-inline">--pill-h</code> and icon sizing via CSS custom properties. No JS needed.</li>
+        <li><span class="tag tag--all">All</span> One artifact per message (widget slot). Tap opens the artifact. Badge optional (live, draft, error).</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- FILE PILLS                               -->
+  <!-- ════════════════════════════════════════ -->
+  <div class="section" id="file-pills">
+    <h2 class="section-title">File Pills</h2>
     <div class="msg-compare">
       <div class="msg-col">
         <div class="msg-col-label">Chat</div>
@@ -1530,12 +1708,15 @@
             </div>
           </div>
 
-          <!-- Peer: files only inside bubble -->
+          <!-- Peer: media + files inside bubble -->
           <div class="chat-msg chat-msg--incoming chat-msg--peer">
             <div class="avatar avatar--sm"><span>JK</span></div>
             <div>
               <div class="chat-msg-name">Julia Kim</div>
-              <div class="chat-msg-bubble">
+              <div class="chat-msg-bubble chat-msg-bubble--media">
+                <div class="chat-attach-media">
+                  <div class="chat-media"><div style="width:100%;aspect-ratio:4/3;background:linear-gradient(135deg, var(--systemGreen), var(--tintTeal));"></div></div>
+                </div>
                 <div class="chat-attach-files">
                   <a class="attach-artifact" href="#"><div class="attach-artifact-icon" style="background: var(--systemGreen);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg></div><div class="attach-artifact-info"><span class="attach-artifact-name">API Docs</span><span class="attach-artifact-meta">Markdown</span></div></a>
                   <a class="attach-artifact" href="#"><div class="attach-artifact-icon attach-artifact-icon--muted"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="attach-artifact-info"><span class="attach-artifact-name">schema.sql</span><span class="attach-artifact-meta">db/</span></div></a>
@@ -1643,11 +1824,10 @@
   </div>
 
   <!-- ════════════════════════════════════════ -->
-  <!-- MEDIA & FILES                            -->
+  <!-- MEDIA THUMBNAILS                         -->
   <!-- ════════════════════════════════════════ -->
-  <div class="section" id="media-files">
-    <h2 class="section-title">Media & Files</h2>
-
+  <div class="section" id="media-thumbs">
+    <h2 class="section-title">Media Thumbnails</h2>
     <div class="msg-compare">
       <div class="msg-col">
         <div class="msg-col-label">Chat</div>
@@ -1732,6 +1912,7 @@
               <div class="chat-msg-time">2:23 PM</div>
             </div>
           </div>
+
         </div>
       </div>
       <div class="msg-col">
@@ -2079,8 +2260,8 @@
             <div class="term-prose"><p>Done! API key: <code>const KEY = 'your-key';</code></p></div>
             <div class="term-changeset"><div class="term-changeset-header"><span class="term-changeset-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 3v2m0 14v2m-7.07-3.93l1.41-1.41m9.9-9.9l1.41-1.41M3 12h2m14 0h2m-3.93 7.07l-1.41-1.41M6.34 6.34L4.93 4.93"/></svg></span><span class="term-changeset-id">f4a1b2c</span><span class="term-changeset-seq">#1</span></div><div class="term-changeset-msg">Initial weather dashboard</div><div class="term-changeset-files"><span class="term-changeset-file">api.js</span><span class="term-changeset-file">dashboard.html</span></div></div>
 
-            <!-- Agent: artifact -->
-            <div class="attach-row" style="padding:var(--space4) 0;"><a class="attach-artifact" href="#"><div class="attach-artifact-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><div class="attach-artifact-info"><span class="attach-artifact-name">Weather Dashboard</span><span class="attach-artifact-meta">weather.fork.site</span></div><span class="attach-artifact-badge"><span class="term-badge term-badge--success">live</span></span></a></div>
+            <!-- Agent: artifact (large — created app) -->
+            <div class="attach-row" style="padding:var(--space4) 0;"><a class="attach-artifact attach-artifact--lg" href="#"><div class="attach-artifact-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><div class="attach-artifact-info"><span class="attach-artifact-name">Weather Dashboard</span><span class="attach-artifact-meta">weather.fork.site</span></div><span class="attach-artifact-badge"><span class="term-badge term-badge--success">live</span></span></a></div>
 
             <div class="term-line term-line--stdout"></div>
 

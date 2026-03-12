@@ -5206,8 +5206,8 @@ a.header-title:hover {
   position: absolute;
   top: var(--space4);
   right: var(--space4);
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   border: none;
   background: rgba(26, 26, 24, 0.6);
@@ -5224,7 +5224,7 @@ a.header-title:hover {
 .attach-remove::after {
   content: '';
   position: absolute;
-  inset: -13px;
+  inset: -12px;
 }
 
 .attach-thumb:hover .attach-remove,
@@ -5629,21 +5629,21 @@ a.header-title:hover {
 
 /* ── Terminal Fold ── */
 .term-fold {
-  margin: var(--space2) 0;
+  margin: 0;
 }
 
 .term-fold summary {
   display: flex;
   align-items: center;
   gap: var(--space8);
-  min-height: 44px;
+  min-height: 32px; /* Full-width rows: tap target met by width, 44px not needed */
   cursor: pointer;
   list-style: none;
   font-family: var(--fontMono);
   font-size: var(--typeCode);
   line-height: 1.7;
   color: var(--label);
-  padding: var(--space2) 0;
+  padding: var(--space4) 0;
 }
 
 .term-fold summary::-webkit-details-marker { display: none; }
@@ -5781,6 +5781,32 @@ a.header-title:hover {
 
 .attach-artifact-badge {
   margin-left: auto;
+}
+
+/* ── Large Artifact Pill ── */
+/* iOS app-icon scale: 60×60 icon, 80px pill. Use for created apps, projects, deployed artifacts. */
+.attach-artifact--lg {
+  --pill-h: 80px;
+  --_pad: var(--space8);
+  gap: var(--space12);
+  padding-right: var(--space16);
+}
+
+.attach-artifact--lg .attach-artifact-icon {
+  border-radius: var(--radius14);
+}
+
+.attach-artifact--lg .attach-artifact-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.attach-artifact--lg .attach-artifact-name {
+  font-size: var(--typeCallout);
+}
+
+.attach-artifact--lg .attach-artifact-meta {
+  font-size: var(--typeFootnote);
 }
 
 /* ── Activity Card ── */
@@ -6099,6 +6125,10 @@ a.header-title:hover {
   min-width: 0; /* prevent grid blowout from wide children */
 }
 
+/* Structural gap between stacked windows and term-pairs inside a column */
+.msg-col > .window + .window,
+.msg-col > .term-pair { margin-top: var(--space16); }
+
 .msg-col--empty {
   /* Intentionally empty — no placeholder, just white space */
 }
@@ -6205,7 +6235,7 @@ a.header-title:hover {
   display: flex;
   flex-direction: column;
   gap: var(--space4);
-  padding: var(--space4) 0;
+  padding: var(--space8) 0 var(--space4);
   max-width: 320px;
 }
 
@@ -6221,6 +6251,10 @@ a.header-title:hover {
   border-radius: var(--radius10);
   font-family: var(--fontBody);
   width: 100%;
+}
+
+.chat-attach-files .attach-artifact--lg {
+  border-radius: var(--radius20);
 }
 
 .chat-attach-files .attach-artifact-name {
