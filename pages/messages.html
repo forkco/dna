@@ -128,6 +128,7 @@
         <li><strong>Media-only bubble:</strong> when a peer/user message has a single media attachment and no text, the media fills the entire bubble edge-to-edge — no padding. Use <code class="code-inline">.chat-msg-bubble--media</code>.</li>
         <li><strong>Chat agent:</strong> flat layout — attachments → text → widget all as siblings (not inside bubble). Media scrolls full width.</li>
         <li><strong>Chat peer/user:</strong> attachments + text inside bubble. Widget as sibling below bubble.</li>
+        <li><strong>Bubble width:</strong> determined by the widest child — media, text, or file pills — capped at max bubble width (85%). The bubble grows to fit its widest content, never wider than the cap. Widgets are always outside the bubble and size independently.</li>
         <li><strong>Terminal:</strong> inline flow — attach-row → text lines/prose → card.</li>
       </ul>
     </div>
@@ -285,7 +286,7 @@
         <div class="spec-title">Single Media</div>
         <div class="spec-row"><span class="spec-label">Padding</span><span class="spec-val">none — image edge-to-edge</span></div>
         <div class="spec-row"><span class="spec-label">Bubble width</span><span class="spec-val">driven by image aspect ratio</span></div>
-        <div class="spec-row"><span class="spec-label">Max width</span><span class="spec-val">50% of chat container</span></div>
+        <div class="spec-row"><span class="spec-label">Max width</span><span class="spec-val">--chat-media-w (280px default), capped by 85% bubble max</span></div>
         <div class="spec-row"><span class="spec-label">With text</span><span class="spec-val">text below image, padded horizontally</span></div>
         <div class="spec-row"><span class="spec-label">Without text</span><span class="spec-val">image IS the bubble</span></div>
       </div>
@@ -300,14 +301,15 @@
       <div class="spec-card">
         <div class="spec-title">File Pills (no preview)</div>
         <div class="spec-row"><span class="spec-label">Layout</span><span class="spec-val">vertical list</span></div>
-        <div class="spec-row"><span class="spec-label">Max width</span><span class="spec-val">320px</span></div>
+        <div class="spec-row"><span class="spec-label">Container max</span><span class="spec-val">320px</span></div>
+        <div class="spec-row"><span class="spec-label">Pill width</span><span class="spec-val">fit-content (agent flat) / stretch (inside bubble)</span></div>
         <div class="spec-row"><span class="spec-label">Pill radius</span><span class="spec-val">radius10 (chat) / 0 (terminal)</span></div>
         <div class="spec-row"><span class="spec-label">Font</span><span class="spec-val">fontBody (chat) / fontMono (terminal)</span></div>
       </div>
       <div class="spec-card">
         <div class="spec-title">Agent (flat)</div>
         <div class="spec-row"><span class="spec-label">Media scroll</span><span class="spec-val">full chat width (bleed)</span></div>
-        <div class="spec-row"><span class="spec-label">Files</span><span class="spec-val">full width, max 320px</span></div>
+        <div class="spec-row"><span class="spec-label">Files</span><span class="spec-val">fit-content (flat); full width inside bubble</span></div>
         <div class="spec-row"><span class="spec-label">Padding</span><span class="spec-val">none — not inside bubble</span></div>
       </div>
     </div>
@@ -316,10 +318,10 @@
       <div class="usage-title">Rules</div>
       <ul class="usage-list">
         <li><strong>Single media, no text:</strong> image fills the bubble. No padding. Bubble shape = image shape (clipped by border-radius). This is the "photo message" pattern.</li>
-        <li><strong>Single media + text:</strong> image still edge-to-edge at top. Text below with horizontal padding. Bubble width driven by image aspect ratio, max 50%.</li>
+        <li><strong>Single media + text:</strong> image still edge-to-edge at top. Text below with horizontal padding. Bubble width driven by <code class="code-inline">--chat-media-w</code> (280px default), capped at 85%.</li>
         <li><strong>Multiple media:</strong> horizontal scroll. Each thumb is 70% of bubble width so 30% of the next item peeks — the visual cue that scrolling is available.</li>
-        <li><strong>File pills:</strong> always vertical list, below media (if any), above text. Max 320px width. Rounded (radius10).</li>
-        <li><strong>Agent:</strong> no bubble — media and files are flat siblings. Media carousel bleeds to full chat width. No max-width constraint.</li>
+        <li><strong>File pills:</strong> always vertical list, below media (if any), above text. Container max 320px. Inside bubble: pills stretch to bubble width. Agent (flat): pills shrink to content. Rounded (radius10).</li>
+        <li><strong>Agent:</strong> no bubble — media and files are flat siblings. Media carousel bleeds to full chat width. Pills and artifacts shrink to content width.</li>
         <li><strong>Mixed media + files:</strong> media carousel first, file list second, text third. Always this order (anatomy rule).</li>
         <li><strong>Terminal geometry:</strong> terminal pills, thumbs, and option rows are <strong>square-cornered</strong> (0 radius). Chat uses rounded corners (radius10–radius12) concentric with bubbles. This split is intentional — terminal surfaces are utilitarian and grid-aligned; chat surfaces are organic and conversational.</li>
       </ul>
@@ -1679,7 +1681,7 @@
   <!-- ════════════════════════════════════════ -->
   <div class="section" id="artifact">
     <h2 class="section-title">Artifact</h2>
-    <p class="section-desc">Large artifact pill for primary outputs — created apps, deployed projects. iOS app-icon scale (60×60).</p>
+    <p class="section-desc">Large artifact pill for primary outputs — created apps, deployed projects. 56×56 icon, 72px pill.</p>
     <div class="msg-compare">
       <div class="msg-col">
         <div class="msg-col-label">Chat</div>
@@ -1690,7 +1692,7 @@
               <div class="chat-msg-name">Agent</div>
               <div class="chat-msg-bubble">Your dashboard is live.</div>
               <div class="chat-attach-files">
-                <a class="attach-artifact attach-artifact--lg" href="#"><div class="attach-artifact-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><div class="attach-artifact-info"><span class="attach-artifact-name">Weather Dashboard</span><span class="attach-artifact-meta">weather.fork.site</span></div><span class="attach-artifact-badge"><span class="term-badge term-badge--success">live</span></span></a>
+                <a class="attach-artifact attach-artifact--lg" href="#"><div class="attach-artifact-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><div class="attach-artifact-info"><span class="attach-artifact-name">Weather Dashboard</span><span class="attach-artifact-meta">weather.fork.site</span></div><span class="attach-artifact-badge"><span class="term-badge term-badge--success">live</span></span></a>
               </div>
               <div class="chat-msg-time">2:24 PM</div>
             </div>
@@ -1702,7 +1704,7 @@
               <div class="chat-msg-name">Julia Kim</div>
               <div class="chat-msg-bubble chat-msg-bubble--capsule">Check out my app</div>
               <div class="chat-attach-files">
-                <a class="attach-artifact attach-artifact--lg" href="#"><div class="attach-artifact-icon" style="background: var(--systemGreen);"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div><div class="attach-artifact-info"><span class="attach-artifact-name">Portfolio Site</span><span class="attach-artifact-meta">julia.fork.site</span></div></a>
+                <a class="attach-artifact attach-artifact--lg" href="#"><div class="attach-artifact-icon" style="background: var(--systemGreen);"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div><div class="attach-artifact-info"><span class="attach-artifact-name">Portfolio Site</span><span class="attach-artifact-meta">julia.fork.site</span></div></a>
               </div>
               <div class="chat-msg-time">2:25 PM</div>
             </div>
@@ -1716,10 +1718,10 @@
           <div class="term-surface">
             <div class="term-prompt"><span class="term-prompt-symbol">$</span><span class="term-prompt-input">deploy dashboard</span></div>
             <div class="term-line term-line--success">✓ Deployed</div>
-            <div class="attach-row" style="padding:var(--space4) 0;"><a class="attach-artifact attach-artifact--lg" href="#"><div class="attach-artifact-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><div class="attach-artifact-info"><span class="attach-artifact-name">Analytics Dashboard</span><span class="attach-artifact-meta">analytics.fork.site</span></div><span class="attach-artifact-badge"><span class="term-badge term-badge--success">live</span></span></a></div>
+            <div class="attach-row" style="padding:var(--space4) 0;"><a class="attach-artifact attach-artifact--lg" href="#"><div class="attach-artifact-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><div class="attach-artifact-info"><span class="attach-artifact-name">Analytics Dashboard</span><span class="attach-artifact-meta">analytics.fork.site</span></div><span class="attach-artifact-badge"><span class="term-badge term-badge--success">live</span></span></a></div>
             <div class="term-spacer"></div>
             <div class="term-prompt"><span class="term-prompt-user">@julia</span><span class="term-prompt-symbol">$</span><span class="term-prompt-input">share portfolio</span></div>
-            <div class="attach-row" style="padding:var(--space4) 0;"><a class="attach-artifact attach-artifact--lg" href="#"><div class="attach-artifact-icon" style="background: var(--systemGreen);"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div><div class="attach-artifact-info"><span class="attach-artifact-name">Portfolio Site</span><span class="attach-artifact-meta">julia.fork.site</span></div></a></div>
+            <div class="attach-row" style="padding:var(--space4) 0;"><a class="attach-artifact attach-artifact--lg" href="#"><div class="attach-artifact-icon" style="background: var(--systemGreen);"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div><div class="attach-artifact-info"><span class="attach-artifact-name">Portfolio Site</span><span class="attach-artifact-meta">julia.fork.site</span></div></a></div>
           </div>
         </div>
       </div>
@@ -1729,11 +1731,11 @@
       <div class="spec-card">
         <div class="spec-title">Artifact Pill — Large</div>
         <div class="spec-row"><span class="spec-label">Modifier</span><span class="spec-val">.attach-artifact--lg</span></div>
-        <div class="spec-row"><span class="spec-label">Pill height</span><span class="spec-val">80px</span></div>
-        <div class="spec-row"><span class="spec-label">Icon</span><span class="spec-val">64 × 64, radius14</span></div>
-        <div class="spec-row"><span class="spec-label">SVG glyph</span><span class="spec-val">28 × 28</span></div>
-        <div class="spec-row"><span class="spec-label">Name</span><span class="spec-val">callout (17px), 600</span></div>
-        <div class="spec-row"><span class="spec-label">Meta</span><span class="spec-val">footnote (14px)</span></div>
+        <div class="spec-row"><span class="spec-label">Pill height</span><span class="spec-val">72px</span></div>
+        <div class="spec-row"><span class="spec-label">Icon</span><span class="spec-val">56 × 56, radius14</span></div>
+        <div class="spec-row"><span class="spec-label">SVG glyph</span><span class="spec-val">24 × 24</span></div>
+        <div class="spec-row"><span class="spec-label">Name</span><span class="spec-val">subheadline (16px), 600</span></div>
+        <div class="spec-row"><span class="spec-label">Meta</span><span class="spec-val">caption1 (13px)</span></div>
         <div class="spec-row"><span class="spec-label">Chat pill radius</span><span class="spec-val">radius20 (concentric: 14 + 8)</span></div>
         <div class="spec-row"><span class="spec-label">Terminal pill</span><span class="spec-val">0 (square, per terminal geometry)</span></div>
       </div>
@@ -1742,7 +1744,7 @@
     <div class="usage">
       <div class="usage-title">When to use</div>
       <ul class="usage-list">
-        <li><span class="token">.attach-artifact--lg</span><span class="dash">/</span>Large artifact pill with iOS-scale icon (60×60). Use when the agent creates an application, deploys a project, or generates a primary output artifact.</li>
+        <li><span class="token">.attach-artifact--lg</span><span class="dash">/</span>Large artifact pill with 56×56 icon. Use when the agent creates an application, deploys a project, or generates a primary output artifact.</li>
         <li><strong>Not for:</strong> regular file references (config.yaml, schema.sql) — use default <code class="code-inline">.attach-artifact</code>.</li>
         <li><strong>Icon color:</strong> tint (default) for agent-created. Custom color via inline style for peer/external apps.</li>
       </ul>
@@ -1751,8 +1753,8 @@
     <div class="usage">
       <div class="usage-title">Platform notes</div>
       <ul class="usage-list">
-        <li><span class="tag tag--ios">iOS</span> Icon shape: <code class="code-inline">UISmoothCornerPath</code> (continuous corner) at radius14 to match native app icon. Accepts <code class="code-inline">UIImage</code> or SF Symbol at 28pt.</li>
-        <li><span class="tag tag--android">Android</span> Icon shape: <code class="code-inline">RoundedCornerShape(14.dp)</code>. Accepts <code class="code-inline">ImageVector</code> or <code class="code-inline">Painter</code> at 28dp.</li>
+        <li><span class="tag tag--ios">iOS</span> Icon shape: <code class="code-inline">UISmoothCornerPath</code> (continuous corner) at radius14 to match native app icon. Accepts <code class="code-inline">UIImage</code> or SF Symbol at 24pt.</li>
+        <li><span class="tag tag--android">Android</span> Icon shape: <code class="code-inline">RoundedCornerShape(14.dp)</code>. Accepts <code class="code-inline">ImageVector</code> or <code class="code-inline">Painter</code> at 24dp.</li>
         <li><span class="tag tag--web">Web</span> Modifier <code class="code-inline">.attach-artifact--lg</code> overrides <code class="code-inline">--pill-h</code> and icon sizing via CSS custom properties. No JS needed.</li>
         <li><span class="tag tag--all">All</span> One artifact per message (widget slot). Tap opens the artifact. Badge optional (live, draft, error).</li>
       </ul>
@@ -1867,9 +1869,9 @@
     <div class="spec-grid">
       <div class="spec-card">
         <div class="spec-title">Chat Attachments (in bubble)</div>
-        <div class="spec-row"><span class="spec-label">1 media</span><span class="spec-val">fills bubble, no padding, max-width 50%</span></div>
+        <div class="spec-row"><span class="spec-label">1 media</span><span class="spec-val">fills bubble, no padding, width = --chat-media-w (280px)</span></div>
         <div class="spec-row"><span class="spec-label">N media</span><span class="spec-val">horizontal scroll, 70% width per thumb (peek next)</span></div>
-        <div class="spec-row"><span class="spec-label">Files</span><span class="spec-val">vertical list · max-width 320px</span></div>
+        <div class="spec-row"><span class="spec-label">Files</span><span class="spec-val">vertical list · container max 320px · pills stretch to bubble width</span></div>
         <div class="spec-row"><span class="spec-label">Pill radius</span><span class="spec-val">radius10 (concentric with bubble)</span></div>
         <div class="spec-row"><span class="spec-label">Order</span><span class="spec-val">media → files → text (anatomy rule)</span></div>
       </div>
@@ -2343,7 +2345,7 @@
             <div class="term-changeset"><div class="term-changeset-header"><span class="term-changeset-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 3v2m0 14v2m-7.07-3.93l1.41-1.41m9.9-9.9l1.41-1.41M3 12h2m14 0h2m-3.93 7.07l-1.41-1.41M6.34 6.34L4.93 4.93"/></svg></span><span class="term-changeset-id">f4a1b2c</span><span class="term-changeset-seq">#1</span></div><div class="term-changeset-msg">Initial weather dashboard</div><div class="term-changeset-files"><span class="term-changeset-file">api.js</span><span class="term-changeset-file">dashboard.html</span></div></div>
 
             <!-- Agent: artifact (large — created app) -->
-            <div class="attach-row" style="padding:var(--space4) 0;"><a class="attach-artifact attach-artifact--lg" href="#"><div class="attach-artifact-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><div class="attach-artifact-info"><span class="attach-artifact-name">Weather Dashboard</span><span class="attach-artifact-meta">weather.fork.site</span></div><span class="attach-artifact-badge"><span class="term-badge term-badge--success">live</span></span></a></div>
+            <div class="attach-row" style="padding:var(--space4) 0;"><a class="attach-artifact attach-artifact--lg" href="#"><div class="attach-artifact-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><div class="attach-artifact-info"><span class="attach-artifact-name">Weather Dashboard</span><span class="attach-artifact-meta">weather.fork.site</span></div><span class="attach-artifact-badge"><span class="term-badge term-badge--success">live</span></span></a></div>
 
             <div class="term-line term-line--stdout"></div>
 

@@ -4261,13 +4261,20 @@ a.header-title:hover {
   min-width: 0;
 }
 
-.chat-msg > div {
+.chat-msg > div:not(.avatar) {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   min-width: 0;
 }
 
 .chat-msg--outgoing {
   align-self: flex-end;
   flex-direction: row-reverse;
+}
+
+.chat-msg--outgoing > div {
+  align-items: flex-end;
 }
 
 .chat-msg--system {
@@ -5784,9 +5791,9 @@ a.header-title:hover {
 }
 
 /* ── Large Artifact Pill ── */
-/* iOS app-icon scale: 60×60 icon, 80px pill. Use for created apps, projects, deployed artifacts. */
+/* 56×56 icon, 72px pill. Use for created apps, projects, deployed artifacts. */
 .attach-artifact--lg {
-  --pill-h: 80px;
+  --pill-h: 72px;
   --_pad: var(--space8);
   gap: var(--space12);
   padding-right: var(--space16);
@@ -5797,16 +5804,16 @@ a.header-title:hover {
 }
 
 .attach-artifact--lg .attach-artifact-icon svg {
-  width: 28px;
-  height: 28px;
+  width: 24px;
+  height: 24px;
 }
 
 .attach-artifact--lg .attach-artifact-name {
-  font-size: var(--typeCallout);
+  font-size: var(--typeSubheadline);
 }
 
 .attach-artifact--lg .attach-artifact-meta {
-  font-size: var(--typeFootnote);
+  font-size: var(--typeCaption1);
 }
 
 /* ── Activity Card ── */
@@ -6257,11 +6264,16 @@ a.header-title:hover {
 .chat-attach-files .attach-artifact {
   border-radius: var(--radius10);
   font-family: var(--fontBody);
-  width: 100%;
+  align-self: flex-start;
 }
 
 .chat-attach-files .attach-artifact--lg {
   border-radius: var(--radius20);
+}
+
+/* Inside bubble: file pills stretch to fill bubble width */
+.chat-msg-bubble .chat-attach-files .attach-artifact {
+  align-self: stretch;
 }
 
 .chat-attach-files .attach-artifact-name {
