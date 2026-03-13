@@ -64,6 +64,7 @@
     <a class="sidebar-link" href="#widget">Card</a>
     <a class="sidebar-link" href="#activity-card">Activity Card</a>
     <a class="sidebar-link" href="#artifact">Artifact</a>
+    <a class="sidebar-link" href="#banner">Banner</a>
   </div>
   <div class="sidebar-group">
     <div class="sidebar-group-label">Attachments</div>
@@ -1875,6 +1876,155 @@
         <li><span class="tag tag--android">Android</span> Data model: <code class="code-inline">message.widget = Widget.Artifact(...)</code> — NOT in <code class="code-inline">message.attachments</code>. Icon shape: <code class="code-inline">RoundedCornerShape(14.dp)</code>. Accepts <code class="code-inline">ImageVector</code> or <code class="code-inline">Painter</code> at 24dp.</li>
         <li><span class="tag tag--web">Web</span> Modifier <code class="code-inline">.attach-artifact--lg</code> overrides <code class="code-inline">--pill-h</code> and icon sizing via CSS custom properties. No JS needed.</li>
         <li><span class="tag tag--all">All</span> Artifact is a <strong>widget</strong> — it occupies the widget slot (below text), max one per message. Uses <code class="code-inline">.chat-attach-files</code> CSS markup for pill styling, but in the data model it is <code class="code-inline">widget: .artifact(...)</code>, NOT part of <code class="code-inline">attachments[]</code>. An artifact and a changeset cannot coexist in one message (both are widgets — split into two messages). Tap opens the artifact. Badge optional (live, draft, error).</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- BANNER                                    -->
+  <!-- ════════════════════════════════════════ -->
+  <div class="section" id="banner">
+    <h2 class="section-title">Banner</h2>
+
+    <div class="msg-compare">
+      <div class="msg-col">
+        <div class="msg-col-label">Chat</div>
+        <div class="chat-demo">
+          <!-- Context: agent message before banner -->
+          <div class="chat-msg chat-msg--incoming">
+            <div>
+              <div class="chat-msg-name">Agent</div>
+              <div class="chat-msg-bubble">Let me analyze that for you.</div>
+            </div>
+          </div>
+
+          <!-- Error banner -->
+          <div class="chat-msg chat-msg--system">
+            <a class="chat-banner chat-banner--error" href="#">
+              <svg class="chat-banner-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="6.25"/><path d="M8 5v3.5"/><circle cx="8" cy="11" r=".75" fill="currentColor" stroke="none"/></svg>
+              <span class="chat-banner-text">Token limit reached</span>
+              <svg class="chat-banner-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4l4 4-4 4"/></svg>
+            </a>
+          </div>
+
+          <!-- Warning banner -->
+          <div class="chat-msg chat-msg--system">
+            <a class="chat-banner chat-banner--warning" href="#">
+              <svg class="chat-banner-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.5L1.5 13h13L8 2.5z"/><path d="M8 6.5v3"/><circle cx="8" cy="11.5" r=".75" fill="currentColor" stroke="none"/></svg>
+              <span class="chat-banner-text">Running low on tokens — 12% remaining</span>
+              <svg class="chat-banner-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4l4 4-4 4"/></svg>
+            </a>
+          </div>
+
+          <!-- Info banner -->
+          <div class="chat-msg chat-msg--system">
+            <a class="chat-banner chat-banner--info" href="#">
+              <svg class="chat-banner-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="6.25"/><path d="M8 7.5v4"/><circle cx="8" cy="5.25" r=".75" fill="currentColor" stroke="none"/></svg>
+              <span class="chat-banner-text">Voice messages are now available</span>
+              <svg class="chat-banner-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4l4 4-4 4"/></svg>
+            </a>
+          </div>
+
+          <!-- Context: conversation continues -->
+          <div class="chat-msg chat-msg--outgoing">
+            <div>
+              <div class="chat-msg-bubble">Got it, thanks.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="msg-col">
+        <div class="msg-col-label">Terminal</div>
+        <div class="window">
+          <div class="window-titlebar">
+            <div class="window-controls">
+              <div class="window-dot window-dot--close"></div>
+              <div class="window-dot window-dot--minimize"></div>
+              <div class="window-dot window-dot--maximize"></div>
+            </div>
+            <div class="window-title">banner</div>
+          </div>
+          <div class="term-surface">
+            <div class="term-line term-line--stdout">Processing complete.</div>
+
+            <!-- Error banner -->
+            <a class="term-banner term-banner--error" href="#">
+              <svg class="term-banner-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="6.25"/><path d="M8 5v3.5"/><circle cx="8" cy="11" r=".75" fill="currentColor" stroke="none"/></svg>
+              <span class="term-banner-text">Token limit reached</span>
+              <svg class="term-banner-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4l4 4-4 4"/></svg>
+            </a>
+
+            <!-- Warning banner -->
+            <a class="term-banner term-banner--warning" href="#">
+              <svg class="term-banner-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.5L1.5 13h13L8 2.5z"/><path d="M8 6.5v3"/><circle cx="8" cy="11.5" r=".75" fill="currentColor" stroke="none"/></svg>
+              <span class="term-banner-text">Running low on tokens — 12% remaining</span>
+              <svg class="term-banner-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4l4 4-4 4"/></svg>
+            </a>
+
+            <!-- Info banner -->
+            <a class="term-banner term-banner--info" href="#">
+              <svg class="term-banner-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="6.25"/><path d="M8 7.5v4"/><circle cx="8" cy="5.25" r=".75" fill="currentColor" stroke="none"/></svg>
+              <span class="term-banner-text">Voice messages are now available</span>
+              <svg class="term-banner-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4l4 4-4 4"/></svg>
+            </a>
+
+            <div class="term-prompt"><span class="term-prompt-symbol">$</span><span class="term-prompt-input">_</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="spec-grid">
+      <div class="spec-card">
+        <div class="spec-title">Chat Banner</div>
+        <div class="spec-row"><span class="spec-label">Font</span><span class="spec-val">fontBody · caption1 (13px) · 500</span></div>
+        <div class="spec-row"><span class="spec-label">Text color</span><span class="spec-val">label (not semantic — warning fails WCAG on light)</span></div>
+        <div class="spec-row"><span class="spec-label">Icon</span><span class="spec-val">16px · semantic color (destructive / warning / link)</span></div>
+        <div class="spec-row"><span class="spec-label">Chevron</span><span class="spec-val">12px · tertiaryLabel</span></div>
+        <div class="spec-row"><span class="spec-label">Padding</span><span class="spec-val">space12 × space16</span></div>
+        <div class="spec-row"><span class="spec-label">Radius</span><span class="spec-val">radiusFull (pill)</span></div>
+        <div class="spec-row"><span class="spec-label">Min height</span><span class="spec-val">44px (tap target)</span></div>
+        <div class="spec-row"><span class="spec-label">Alignment</span><span class="spec-val">center (auto width)</span></div>
+        <div class="spec-row"><span class="spec-label">Error</span><span class="spec-val">destructive 10% fill + 18% border</span></div>
+        <div class="spec-row"><span class="spec-label">Warning</span><span class="spec-val">warning 12% fill + 18% border</span></div>
+        <div class="spec-row"><span class="spec-label">Info</span><span class="spec-val">link 10% fill + 18% border</span></div>
+        <div class="spec-row"><span class="spec-label">Hover</span><span class="spec-val">fill opacity +6%</span></div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-title">Terminal Banner</div>
+        <div class="spec-row"><span class="spec-label">Font</span><span class="spec-val">fontMono · code (14px)</span></div>
+        <div class="spec-row"><span class="spec-label">Text color</span><span class="spec-val">label</span></div>
+        <div class="spec-row"><span class="spec-label">Padding</span><span class="spec-val">space8 × space12</span></div>
+        <div class="spec-row"><span class="spec-label">Radius</span><span class="spec-val">0 (terminal geometry)</span></div>
+        <div class="spec-row"><span class="spec-label">Left border</span><span class="spec-val">2px solid · semantic color</span></div>
+        <div class="spec-row"><span class="spec-label">Error fill</span><span class="spec-val">destructive 8%</span></div>
+        <div class="spec-row"><span class="spec-label">Warning fill</span><span class="spec-val">warning 10%</span></div>
+        <div class="spec-row"><span class="spec-label">Info fill</span><span class="spec-val">link 8%</span></div>
+        <div class="spec-row"><span class="spec-label">Min height</span><span class="spec-val">44px (tap target)</span></div>
+      </div>
+    </div>
+
+    <div class="usage">
+      <div class="usage-title">When to use</div>
+      <ul class="usage-list">
+        <li><span class="token">.chat-banner--error</span><span class="dash">/</span>Blocking errors requiring user action — token depletion, payment failure, account suspension. Destructive fill signals urgency.</li>
+        <li><span class="token">.chat-banner--warning</span><span class="dash">/</span>Non-blocking alerts — low token count, expiring subscription, approaching limits. Warning fill signals caution without blocking.</li>
+        <li><span class="token">.chat-banner--info</span><span class="dash">/</span>Informational CTAs — new features, promotions, tips. Link-blue fill signals neutral but actionable information.</li>
+        <li><strong>Tap target:</strong> entire banner is tappable. One action per banner, defined by the consumer. No embedded buttons — the banner IS the button.</li>
+        <li><strong>Persistence:</strong> banners stay in message history. Not dismissable — they document a system event with an action path.</li>
+        <li><strong>Not a system message:</strong> visually distinct from <code class="code-inline">.chat-msg--system</code> (timestamps, joins). System messages are passive text. Banners are CTAs — the pill shape, colored fill, and chevron all signal "tap me."</li>
+      </ul>
+    </div>
+
+    <div class="usage">
+      <div class="usage-title">Platform notes</div>
+      <ul class="usage-list">
+        <li><span class="tag tag--ios">iOS</span> Use a <code class="code-inline">UIButton</code> with <code class="code-inline">.plain</code> style inside a full-width container, centered with auto layout. Background: semantic color at 10% via <code class="code-inline">UIColor.systemRed.withAlphaComponent(0.1)</code>. Corner radius: <code class="code-inline">.capsule</code> (continuous corners, equivalent to <code class="code-inline">radiusFull</code>). Min height 44pt is the default tap target — enforce via height constraint. Use <code class="code-inline">UIButton.Configuration</code> for icon + title + chevron layout.</li>
+        <li><span class="tag tag--android">Android</span> Compose: <code class="code-inline">Surface(onClick, shape = RoundedCornerShape(50%), color = destructive.copy(alpha = 0.1f))</code> with <code class="code-inline">Row(verticalAlignment = CenterVertically)</code> inside. Min height <code class="code-inline">44.dp</code>. Center in parent via <code class="code-inline">Modifier.align(CenterHorizontally)</code>. Ripple indication on tap.</li>
+        <li><span class="tag tag--web">Web</span> Use <code class="code-inline">&lt;a&gt;</code> or <code class="code-inline">&lt;button&gt;</code> for the banner element. Wrap in <code class="code-inline">.chat-msg.chat-msg--system</code> for centering. Hover/active states handled in CSS. Add <code class="code-inline">role="link"</code> if using <code class="code-inline">&lt;div&gt;</code>.</li>
+        <li><span class="tag tag--all">All</span> Banners live in the message stream at the system level — they have no sender. Position: between messages, centered in chat, full-width in terminal. The chevron is a visual affordance only — the entire surface is the tap target, not the chevron.</li>
       </ul>
     </div>
 
