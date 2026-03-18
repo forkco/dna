@@ -4740,6 +4740,113 @@ a.header-title:hover {
   margin-left: auto;
 }
 
+/* ── Audio Message (widget) ── */
+/* Voice message player — waveform + play/pause + duration.
+   Widget type: sits outside bubble in chat (widget slot, max 1 per message).
+   In terminal: standalone .term-audio block. */
+
+.chat-audio {
+  display: flex;
+  align-items: center;
+  gap: var(--space8);
+  padding: var(--space8) var(--space12);
+  background: var(--tertiarySystemFill);
+  border-radius: var(--radius14);
+  min-width: 200px;
+}
+
+.chat-audio-play {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radiusFull);
+  background: var(--tint);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--onLight);
+  transition: transform 0.25s var(--easeSpring), background 0.25s var(--easeFluent);
+}
+
+.chat-audio-play:hover {
+  transform: scale(1.06);
+}
+
+.chat-audio-play:active {
+  transform: scale(0.94);
+  transition: transform 0.12s var(--easeStandard);
+}
+
+.chat-audio-play svg {
+  width: 16px;
+  height: 16px;
+}
+
+.chat-audio-wave {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 28px;
+  min-width: 0;
+}
+
+.chat-audio-bar {
+  flex: 0 0 2px;
+  height: var(--h, 50%);
+  border-radius: 1px;
+  background: var(--tertiaryLabel);
+  transition: background 0.15s var(--easeFluent);
+}
+
+.chat-audio-bar.is-played {
+  background: var(--tint);
+}
+
+.chat-audio-time {
+  font-family: var(--fontMono);
+  font-size: var(--typeCaption2);
+  color: var(--secondaryLabel);
+  flex-shrink: 0;
+  min-width: 3ch;
+  text-align: right;
+}
+
+/* Terminal audio — standalone block */
+.term-audio {
+  display: flex;
+  align-items: center;
+  gap: var(--space8);
+  padding: var(--space8) var(--space12);
+  margin: var(--space4) 0;
+  background: var(--tertiarySystemFill);
+  border-radius: var(--radius12);
+  min-width: 200px;
+}
+
+.term-audio .chat-audio-play {
+  width: 32px;
+  height: 32px;
+}
+
+.term-audio .chat-audio-play svg {
+  width: 14px;
+  height: 14px;
+}
+
+.term-audio .chat-audio-wave {
+  height: 24px;
+  justify-content: flex-start;
+  gap: var(--space2);
+}
+
+.term-audio .chat-audio-bar {
+  flex: 1 0 2px;
+  max-width: 3px;
+}
+
 /* Typing indicator */
 .chat-typing {
   display: inline-flex;
@@ -6301,6 +6408,10 @@ a.header-title:hover {
   font-size: var(--typeCaption1);
 }
 
+.chat-demo .term-audio {
+  border-radius: var(--radius14);
+}
+
 .chat-demo .term-fold summary {
   border-radius: var(--radius10);
 }
@@ -6358,6 +6469,7 @@ a.header-title:hover {
 .chat-msg-bubble + .chat-widget,
 .chat-msg-bubble + .chat-link-preview,
 .chat-msg-bubble + .chat-attach-files,
+.chat-msg-bubble + .chat-audio,
 .chat-msg-bubble + .term-block {
   margin-top: var(--space4);
 }
@@ -6374,6 +6486,7 @@ a.header-title:hover {
 .chat-attach-media + .term-activity,
 .chat-attach-media + .chat-widget,
 .chat-attach-media + .chat-link-preview,
+.chat-attach-media + .chat-audio,
 .chat-attach-media + .chat-attach-files,
 .chat-attach-files + .term-steps,
 .chat-attach-files + .term-options,
@@ -6381,12 +6494,14 @@ a.header-title:hover {
 .chat-attach-files + .term-activity,
 .chat-attach-files + .chat-widget,
 .chat-attach-files + .chat-link-preview,
+.chat-attach-files + .chat-audio,
 .chat-msg-name + .term-steps,
 .chat-msg-name + .term-options,
 .chat-msg-name + .term-changeset,
 .chat-msg-name + .term-activity,
 .chat-msg-name + .chat-widget,
-.chat-msg-name + .chat-link-preview {
+.chat-msg-name + .chat-link-preview,
+.chat-msg-name + .chat-audio {
   margin-top: var(--space8);
 }
 

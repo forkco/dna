@@ -64,6 +64,7 @@
     <a class="sidebar-link" href="#widget">Card</a>
     <a class="sidebar-link" href="#activity-card">Activity Card</a>
     <a class="sidebar-link" href="#artifact">Artifact</a>
+    <a class="sidebar-link" href="#audio-message">Audio Message</a>
     <a class="sidebar-link" href="#banner">Banner</a>
   </div>
   <div class="sidebar-group">
@@ -1876,6 +1877,151 @@
         <li><span class="tag tag--android">Android</span> Data model: <code class="code-inline">message.widget = Widget.Artifact(...)</code> — NOT in <code class="code-inline">message.attachments</code>. Icon shape: <code class="code-inline">RoundedCornerShape(14.dp)</code>. Accepts <code class="code-inline">ImageVector</code> or <code class="code-inline">Painter</code> at 24dp.</li>
         <li><span class="tag tag--web">Web</span> Modifier <code class="code-inline">.attach-artifact--lg</code> overrides <code class="code-inline">--pill-h</code> and icon sizing via CSS custom properties. No JS needed.</li>
         <li><span class="tag tag--all">All</span> Artifact is a <strong>widget</strong> — it occupies the widget slot (below text), max one per message. Uses <code class="code-inline">.chat-attach-files</code> CSS markup for pill styling, but in the data model it is <code class="code-inline">widget: .artifact(...)</code>, NOT part of <code class="code-inline">attachments[]</code>. An artifact and a changeset cannot coexist in one message (both are widgets — split into two messages). Tap opens the artifact. Badge optional (live, draft, error).</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- AUDIO MESSAGE                            -->
+  <!-- ════════════════════════════════════════ -->
+  <div class="section" id="audio-message">
+    <h2 class="section-title">Audio Message</h2>
+    <p class="section-desc">Voice message player — waveform visualization with play/pause and duration. Widget type: sits outside bubble in the widget slot (max 1 per message).</p>
+
+    <div class="msg-compare">
+      <div class="msg-col">
+        <div class="msg-col-label">Chat</div>
+        <div class="chat-demo">
+
+          <!-- User: outgoing voice only, fully played -->
+          <div class="chat-msg chat-msg--outgoing">
+            <div>
+              <div class="chat-audio">
+                <button class="chat-audio-play" aria-label="Play"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M5.5 3.5v9l7-4.5z"/></svg></button>
+                <div class="chat-audio-wave">
+                  <span class="chat-audio-bar is-played" style="--h:20%"></span><span class="chat-audio-bar is-played" style="--h:35%"></span><span class="chat-audio-bar is-played" style="--h:55%"></span><span class="chat-audio-bar is-played" style="--h:70%"></span><span class="chat-audio-bar is-played" style="--h:50%"></span><span class="chat-audio-bar is-played" style="--h:85%"></span><span class="chat-audio-bar is-played" style="--h:65%"></span><span class="chat-audio-bar is-played" style="--h:90%"></span><span class="chat-audio-bar is-played" style="--h:75%"></span><span class="chat-audio-bar is-played" style="--h:55%"></span><span class="chat-audio-bar is-played" style="--h:80%"></span><span class="chat-audio-bar is-played" style="--h:95%"></span><span class="chat-audio-bar is-played" style="--h:65%"></span><span class="chat-audio-bar is-played" style="--h:45%"></span><span class="chat-audio-bar is-played" style="--h:80%"></span><span class="chat-audio-bar is-played" style="--h:70%"></span><span class="chat-audio-bar is-played" style="--h:50%"></span><span class="chat-audio-bar is-played" style="--h:85%"></span><span class="chat-audio-bar is-played" style="--h:60%"></span><span class="chat-audio-bar is-played" style="--h:40%"></span><span class="chat-audio-bar is-played" style="--h:70%"></span><span class="chat-audio-bar is-played" style="--h:55%"></span><span class="chat-audio-bar is-played" style="--h:35%"></span><span class="chat-audio-bar is-played" style="--h:25%"></span><span class="chat-audio-bar is-played" style="--h:20%"></span>
+                </div>
+                <span class="chat-audio-time">0:42</span>
+              </div>
+              <div class="chat-msg-time">2:30 PM</div>
+            </div>
+          </div>
+
+          <!-- Peer: incoming voice, playing at ~60% -->
+          <div class="chat-msg chat-msg--incoming chat-msg--peer">
+            <div class="avatar avatar--sm"><span>JK</span></div>
+            <div>
+              <div class="chat-msg-name">Julia Kim</div>
+              <div class="chat-audio">
+                <button class="chat-audio-play" aria-label="Pause"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><rect x="4" y="3" width="3" height="10" rx="0.75"/><rect x="9" y="3" width="3" height="10" rx="0.75"/></svg></button>
+                <div class="chat-audio-wave">
+                  <span class="chat-audio-bar is-played" style="--h:15%"></span><span class="chat-audio-bar is-played" style="--h:30%"></span><span class="chat-audio-bar is-played" style="--h:48%"></span><span class="chat-audio-bar is-played" style="--h:65%"></span><span class="chat-audio-bar is-played" style="--h:82%"></span><span class="chat-audio-bar is-played" style="--h:58%"></span><span class="chat-audio-bar is-played" style="--h:90%"></span><span class="chat-audio-bar is-played" style="--h:72%"></span><span class="chat-audio-bar is-played" style="--h:50%"></span><span class="chat-audio-bar is-played" style="--h:78%"></span><span class="chat-audio-bar is-played" style="--h:92%"></span><span class="chat-audio-bar is-played" style="--h:68%"></span><span class="chat-audio-bar is-played" style="--h:45%"></span><span class="chat-audio-bar is-played" style="--h:75%"></span><span class="chat-audio-bar is-played" style="--h:60%"></span><span class="chat-audio-bar" style="--h:85%"></span><span class="chat-audio-bar" style="--h:55%"></span><span class="chat-audio-bar" style="--h:42%"></span><span class="chat-audio-bar" style="--h:70%"></span><span class="chat-audio-bar" style="--h:48%"></span><span class="chat-audio-bar" style="--h:62%"></span><span class="chat-audio-bar" style="--h:38%"></span><span class="chat-audio-bar" style="--h:28%"></span><span class="chat-audio-bar" style="--h:18%"></span><span class="chat-audio-bar" style="--h:12%"></span>
+                </div>
+                <span class="chat-audio-time">0:27</span>
+              </div>
+              <div class="chat-msg-time">2:28 PM</div>
+            </div>
+          </div>
+
+          <!-- Peer: text bubble + voice widget below, not played -->
+          <div class="chat-msg chat-msg--incoming chat-msg--peer">
+            <div class="avatar avatar--sm"><span>AL</span></div>
+            <div>
+              <div class="chat-msg-name">Alex Lee</div>
+              <div class="chat-msg-bubble chat-msg-bubble--capsule">Meeting notes from today</div>
+              <div class="chat-audio">
+                <button class="chat-audio-play" aria-label="Play"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M5.5 3.5v9l7-4.5z"/></svg></button>
+                <div class="chat-audio-wave">
+                  <span class="chat-audio-bar" style="--h:18%"></span><span class="chat-audio-bar" style="--h:28%"></span><span class="chat-audio-bar" style="--h:45%"></span><span class="chat-audio-bar" style="--h:62%"></span><span class="chat-audio-bar" style="--h:75%"></span><span class="chat-audio-bar" style="--h:55%"></span><span class="chat-audio-bar" style="--h:88%"></span><span class="chat-audio-bar" style="--h:68%"></span><span class="chat-audio-bar" style="--h:48%"></span><span class="chat-audio-bar" style="--h:80%"></span><span class="chat-audio-bar" style="--h:90%"></span><span class="chat-audio-bar" style="--h:60%"></span><span class="chat-audio-bar" style="--h:42%"></span><span class="chat-audio-bar" style="--h:72%"></span><span class="chat-audio-bar" style="--h:58%"></span><span class="chat-audio-bar" style="--h:82%"></span><span class="chat-audio-bar" style="--h:50%"></span><span class="chat-audio-bar" style="--h:38%"></span><span class="chat-audio-bar" style="--h:65%"></span><span class="chat-audio-bar" style="--h:45%"></span><span class="chat-audio-bar" style="--h:55%"></span><span class="chat-audio-bar" style="--h:35%"></span><span class="chat-audio-bar" style="--h:25%"></span><span class="chat-audio-bar" style="--h:15%"></span><span class="chat-audio-bar" style="--h:10%"></span>
+                </div>
+                <span class="chat-audio-time">1:15</span>
+              </div>
+              <div class="chat-msg-time">2:26 PM</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="msg-col">
+        <div class="msg-col-label">Terminal</div>
+        <div class="window">
+          <div class="window-titlebar"><div class="window-controls"><div class="window-dot window-dot--close"></div><div class="window-dot window-dot--minimize"></div><div class="window-dot window-dot--maximize"></div></div><div class="window-title">audio</div></div>
+          <div class="term-surface">
+            <div class="term-prompt"><span class="term-prompt-user">@julia</span><span class="term-prompt-symbol">$</span><span class="term-prompt-input">send voice</span></div>
+            <!-- Playing at ~40% -->
+            <div class="term-audio">
+              <button class="chat-audio-play" aria-label="Pause"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><rect x="4" y="3" width="3" height="10" rx="0.75"/><rect x="9" y="3" width="3" height="10" rx="0.75"/></svg></button>
+              <div class="chat-audio-wave">
+                <span class="chat-audio-bar is-played" style="--h:22%"></span><span class="chat-audio-bar is-played" style="--h:38%"></span><span class="chat-audio-bar is-played" style="--h:52%"></span><span class="chat-audio-bar is-played" style="--h:68%"></span><span class="chat-audio-bar is-played" style="--h:80%"></span><span class="chat-audio-bar is-played" style="--h:62%"></span><span class="chat-audio-bar is-played" style="--h:88%"></span><span class="chat-audio-bar is-played" style="--h:72%"></span><span class="chat-audio-bar is-played" style="--h:48%"></span><span class="chat-audio-bar is-played" style="--h:82%"></span><span class="chat-audio-bar" style="--h:90%"></span><span class="chat-audio-bar" style="--h:65%"></span><span class="chat-audio-bar" style="--h:45%"></span><span class="chat-audio-bar" style="--h:78%"></span><span class="chat-audio-bar" style="--h:58%"></span><span class="chat-audio-bar" style="--h:85%"></span><span class="chat-audio-bar" style="--h:52%"></span><span class="chat-audio-bar" style="--h:40%"></span><span class="chat-audio-bar" style="--h:68%"></span><span class="chat-audio-bar" style="--h:50%"></span><span class="chat-audio-bar" style="--h:60%"></span><span class="chat-audio-bar" style="--h:42%"></span><span class="chat-audio-bar" style="--h:30%"></span><span class="chat-audio-bar" style="--h:20%"></span><span class="chat-audio-bar" style="--h:15%"></span>
+              </div>
+              <span class="chat-audio-time">0:18</span>
+            </div>
+
+            <div class="term-spacer"></div>
+            <div class="term-prompt"><span class="term-prompt-symbol">$</span><span class="term-prompt-input">play recording.m4a</span></div>
+            <!-- Not played -->
+            <div class="term-audio">
+              <button class="chat-audio-play" aria-label="Play"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M5.5 3.5v9l7-4.5z"/></svg></button>
+              <div class="chat-audio-wave">
+                <span class="chat-audio-bar" style="--h:15%"></span><span class="chat-audio-bar" style="--h:25%"></span><span class="chat-audio-bar" style="--h:42%"></span><span class="chat-audio-bar" style="--h:58%"></span><span class="chat-audio-bar" style="--h:72%"></span><span class="chat-audio-bar" style="--h:55%"></span><span class="chat-audio-bar" style="--h:85%"></span><span class="chat-audio-bar" style="--h:70%"></span><span class="chat-audio-bar" style="--h:48%"></span><span class="chat-audio-bar" style="--h:78%"></span><span class="chat-audio-bar" style="--h:92%"></span><span class="chat-audio-bar" style="--h:62%"></span><span class="chat-audio-bar" style="--h:40%"></span><span class="chat-audio-bar" style="--h:75%"></span><span class="chat-audio-bar" style="--h:55%"></span><span class="chat-audio-bar" style="--h:88%"></span><span class="chat-audio-bar" style="--h:50%"></span><span class="chat-audio-bar" style="--h:35%"></span><span class="chat-audio-bar" style="--h:65%"></span><span class="chat-audio-bar" style="--h:48%"></span><span class="chat-audio-bar" style="--h:58%"></span><span class="chat-audio-bar" style="--h:38%"></span><span class="chat-audio-bar" style="--h:28%"></span><span class="chat-audio-bar" style="--h:18%"></span><span class="chat-audio-bar" style="--h:12%"></span>
+              </div>
+              <span class="chat-audio-time">2:04</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="spec-grid">
+      <div class="spec-card">
+        <div class="spec-title">Chat Audio</div>
+        <div class="spec-row"><span class="spec-label">Surface</span><span class="spec-val">tertiarySystemFill · radius14</span></div>
+        <div class="spec-row"><span class="spec-label">Padding</span><span class="spec-val">space8 × space12</span></div>
+        <div class="spec-row"><span class="spec-label">Play button</span><span class="spec-val">36 × 36, radiusFull, tint bg, onLight icon 16 × 16</span></div>
+        <div class="spec-row"><span class="spec-label">Waveform height</span><span class="spec-val">28px</span></div>
+        <div class="spec-row"><span class="spec-label">Bar width</span><span class="spec-val">2px (fixed)</span></div>
+        <div class="spec-row"><span class="spec-label">Bar distribution</span><span class="spec-val">space-between (auto gap)</span></div>
+        <div class="spec-row"><span class="spec-label">Bar radius</span><span class="spec-val">1px</span></div>
+        <div class="spec-row"><span class="spec-label">Unplayed</span><span class="spec-val">tertiaryLabel</span></div>
+        <div class="spec-row"><span class="spec-label">Played</span><span class="spec-val">tint (.is-played)</span></div>
+        <div class="spec-row"><span class="spec-label">Duration</span><span class="spec-val">fontMono · caption2 (12px) · secondaryLabel</span></div>
+        <div class="spec-row"><span class="spec-label">Inner gap</span><span class="spec-val">space8</span></div>
+        <div class="spec-row"><span class="spec-label">Min width</span><span class="spec-val">200px</span></div>
+        <div class="spec-row"><span class="spec-label">After bubble</span><span class="spec-val">space4 gap (widget sibling rule)</span></div>
+        <div class="spec-row"><span class="spec-label">After name</span><span class="spec-val">space8 gap (no preceding bubble)</span></div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-title">Terminal Audio</div>
+        <div class="spec-row"><span class="spec-label">Surface</span><span class="spec-val">tertiarySystemFill · radius12</span></div>
+        <div class="spec-row"><span class="spec-label">Padding</span><span class="spec-val">space8 × space12</span></div>
+        <div class="spec-row"><span class="spec-label">Play button</span><span class="spec-val">32 × 32 (compact)</span></div>
+        <div class="spec-row"><span class="spec-label">Waveform height</span><span class="spec-val">24px</span></div>
+        <div class="spec-row"><span class="spec-label">Icon</span><span class="spec-val">14 × 14</span></div>
+      </div>
+    </div>
+
+    <div class="usage">
+      <div class="usage-title">When to use</div>
+      <ul class="usage-list">
+        <li><span class="token">.chat-audio</span><span class="dash">/</span>Voice message widget in chat. Sits in the widget slot — outside and below the bubble (or standalone when voice-only).</li>
+        <li><span class="token">.term-audio</span><span class="dash">/</span>Audio player in terminal context. Standalone block with tertiarySystemFill background.</li>
+        <li><span class="token">.is-played</span><span class="dash">/</span>Applied to each bar that has been played. Progress fills left-to-right as playback advances.</li>
+        <li><strong>States:</strong> not-played (play icon, all bars uncolored, total duration), playing (pause icon, bars fill left-to-right, elapsed time), played (play icon, all bars colored, total duration).</li>
+        <li><strong>With text:</strong> text goes in the bubble above, audio widget below — standard widget pattern (like link preview after text).</li>
+        <li><strong>Widget slot:</strong> audio occupies the widget slot. Cannot coexist with other widgets (link preview, changeset, artifact) in the same message.</li>
+        <li><strong>Not for:</strong> audio files (music, podcasts, sound effects) — use file pill with audio icon. Not for transcription — that's text content.</li>
+      </ul>
+    </div>
+
+    <div class="usage">
+      <div class="usage-title">Platform notes</div>
+      <ul class="usage-list">
+        <li><span class="tag tag--ios">iOS</span> Playback: <code class="code-inline">AVAudioPlayer</code>. Waveform: <code class="code-inline">CAShapeLayer</code> with bar paths or custom <code class="code-inline">UIView.draw(_:)</code>. Play/pause: <code class="code-inline">UIButton</code> with spring animation on state change. Extend hit area to 44pt via <code class="code-inline">point(inside:with:)</code> override or <code class="code-inline">contentEdgeInsets</code>.</li>
+        <li><span class="tag tag--android">Android</span> Playback: <code class="code-inline">MediaPlayer</code> or <code class="code-inline">ExoPlayer</code>. Waveform: <code class="code-inline">Canvas.drawRoundRect()</code> per bar in custom <code class="code-inline">View</code>, or Compose <code class="code-inline">Canvas</code> composable. Play button: <code class="code-inline">IconButton(modifier = Modifier.size(44.dp))</code> for touch target.</li>
+        <li><span class="tag tag--web">Web</span> Playback: <code class="code-inline">HTMLAudioElement</code> API. Waveform bars: <code class="code-inline">&lt;span&gt;</code> elements with <code class="code-inline">--h</code> custom property. Toggle <code class="code-inline">.is-played</code> per bar on <code class="code-inline">timeupdate</code> event. No audio analysis needed at render — waveform data comes from server.</li>
+        <li><span class="tag tag--all">All</span> Waveform data = peak amplitudes sampled from audio file (typically 25–40 samples, normalized 0–100%). Play button effective tap target ≥ 44pt — 36px button + 12px widget padding = 48px touchable area. Data model: <code class="code-inline">message.widget = .audio(url, duration, waveform)</code> — NOT in <code class="code-inline">attachments[]</code>. Occupies widget slot (max 1 per message).</li>
       </ul>
     </div>
 
