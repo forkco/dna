@@ -4113,7 +4113,7 @@ a.header-title:hover {
   display: flex;
   align-items: center;
   gap: var(--space12);
-  padding: var(--space12) var(--space24);
+  padding: var(--space12) var(--space16);
   min-height: 44px;
   border-bottom: 1px solid var(--separator);
   transition: background 0.18s var(--easeStandard);
@@ -4157,6 +4157,10 @@ a.header-title:hover {
   color: var(--secondaryLabel);
   line-height: 1.3;
   margin-top: var(--space2);
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .list-item-trailing {
@@ -4176,6 +4180,120 @@ a.header-title:hover {
 .list-item--destructive .list-item-title {
   color: var(--destructive);
 }
+
+/* Section header — standalone between .list groups (iOS insetGrouped pattern) */
+.list-header {
+  font-family: var(--fontMono);
+  font-size: var(--typeOverline);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--secondaryLabel);
+  padding: var(--space24) var(--space16) var(--space8);
+}
+
+.list-header:first-child {
+  padding-top: var(--space4);
+}
+
+/* Unread state — bold title (badge/tint timestamp handle the rest) */
+.list-item--unread .list-item-title {
+  font-weight: 600;
+}
+
+/* Top-aligned variant — trailing at top-right (chat/notification rows) */
+.list-item--top {
+  align-items: flex-start;
+}
+
+.list-item--top .list-item-leading {
+  padding-top: var(--space2);
+}
+
+.list-item--top .list-item-trailing {
+  padding-top: var(--space2);
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space4);
+}
+
+/* Horizontal scroll list */
+.list-row {
+  display: flex;
+  gap: var(--space16);
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: var(--space4) 0;
+}
+
+.list-row::-webkit-scrollbar { display: none; }
+
+.list-row-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space8);
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: transform 0.25s var(--easeSpring);
+}
+
+.list-row-item:active {
+  transform: scale(0.95);
+}
+
+.list-row-label {
+  font-family: var(--fontBody);
+  font-size: var(--typeCaption2);
+  color: var(--label);
+  text-align: center;
+  max-width: 64px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Swipe reveal (static demo of swipe actions) */
+.list-swipe-reveal {
+  display: flex;
+  overflow: hidden;
+}
+
+.list-swipe-reveal > .list-item {
+  flex: 1;
+  min-width: 0;
+  border-radius: 0;
+}
+
+.list-swipe-actions {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.list-swipe-action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space4);
+  width: 80px;
+  border: none;
+  cursor: pointer;
+  color: var(--onLight);
+  text-shadow: var(--textShadowOnFill);
+  font-family: var(--fontBody);
+  font-size: var(--typeCaption2);
+  font-weight: 500;
+}
+
+.list-swipe-action svg {
+  width: 20px;
+  height: 20px;
+}
+
+.list-swipe-action--delete { background: var(--destructive); }
+.list-swipe-action--archive { background: var(--tint); }
+.list-swipe-action--more { background: var(--secondaryLabel); }
 
 /* ── Card Interactive ── */
 .card--interactive {

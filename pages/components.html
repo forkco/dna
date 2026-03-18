@@ -1120,6 +1120,8 @@
   <div class="section" id="list">
     <h2 class="section-title">List</h2>
 
+    <!-- ── Basic ── -->
+    <div class="demo-label">BASIC</div>
     <div class="list">
       <div class="list-item">
         <div class="list-item-leading"><div class="avatar avatar--md">AK</div></div>
@@ -1155,41 +1157,200 @@
       </div>
     </div>
 
-    <div class="spec-grid" style="margin-top: var(--space12);">
+    <!-- ── Sections & Unread ── -->
+    <div class="demo-label" style="margin-top: var(--space24);">SECTIONS &amp; UNREAD</div>
+    <div class="list-header">Today</div>
+    <div class="list">
+      <div class="list-item list-item--top list-item--unread">
+        <div class="list-item-leading"><div class="avatar avatar--md">AK</div></div>
+        <div class="list-item-content">
+          <div class="list-item-title">Anna Kim</div>
+          <div class="list-item-subtitle">Hey, check out the new prototype I just pushed — let me know what you think about the transitions</div>
+        </div>
+        <div class="list-item-trailing">
+          <span class="list-item-value" style="font-size: var(--typeCaption1); color: var(--tint);">2m</span>
+          <span class="badge">2</span>
+        </div>
+      </div>
+      <div class="list-item list-item--top list-item--unread">
+        <div class="list-item-leading"><div class="avatar avatar--md">DT</div></div>
+        <div class="list-item-content">
+          <div class="list-item-title">Design Team</div>
+          <div class="list-item-subtitle">Julia: New icons uploaded to the shared library, please review when you get a chance</div>
+        </div>
+        <div class="list-item-trailing">
+          <span class="list-item-value" style="font-size: var(--typeCaption1); color: var(--tint);">15m</span>
+        </div>
+      </div>
+      <div class="list-item list-item--top">
+        <div class="list-item-leading"><div class="avatar avatar--md">MR</div></div>
+        <div class="list-item-content">
+          <div class="list-item-title">Max Rivera</div>
+          <div class="list-item-subtitle">Thanks for the review</div>
+        </div>
+        <div class="list-item-trailing">
+          <span class="list-item-value" style="font-size: var(--typeCaption1);">1h</span>
+        </div>
+      </div>
+    </div>
+    <div class="list-header">Earlier</div>
+    <div class="list">
+      <div class="list-item list-item--top">
+        <div class="list-item-leading"><div class="avatar avatar--md">JK</div></div>
+        <div class="list-item-content">
+          <div class="list-item-title">Julia Kim</div>
+          <div class="list-item-subtitle">Meeting rescheduled to Thursday</div>
+        </div>
+        <div class="list-item-trailing">
+          <span class="list-item-value" style="font-size: var(--typeCaption1);">Yesterday</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Inline Actions ── -->
+    <div class="demo-label" style="margin-top: var(--space24);">INLINE ACTIONS</div>
+    <div class="list">
+      <div class="list-item">
+        <div class="list-item-leading"><div class="avatar avatar--md">SC</div></div>
+        <div class="list-item-content">
+          <div class="list-item-title">Sarah Chen</div>
+          <div class="list-item-subtitle">@sarah</div>
+        </div>
+        <div class="list-item-trailing"><button class="btn btn--primaryTinted btn--sm"><span class="btn-label">Follow</span></button></div>
+      </div>
+      <div class="list-item">
+        <div class="list-item-leading"><div class="avatar avatar--md">AL</div></div>
+        <div class="list-item-content">
+          <div class="list-item-title">Alex Lee</div>
+          <div class="list-item-subtitle">@alexl</div>
+        </div>
+        <div class="list-item-trailing"><button class="btn btn--secondary btn--sm"><span class="btn-label">Following</span></button></div>
+      </div>
+      <div class="list-item">
+        <div class="list-item-leading"><div class="avatar avatar--md">MR</div></div>
+        <div class="list-item-content">
+          <div class="list-item-title">Max Rivera</div>
+          <div class="list-item-subtitle">@maxr</div>
+        </div>
+        <div class="list-item-trailing"><button class="btn btn--primaryTinted btn--sm"><span class="btn-label">Follow</span></button></div>
+      </div>
+    </div>
+
+    <!-- ── Horizontal Scroll ── -->
+    <div class="demo-label" style="margin-top: var(--space24);">HORIZONTAL</div>
+    <div class="list-row">
+      <div class="list-row-item"><div class="avatar avatar--md">AK</div><span class="list-row-label">Anna</span></div>
+      <div class="list-row-item"><div class="avatar avatar--md">MR</div><span class="list-row-label">Max</span></div>
+      <div class="list-row-item"><div class="avatar avatar--md">JK</div><span class="list-row-label">Julia</span></div>
+      <div class="list-row-item"><div class="avatar avatar--md">SC</div><span class="list-row-label">Sarah</span></div>
+      <div class="list-row-item"><div class="avatar avatar--md">AL</div><span class="list-row-label">Alex</span></div>
+      <div class="list-row-item"><div class="avatar avatar--md">TW</div><span class="list-row-label">Tom</span></div>
+      <div class="list-row-item"><div class="avatar avatar--md">LM</div><span class="list-row-label">Lisa</span></div>
+      <div class="list-row-item"><div class="avatar avatar--md">DP</div><span class="list-row-label">Dan</span></div>
+    </div>
+
+    <!-- ── Swipe Actions ── -->
+    <div class="demo-label" style="margin-top: var(--space24);">SWIPE ACTIONS</div>
+    <div class="list" style="overflow: hidden;">
+      <div class="list-item list-item--top">
+        <div class="list-item-leading"><div class="avatar avatar--md">JK</div></div>
+        <div class="list-item-content">
+          <div class="list-item-title">Julia Kim</div>
+          <div class="list-item-subtitle">See you tomorrow!</div>
+        </div>
+        <div class="list-item-trailing"><span class="list-item-value" style="font-size: var(--typeCaption1);">3h</span></div>
+      </div>
+      <div class="list-swipe-reveal">
+        <div class="list-item list-item--top" style="flex: 1; min-width: 0;">
+          <div class="list-item-leading"><div class="avatar avatar--md">AK</div></div>
+          <div class="list-item-content">
+            <div class="list-item-title">Anna Kim</div>
+            <div class="list-item-subtitle">Sounds good, let me know</div>
+          </div>
+          <div class="list-item-trailing"><span class="list-item-value" style="font-size: var(--typeCaption1);">5h</span></div>
+        </div>
+        <div class="list-swipe-actions">
+          <button class="list-swipe-action list-swipe-action--more"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg>More</button>
+          <button class="list-swipe-action list-swipe-action--archive"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8V21H3V8"/><path d="M1 3h22v5H1z"/><path d="M10 12h4"/></svg>Archive</button>
+          <button class="list-swipe-action list-swipe-action--delete"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/></svg>Delete</button>
+        </div>
+      </div>
+      <div class="list-item list-item--top">
+        <div class="list-item-leading"><div class="avatar avatar--md">MR</div></div>
+        <div class="list-item-content">
+          <div class="list-item-title">Max Rivera</div>
+          <div class="list-item-subtitle">Thanks for the review</div>
+        </div>
+        <div class="list-item-trailing"><span class="list-item-value" style="font-size: var(--typeCaption1);">1d</span></div>
+      </div>
+    </div>
+
+    <!-- ── Specs ── -->
+    <div class="spec-grid" style="margin-top: var(--space24);">
       <div class="spec-card">
         <div class="spec-title">Dimensions</div>
         <div class="spec-row"><span class="spec-label">Min row height</span><span class="spec-val">44pt (tap target)</span></div>
-        <div class="spec-row"><span class="spec-label">Padding</span><span class="spec-val">12pt × 24pt</span></div>
-        <div class="spec-row"><span class="spec-label">Gap (leading)</span><span class="spec-val">12pt</span></div>
-        <div class="spec-row"><span class="spec-label">Container radius</span><span class="spec-val">radius14</span></div>
+        <div class="spec-row"><span class="spec-label">Padding</span><span class="spec-val">space12 × space16</span></div>
+        <div class="spec-row"><span class="spec-label">Gap (leading)</span><span class="spec-val">space12</span></div>
+        <div class="spec-row"><span class="spec-label">Container</span><span class="spec-val">secondarySystemGroupedBackground · radius14 · 1px border</span></div>
         <div class="spec-row"><span class="spec-label">Separator</span><span class="spec-val">1px separator (between items)</span></div>
       </div>
       <div class="spec-card">
         <div class="spec-title">Typography</div>
-        <div class="spec-row"><span class="spec-label">Title</span><span class="spec-val">subheadline (16px) regular</span></div>
-        <div class="spec-row"><span class="spec-label">Subtitle</span><span class="spec-val">caption1 (13px) secondaryLabel</span></div>
-        <div class="spec-row"><span class="spec-label">Value</span><span class="spec-val">subheadline secondaryLabel</span></div>
+        <div class="spec-row"><span class="spec-label">Title</span><span class="spec-val">subheadline (16px) · 400 · label</span></div>
+        <div class="spec-row"><span class="spec-label">Title (unread)</span><span class="spec-val">subheadline (16px) · 600 · label</span></div>
+        <div class="spec-row"><span class="spec-label">Subtitle</span><span class="spec-val">caption1 (13px) · secondaryLabel · 2-line clamp</span></div>
+        <div class="spec-row"><span class="spec-label">Value</span><span class="spec-val">subheadline · secondaryLabel</span></div>
+        <div class="spec-row"><span class="spec-label">Section header</span><span class="spec-val">overline (11px) · mono · 600 · uppercase · secondaryLabel</span></div>
         <div class="spec-row"><span class="spec-label">Destructive</span><span class="spec-val">destructive color on title</span></div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-title">Unread State</div>
+        <div class="spec-row"><span class="spec-label">Title weight</span><span class="spec-val">600 (semibold)</span></div>
+        <div class="spec-row"><span class="spec-label">Timestamp</span><span class="spec-val">tint color (optional, for emphasis)</span></div>
+        <div class="spec-row"><span class="spec-label">Badge</span><span class="spec-val">counter in trailing (optional)</span></div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-title">Horizontal</div>
+        <div class="spec-row"><span class="spec-label">Gap</span><span class="spec-val">space16</span></div>
+        <div class="spec-row"><span class="spec-label">Scroll</span><span class="spec-val">horizontal, hidden scrollbar</span></div>
+        <div class="spec-row"><span class="spec-label">Label</span><span class="spec-val">caption2 (12px) · label · max 64px · ellipsis</span></div>
+        <div class="spec-row"><span class="spec-label">Active</span><span class="spec-val">scale(0.95) · easeSpring</span></div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-title">Swipe Actions</div>
+        <div class="spec-row"><span class="spec-label">Action width</span><span class="spec-val">80px per action</span></div>
+        <div class="spec-row"><span class="spec-label">Icon</span><span class="spec-val">20 × 20 · onLight</span></div>
+        <div class="spec-row"><span class="spec-label">Label</span><span class="spec-val">caption2 (12px) · 500 · onLight</span></div>
+        <div class="spec-row"><span class="spec-label">Delete</span><span class="spec-val">destructive background</span></div>
+        <div class="spec-row"><span class="spec-label">Archive</span><span class="spec-val">tint background</span></div>
+        <div class="spec-row"><span class="spec-label">More</span><span class="spec-val">secondaryLabel background</span></div>
+        <div class="spec-row"><span class="spec-label">Full swipe</span><span class="spec-val">triggers trailing-most action (usually delete)</span></div>
       </div>
     </div>
 
     <div class="usage">
       <div class="usage-title">When to use</div>
       <ul class="usage-list">
-        <li><span class="token">.list</span><span class="dash">/</span>Grouped rows — settings, contacts, conversations, notifications. Rounded container with separator dividers.</li>
-        <li><span class="token">.list-item-leading</span><span class="dash">/</span>Avatar, icon, or thumbnail on the left. Flex-shrink prevents content collapse.</li>
-        <li><span class="token">.list-item-trailing</span><span class="dash">/</span>Badge, chevron, switch, or timestamp on the right. Secondary information or actions.</li>
+        <li><span class="token">.list</span><span class="dash">/</span>Grouped vertical rows — settings, contacts, conversations, notifications. Rounded container with separator dividers.</li>
+        <li><span class="token">.list-header</span><span class="dash">/</span>Section label between <code class="code-inline">.list</code> groups. Overline style (mono, uppercase). Use for temporal ("Today", "Earlier") or alphabetical grouping.</li>
+        <li><span class="token">.list-item--unread</span><span class="dash">/</span>Unread/new state — bold title + tint timestamp. Badge in trailing for count. Combine with <code class="code-inline">.list-item--top</code> for chat/notification rows.</li>
+        <li><span class="token">.list-item--top</span><span class="dash">/</span>Top-aligned layout — trailing slot becomes column (timestamp top, badge below). Use for rows with multi-line subtitle where meta should align with title.</li>
         <li><span class="token">.list-item--destructive</span><span class="dash">/</span>Danger actions — delete, leave, remove. Red title, typically no leading element.</li>
+        <li><span class="token">.list-row</span><span class="dash">/</span>Horizontal scroll container — stories, suggested friends, categories. Items are <code class="code-inline">.list-row-item</code> with avatar/icon + label below.</li>
+        <li><span class="token">.list-swipe-reveal</span><span class="dash">/</span>Swipe action reveal — trailing actions behind the row. Trailing-most action is the full-swipe target. Max 3 actions.</li>
+        <li><strong>Inline actions:</strong> buttons in <code class="code-inline">.list-item-trailing</code> — use existing <code class="code-inline">.btn--sm</code>. For Follow/Unfollow, toggle between <code class="code-inline">.btn--primaryTinted</code> and <code class="code-inline">.btn--secondary</code>.</li>
+        <li><strong>Subtitle truncation:</strong> all subtitles auto-clamp to 2 lines with ellipsis. No modifier needed — it's the default behavior.</li>
       </ul>
     </div>
     <div class="usage">
       <div class="usage-title">Platform notes</div>
       <ul class="usage-list">
-        <li><span class="tag tag--ios">iOS</span> <code class="code-inline">List { ForEach(...) }</code> with <code class="code-inline">.listStyle(.insetGrouped)</code>. Swipe actions via <code class="code-inline">.swipeActions()</code>.</li>
-        <li><span class="tag tag--ios">iOS</span> Use <code class="code-inline">.listRowSeparatorTint(.separator)</code> for consistent separator color with the design language.</li>
-        <li><span class="tag tag--web">Web</span> <code class="code-inline">&lt;div class="list"&gt;&lt;div class="list-item"&gt;...&lt;/div&gt;...&lt;/div&gt;</code>. Hover and active states via CSS. No JS needed for basic lists.</li>
-        <li><span class="tag tag--android">Android</span> <code class="code-inline">LazyColumn</code> with custom <code class="code-inline">ListItem</code> composables. Map separators to <code class="code-inline">Divider</code> with FORK separator token color.</li>
-        <li><span class="tag tag--all">All</span> Minimum 44pt row height ensures comfortable tap targets. Never reduce below this threshold.</li>
+        <li><span class="tag tag--ios">iOS</span> <code class="code-inline">List { ForEach(...) }</code> with <code class="code-inline">.listStyle(.insetGrouped)</code>. Section headers: <code class="code-inline">Section(header:)</code>. Swipe via <code class="code-inline">.swipeActions(edge:)</code> — leading for archive, trailing for delete. Use <code class="code-inline">.listRowSeparatorTint(.separator)</code>.</li>
+        <li><span class="tag tag--ios">iOS</span> Unread: <code class="code-inline">.fontWeight(.semibold)</code> on title + tint color on timestamp. No dot — badge count and bold title are sufficient signals.</li>
+        <li><span class="tag tag--android">Android</span> <code class="code-inline">LazyColumn</code> with <code class="code-inline">ListItem</code> composables. Section headers: sticky headers via <code class="code-inline">stickyHeader { }</code>. Swipe: <code class="code-inline">SwipeToDismiss</code> with custom background. Separators: <code class="code-inline">Divider</code>.</li>
+        <li><span class="tag tag--web">Web</span> <code class="code-inline">&lt;div class="list"&gt;</code> wrapper + <code class="code-inline">.list-item</code> rows. Hover/active via CSS. Swipe not native on Web — use touch events or show actions on hover/long-press as fallback. Horizontal scroll via <code class="code-inline">overflow-x: auto</code>.</li>
+        <li><span class="tag tag--all">All</span> 44pt minimum row height is non-negotiable. Subtitle clamps at 2 lines. Swipe actions: max 3 per side, 80pt each, trailing-most is the full-swipe target. Horizontal list must show peek of next item to signal scrollability.</li>
       </ul>
     </div>
   </div>
