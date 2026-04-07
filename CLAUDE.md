@@ -16,7 +16,7 @@ Cross-platform design language for the FORK product family (iOS + Android + Web)
 │   ├── layout.html         ← Shadows, spacing & radius, concentric corner radius
 │   ├── components.html     ← Button, input, markdown
 │   ├── messages.html       ← Chat + terminal side by side: input, output, rich content, agent, sessions
-│   ├── typography.html     ← Display / Besley, body / Figtree, mono / IBM Plex
+│   ├── typography.html     ← Inter type scale, mono / IBM Plex
 │   ├── visual-direction.html ← Liquid glass, glass + dot, dot pattern
 │   ├── motion.html         ← Motion tokens
 │   └── reference.html      ← All tokens table (auto-generated)
@@ -52,9 +52,9 @@ Cross-platform design language for the FORK product family (iOS + Android + Web)
 
 - Open: `open index.html`
 - Toggle theme: switch in top-right corner
-- Swap tint: dot picker in header (Orange, Coral, Indigo, Teal, Amber)
+- Swap tint: dot picker in header (Cobalt, Orange, Coral, Indigo, Teal, Amber)
 - Light base: `#1A1A18` / `#FFFFFF` — Dark base: `#F5F5F2` / `#1A1A18`
-- Brand tint: `#E86420` (light) / `#F07030` (dark)
-- Fonts: `--fontDisplay` (Besley), `--fontBody` (Figtree), `--fontMono` (IBM Plex Mono)
-- Type scale sizes: `--typeXlTitle2` (42px) through `--typeOverline` (11px) — always use `var(--type*)` instead of raw px
-- Body default: Figtree `var(--typeFootnote)` (14px) — all font sizes reference the type scale tokens
+- Brand tint: `#1868D8` (light) / `#4890FF` (dark)
+- Fonts: `--fontText` (Inter), `--fontMono` (IBM Plex Mono)
+- Type scale sizes: `--typeXlTitle2` (42px) through `--typeCaption2` (12px) — always use `var(--type*)` instead of raw px
+- Body default: Inter `var(--typeFootnote)` (14px) — all font sizes reference the type scale tokens

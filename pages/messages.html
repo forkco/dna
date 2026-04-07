@@ -7,7 +7,7 @@
 <meta name="description" content="FORK message patterns: text, widgets, attachments, and input — chat and terminal side by side.">
 <meta name="theme-color" content="#F5F5F2" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#1A1A18" media="(prefers-color-scheme: dark)">
-<link href="https://fonts.googleapis.com/css2?family=Besley:ital,wght@0,400..900;1,400..900&family=Figtree:ital,wght@0,300..700;1,300..700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300..700;1,300..700&family=IBM+Plex+Mono:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../styles.css">
 <script>(function(){var t=localStorage.getItem('te-theme');if(!t){t=window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'}document.documentElement.setAttribute('data-theme',t)})()</script>
 </head>
@@ -238,12 +238,12 @@
       <table class="spec-table" style="margin: var(--space8) 0 var(--space4); font-size: var(--typeCaption1);">
         <thead><tr><th>Component</th><th>Terminal</th><th>Chat</th></tr></thead>
         <tbody>
-          <tr><td>Fold summary</td><td>fontMono / typeCode</td><td>fontBody / caption1</td></tr>
-          <tr><td>Steps</td><td>fontMono / typeCode</td><td>fontBody / caption1</td></tr>
-          <tr><td>Options</td><td>fontMono / typeCode</td><td>fontBody / caption1</td></tr>
-          <tr><td>Changeset</td><td>fontMono / typeCode</td><td>fontBody / caption1</td></tr>
-          <tr><td>Activity card</td><td>fontMono / typeCode</td><td>fontBody / caption1</td></tr>
-          <tr><td>Pill (attach-artifact)</td><td>fontMono / r0</td><td>fontBody / r10</td></tr>
+          <tr><td>Fold summary</td><td>fontMono / typeCode</td><td>fontText / caption1</td></tr>
+          <tr><td>Steps</td><td>fontMono / typeCode</td><td>fontText / caption1</td></tr>
+          <tr><td>Options</td><td>fontMono / typeCode</td><td>fontText / caption1</td></tr>
+          <tr><td>Changeset</td><td>fontMono / typeCode</td><td>fontText / caption1</td></tr>
+          <tr><td>Activity card</td><td>fontMono / typeCode</td><td>fontText / caption1</td></tr>
+          <tr><td>Pill (attach-artifact)</td><td>fontMono / r0</td><td>fontText / r10</td></tr>
           <tr><td>Changeset radius</td><td>radius12</td><td>radius14</td></tr>
           <tr><td>Activity radius</td><td>radius12</td><td>radius14</td></tr>
           <tr><td>Standalone code block (.term-block)</td><td>radius10</td><td>radius14</td></tr>
@@ -357,7 +357,7 @@
         <div class="spec-row"><span class="spec-label">Container max</span><span class="spec-val">320px</span></div>
         <div class="spec-row"><span class="spec-label">Pill width</span><span class="spec-val">fit-content (agent flat) / stretch (inside bubble)</span></div>
         <div class="spec-row"><span class="spec-label">Pill radius</span><span class="spec-val">radius10 (chat) / radius20 (large artifact) / 0 (terminal)</span></div>
-        <div class="spec-row"><span class="spec-label">Font</span><span class="spec-val">fontBody (chat) / fontMono (terminal)</span></div>
+        <div class="spec-row"><span class="spec-label">Font</span><span class="spec-val">fontText (chat) / fontMono (terminal)</span></div>
       </div>
       <div class="spec-card">
         <div class="spec-title">Agent (flat)</div>
@@ -531,7 +531,7 @@
     <div class="spec-grid">
       <div class="spec-card">
         <div class="spec-title">Chat Bubble</div>
-        <div class="spec-row"><span class="spec-label">Font</span><span class="spec-val">Figtree 17px (callout)</span></div>
+        <div class="spec-row"><span class="spec-label">Font</span><span class="spec-val">Inter 17px (body)</span></div>
         <div class="spec-row"><span class="spec-label">Padding</span><span class="spec-val">space12 × space16 (12px × 16px)</span></div>
         <div class="spec-row"><span class="spec-label">Radius</span><span class="spec-val">chatBubbleRadius (18px)</span></div>
         <div class="spec-row"><span class="spec-label">Tail</span><span class="spec-val">chatTailRadius (6px)</span></div>
@@ -585,7 +585,7 @@
       </div>
       <div class="spec-card">
         <div class="spec-title">System Message</div>
-        <div class="spec-row"><span class="spec-label">Font</span><span class="spec-val">fontBody · caption1 (13px)</span></div>
+        <div class="spec-row"><span class="spec-label">Font</span><span class="spec-val">fontText · caption1 (13px)</span></div>
         <div class="spec-row"><span class="spec-label">Color</span><span class="spec-val">secondaryLabel</span></div>
         <div class="spec-row"><span class="spec-label">Alignment</span><span class="spec-val">center</span></div>
         <div class="spec-row"><span class="spec-label">Background</span><span class="spec-val">transparent</span></div>
@@ -750,7 +750,7 @@
     <div class="spec-grid">
       <div class="spec-card">
         <div class="spec-title">Chat Prose</div>
-        <div class="spec-row"><span class="spec-label">Font</span><span class="spec-val">Figtree 17px (callout)</span></div>
+        <div class="spec-row"><span class="spec-label">Font</span><span class="spec-val">Inter 17px (body)</span></div>
         <div class="spec-row"><span class="spec-label">Inside bubble</span><span class="spec-val">transparent bg, 0 padding reset</span></div>
         <div class="spec-row"><span class="spec-label">Any sender</span><span class="spec-val">agent, user, peer — all can send prose</span></div>
         <div class="spec-row"><span class="spec-label">Streaming</span><span class="spec-val">.is-streaming → solid tint cursor via ::after</span></div>
@@ -778,10 +778,10 @@
     <div class="usage">
       <div class="usage-title">Platform notes</div>
       <ul class="usage-list">
-        <li><span class="tag tag--ios">iOS</span> Chat: <code class="code-inline">AttributedString(markdown:)</code> with Figtree. Terminal: IBM Plex Mono throughout, bold=600.</li>
-        <li><span class="tag tag--android">Android</span> Chat: <code class="code-inline">AnnotatedString</code> with markdown parser, Satoshi body font. Terminal: IBM Plex Mono throughout, bold=600.</li>
+        <li><span class="tag tag--ios">iOS</span> Chat: <code class="code-inline">AttributedString(markdown:)</code> with Inter. Terminal: IBM Plex Mono throughout, bold=600.</li>
+        <li><span class="tag tag--android">Android</span> Chat: <code class="code-inline">AnnotatedString</code> with markdown parser, Inter body font. Terminal: IBM Plex Mono throughout, bold=600.</li>
         <li><span class="tag tag--web">Web</span> Chat: <code class="code-inline">.prose</code> resets inside bubble. Terminal: <code class="code-inline">.term-prose</code> inherits <code class="code-inline">var(--fontMono)</code>.</li>
-        <li><span class="tag tag--all">All</span> Chat = mixed fonts (Figtree + Plex code). Terminal = mono only. Hierarchy via weight, not typeface.</li>
+        <li><span class="tag tag--all">All</span> Chat = mixed fonts (Inter + Plex code). Terminal = mono only. Hierarchy via weight, not typeface.</li>
       </ul>
     </div>
   </div>
@@ -868,7 +868,7 @@
             <div class="term-block">
               <button class="term-block-copy" aria-label="Copy block"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
               <div class="term-line term-diff-hunk">@@ -93,6 +93,7 @@ :root {</div>
-              <div class="term-line">   --tint: #E86420;</div>
+              <div class="term-line">   --tint: #1868D8;</div>
               <div class="term-line term-diff-del">-  --tintOrange: #E86420;</div>
               <div class="term-line term-diff-add">+  --tintOrange: #F07030;</div>
               <div class="term-line term-diff-add">+  --tintSunrise: #FF8C42;</div>
@@ -1169,7 +1169,7 @@
       <div class="spec-card">
         <div class="spec-title">Fold</div>
         <div class="spec-row"><span class="spec-label">Element</span><span class="spec-val">&lt;details class="term-fold"&gt;</span></div>
-        <div class="spec-row"><span class="spec-label">Summary font</span><span class="spec-val">fontMono · typeCode (terminal) / fontBody · caption1 (chat)</span></div>
+        <div class="spec-row"><span class="spec-label">Summary font</span><span class="spec-val">fontMono · typeCode (terminal) / fontText · caption1 (chat)</span></div>
         <div class="spec-row"><span class="spec-label">Body font</span><span class="spec-val">fontMono · typeCode (always — code output)</span></div>
         <div class="spec-row"><span class="spec-label">Min-height</span><span class="spec-val">32px (full-width row — tap target met by width)</span></div>
         <div class="spec-row"><span class="spec-label">Default</span><span class="spec-val">collapsed</span></div>
@@ -1272,7 +1272,7 @@
     <div class="spec-grid">
       <div class="spec-card">
         <div class="spec-title">Step States</div>
-        <div class="spec-row"><span class="spec-label">Font</span><span class="spec-val">fontMono · typeCode (terminal) / fontBody · caption1 (chat)</span></div>
+        <div class="spec-row"><span class="spec-label">Font</span><span class="spec-val">fontMono · typeCode (terminal) / fontText · caption1 (chat)</span></div>
         <div class="spec-row"><span class="spec-label">Pending</span><span class="spec-val">○ tertiaryLabel</span></div>
         <div class="spec-row"><span class="spec-label">Active</span><span class="spec-val">◉ tint / label</span></div>
         <div class="spec-row"><span class="spec-label">Done</span><span class="spec-val">✓ success / secondaryLabel</span></div>
@@ -1371,7 +1371,7 @@
     <div class="spec-grid">
       <div class="spec-card">
         <div class="spec-title">Option Item</div>
-        <div class="spec-row"><span class="spec-label">Font</span><span class="spec-val">fontMono · typeCode (terminal) / fontBody · caption1 (chat)</span></div>
+        <div class="spec-row"><span class="spec-label">Font</span><span class="spec-val">fontMono · typeCode (terminal) / fontText · caption1 (chat)</span></div>
         <div class="spec-row"><span class="spec-label">Min height</span><span class="spec-val">44px</span></div>
         <div class="spec-row"><span class="spec-label">Background</span><span class="spec-val">tertiarySystemFill</span></div>
         <div class="spec-row"><span class="spec-label">Radius</span><span class="spec-val">radius10 (chat) / 0 (terminal)</span></div>
@@ -1383,7 +1383,7 @@
         <div class="spec-title">Options Prompt</div>
         <div class="spec-row"><span class="spec-label">Element</span><span class="spec-val">.term-options-prompt</span></div>
         <div class="spec-row"><span class="spec-label">Font (terminal)</span><span class="spec-val">fontMono · typeCode</span></div>
-        <div class="spec-row"><span class="spec-label">Font (chat)</span><span class="spec-val">fontBody · footnote · 600 — only if options appear without a preceding bubble (rare). Normally the bubble text serves as the prompt and .term-options-prompt is omitted.</span></div>
+        <div class="spec-row"><span class="spec-label">Font (chat)</span><span class="spec-val">fontText · footnote · 600 — only if options appear without a preceding bubble (rare). Normally the bubble text serves as the prompt and .term-options-prompt is omitted.</span></div>
         <div class="spec-row"><span class="spec-label">Visibility</span><span class="spec-val">Terminal: always present — terminal has no bubble, so the options prompt provides the question context. Chat: omitted when bubble text serves as prompt (typical); shown only when options widget appears without a preceding bubble.</span></div>
       </div>
     </div>
@@ -1471,8 +1471,8 @@
         <div class="spec-row"><span class="spec-label">Padding</span><span class="spec-val">space12</span></div>
         <div class="spec-row"><span class="spec-label">Max width</span><span class="spec-val">320px</span></div>
         <div class="spec-row"><span class="spec-label">Icon</span><span class="spec-val">40px · radius10 · systemFill bg</span></div>
-        <div class="spec-row"><span class="spec-label">Title</span><span class="spec-val">fontBody · caption1 · 600</span></div>
-        <div class="spec-row"><span class="spec-label">Description</span><span class="spec-val">fontBody · caption2 · secondaryLabel</span></div>
+        <div class="spec-row"><span class="spec-label">Title</span><span class="spec-val">fontText · caption1 · 600</span></div>
+        <div class="spec-row"><span class="spec-label">Description</span><span class="spec-val">fontText · caption2 · secondaryLabel</span></div>
         <div class="spec-row"><span class="spec-label">Domain</span><span class="spec-val">fontMono · overline · tertiaryLabel</span></div>
         <div class="spec-row"><span class="spec-label">Hover</span><span class="spec-val">translateY(-1px) + shadowSmall</span></div>
       </div>
@@ -1559,7 +1559,7 @@
         <div class="spec-row"><span class="spec-label">Radius</span><span class="spec-val">radius14 (chat) / radius12 (terminal)</span></div>
         <div class="spec-row"><span class="spec-label">Padding</span><span class="spec-val">space12 × space16</span></div>
         <div class="spec-row"><span class="spec-label">Background</span><span class="spec-val">tertiarySystemFill</span></div>
-        <div class="spec-row"><span class="spec-label">Font</span><span class="spec-val">fontMono (terminal) / fontBody (chat)</span></div>
+        <div class="spec-row"><span class="spec-label">Font</span><span class="spec-val">fontMono (terminal) / fontText (chat)</span></div>
         <div class="spec-row"><span class="spec-label">Commit ID</span><span class="spec-val">tint · caption2 · 600</span></div>
         <div class="spec-row"><span class="spec-label">Message</span><span class="spec-val">label · caption1 · 600</span></div>
         <div class="spec-row"><span class="spec-label">Sequence</span><span class="spec-val">tertiaryLabel · caption2 · right-aligned</span></div>
@@ -1584,7 +1584,7 @@
         <li><span class="tag tag--ios">iOS</span> <code class="code-inline">VStack</code> with mono font throughout. Tap navigates to diff viewer.</li>
         <li><span class="tag tag--android">Android</span> <code class="code-inline">Column</code> inside <code class="code-inline">Surface(shape = RoundedCornerShape(12.dp))</code>. Mono font.</li>
         <li><span class="tag tag--web">Web</span> <code class="code-inline">.term-changeset</code> base radius12; <code class="code-inline">.chat-demo .term-changeset</code> overrides to radius14. Same component, context-aware radius.</li>
-        <li><span class="tag tag--all">All</span> Terminal: mono font throughout. Chat: fontBody (caption1) for readability — only fold bodies retain mono. Radius14 in chat (concentric with bubble), radius12 in terminal.</li>
+        <li><span class="tag tag--all">All</span> Terminal: mono font throughout. Chat: fontText (caption1) for readability — only fold bodies retain mono. Radius14 in chat (concentric with bubble), radius12 in terminal.</li>
       </ul>
     </div>
   </div>
@@ -1653,7 +1653,7 @@
         <div class="spec-row"><span class="spec-label">Max width</span><span class="spec-val">320px</span></div>
         <div class="spec-row"><span class="spec-label">Preview height</span><span class="spec-val">160px · tertiarySystemBackground</span></div>
         <div class="spec-row"><span class="spec-label">Footer padding</span><span class="spec-val">space12</span></div>
-        <div class="spec-row"><span class="spec-label">Name</span><span class="spec-val">fontBody · caption1 · 600</span></div>
+        <div class="spec-row"><span class="spec-label">Name</span><span class="spec-val">fontText · caption1 · 600</span></div>
         <div class="spec-row"><span class="spec-label">Meta</span><span class="spec-val">fontMono · overline · tertiaryLabel</span></div>
         <div class="spec-row"><span class="spec-label">Hover</span><span class="spec-val">translateY(-1px) + shadowSmall</span></div>
       </div>
@@ -1766,7 +1766,7 @@
         <div class="spec-row"><span class="spec-label">Radius</span><span class="spec-val">radius14 (chat) / radius12 (terminal)</span></div>
         <div class="spec-row"><span class="spec-label">Padding</span><span class="spec-val">space12 × space16</span></div>
         <div class="spec-row"><span class="spec-label">Background</span><span class="spec-val">tertiarySystemFill</span></div>
-        <div class="spec-row"><span class="spec-label">Font</span><span class="spec-val">fontMono (terminal) / fontBody (chat)</span></div>
+        <div class="spec-row"><span class="spec-label">Font</span><span class="spec-val">fontMono (terminal) / fontText (chat)</span></div>
         <div class="spec-row"><span class="spec-label">Icon</span><span class="spec-val">32px · radius6 · tint bg · onLight</span></div>
         <div class="spec-row"><span class="spec-label">Title</span><span class="spec-val">label · caption1 · 600</span></div>
         <div class="spec-row"><span class="spec-label">Status</span><span class="spec-val">secondaryLabel · caption1</span></div>
@@ -1791,7 +1791,7 @@
         <li><span class="tag tag--ios">iOS</span> Card: <code class="code-inline">HStack</code> with icon + body + badge. Progress: <code class="code-inline">ProgressView</code> with custom tint style.</li>
         <li><span class="tag tag--android">Android</span> Card: <code class="code-inline">Row</code> composable. Progress: <code class="code-inline">LinearProgressIndicator</code> with <code class="code-inline">animateFloatAsState</code>.</li>
         <li><span class="tag tag--web">Web</span> <code class="code-inline">.term-activity</code> flex row. Bar width via inline <code class="code-inline">style</code>, transitions with <code class="code-inline">easeFluent 0.4s</code>.</li>
-        <li><span class="tag tag--all">All</span> Terminal: mono font throughout. Chat: fontBody (caption1) for readability. Radius14 in chat (concentric with bubble), radius12 in terminal. Icon optional. Progress updates in-place — no re-render flicker.</li>
+        <li><span class="tag tag--all">All</span> Terminal: mono font throughout. Chat: fontText (caption1) for readability. Radius14 in chat (concentric with bubble), radius12 in terminal. Icon optional. Progress updates in-place — no re-render flicker.</li>
       </ul>
     </div>
   </div>
@@ -2131,7 +2131,7 @@
     <div class="spec-grid">
       <div class="spec-card">
         <div class="spec-title">Chat Banner</div>
-        <div class="spec-row"><span class="spec-label">Font</span><span class="spec-val">fontBody · caption1 (13px) · 500</span></div>
+        <div class="spec-row"><span class="spec-label">Font</span><span class="spec-val">fontText · caption1 (13px) · 500</span></div>
         <div class="spec-row"><span class="spec-label">Text color</span><span class="spec-val">label (not semantic — warning fails WCAG on light)</span></div>
         <div class="spec-row"><span class="spec-label">Icon</span><span class="spec-val">16px · semantic color (destructive / warning / link)</span></div>
         <div class="spec-row"><span class="spec-label">CTA label</span><span class="spec-val">tint · 600 weight · optional</span></div>
@@ -2315,7 +2315,7 @@
       <div class="usage-title">When to use</div>
       <ul class="usage-list">
         <li><span class="token">.chat-attach-media</span><span class="dash">/</span>Media carousel. Agent: full-width flat. Peer/user: inside bubble.</li>
-        <li><span class="token">.chat-attach-files</span><span class="dash">/</span>Vertical file pill list. Max 320px. Radius10 pills with fontBody.</li>
+        <li><span class="token">.chat-attach-files</span><span class="dash">/</span>Vertical file pill list. Max 320px. Radius10 pills with fontText.</li>
         <li><span class="token">.chat-msg-bubble--media</span><span class="dash">/</span>Single media bubble. Image edge-to-edge, text below with padding.</li>
         <li><span class="token">.chat-msg-bubble--media-scroll</span><span class="dash">/</span>Multi-media bubble. 70% thumb width, peek 30% of next.</li>
         <li><strong>Agent flat:</strong> media + files not inside bubble, scroll full chat width.</li>

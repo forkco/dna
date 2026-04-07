@@ -8,15 +8,16 @@ No frameworks, no build tools.
 | Key | Values | Purpose |
 |-----|--------|---------|
 | `te-theme` | `"light"` / `"dark"` | Persisted theme choice |
-| `te-tint` | Preset name (e.g. `"Orange"`) | Persisted tint choice |
+| `te-tint` | Preset name (e.g. `"Cobalt"`) | Persisted tint choice |
 
 ## Tint Picker System
 
-Five swappable brand tints. Each preset has light/dark hex pairs:
+Six swappable brand tints. Each preset has light/dark hex pairs:
 
 ```js
 const tintPresets = [
-  { name: 'Orange',  light: '#E86420', dark: '#F07030' },  // default
+  { name: 'Cobalt',  light: '#1868D8', dark: '#4890FF' },  // default
+  { name: 'Orange',  light: '#E86420', dark: '#F07030' },
   { name: 'Coral',   light: '#E05248', dark: '#F06060' },
   { name: 'Indigo',  light: '#5856D6', dark: '#7B79FF' },
   { name: 'Teal',    light: '#2CA898', dark: '#38C8B8' },

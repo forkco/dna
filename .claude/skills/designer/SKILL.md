@@ -42,7 +42,7 @@ Workflow:
 Examples of when to push back:
 
 - User asks for a decorative gradient → "Gradients in FORK follow a light model. What depth or hierarchy are you trying to create? Options: (A) use `--shadowMedium` for elevation, (B) use a fill token for subtle layering, (C) if you really need a gradient, tie it to the glass specular pattern."
-- User asks for a new font → "The type system is locked to three families with strict roles. Adding a fourth fragments hierarchy. What's missing? If it's a display need, Besley covers it at 700. If it's a data/label need, IBM Plex Mono handles it."
+- User asks for a new font → "The type system is locked to two families with strict roles. Adding a third fragments hierarchy. What's missing? If it's a display or body need, Inter covers it at 300–700. If it's a data/label need, IBM Plex Mono handles it."
 - User wants pure black text → "FORK uses warm neutrals (#1A1A18, not #000). Pure black creates harsh contrast on warm backgrounds. The warmth is intentional — it's core DNA from the Braun influence."
 
 ### When to yield
@@ -71,18 +71,17 @@ Think like a design systems engineer: tokens are the API, consistency is the pro
 
 ## Design DNA
 
-FORK's aesthetic sits at the intersection of four traditions:
+FORK's aesthetic sits at the intersection of three traditions:
 
 | Influence | What we take | How it shows up |
 |-----------|-------------|-----------------|
 | **Braun / Dieter Rams** | Reduction without coldness — "less but better" | Warm neutrals (#1A1A18, not #000), minimal decoration, every element earns its place |
 | **Apple HIG** | Material honesty, clarity, depth | Glass tiers that behave like real materials, shadows cast by actual light, semantic color |
-| **Teenage Engineering** | Playful precision, engineered boldness | Mono overline labels, dot grid texture, orange tint, unapologetic personality |
 | **Industrial design** | Tactility, physics in the interface | Spring motion, rubber banding, haptic feedback, surfaces you want to touch |
 
 ### Core rules
 
-- **Typography is structure** — type creates hierarchy, not decoration. Besley bold commands, Figtree regular recedes, Mono labels. Never reverse these roles.
+- **Typography is structure** — type creates hierarchy, not decoration. Inter bold commands, Inter regular recedes. Hierarchy through weight and size, not font family.
 - **Contrast is meaning** — visual weight directs attention. One focal point per section. If everything is bold, nothing is.
 - **Color is semantic** — every color communicates something. No decorative color. `--tint` = brand action, `--destructive` = danger, `--success` = confirmation.
 - **Whitespace is content** — spacing tokens exist to be used. Generous padding signals confidence, cramped layouts signal uncertainty.
@@ -143,7 +142,7 @@ pages/
   layout.html      — Shadows, spacing & radius, concentric corner radius
   components.html  — Button, input, switch, dropdown, avatar, badge, tag, tabs, list, card, modal, empty state, skeleton, markdown, dot indicator, progress bar, chrome bar
   messages.html    — Chat + terminal side by side: input, output, rich content, agent patterns, sessions
-  typography.html  — Display / Besley, body / Figtree, mono / IBM Plex
+  typography.html  — Display / Inter, body / Inter, mono / IBM Plex
   visual-direction.html — Liquid glass, glass + dot, dot pattern
   motion.html      — Spring presets, press/release, dot states
   reference.html   — Auto-generated all-tokens table
@@ -181,7 +180,7 @@ Warm neutral palette — **never pure gray**.
 
 - Light base: `#1A1A18` (labels), `#FFFFFF` (backgrounds)
 - Dark base: `#F5F5F2` (labels), `#1A1A18` (backgrounds)
-- Brand tint: `#E86420` (light) / `#F07030` (dark)
+- Brand tint: `#1868D8` (light) / `#4890FF` (dark)
 
 All alpha-based fills use `rgba()` with the base color, not separate gray values.
 
@@ -189,23 +188,21 @@ All alpha-based fills use `rgba()` with the base color, not separate gray values
 
 | Role | Web Family | Native Family | Source |
 |------|-----------|---------------|--------|
-| Display / Titles | Besley | Bespoke Serif | Google Fonts / Bundled |
-| Body / UI | Figtree | Satoshi | Google Fonts / Bundled |
+| Text (display + body) | Inter | Inter | Google Fonts / Bundled |
 | Code / Data | IBM Plex Mono | IBM Plex Mono | Google Fonts / Bundled |
 
-Web and native may use different display/body families optimized for their platform. IBM Plex Mono is shared.
+Inter is shared across Web and native. IBM Plex Mono is shared.
 
 ### Font Tokens
 
 Font families are tokenized as CSS custom properties:
 
 ```css
---fontDisplay: 'Besley', serif;     /* Titles, headings */
---fontBody: 'Figtree', sans-serif;  /* Body, UI, interactive */
---fontMono: 'IBM Plex Mono', monospace; /* Code, data, overline labels */
+--fontText: 'Inter', sans-serif;     /* All text — display, body, UI */
+--fontMono: 'IBM Plex Mono', monospace; /* Code, data */
 ```
 
-Always reference via `var(--fontDisplay)`, never raw family names. The body element defaults to `var(--fontBody)` at 14px.
+Always reference via `var(--fontText)`, never raw family names. The body element defaults to `var(--fontText)` at 14px.
 
 ### Type Scale Size Tokens
 
@@ -214,47 +211,42 @@ Font sizes are tokenized as CSS custom properties so component CSS references th
 ```css
 --typeXlTitle2: 42px;   --typeXlTitle: 36px;    --typeLargeTitle: 34px;
 --typeTitle1: 28px;     --typeTitle2: 22px;     --typeTitle3: 20px;
---typeHeadline: 17px;   --typeBody: 18px;       --typeCallout: 17px;
+--typeHeadline: 17px;   --typeBody: 17px;       --typeCallout: 16px;
 --typeSubheadline: 16px; --typeFootnote: 14px;  --typeCaption1: 13px;
---typeCaption2: 12px;   --typeCode: 14px;       --typeOverline: 11px;
+--typeCaption2: 12px;   --typeCode: 14px;
 ```
 
 Always use `font-size: var(--typeTitle3)` instead of `font-size: 20px`. Size tokens are theme-independent (defined once in `:root`).
 
-Note: `--typeHeadline` and `--typeCallout` share 17px but are semantically independent (Besley vs Figtree). Same for `--typeFootnote` and `--typeCode` at 14px.
+Note: `--typeHeadline` (17px/600) serves as emphasized body text — use it instead of a separate bodySemi token. `--typeFootnote` and `--typeCode` share 14px but are semantically independent.
 
-Overline at 11px is below the 12px body-text accessibility floor but remains legible due to UPPERCASE + wide letter-spacing + monospace — treat as a label-only exception, never for running text.
 
 ### Google Fonts Loading
 
 Single `<link>` tag, all families in one request:
 
 ```html
-<link href="https://fonts.googleapis.com/css2?family=Besley:ital,wght@0,400..900;1,400..900&family=Figtree:ital,wght@0,300..700;1,300..700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300..700;1,300..700&family=IBM+Plex+Mono:wght@400;600;700&display=swap" rel="stylesheet">
 ```
 
 ### Typography Scale (Web)
 
 | Token | Size | Weight | Line Height | Letter Spacing | Family |
 |-------|------|--------|-------------|----------------|--------|
-| xlTitle2 | 42px | 700 | 1.15 | -0.02em | Besley |
-| xlTitle | 36px | 700 | 1.15 | -0.02em | Besley |
-| largeTitle | 34px | 700 | 1.18 | -0.01em | Besley |
-| title1 | 28px | 700 | 1.21 | -0.01em | Besley |
-| title2 | 22px | 600 | 1.27 | 0 | Besley |
-| title3 | 20px | 600 | 1.30 | 0 | Besley |
-| headline | 17px | 600 | 1.35 | 0 | Besley |
-| body | 18px | 400 | 1.6 | 0 | Figtree |
-| bodySemi | 18px | 600 | 1.6 | 0 | Figtree |
-| callout | 17px | 400 | 1.5 | 0 | Figtree |
-| subheadline | 16px | 400 | 1.5 | 0.01em | Figtree |
-| footnote | 14px | 400 | 1.45 | 0.01em | Figtree |
-| caption1 | 13px | 400 | 1.4 | 0.01em | Figtree |
-| caption2 | 12px | 400 | 1.35 | 0.01em | Figtree |
-| code | 14px | 400 | 1.6 | 0 | IBM Plex Mono |
-| overline | 11px | 600 | 1.2 | 0.08em | IBM Plex Mono |
-
-Web body is 18px (vs native 17pt) for screen readability.
+| xlTitle2 | 42px | 700 | 1.15 | -0.01em | Inter |
+| xlTitle | 38px | 700 | 1.15 | -0.01em | Inter |
+| largeTitle | 34px | 700 | 1.18 | 0 | Inter |
+| title1 | 28px | 700 | 1.21 | 0 | Inter |
+| title2 | 22px | 600 | 1.27 | 0 | Inter |
+| title3 | 20px | 600 | 1.30 | 0 | Inter |
+| headline | 17px | 600 | 1.35 | 0 | Inter |
+| body | 17px | 400 | 1.5 | 0 | Inter |
+| callout | 16px | 400 | 1.5 | 0 | Inter |
+| subheadline | 16px | 500 | 1.5 | 0.01em | Inter |
+| footnote | 14px | 400 | 1.45 | 0.01em | Inter |
+| caption1 | 13px | 400 | 1.4 | 0.01em | Inter |
+| caption2 | 12px | 400 | 1.35 | 0.02em | Inter |
+| code | 14px | 400 | 1.5 | 0 | IBM Plex Mono |
 
 ## Section Structure
 
@@ -333,7 +325,7 @@ Tags vs badges: Tags are inline labels. Badges are notification dots/counters po
 
 ## Tint Picker
 
-The header contains a dynamic tint picker with 5 presets (Orange, Coral, Indigo, Teal, Amber).
+The header contains a dynamic tint picker with 6 presets (Cobalt, Orange, Coral, Indigo, Teal, Amber).
 Selecting a tint updates `--tint` and `--selection` globally. Choice persists in localStorage.
 
 To add a new preset, update the `tintPresets` array in `scripts.js`, add a CSS token, and add a
@@ -377,8 +369,8 @@ If a new token is truly justified (see Token Economy above), name it consistentl
 | `dot*` | Dot pattern states | `dotIdle`, `dotTap`, `dotField` |
 | `shadow*` | Elevation levels | `shadowSmall`, `shadowMedium`, `shadowLarge` |
 | `space*` / `radius*` | Spatial values (number = px) | `space8`, `radius12`, `radiusFull` |
-| `font*` | Typography families | `fontDisplay`, `fontBody`, `fontMono` |
-| `type*` | Typography scale sizes | `typeTitle1`, `typeBody`, `typeOverline` |
+| `font*` | Typography families | `fontText`, `fontMono` |
+| `type*` | Typography scale sizes | `typeTitle1`, `typeBody`, `typeCaption2` |
 | `textShadow*` | Text shadow on fills | `textShadowOnFill` |
 | `glass*` | Glass effect material | `glassSpecular`, `glassSpecularEdge`, `glassHighlight`, `glassShadow` |
 | `ease*` | Motion timing functions | `easeFluent`, `easeSpring`, `easeStandard` |
@@ -476,7 +468,7 @@ JavaScript lives in `scripts.js`, loaded by every page via `<script src="scripts
 
 Current interactions:
 - **Theme toggle** — switches `data-theme` on `<html>`, persists to `localStorage['te-theme']`
-- **Tint picker** — 5 preset tints, updates `--tint` + `--selection`, persists to `localStorage['te-tint']`
+- **Tint picker** — 6 preset tints, updates `--tint` + `--selection`, persists to `localStorage['te-tint']`
 - **Token resolution** — elements with `data-resolve="--tokenName"` auto-display resolved values
 - **Copy to clipboard** — click any swatch row → copies hex/rgba, shows toast
 - **All Tokens table** — generated from `allTokens` JS array, not hardcoded HTML
@@ -517,7 +509,7 @@ Mistakes that break the file silently:
 - **Broke Google Fonts URL** — it's one `<link>` with all families. Editing one family can kill all fonts.
 - **Specificity clash** — `[data-theme="dark"]` beats `:root`, but loses to inline styles set by tint picker (`setTint()` uses `root.style.setProperty`). Don't rely on `[data-theme]` for tint-affected tokens.
 - **Alpha stacking** — layering `--systemFill` on `--secondarySystemFill` compounds opacity. Fills go on solid backgrounds only.
-- **Hardcoded color** — using `#E86420` directly instead of `var(--tint)`. Breaks when user swaps tint preset.
+- **Hardcoded color** — using `#1868D8` directly instead of `var(--tint)`. Breaks when user swaps tint preset.
 - **Hardcoded position** — using `bottom: 72px` instead of flex/grid structure. Breaks when the adjacent element changes size. Related elements must be structural siblings, not absolute-positioned with magic numbers.
 - **Forgot safe area** — content or interactive elements under the notch / home indicator. On Web: missing `viewport-fit=cover` + `env(safe-area-inset-*)`. On iOS: ignoring `safeAreaLayoutGuide`.
 
@@ -526,7 +518,7 @@ Mistakes that break the file silently:
 Run through before considering any change done:
 
 - [ ] **Both themes** — toggle light/dark, check the changed section in both
-- [ ] **Tint swap** — switch to a non-default tint (Indigo is the best stress test), verify nothing assumes orange
+- [ ] **Tint swap** — switch to a non-default tint (Indigo is the best stress test), verify nothing assumes cobalt
 - [ ] **Token resolution** — `data-resolve` elements show correct values after the change
 - [ ] **Copy works** — click a swatch, confirm toast shows and clipboard has the value
 - [ ] **Sidebar** — new section has a link, scroll spy highlights it correctly

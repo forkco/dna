@@ -11,7 +11,7 @@
   color: var(--onLight);
   border-radius: var(--radius6);
   z-index: 200;
-  font-family: var(--fontBody);
+  font-family: var(--fontText);
   font-size: var(--typeFootnote);
   font-weight: 600;
   text-decoration: none;
@@ -90,7 +90,7 @@
   --onDark: #1A1A18;
 
   /* Tint */
-  --tint: #E86420;
+  --tint: #1868D8;
 
   /* Tint Alternatives */
   --tintOrange: #E86420;
@@ -164,26 +164,24 @@
   --easeStandard: cubic-bezier(0.4, 0, 0.2, 1);
 
   /* Typography — font families */
-  --fontDisplay: 'Besley', serif;
-  --fontBody: 'Figtree', sans-serif;
+  --fontText: 'Inter', sans-serif;
   --fontMono: 'IBM Plex Mono', monospace;
 
   /* Typography Scale — sizes (single source of truth for the type scale) */
   --typeXlTitle2: 42px;
-  --typeXlTitle: 36px;
+  --typeXlTitle: 38px;
   --typeLargeTitle: 34px;
   --typeTitle1: 28px;
   --typeTitle2: 22px;
   --typeTitle3: 20px;
   --typeHeadline: 17px;
-  --typeBody: 18px;
-  --typeCallout: 17px;
+  --typeBody: 17px;
+  --typeCallout: 16px;
   --typeSubheadline: 16px;
   --typeFootnote: 14px;
   --typeCaption1: 13px;
   --typeCaption2: 12px;
   --typeCode: 14px;
-  --typeOverline: 11px;
 
   /* Text shadow — for light text on colored fills */
   --textShadowOnFill: 0 1px 3px rgba(26, 26, 24, 0.3);
@@ -270,7 +268,7 @@
   --onDark: #1A1A18;
 
   /* Tint */
-  --tint: #F07030;
+  --tint: #4890FF;
 
   /* Tint Alternatives */
   --tintOrange: #F07030;
@@ -335,8 +333,8 @@
 /* ── Typography Utilities ── */
 /* Reusable type scale classes — use in HTML to apply scale steps directly */
 .text-overline {
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -347,8 +345,8 @@
 .tag {
   display: inline-flex;
   align-items: center;
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -377,8 +375,8 @@
 
 /* ── Typography ── */
 body {
-  font-family: var(--fontBody);
-  font-size: var(--typeFootnote); /* UI chrome at footnote size; content uses body token (18px) via .prose */
+  font-family: var(--fontText);
+  font-size: var(--typeFootnote); /* UI chrome at footnote size; content uses body token (17px) via .prose */
   line-height: 1.45;
   background: var(--systemGroupedBackground);
   color: var(--label);
@@ -410,8 +408,8 @@ body {
 }
 
 .header-title {
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -436,7 +434,7 @@ a.header-title:hover {
 }
 
 .top-nav-link {
-  font-family: var(--fontBody);
+  font-family: var(--fontText);
   font-size: var(--typeCaption1);
   font-weight: 500;
   color: var(--secondaryLabel);
@@ -472,8 +470,8 @@ a.header-title:hover {
   display: flex;
   align-items: center;
   gap: var(--space8);
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -594,8 +592,8 @@ a.header-title:hover {
 }
 
 .sidebar-group-label {
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -607,7 +605,7 @@ a.header-title:hover {
 .sidebar-link {
   display: flex;
   align-items: center;
-  font-family: var(--fontBody);
+  font-family: var(--fontText);
   font-size: var(--typeCaption1);
   font-weight: 400;
   color: var(--secondaryLabel);
@@ -658,7 +656,7 @@ a.header-title:hover {
 }
 
 .page-title {
-  font-family: var(--fontDisplay);
+  font-family: var(--fontText);
   font-size: var(--typeTitle1);
   font-weight: 700;
   color: var(--label);
@@ -668,7 +666,7 @@ a.header-title:hover {
 }
 
 .page-subtitle {
-  font-family: var(--fontBody);
+  font-family: var(--fontText);
   font-size: var(--typeSubheadline);
   color: var(--secondaryLabel);
   line-height: 1.5;
@@ -676,7 +674,7 @@ a.header-title:hover {
 }
 
 .section-title {
-  font-family: var(--fontDisplay);
+  font-family: var(--fontText);
   font-size: var(--typeTitle3);
   font-weight: 600;
   line-height: 1.3;
@@ -829,7 +827,7 @@ a.header-title:hover {
 
 .swatch-value {
   font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-size: var(--typeCaption2);
   color: var(--secondaryLabel);
   margin-left: auto;
   white-space: nowrap;
@@ -870,8 +868,8 @@ a.header-title:hover {
 }
 
 .context-label {
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -908,7 +906,7 @@ a.header-title:hover {
 
 .layer-token {
   font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-size: var(--typeCaption2);
   color: var(--tertiaryLabel);
 }
 
@@ -952,8 +950,8 @@ a.header-title:hover {
 }
 
 .label-sample-name {
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   color: var(--tertiaryLabel);
 }
 
@@ -994,7 +992,7 @@ a.header-title:hover {
 
 .color-chip-name {
   font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-size: var(--typeCaption2);
   font-weight: 700;
   color: var(--onLight);
   text-shadow: var(--textShadowOnFill);
@@ -1002,7 +1000,7 @@ a.header-title:hover {
 
 .color-chip-hex {
   font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-size: var(--typeCaption2);
   color: color-mix(in srgb, var(--onLight) 75%, transparent);
   text-shadow: var(--textShadowOnFill);
 }
@@ -1021,8 +1019,8 @@ a.header-title:hover {
 .gray-labels {
   display: flex;
   justify-content: space-between;
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   color: var(--tertiaryLabel);
   padding: var(--space16) var(--space16) var(--space8);
 }
@@ -1044,8 +1042,8 @@ a.header-title:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   font-weight: 600;
   transition: flex 0.25s var(--easeFluent);
   cursor: pointer;
@@ -1093,8 +1091,8 @@ a.header-title:hover {
 }
 
 .fills-context-label {
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -1120,7 +1118,7 @@ a.header-title:hover {
 
 .fill-chip-name {
   font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-size: var(--typeCaption2);
   font-weight: 600;
   color: var(--secondaryLabel);
 }
@@ -1133,8 +1131,8 @@ a.header-title:hover {
   transform: translateX(-50%) translateY(80px);
   background: var(--label);
   color: var(--systemBackground);
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   font-weight: 600;
   letter-spacing: 0.04em;
   padding: var(--space8) var(--space16);
@@ -1161,8 +1159,8 @@ a.header-title:hover {
 }
 
 .usage-title {
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -1178,7 +1176,7 @@ a.header-title:hover {
 }
 
 .usage-list li {
-  font-family: var(--fontBody);
+  font-family: var(--fontText);
   font-size: var(--typeCaption1);
   line-height: 1.4;
   letter-spacing: 0.01em;
@@ -1223,8 +1221,8 @@ a.header-title:hover {
 }
 
 .type-card-name {
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -1232,13 +1230,19 @@ a.header-title:hover {
 }
 
 .type-card-meta {
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   color: var(--tertiaryLabel);
   letter-spacing: 0.02em;
 }
 
 .type-scale {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space24);
+}
+
+.type-group {
   display: flex;
   flex-direction: column;
   gap: var(--space12);
@@ -1253,89 +1257,55 @@ a.header-title:hover {
 .type-row-label {
   flex-shrink: 0;
   width: 80px;
-  font-size: var(--typeOverline);
+  font-size: var(--typeCaption2);
   font-weight: 600;
   letter-spacing: 0.04em;
   color: var(--tertiaryLabel);
   text-align: right;
-  font-family: var(--fontMono);
+  font-family: var(--fontText);
 }
 
 .type-row-sample {
   flex: 1;
   color: var(--label);
-  line-height: 1.35;
+  min-width: 0;
 }
 
 .type-row-size {
   flex-shrink: 0;
-  font-size: var(--typeOverline);
+  font-size: var(--typeCaption2);
   color: var(--tertiaryLabel);
-  font-family: var(--fontMono);
+  font-family: var(--fontText);
 }
 
-.type-body-compare {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space12);
-  margin-top: var(--space12);
+.type-table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-top: var(--space16);
 }
 
 @media (max-width: 720px) {
-  .type-body-compare {
-    grid-template-columns: 1fr;
+  .type-card-header {
+    flex-wrap: wrap;
+    gap: var(--space4);
   }
-}
-
-.type-body-option {
-  background: var(--secondarySystemGroupedBackground);
-  border: 1px solid var(--border);
-  border-radius: var(--radius14);
-  padding: var(--space24);
-  transition: background 0.25s var(--easeFluent), border-color 0.25s var(--easeFluent);
-}
-
-.type-body-option-header {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  margin-bottom: var(--space12);
-  padding-bottom: var(--space8);
-  border-bottom: 1px solid var(--separator);
-}
-
-.type-body-option-name {
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--secondaryLabel);
-}
-
-.type-body-option-meta {
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
-  color: var(--tertiaryLabel);
-}
-
-.type-body-sample {
-  color: var(--label);
-  font-size: var(--typeFootnote);
-  line-height: 1.45;
-  letter-spacing: 0.01em;
-}
-
-.type-body-sample-secondary {
-  color: var(--secondaryLabel);
-  font-size: var(--typeCaption1);
-  line-height: 1.5;
-  margin-top: var(--space8);
+  .type-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--space4) var(--space8);
+  }
+  .type-row-label {
+    width: auto;
+    text-align: left;
+  }
+  .type-row-sample {
+    grid-column: 1 / -1;
+  }
 }
 
 /* ── Markdown Prose ── */
 .prose {
-  font-family: var(--fontBody);
+  font-family: var(--fontText);
   font-size: var(--typeBody);
   line-height: 1.6;
   color: var(--label);
@@ -1347,7 +1317,7 @@ a.header-title:hover {
 }
 
 .prose h1, .prose h2, .prose h3, .prose h4 {
-  font-family: var(--fontDisplay);
+  font-family: var(--fontText);
   color: var(--label);
   margin: 0;
 }
@@ -1480,7 +1450,7 @@ a.header-title:hover {
 
 .prose table th {
   font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-size: var(--typeCaption2);
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -1565,7 +1535,7 @@ a.header-title:hover {
 }
 
 .prose h5 {
-  font-family: var(--fontDisplay);
+  font-family: var(--fontText);
   font-size: var(--typeSubheadline);
   font-weight: 600;
   line-height: 1.35;
@@ -1575,7 +1545,7 @@ a.header-title:hover {
 }
 
 .prose h6 {
-  font-family: var(--fontMono);
+  font-family: var(--fontText);
   font-size: var(--typeCaption2);
   font-weight: 600;
   letter-spacing: 0.04em;
@@ -1587,8 +1557,8 @@ a.header-title:hover {
 }
 
 .prose .overline {
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -1600,12 +1570,12 @@ a.header-title:hover {
   width: 100%;
   border-collapse: collapse;
   font-family: var(--fontMono);
-  font-size: var(--typeOverline);
-  margin-top: var(--space16);
+  font-size: var(--typeCaption2);
+  min-width: 520px;
 }
 
 .type-platform-table th {
-  font-size: var(--typeOverline);
+  font-size: var(--typeCaption2);
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -1761,8 +1731,8 @@ a.header-title:hover {
 }
 
 .glass-card-eyebrow {
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -1772,7 +1742,7 @@ a.header-title:hover {
 }
 
 .glass-card-title {
-  font-family: var(--fontDisplay);
+  font-family: var(--fontText);
   font-size: var(--typeTitle1);
   font-weight: 700;
   line-height: 1.2;
@@ -1782,7 +1752,7 @@ a.header-title:hover {
 }
 
 .glass-card-body {
-  font-family: var(--fontBody);
+  font-family: var(--fontText);
   font-size: var(--typeSubheadline);
   line-height: 1.5;
   color: var(--secondaryLabel);
@@ -1790,8 +1760,8 @@ a.header-title:hover {
 }
 
 .glass-card-meta {
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   color: var(--tertiaryLabel);
   margin-top: var(--space12);
   letter-spacing: 0.02em;
@@ -1800,8 +1770,8 @@ a.header-title:hover {
 
 .glass-badge {
   display: inline-block;
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -1870,15 +1840,15 @@ a.header-title:hover {
 }
 
 .glass-compare-title {
-  font-family: var(--fontDisplay);
+  font-family: var(--fontText);
   font-size: var(--typeSubheadline);
   font-weight: 600;
   color: var(--label);
 }
 
 .glass-compare-version {
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   font-weight: 600;
   color: var(--tertiaryLabel);
 }
@@ -1893,13 +1863,13 @@ a.header-title:hover {
 .glass-prop-list li {
   font-size: var(--typeCaption2);
   color: var(--secondaryLabel);
-  font-family: var(--fontBody);
+  font-family: var(--fontText);
   line-height: 1.45;
 }
 
 .glass-prop-list .prop-name {
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   font-weight: 600;
   color: var(--label);
 }
@@ -1939,15 +1909,15 @@ a.header-title:hover {
 }
 
 .glass-principle-num {
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   font-weight: 700;
   color: var(--tint);
   margin-bottom: var(--space8);
 }
 
 .glass-principle-title {
-  font-family: var(--fontDisplay);
+  font-family: var(--fontText);
   font-size: var(--typeSubheadline);
   font-weight: 600;
   color: var(--label);
@@ -1956,7 +1926,7 @@ a.header-title:hover {
 }
 
 .glass-principle-body {
-  font-family: var(--fontBody);
+  font-family: var(--fontText);
   font-size: var(--typeFootnote);
   line-height: 1.5;
   color: var(--secondaryLabel);
@@ -2038,8 +2008,8 @@ a.header-title:hover {
 }
 
 .dot-interaction-label span {
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -2088,31 +2058,31 @@ a.header-title:hover {
 }
 
 .dot-state-name {
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   font-weight: 700;
   color: var(--label);
   margin-bottom: var(--space4);
 }
 
 .dot-state-desc {
-  font-family: var(--fontBody);
+  font-family: var(--fontText);
   font-size: var(--typeFootnote);
   line-height: 1.5;
   color: var(--secondaryLabel);
 }
 
 .dot-state-value {
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   color: var(--tertiaryLabel);
   margin-top: var(--space4);
 }
 
 /* Spec table */
 .spec-group-label {
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -2147,8 +2117,8 @@ a.header-title:hover {
 }
 
 .spec-title {
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -2172,14 +2142,14 @@ a.header-title:hover {
 }
 
 .spec-label {
-  font-family: var(--fontBody);
+  font-family: var(--fontText);
   color: var(--secondaryLabel);
   flex-shrink: 0;
 }
 
 .spec-val {
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   font-weight: 600;
   color: var(--label);
   text-align: right;
@@ -2201,8 +2171,8 @@ a.header-title:hover {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -2255,8 +2225,8 @@ a.header-title:hover {
   left: 50%;
   transform: translateX(-50%);
   z-index: 1;
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -2309,8 +2279,8 @@ a.header-title:hover {
 }
 
 .planar-demo-label {
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -2350,8 +2320,8 @@ a.header-title:hover {
 }
 
 .btn-row-label {
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -2375,7 +2345,7 @@ a.header-title:hover {
   border: none;
   cursor: pointer;
   border-radius: var(--radiusFull);
-  font-family: var(--fontBody);
+  font-family: var(--fontText);
   font-weight: 600;
   white-space: nowrap;
   transition: transform 0.18s var(--easeStandard), opacity 0.18s var(--easeStandard), box-shadow 0.25s var(--easeFluent);
@@ -2574,8 +2544,8 @@ a.header-title:hover {
 }
 
 .btn-state-label {
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -2589,16 +2559,16 @@ a.header-title:hover {
 /* Inline code in usage notes — mono 11px */
 .code-inline {
   font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-size: var(--typeCaption2);
 }
 
 /* Card with standard padding */
 .card--padded { padding: var(--space24); }
 
-/* Demo section label — mono overline */
+/* Demo section label — overline */
 .demo-label {
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   font-weight: 600;
   color: var(--tertiaryLabel);
   letter-spacing: 0.08em;
@@ -2617,7 +2587,7 @@ a.header-title:hover {
 
 /* Demo description text */
 .demo-desc {
-  font-family: var(--fontBody);
+  font-family: var(--fontText);
   font-size: var(--typeCaption1);
   color: var(--secondaryLabel);
   line-height: 1.45;
@@ -2640,8 +2610,8 @@ a.header-title:hover {
 
 /* Demo overline — heavier than .demo-label */
 .demo-overline {
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -2661,8 +2631,8 @@ a.header-title:hover {
   display: flex;
   gap: var(--space16);
   flex-wrap: wrap;
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   color: var(--secondaryLabel);
 }
 
@@ -2683,8 +2653,8 @@ a.header-title:hover {
   display: flex;
   gap: var(--space12);
   margin-top: var(--space8);
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   color: var(--secondaryLabel);
 }
 
@@ -2727,8 +2697,8 @@ a.header-title:hover {
   bottom: -18px;
   left: 50%;
   transform: translateX(-50%);
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   color: var(--tertiaryLabel);
   white-space: nowrap;
 }
@@ -2748,7 +2718,7 @@ a.header-title:hover {
 }
 
 .formula-desc {
-  font-family: var(--fontBody);
+  font-family: var(--fontText);
   font-size: var(--typeCaption1);
   color: var(--secondaryLabel);
   line-height: 1.5;
@@ -2762,7 +2732,7 @@ a.header-title:hover {
   border-radius: var(--radius10);
   padding: var(--space12) var(--space16);
   min-height: 44px;
-  font-family: var(--fontBody);
+  font-family: var(--fontText);
   font-size: var(--typeBody);
   color: var(--label);
   outline: none;
@@ -2901,7 +2871,7 @@ a.header-title:hover {
   resize: none;
   border: none;
   background: transparent;
-  font-family: var(--fontBody);
+  font-family: var(--fontText);
   font-size: var(--typeSubheadline);
   color: var(--label);
   line-height: 1.5;
@@ -3015,14 +2985,14 @@ a.header-title:hover {
   flex: 1;
   background: transparent;
   border: none;
-  font-family: var(--fontBody);
+  font-family: var(--fontText);
   font-size: var(--typeSubheadline);
   color: var(--label);
   outline: none;
 }
 
 .input-error-msg {
-  font-family: var(--fontBody);
+  font-family: var(--fontText);
   font-size: var(--typeFootnote);
   color: var(--destructive);
   margin-top: var(--space4);
@@ -3056,7 +3026,7 @@ a.header-title:hover {
   background: var(--systemFill);
   border: 1px solid var(--separator);
   border-radius: var(--radius10);
-  font-family: var(--fontBody);
+  font-family: var(--fontText);
   font-size: var(--typeFootnote);
   color: var(--label);
   cursor: pointer;
@@ -3130,7 +3100,7 @@ a.header-title:hover {
   background: none;
   border: none;
   border-radius: var(--radius10);
-  font-family: var(--fontBody);
+  font-family: var(--fontText);
   font-size: var(--typeFootnote);
   color: var(--label);
   cursor: pointer;
@@ -3198,25 +3168,23 @@ a.header-title:hover {
 }
 
 /* Typography sample classes — each matches a type token */
-.type-sample-xlTitle2   { font-family: var(--fontDisplay); font-size: var(--typeXlTitle2); font-weight: 700; line-height: 1.15; letter-spacing: -0.02em; }
-.type-sample-xlTitle    { font-family: var(--fontDisplay); font-size: var(--typeXlTitle); font-weight: 700; line-height: 1.15; letter-spacing: -0.02em; }
-.type-sample-largeTitle { font-family: var(--fontDisplay); font-size: var(--typeLargeTitle); font-weight: 700; line-height: 1.18; letter-spacing: -0.01em; }
-.type-sample-title1     { font-family: var(--fontDisplay); font-size: var(--typeTitle1); font-weight: 700; line-height: 1.21; letter-spacing: -0.01em; }
-.type-sample-title2     { font-family: var(--fontDisplay); font-size: var(--typeTitle2); font-weight: 600; line-height: 1.27; }
-.type-sample-title3     { font-family: var(--fontDisplay); font-size: var(--typeTitle3); font-weight: 600; line-height: 1.3; }
-.type-sample-headline   { font-family: var(--fontDisplay); font-size: var(--typeHeadline); font-weight: 600; line-height: 1.35; }
+.type-sample-xlTitle2   { font-family: var(--fontText); font-size: var(--typeXlTitle2); font-weight: 700; line-height: 1.15; letter-spacing: -0.01em; }
+.type-sample-xlTitle    { font-family: var(--fontText); font-size: var(--typeXlTitle); font-weight: 700; line-height: 1.15; letter-spacing: -0.01em; }
+.type-sample-largeTitle { font-family: var(--fontText); font-size: var(--typeLargeTitle); font-weight: 700; line-height: 1.18; }
+.type-sample-title1     { font-family: var(--fontText); font-size: var(--typeTitle1); font-weight: 700; line-height: 1.21; }
+.type-sample-title2     { font-family: var(--fontText); font-size: var(--typeTitle2); font-weight: 600; line-height: 1.27; }
+.type-sample-title3     { font-family: var(--fontText); font-size: var(--typeTitle3); font-weight: 600; line-height: 1.3; }
+.type-sample-headline   { font-family: var(--fontText); font-size: var(--typeHeadline); font-weight: 600; line-height: 1.35; }
 
-.type-sample-body       { font-family: var(--fontBody); font-size: var(--typeBody); font-weight: 400; line-height: 1.6; }
-.type-sample-bodySemi   { font-family: var(--fontBody); font-size: var(--typeBody); font-weight: 600; line-height: 1.6; }
-.type-sample-callout    { font-family: var(--fontBody); font-size: var(--typeCallout); font-weight: 400; line-height: 1.5; }
-.type-sample-subheadline { font-family: var(--fontBody); font-size: var(--typeSubheadline); font-weight: 400; line-height: 1.5; letter-spacing: 0.01em; }
-.type-sample-footnote   { font-family: var(--fontBody); font-size: var(--typeFootnote); font-weight: 400; line-height: 1.45; letter-spacing: 0.01em; }
-.type-sample-caption1   { font-family: var(--fontBody); font-size: var(--typeCaption1); font-weight: 400; line-height: 1.4; letter-spacing: 0.01em; }
-.type-sample-caption2   { font-family: var(--fontBody); font-size: var(--typeCaption2); font-weight: 400; line-height: 1.35; letter-spacing: 0.02em; }
+.type-sample-body       { font-family: var(--fontText); font-size: var(--typeBody); font-weight: 400; line-height: 1.5; }
+.type-sample-callout    { font-family: var(--fontText); font-size: var(--typeCallout); font-weight: 400; line-height: 1.5; }
+.type-sample-subheadline { font-family: var(--fontText); font-size: var(--typeSubheadline); font-weight: 500; line-height: 1.5; letter-spacing: 0.01em; }
+.type-sample-footnote   { font-family: var(--fontText); font-size: var(--typeFootnote); font-weight: 400; line-height: 1.45; letter-spacing: 0.01em; }
+.type-sample-caption1   { font-family: var(--fontText); font-size: var(--typeCaption1); font-weight: 400; line-height: 1.4; letter-spacing: 0.01em; }
+.type-sample-caption2   { font-family: var(--fontText); font-size: var(--typeCaption2); font-weight: 400; line-height: 1.35; letter-spacing: 0.02em; }
 
 .type-sample-code       { font-family: var(--fontMono); font-size: var(--typeCode); font-weight: 400; line-height: 1.5; }
-.type-sample-overline   { font-family: var(--fontMono); font-size: var(--typeOverline); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--secondaryLabel); line-height: 1.36; }
-.type-sample-data       { font-family: var(--fontMono); font-size: var(--typeCaption1); font-weight: 600; font-variant-numeric: tabular-nums; line-height: 1.38; }
+.type-sample-overline   { font-family: var(--fontText); font-size: var(--typeCaption2); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--secondaryLabel); line-height: 1.35; }
 
 /* Button state demos */
 .btn-state-hover { box-shadow: 0 4px 16px color-mix(in srgb, var(--label) 25%, transparent); }
@@ -3236,7 +3204,7 @@ a.header-title:hover {
 }
 
 .on-color-chip {
-  font-family: var(--fontBody);
+  font-family: var(--fontText);
   font-size: var(--typeCaption1);
   font-weight: 600;
   padding: var(--space4) var(--space12);
@@ -3264,8 +3232,8 @@ a.header-title:hover {
 }
 
 .footer-brand {
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -3278,8 +3246,8 @@ a.header-title:hover {
 }
 
 .footer-meta {
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   color: var(--tertiaryLabel);
   letter-spacing: 0.06em;
 }
@@ -3305,7 +3273,7 @@ a.header-title:hover {
 }
 
 .landing-title {
-  font-family: var(--fontDisplay);
+  font-family: var(--fontText);
   font-size: clamp(var(--typeXlTitle2), 10vw, 96px);
   font-weight: 700;
   color: var(--label);
@@ -3315,8 +3283,8 @@ a.header-title:hover {
 }
 
 .landing-overline {
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -3336,8 +3304,8 @@ a.header-title:hover {
 /* Uses shared .cursor.cursor--line component (see cursor-blink keyframes) */
 
 .landing-version {
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   font-weight: 400;
   letter-spacing: 0.06em;
   color: var(--quaternaryLabel);
@@ -3350,7 +3318,7 @@ a.header-title:hover {
 }
 
 .landing-dna {
-  font-family: var(--fontBody);
+  font-family: var(--fontText);
   font-size: var(--typeBody);
   color: var(--secondaryLabel);
   line-height: 1.7;
@@ -3379,8 +3347,8 @@ a.header-title:hover {
 }
 
 .landing-section-overline {
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -3447,7 +3415,7 @@ a.header-title:hover {
 }
 
 .landing-card-label {
-  font-family: var(--fontDisplay);
+  font-family: var(--fontText);
   font-size: var(--typeTitle3);
   font-weight: 600;
   color: var(--label);
@@ -3455,7 +3423,7 @@ a.header-title:hover {
 }
 
 .landing-card-desc {
-  font-family: var(--fontBody);
+  font-family: var(--fontText);
   font-size: var(--typeFootnote);
   color: var(--secondaryLabel);
   line-height: 1.5;
@@ -3463,8 +3431,8 @@ a.header-title:hover {
 }
 
 .landing-card-count {
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   font-weight: 600;
   color: var(--tint);
   letter-spacing: 0.04em;
@@ -3510,7 +3478,7 @@ a.header-title:hover {
 }
 
 .error-page-code {
-  font-family: var(--fontMono);
+  font-family: var(--fontText);
   font-size: var(--typeXlTitle2);
   font-weight: 700;
   color: var(--label);
@@ -3524,7 +3492,7 @@ a.header-title:hover {
 }
 
 .error-page-message {
-  font-family: var(--fontBody);
+  font-family: var(--fontText);
   font-size: var(--typeBody);
   color: var(--secondaryLabel);
   margin-top: var(--space8);
@@ -3545,10 +3513,10 @@ a.header-title:hover {
   margin-top: var(--space12);
 }
 
-/* Overline label for demos — Mono role */
+/* Overline label for demos */
 .motion-demo-overline {
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -3558,9 +3526,9 @@ a.header-title:hover {
   border-bottom: 1px solid var(--separator);
 }
 
-/* Description below title — Figtree role */
+/* Description below title — Inter role */
 .motion-demo-desc {
-  font-family: var(--fontBody);
+  font-family: var(--fontText);
   font-size: var(--typeCaption1);
   color: var(--secondaryLabel);
   line-height: 1.45;
@@ -3588,8 +3556,8 @@ a.header-title:hover {
 }
 
 .motion-spring-label {
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -3597,8 +3565,8 @@ a.header-title:hover {
 }
 
 .motion-spring-meta {
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   color: var(--tertiaryLabel);
   letter-spacing: 0.02em;
 }
@@ -3681,8 +3649,8 @@ a.header-title:hover {
 }
 
 .motion-press-status {
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   font-weight: 600;
   color: var(--tertiaryLabel);
   letter-spacing: 0.02em;
@@ -3744,8 +3712,8 @@ a.header-title:hover {
 }
 
 .motion-curve-label {
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -3753,8 +3721,8 @@ a.header-title:hover {
 }
 
 .motion-curve-timing {
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   color: var(--tertiaryLabel);
 }
 
@@ -3822,8 +3790,8 @@ a.header-title:hover {
 }
 
 .motion-dot-state-label {
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -3832,8 +3800,8 @@ a.header-title:hover {
 }
 
 .motion-dot-state-meta {
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   color: var(--tertiaryLabel);
   transition: color 0.4s var(--easeFluent);
 }
@@ -3844,7 +3812,7 @@ a.header-title:hover {
 }
 
 .motion-demos-title {
-  font-family: var(--fontDisplay);
+  font-family: var(--fontText);
   font-size: var(--typeTitle2);
   font-weight: 600;
   color: var(--label);
@@ -3853,7 +3821,7 @@ a.header-title:hover {
 }
 
 .motion-demos-subtitle {
-  font-family: var(--fontBody);
+  font-family: var(--fontText);
   font-size: var(--typeFootnote);
   color: var(--secondaryLabel);
   line-height: 1.5;
@@ -3870,7 +3838,7 @@ a.header-title:hover {
   background: var(--tertiarySystemFill);
   box-shadow: inset 0 0 0 1px var(--separator);
   color: var(--secondaryLabel);
-  font-family: var(--fontBody);
+  font-family: var(--fontText);
   font-weight: 600;
   flex-shrink: 0;
   overflow: hidden;
@@ -3931,8 +3899,8 @@ a.header-title:hover {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   font-weight: 700;
   min-width: 18px;
   height: 18px;
@@ -4027,7 +3995,7 @@ a.header-title:hover {
 .segmented-item {
   position: relative;
   z-index: 1;
-  font-family: var(--fontBody);
+  font-family: var(--fontText);
   font-size: var(--typeCaption1);
   font-weight: 500;
   color: var(--secondaryLabel);
@@ -4075,7 +4043,7 @@ a.header-title:hover {
 .tab-bar::-webkit-scrollbar { display: none; }
 
 .tab-bar-item {
-  font-family: var(--fontBody);
+  font-family: var(--fontText);
   font-size: var(--typeFootnote);
   font-weight: 500;
   color: var(--secondaryLabel);
@@ -4144,7 +4112,7 @@ a.header-title:hover {
 }
 
 .list-item-title {
-  font-family: var(--fontBody);
+  font-family: var(--fontText);
   font-size: var(--typeSubheadline);
   font-weight: 400;
   color: var(--label);
@@ -4152,7 +4120,7 @@ a.header-title:hover {
 }
 
 .list-item-subtitle {
-  font-family: var(--fontBody);
+  font-family: var(--fontText);
   font-size: var(--typeCaption1);
   color: var(--secondaryLabel);
   line-height: 1.3;
@@ -4172,7 +4140,7 @@ a.header-title:hover {
 }
 
 .list-item-value {
-  font-family: var(--fontBody);
+  font-family: var(--fontText);
   font-size: var(--typeSubheadline);
   color: var(--secondaryLabel);
 }
@@ -4183,8 +4151,8 @@ a.header-title:hover {
 
 /* Section header — standalone between .list groups (iOS insetGrouped pattern) */
 .list-header {
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -4243,7 +4211,7 @@ a.header-title:hover {
 }
 
 .list-row-label {
-  font-family: var(--fontBody);
+  font-family: var(--fontText);
   font-size: var(--typeCaption2);
   color: var(--label);
   text-align: center;
@@ -4281,7 +4249,7 @@ a.header-title:hover {
   cursor: pointer;
   color: var(--onLight);
   text-shadow: var(--textShadowOnFill);
-  font-family: var(--fontBody);
+  font-family: var(--fontText);
   font-size: var(--typeCaption2);
   font-weight: 500;
 }
@@ -4327,8 +4295,8 @@ a.header-title:hover {
   display: flex;
   align-items: center;
   gap: var(--space8);
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   color: var(--tertiaryLabel);
 }
 
@@ -4345,14 +4313,14 @@ a.header-title:hover {
 }
 
 .card-title {
-  font-family: var(--fontBody);
+  font-family: var(--fontText);
   font-size: var(--typeSubheadline);
   font-weight: 600;
   color: var(--label);
 }
 
 .card-desc {
-  font-family: var(--fontBody);
+  font-family: var(--fontText);
   font-size: var(--typeCaption1);
   color: var(--secondaryLabel);
   line-height: 1.4;
@@ -4415,7 +4383,7 @@ a.header-title:hover {
 .chat-msg-bubble {
   padding: var(--space12) var(--space16);
   border-radius: var(--chatBubbleRadius);
-  font-family: var(--fontBody);
+  font-family: var(--fontText);
   font-size: var(--typeCallout);
   line-height: 1.5;
   color: var(--label);
@@ -4634,7 +4602,7 @@ a.header-title:hover {
   padding: var(--space12) var(--space16);
   border-radius: var(--radiusFull);
   cursor: pointer;
-  font-family: var(--fontBody);
+  font-family: var(--fontText);
   font-size: var(--typeCaption1);
   font-weight: 500;
   letter-spacing: 0.01em;
@@ -4697,7 +4665,7 @@ a.header-title:hover {
 .chat-banner--info:active { background: color-mix(in srgb, var(--link) 22%, transparent); transition: background 0.08s; }
 
 .chat-msg-name {
-  font-family: var(--fontBody);
+  font-family: var(--fontText);
   font-size: var(--typeCaption2);
   font-weight: 600;
   letter-spacing: 0.01em;
@@ -4706,8 +4674,8 @@ a.header-title:hover {
 }
 
 .chat-msg-time {
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   color: var(--tertiaryLabel);
   margin-top: var(--space4);
 }
@@ -4781,7 +4749,7 @@ a.header-title:hover {
 }
 
 .chat-link-preview-title {
-  font-family: var(--fontBody);
+  font-family: var(--fontText);
   font-size: var(--typeCaption1);
   font-weight: 600;
   letter-spacing: 0.01em;
@@ -4790,7 +4758,7 @@ a.header-title:hover {
 }
 
 .chat-link-preview-desc {
-  font-family: var(--fontBody);
+  font-family: var(--fontText);
   font-size: var(--typeCaption2);
   letter-spacing: 0.01em;
   color: var(--secondaryLabel);
@@ -4799,8 +4767,8 @@ a.header-title:hover {
 }
 
 .chat-link-preview-domain {
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   color: var(--tertiaryLabel);
   margin-top: var(--space4);
 }
@@ -4844,7 +4812,7 @@ a.header-title:hover {
 }
 
 .chat-widget-name {
-  font-family: var(--fontBody);
+  font-family: var(--fontText);
   font-size: var(--typeCaption1);
   font-weight: 600;
   letter-spacing: 0.01em;
@@ -4852,8 +4820,8 @@ a.header-title:hover {
 }
 
 .chat-widget-meta {
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   color: var(--tertiaryLabel);
   margin-left: auto;
 }
@@ -4924,7 +4892,7 @@ a.header-title:hover {
 }
 
 .chat-audio-time {
-  font-family: var(--fontMono);
+  font-family: var(--fontText);
   font-size: var(--typeCaption2);
   color: var(--secondaryLabel);
   flex-shrink: 0;
@@ -5053,7 +5021,7 @@ a.header-title:hover {
 }
 
 .modal-title {
-  font-family: var(--fontDisplay);
+  font-family: var(--fontText);
   font-size: var(--typeTitle3);
   font-weight: 600;
   color: var(--label);
@@ -5081,7 +5049,7 @@ a.header-title:hover {
 
 .modal-body {
   padding: 0 var(--space24) var(--space24);
-  font-family: var(--fontBody);
+  font-family: var(--fontText);
   font-size: var(--typeSubheadline);
   color: var(--secondaryLabel);
   line-height: 1.5;
@@ -5115,7 +5083,7 @@ a.header-title:hover {
 }
 
 .empty-state-title {
-  font-family: var(--fontDisplay);
+  font-family: var(--fontText);
   font-size: var(--typeTitle3);
   font-weight: 600;
   color: var(--label);
@@ -5123,7 +5091,7 @@ a.header-title:hover {
 }
 
 .empty-state-desc {
-  font-family: var(--fontBody);
+  font-family: var(--fontText);
   font-size: var(--typeSubheadline);
   color: var(--secondaryLabel);
   line-height: 1.5;
@@ -5275,7 +5243,7 @@ a.header-title:hover {
 .window-title {
   flex: 1;
   text-align: center;
-  font-family: var(--fontMono);
+  font-family: var(--fontText);
   font-size: var(--typeCaption1);
   color: var(--secondaryLabel);
   margin-right: var(--_controls-w);
@@ -5289,7 +5257,7 @@ a.header-title:hover {
 
 .window-tab {
   padding: var(--space4) var(--space12);
-  font-family: var(--fontMono);
+  font-family: var(--fontText);
   font-size: var(--typeCaption2);
   letter-spacing: 0.01em;
   color: var(--tertiaryLabel);
@@ -5757,8 +5725,8 @@ a.header-title:hover {
 /* ── Terminal Badge (inline status) ── */
 .term-badge {
   display: inline-block;
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -5825,7 +5793,7 @@ a.header-title:hover {
   justify-content: center;
   gap: var(--space2);
   font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-size: var(--typeCaption2);
   letter-spacing: 0.04em;
   border: 1px solid var(--border);
   cursor: pointer;
@@ -5843,7 +5811,7 @@ a.header-title:hover {
 }
 
 .term-ansi-swatch-label {
-  font-size: var(--typeOverline);
+  font-size: var(--typeCaption2);
   color: var(--onLight);
   text-shadow: var(--textShadowOnFill);
   opacity: 0.8;
@@ -6430,7 +6398,7 @@ a.header-title:hover {
   align-items: center;
   justify-content: center;
   color: var(--secondaryLabel);
-  font-family: var(--fontMono);
+  font-family: var(--fontText);
   font-size: var(--typeCaption2);
 }
 
@@ -6487,8 +6455,8 @@ a.header-title:hover {
 }
 
 .msg-col-label {
-  font-family: var(--fontMono);
-  font-size: var(--typeOverline);
+  font-family: var(--fontText);
+  font-size: var(--typeCaption2);
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--tertiaryLabel);
@@ -6515,14 +6483,14 @@ a.header-title:hover {
 
 /* ── Chat Context Overrides ── */
 /* When terminal components appear inside chat, restyle for chat visual language */
-/* Font: Figtree body (not mono). Radius: concentric with bubble (18px outer). */
+/* Font: Inter body (not mono). Radius: concentric with bubble (18px outer). */
 
 .chat-demo .term-fold summary,
 .chat-demo .term-steps,
 .chat-demo .term-options,
 .chat-demo .term-changeset,
 .chat-demo .term-activity {
-  font-family: var(--fontBody);
+  font-family: var(--fontText);
   font-size: var(--typeCaption1);
 }
 
@@ -6552,23 +6520,23 @@ a.header-title:hover {
 }
 
 .chat-demo .term-step {
-  font-family: var(--fontBody);
+  font-family: var(--fontText);
   font-size: var(--typeCaption1);
 }
 
 .chat-demo .term-options-prompt {
-  font-family: var(--fontBody);
+  font-family: var(--fontText);
   font-size: var(--typeFootnote);
   font-weight: 600;
 }
 
 .chat-demo .attach-artifact {
   border-radius: var(--radius10);
-  font-family: var(--fontBody);
+  font-family: var(--fontText);
 }
 
 .chat-demo .attach-artifact-name {
-  font-family: var(--fontBody);
+  font-family: var(--fontText);
 }
 
 .chat-demo .attach-artifact-meta {
@@ -6668,7 +6636,7 @@ a.header-title:hover {
 
 .chat-attach-files .attach-artifact {
   border-radius: var(--radius10);
-  font-family: var(--fontBody);
+  font-family: var(--fontText);
   align-self: flex-start;
 }
 
@@ -6682,7 +6650,7 @@ a.header-title:hover {
 }
 
 .chat-attach-files .attach-artifact-name {
-  font-family: var(--fontBody);
+  font-family: var(--fontText);
 }
 
 .chat-attach-files .attach-artifact-meta {

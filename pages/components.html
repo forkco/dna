@@ -7,7 +7,7 @@
 <meta name="description" content="FORK component specs: buttons, inputs, and markdown prose rendering with cross-platform implementation notes.">
 <meta name="theme-color" content="#F5F5F2" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#1A1A18" media="(prefers-color-scheme: dark)">
-<link href="https://fonts.googleapis.com/css2?family=Besley:ital,wght@0,400..900;1,400..900&family=Figtree:ital,wght@0,300..700;1,300..700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300..700;1,300..700&family=IBM+Plex+Mono:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../styles.css">
 <script>(function(){var t=localStorage.getItem('te-theme');if(!t){t=window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'}document.documentElement.setAttribute('data-theme',t)})()</script>
 </head>
@@ -244,7 +244,7 @@
         </div>
         <div class="spec-row">
           <span class="spec-label">Font family</span>
-          <span class="spec-val">Figtree (semibold title / regular subtitle)</span>
+          <span class="spec-val">Inter (semibold title / regular subtitle)</span>
         </div>
       </div>
 
@@ -530,7 +530,7 @@
         <li><span class="token">Outline</span><span class="dash">/</span>URL inputs, code fields, contexts where fill blends too much with background.</li>
         <li><span class="token">Search (capsule)</span><span class="dash">/</span>Global search bars, filter inputs — pairs with capsule buttons visually.</li>
         <li><span class="token">Mono</span><span class="dash">/</span>API keys, URLs, code snippets, technical identifiers — IBM Plex Mono for clarity.</li>
-        <li><span class="token">Body font</span><span class="dash">/</span>All text inputs use Figtree. <span class="tag tag--ios">iOS</span> 17pt <span class="tag tag--web">Web</span> 18px. Placeholder at tertiaryLabel.</li>
+        <li><span class="token">Body font</span><span class="dash">/</span>All text inputs use Inter. <span class="tag tag--all">All</span> 17px. Placeholder at tertiaryLabel.</li>
       </ul>
     </div>
     <div class="usage">
@@ -811,7 +811,7 @@
             <div class="avatar avatar--md">A</div>
             <div class="avatar avatar--md">B</div>
             <div class="avatar avatar--md">C</div>
-            <div class="avatar avatar--md" style="font-size: var(--typeOverline);">+2</div>
+            <div class="avatar avatar--md" style="font-size: var(--typeCaption2);">+2</div>
           </div>
         </div>
 
@@ -1537,7 +1537,7 @@
       <div class="spec-card">
         <div class="spec-title">Typography</div>
         <div class="spec-row"><span class="spec-label">Icon</span><span class="spec-val">48pt, tertiaryLabel</span></div>
-        <div class="spec-row"><span class="spec-label">Title</span><span class="spec-val">title3 (20px) semi, Besley</span></div>
+        <div class="spec-row"><span class="spec-label">Title</span><span class="spec-val">title3 (20px) semi, Inter</span></div>
         <div class="spec-row"><span class="spec-label">Description</span><span class="spec-val">subheadline (16px) secondaryLabel</span></div>
         <div class="spec-row"><span class="spec-label">Action</span><span class="spec-val">Any button variant (typically primaryTinted)</span></div>
       </div>
@@ -1656,11 +1656,10 @@
       </blockquote>
 
       <h3>Typography</h3>
-      <p>We use three font families across the system. Each serves a distinct role:</p>
+      <p>We use two font families across the system:</p>
 
       <ul>
-        <li><strong>Besley</strong> — display and titles. A transitional serif with warm, confident character.</li>
-        <li><strong>Figtree</strong> — body and UI text. A geometric sans-serif that's clean and readable at every size.</li>
+        <li><strong>Inter</strong> — display, titles, body, and UI text. A geometric sans-serif with clean proportions and excellent readability at every size.</li>
         <li><strong>IBM Plex Mono</strong> — code, data, and labels. Tabular figures, technical precision.</li>
       </ul>
 
@@ -1673,14 +1672,14 @@
         </thead>
         <tbody>
           <tr><td><code>--label</code></td><td>#1A1A18</td><td>#F5F5F2</td><td>Primary text</td></tr>
-          <tr><td><code>--tint</code></td><td>#E86420</td><td>#F07030</td><td>Brand accent, CTAs</td></tr>
+          <tr><td><code>--tint</code></td><td>#1868D8</td><td>#4890FF</td><td>Brand accent, CTAs</td></tr>
           <tr><td><code>--link</code></td><td>#1270B8</td><td>#1A8DE0</td><td>Inline links</td></tr>
           <tr><td><code>--destructive</code></td><td>#CE2021</td><td>#E84142</td><td>Delete, errors</td></tr>
         </tbody>
       </table>
 
       <h2>Implementation</h2>
-      <p>The <code>prose</code> class wraps any block of rendered markdown and applies the full typographic scale. Headers use Besley, body uses Figtree, and code blocks use IBM Plex Mono — all automatically.</p>
+      <p>The <code>prose</code> class wraps any block of rendered markdown and applies the full typographic scale. Headers and body use Inter, code blocks use IBM Plex Mono — all automatically.</p>
 
 <pre><code>// Apply the prose styles to any container
 &lt;div class="prose"&gt;
@@ -1689,13 +1688,13 @@
 
 // CSS custom property for tint
 document.documentElement.style
-  .setProperty('--tint', '#E86420');</code></pre>
+  .setProperty('--tint', '#1868D8');</code></pre>
 
       <h4>Inline elements</h4>
-      <p>Inline code like <code>var(--systemFill)</code> uses a subtle tint color. <strong>Bold text</strong> uses Figtree 600. <em>Italic text</em> uses native italic. <strong><em>Bold italic</em></strong> combines both. <del>Strikethrough</del> marks removed content. Links like <a href="#colors">color tokens</a> are underlined with a translucent line that solidifies on hover.</p>
+      <p>Inline code like <code>var(--systemFill)</code> uses a subtle tint color. <strong>Bold text</strong> uses Inter 600. <em>Italic text</em> uses native italic. <strong><em>Bold italic</em></strong> combines both. <del>Strikethrough</del> marks removed content. Links like <a href="#colors">color tokens</a> are underlined with a translucent line that solidifies on hover.</p>
 
       <h5>Detailed specifications</h5>
-      <p>The h5 heading uses Besley at a smaller size, bridging the gap between h4 and body text. Use it for fine-grained subsections within a longer document.</p>
+      <p>The h5 heading uses Inter at a smaller size, bridging the gap between h4 and body text. Use it for fine-grained subsections within a longer document.</p>
 
       <h6>Revision History</h6>
       <p>The h6 heading switches to IBM Plex Mono uppercase with letter-spacing — ideal for metadata labels, version tags, and document annotations.</p>
@@ -1706,7 +1705,7 @@ document.documentElement.style
           <ul>
             <li>Color primitives
               <ul>
-                <li>Brand orange <code>#E86420</code></li>
+                <li>Brand cobalt <code>#1868D8</code></li>
                 <li>Neutral grays</li>
               </ul>
             </li>
@@ -1715,8 +1714,8 @@ document.documentElement.style
         </li>
         <li>Typography scale
           <ol>
-            <li>Display — Besley</li>
-            <li>Body — Figtree</li>
+            <li>Display — Inter</li>
+            <li>Body — Inter</li>
             <li>Mono — IBM Plex Mono</li>
           </ol>
         </li>
@@ -1749,13 +1748,13 @@ document.documentElement.style
     <div class="usage">
       <div class="usage-title">When to use</div>
       <ul class="usage-list">
-        <li><span class="token">.prose</span><span class="dash">/</span>Wrap any rendered markdown. Applies full typographic scale — h1–h4 (Besley), body (Figtree), code (IBM Plex Mono).</li>
-        <li><span class="token">.prose h1</span><span class="dash">/</span>34px Bold Besley. Page-level title. Only one per document.</li>
-        <li><span class="token">.prose h2</span><span class="dash">/</span>24px Bold Besley. Major sections. Bottom border for visual separation.</li>
-        <li><span class="token">.prose h3</span><span class="dash">/</span>20px Semi Besley. Subsections.</li>
+        <li><span class="token">.prose</span><span class="dash">/</span>Wrap any rendered markdown. Applies full typographic scale — h1–h4 (Inter), body (Inter), code (IBM Plex Mono).</li>
+        <li><span class="token">.prose h1</span><span class="dash">/</span>34px Bold Inter. Page-level title. Only one per document.</li>
+        <li><span class="token">.prose h2</span><span class="dash">/</span>24px Bold Inter. Major sections. Bottom border for visual separation.</li>
+        <li><span class="token">.prose h3</span><span class="dash">/</span>20px Semi Inter. Subsections.</li>
         <li><span class="token">.prose code</span><span class="dash">/</span>Inline: tint-colored, systemFill bg, rounded. Block (<code class="code-inline">pre code</code>): neutral, tertiarySystemBackground.</li>
         <li><span class="token">.prose blockquote</span><span class="dash">/</span>3px tint left border, subtle fill, italic. For callouts and quotes.</li>
-        <li><span class="token">.prose h5</span><span class="dash">/</span>16px Semi Besley. Fine-grained subsections within longer documents.</li>
+        <li><span class="token">.prose h5</span><span class="dash">/</span>16px Semi Inter. Fine-grained subsections within longer documents.</li>
         <li><span class="token">.prose h6</span><span class="dash">/</span>12px Semibold IBM Plex Mono, uppercase, tracked. Metadata labels, revision tags.</li>
         <li><span class="token">.prose del</span><span class="dash">/</span>Strikethrough with secondaryLabel color. Marks removed or deprecated content.</li>
         <li><span class="token">.prose a</span><span class="dash">/</span>Link color with translucent underline. Hover solidifies the underline.</li>
@@ -1768,7 +1767,7 @@ document.documentElement.style
       <div class="usage-title">Platform notes</div>
       <ul class="usage-list">
         <li><span class="tag tag--web">Web</span> Apply <code class="code-inline">.prose</code> class to any container with rendered HTML from markdown. Works with any markdown-to-HTML library.</li>
-        <li><span class="tag tag--ios">iOS</span> Use <code class="code-inline">NSAttributedString</code> with matching font/color attributes. Map h1→title1 (Besley 28pt Bold), body→Figtree 17pt, code→IBM Plex Mono 14pt.</li>
+        <li><span class="tag tag--ios">iOS</span> Use <code class="code-inline">NSAttributedString</code> with matching font/color attributes. Map h1→title1 (Inter 28pt Bold), body→Inter 17pt, code→IBM Plex Mono 14pt.</li>
         <li><span class="tag tag--ios">iOS</span> For chat messages, ChatKit's <code class="code-inline">MessageAttributedStringBuilder</code> handles markdown→attributed string conversion with these tokens.</li>
       </ul>
     </div>
@@ -1784,12 +1783,12 @@ document.documentElement.style
 
     <div class="term-pair">
       <div style="padding: var(--space24); background: var(--secondarySystemGroupedBackground); border: 1px solid var(--border); border-radius: var(--radius14);">
-        <div style="font-family: var(--fontMono); font-size: var(--typeOverline); letter-spacing: 0.08em; text-transform: uppercase; color: var(--tertiaryLabel); margin-bottom: var(--space12);">Line Cursor</div>
+        <div style="font-family: var(--fontMono); font-size: var(--typeCaption2); letter-spacing: 0.08em; text-transform: uppercase; color: var(--tertiaryLabel); margin-bottom: var(--space12);">Line Cursor</div>
         <div style="font-family: var(--fontMono); font-size: var(--typeCode); line-height: 1.7; color: var(--secondaryLabel);">Design tokens for iOS<span class="cursor cursor--line"></span></div>
       </div>
 
       <div style="padding: var(--space24); background: var(--secondarySystemGroupedBackground); border: 1px solid var(--border); border-radius: var(--radius14);">
-        <div style="font-family: var(--fontMono); font-size: var(--typeOverline); letter-spacing: 0.08em; text-transform: uppercase; color: var(--tertiaryLabel); margin-bottom: var(--space12);">Block Cursor</div>
+        <div style="font-family: var(--fontMono); font-size: var(--typeCaption2); letter-spacing: 0.08em; text-transform: uppercase; color: var(--tertiaryLabel); margin-bottom: var(--space12);">Block Cursor</div>
         <div style="font-family: var(--fontMono); font-size: var(--typeCode); line-height: 1.7; color: var(--secondaryLabel);">~/project <span style="color: var(--tint);">$</span> fork status<span class="cursor cursor--block"></span></div>
       </div>
     </div>
@@ -1848,7 +1847,7 @@ document.documentElement.style
     <div class="term-pair">
       <!-- Tint picker variant -->
       <div style="padding: var(--space24); background: var(--secondarySystemGroupedBackground); border: 1px solid var(--border); border-radius: var(--radius14);">
-        <div style="font-family: var(--fontMono); font-size: var(--typeOverline); letter-spacing: 0.08em; text-transform: uppercase; color: var(--tertiaryLabel); margin-bottom: var(--space12);">Tint Picker</div>
+        <div style="font-family: var(--fontMono); font-size: var(--typeCaption2); letter-spacing: 0.08em; text-transform: uppercase; color: var(--tertiaryLabel); margin-bottom: var(--space12);">Tint Picker</div>
         <div style="display: flex; align-items: center; gap: var(--space8);">
           <div class="tint-dot active" style="background: var(--tintOrange); width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--label);"></div>
           <div class="tint-dot" style="background: var(--tintCoral); width: 18px; height: 18px; border-radius: 50%; border: 2px solid transparent;"></div>
@@ -1860,7 +1859,7 @@ document.documentElement.style
 
       <!-- Traffic light variant -->
       <div style="padding: var(--space24); background: var(--secondarySystemGroupedBackground); border: 1px solid var(--border); border-radius: var(--radius14);">
-        <div style="font-family: var(--fontMono); font-size: var(--typeOverline); letter-spacing: 0.08em; text-transform: uppercase; color: var(--tertiaryLabel); margin-bottom: var(--space12);">Traffic Light</div>
+        <div style="font-family: var(--fontMono); font-size: var(--typeCaption2); letter-spacing: 0.08em; text-transform: uppercase; color: var(--tertiaryLabel); margin-bottom: var(--space12);">Traffic Light</div>
         <div style="display: flex; align-items: center; gap: 6px;">
           <div class="window-dot window-dot--close"></div>
           <div class="window-dot window-dot--minimize"></div>

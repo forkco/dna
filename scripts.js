@@ -20,17 +20,17 @@ function toggleTheme() {
 
 // ── Tint Picker ──
 const tintPresets = [
+  { name: 'Cobalt',  light: '#1868D8', dark: '#4890FF' },
   { name: 'Orange',  light: '#E86420', dark: '#F07030' },
   { name: 'Coral',   light: '#E05248', dark: '#F06060' },
   { name: 'Indigo',  light: '#5856D6', dark: '#7B79FF' },
   { name: 'Teal',    light: '#2CA898', dark: '#38C8B8' },
   { name: 'Amber',   light: '#CC8510', dark: '#E8A028' },
-  { name: 'Cobalt',  light: '#1868D8', dark: '#4890FF' },
 ];
 
 function buildTintPicker() {
   const container = document.getElementById('tint-picker');
-  const activeName = localStorage.getItem('te-tint') || 'Orange';
+  const activeName = localStorage.getItem('te-tint') || 'Cobalt';
   const isLight = document.documentElement.getAttribute('data-theme') !== 'dark';
   container.innerHTML = '';
   tintPresets.forEach(p => {
@@ -132,8 +132,8 @@ const allTokens = [
   { section: 'Radius', tokens: ['--radius6', '--radius10', '--radius14', '--radius20', '--radius24', '--radiusFull'] },
   { section: 'Motion', tokens: ['--easeFluent', '--easeSpring', '--easeStandard'] },
   { section: 'Glass', tokens: ['--glassSpecular', '--glassSpecularEdge', '--glassHighlight', '--glassShadow', '--glassCardBg', '--glassCardBorder', '--glassFrostedBg', '--glassFrostedBorder'] },
-  { section: 'Typography', tokens: ['--fontDisplay', '--fontBody', '--fontMono'] },
-  { section: 'Type Scale', tokens: ['--typeXlTitle2', '--typeXlTitle', '--typeLargeTitle', '--typeTitle1', '--typeTitle2', '--typeTitle3', '--typeHeadline', '--typeBody', '--typeCallout', '--typeSubheadline', '--typeFootnote', '--typeCaption1', '--typeCaption2', '--typeCode', '--typeOverline'] },
+  { section: 'Typography', tokens: ['--fontText', '--fontMono'] },
+  { section: 'Type Scale', tokens: ['--typeXlTitle2', '--typeXlTitle', '--typeLargeTitle', '--typeTitle1', '--typeTitle2', '--typeTitle3', '--typeHeadline', '--typeBody', '--typeCallout', '--typeSubheadline', '--typeFootnote', '--typeCaption1', '--typeCaption2', '--typeCode'] },
   { section: 'Text Shadow', tokens: ['--textShadowOnFill'] },
   { section: 'Layout', tokens: ['--containerMaxWidth', '--headerHeight'] },
   { section: 'Dot Grid', tokens: ['--dotGridSize', '--dotGridOffset', '--dotRadius'] },

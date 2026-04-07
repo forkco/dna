@@ -22,28 +22,27 @@ Each family has a strict role. Never cross them:
 
 | Family | Role | Allowed contexts |
 |--------|------|-----------------|
-| **Besley** (serif) | Display, titles, headlines | Section titles, card headers, hero text, navigation labels |
-| **Figtree** (sans) | Body, UI, interactive | Paragraphs, buttons, inputs, lists, descriptions, captions |
+| **Inter** (sans) | Display, titles, headlines | Section titles, card headers, hero text, navigation labels |
+| **Inter** (sans) | Body, UI, interactive | Paragraphs, buttons, inputs, lists, descriptions, captions |
 | **IBM Plex Mono** | Code, data, labels | Code blocks, token names, overline labels, numeric data, mono inputs |
 
 Anti-patterns:
-- Figtree for a section title (too light, no authority)
-- Besley for body text (too heavy for sustained reading)
+- Inter 400 for a section title (too light, no authority — use 600+)
 - Mono for anything longer than a label
 
 ### Optical sizing
 
 The type scale already encodes optical compensation — respect it:
 
-- **Large text (≥22px)**: Negative letter-spacing (-0.01em to -0.02em). Characters are large enough that default spacing feels loose.
-- **Body text (15–18px)**: Zero or near-zero tracking. Default metrics work.
+- **Large text (≥22px)**: Negative letter-spacing (-0.01em). Inter is tighter than serif — less compensation needed.
+- **Body text (15–17px)**: Zero or near-zero tracking. Default metrics work.
 - **Small text (≤14px)**: Positive letter-spacing (+0.01em to +0.02em). Characters need air to stay legible.
 
 Never override these values per-component. If a size feels wrong, use a different token from the scale.
 
 ### Vertical rhythm
 
-All spacing between typographic elements should relate to the body line-height (18px × 1.6 = 28.8px ≈ 28px base unit).
+All spacing between typographic elements should relate to the body line-height (17px × 1.5 = 25.5px ≈ 26px base unit).
 
 Practical rules:
 - Paragraph spacing: 1× base (28px → `--space24` or `--space32`)
@@ -58,8 +57,8 @@ Allowed weight combinations within a single view:
 
 | Context | Title weight | Body weight | Label weight |
 |---------|-------------|-------------|-------------|
-| Default | Besley 700 | Figtree 400 | Mono 600 |
-| Emphasis | Besley 700 | Figtree 600 (bodySemi) | Mono 700 |
+| Default | Inter 700 | Inter 400 | Mono 600 |
+| Emphasis | Inter 700 | Inter 600 (headline) | Mono 700 |
 
 Avoid more than 3 distinct weights visible simultaneously — it fragments hierarchy.
 
@@ -71,7 +70,7 @@ Avoid more than 3 distinct weights visible simultaneously — it fragments hiera
 
 | Element | Min ratio | Tokens to check |
 |---------|-----------|----------------|
-| Body text (≤18px) | **4.5:1** | `--label` on `--systemBackground` |
+| Body text (≤17px) | **4.5:1** | `--label` on `--systemBackground` |
 | Large text (≥18px bold or ≥24px) | **3:1** | Title tokens on backgrounds |
 | UI components (borders, icons) | **3:1** | `--separator`, `--systemGray*` on backgrounds |
 | Disabled text | Exempt | `--disabledLabel` — intentionally low contrast |
@@ -86,7 +85,7 @@ FORK's warm neutrals are close in hue to each other. Combinations that look dist
 
 ### Dark mode gotchas
 
-- Dark backgrounds make saturated colors feel brighter — `--tint` shifts from #E86420 → #F07030 to compensate
+- Dark backgrounds make saturated colors feel brighter — `--tint` shifts from #1868D8 → #4890FF to compensate
 - `--onLight` / `--onDark` exist specifically for text on filled (colored) surfaces — never use `--label` on a tinted background
 
 ### Checking contrast
@@ -116,7 +115,7 @@ Never use system colors (systemRed, systemBlue) directly for semantic purposes �
 
 ### Tint vs system colors
 
-- `--tint` = brand action color, user-swappable (5 presets)
+- `--tint` = brand action color, user-swappable (6 presets)
 - `--systemOrange`, `--systemBlue`, etc. = fixed reference palette, not for UI actions
 - Tint alternatives (`--tintCoral`, `--tintIndigo`, etc.) = for multi-brand or feature differentiation, not interchangeable with semantic tokens
 

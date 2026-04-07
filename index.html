@@ -7,7 +7,7 @@
 <meta name="description" content="FORK design language — colors, typography, components, motion, and interaction patterns for iOS, Android, and Web.">
 <meta name="theme-color" content="#F5F5F2" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#1A1A18" media="(prefers-color-scheme: dark)">
-<link href="https://fonts.googleapis.com/css2?family=Besley:ital,wght@0,400..900;1,400..900&family=Figtree:ital,wght@0,300..700;1,300..700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300..700;1,300..700&family=IBM+Plex+Mono:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <script>(function(){var t=localStorage.getItem('te-theme');if(!t){t=window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'}document.documentElement.setAttribute('data-theme',t)})()</script>
 </head>
@@ -76,10 +76,10 @@
       <div class="landing-card-desc">Chat bubbles and terminal output — input, rich content, agent patterns, and session flows compared side by side</div>
       <div class="landing-card-count">18 sections</div>
     </a>
-    <a href="pages/typography.html" class="landing-card" aria-label="Typography — Display / Besley, body / Figtree, mono / IBM Plex, full type scale with cross-platform specs">
+    <a href="pages/typography.html" class="landing-card" aria-label="Typography — Inter for display and body, IBM Plex Mono for code and labels, full type scale with cross-platform specs">
       <div class="landing-card-label">Typography</div>
-      <div class="landing-card-desc">Display / Besley, body / Figtree, mono / IBM Plex — full type scale with cross-platform specs</div>
-      <div class="landing-card-count">3 sections</div>
+      <div class="landing-card-desc">Inter for display and body, IBM Plex Mono for code — full type scale with cross-platform specs</div>
+      <div class="landing-card-count">2 sections</div>
     </a>
     <a href="pages/visual-direction.html" class="landing-card" aria-label="Visual Direction — Liquid Glass effects, frosted fallbacks, glass + dot interaction, PlanarKit dot pattern">
       <div class="landing-card-label">Visual Direction</div>
@@ -100,7 +100,7 @@
   </div> <!-- /landing-container -->
 
   <div class="landing-dna-container">
-    <p class="landing-dna">FORK draws from <span class="dna-accent">Braun's reduction</span>, <span class="dna-accent">Apple's material honesty</span>, <span class="dna-accent">Teenage Engineering's precision</span>, and <span class="dna-accent">industrial tactility</span>. <strong>Warm neutrals</strong> instead of pure black. <strong>Springs</strong> instead of linear easing. <strong>Semantic color</strong> only — nothing decorative. Three type families with strict roles: <strong>Besley</strong> commands, <strong>Figtree</strong> recedes, <strong>Mono</strong> labels. Glass refracts, shadows follow light, whitespace signals confidence. Every token works at <strong>320pt</strong> under a thumb. Every element earns its place.</p>
+    <p class="landing-dna">FORK draws from <span class="dna-accent">Braun's reduction</span>, <span class="dna-accent">Apple's material honesty</span>, and <span class="dna-accent">industrial tactility</span>. <strong>Warm neutrals</strong> instead of pure black. <strong>Springs</strong> instead of linear easing. <strong>Semantic color</strong> only — nothing decorative. Two type families: <strong>Inter</strong> for display and body, <strong>Mono</strong> for code and data. Glass refracts, shadows follow light, whitespace signals confidence. Every token works at <strong>320pt</strong> under a thumb. Every element earns its place.</p>
   </div>
 </main>
 
@@ -218,10 +218,10 @@
   if (!el) return;
   var phrases = [
     '#1A1A18, not #000000.',
-    '42px Besley Bold.',
+    '42px Inter Bold.',
     'cubic-bezier(0.2, 0, 0, 1)',
     '3px dots, 21px spacing.',
-    'var(--tint): #E86420',
+    'var(--tint): #1868D8',
     '44pt minimum tap target.',
     'iOS \u00b7 Android \u00b7 Web'
   ];

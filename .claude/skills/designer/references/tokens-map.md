@@ -10,7 +10,7 @@ Quick reference for locating sections across the multi-page design language.
 | Colors | `pages/colors.html` | Backgrounds, Labels, Fills, Separators, System Colors, Tint Alternatives, Grays, Semantic, On-Colors |
 | Layout | `pages/layout.html` | Shadows, Spacing & Radius, Concentric Corner Radius |
 | Components | `pages/components.html` | Button, Input, Markdown |
-| Typography | `pages/typography.html` | Display / Besley, Body / Figtree, Mono / IBM Plex |
+| Typography | `pages/typography.html` | Inter, Mono / IBM Plex |
 | Visual Direction | `pages/visual-direction.html` | Liquid Glass, Glass + Dot, Dot Pattern |
 | Motion | `pages/motion.html` | Motion Tokens, Live Demos |
 | Reference | `pages/reference.html` | All Tokens (auto-generated table) |
@@ -41,7 +41,7 @@ All pages share:
 - `styles.css` — all CSS (tokens + components)
 - `scripts.js` — theme toggle, tint picker, token resolution, copy/toast, scroll spy
 - `planarkit.js` — PlanarKit Canvas 2D engine (Scene class, physics, rendering, animation loop)
-- Google Fonts link — Besley, Figtree, IBM Plex Mono
+- Google Fonts link — Inter, IBM Plex Mono
 
 Page-specific inline scripts:
 - `index.html` — PlanarKit full-screen background (hover field + ambient)
