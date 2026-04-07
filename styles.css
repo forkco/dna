@@ -90,7 +90,7 @@
   --onDark: #1A1A18;
 
   /* Tint */
-  --tint: #1868D8;
+  --tint: #177CF4;
 
   /* Tint Alternatives */
   --tintOrange: #E86420;
@@ -150,10 +150,8 @@
   --chatTailRadius: 6px;
   --chatCapsuleRadius: 24px;
 
-  /* Chat — outgoing bubble.
-     Same value (#1478CC) in both themes for visual consistency.
-     White text on #1478CC ≈ 4.6:1 contrast — passes WCAG AA. */
-  --chatBubbleUserBackground: #1478CC;
+  /* Chat — outgoing bubble = tint. Changes when user swaps tint preset. */
+  --chatBubbleUserBackground: var(--tint);
   --chatBubbleUserText: #FFFFFF;
 
   /* Border — softer than separator, for card/component outlines */
@@ -269,7 +267,7 @@
   --onDark: #1A1A18;
 
   /* Tint */
-  --tint: #4890FF;
+  --tint: #177CF4;
 
   /* Tint Alternatives */
   --tintOrange: #F07030;
@@ -307,9 +305,8 @@
   /* Border */
   --border: rgba(245, 245, 242, 0.08);
 
-  /* Chat — outgoing bubble: darker than dark-mode systemBlue (#1A8DE0)
-     to maintain ≥4.5:1 contrast with white text */
-  --chatBubbleUserBackground: #1478CC;
+  /* Chat — outgoing bubble = tint. */
+  --chatBubbleUserBackground: var(--tint);
   --chatBubbleUserText: #FFFFFF;
 
   /* Glass — specular highlight */
@@ -410,9 +407,9 @@ body {
 
 .header-title {
   font-family: var(--fontText);
-  font-size: var(--typeCaption2);
+  font-size: var(--typeCaption1);
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
   color: var(--label);
   text-decoration: none;
@@ -472,9 +469,9 @@ a.header-title:hover {
   align-items: center;
   gap: var(--space8);
   font-family: var(--fontText);
-  font-size: var(--typeCaption2);
+  font-size: var(--typeCaption1);
   font-weight: 600;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
   color: var(--secondaryLabel);
   cursor: pointer;
@@ -594,9 +591,9 @@ a.header-title:hover {
 
 .sidebar-group-label {
   font-family: var(--fontText);
-  font-size: var(--typeCaption2);
+  font-size: var(--typeCaption1);
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
   color: var(--secondaryLabel);
   padding: var(--space4) var(--space8);

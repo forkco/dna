@@ -20,7 +20,7 @@ function toggleTheme() {
 
 // ── Tint Picker ──
 const tintPresets = [
-  { name: 'Cobalt',  light: '#1868D8', dark: '#4890FF' },
+  { name: 'Cobalt',  light: '#177CF4', dark: '#177CF4' },
   { name: 'Orange',  light: '#E86420', dark: '#F07030' },
   { name: 'Coral',   light: '#E05248', dark: '#F06060' },
   { name: 'Indigo',  light: '#5856D6', dark: '#7B79FF' },
