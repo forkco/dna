@@ -136,6 +136,7 @@
         <li><span class="token">.attach-artifact--lg</span><span class="dash">/</span>Large artifact pill (created app, deployed project)</li>
         <li><span class="token">.term-steps</span><span class="dash">/</span>Step progress list (pending → active → done)</li>
         <li><span class="token">.term-options</span><span class="dash">/</span>Option picker (numbered choices)</li>
+        <li><span class="token">.chat-audio</span><span class="dash">/</span>Audio message — voice waveform player (play, waveform, duration)</li>
       </ul>
     </div>
 
@@ -143,23 +144,22 @@
       <div class="usage-title">Rules</div>
       <ul class="usage-list">
         <li><strong>Order is fixed:</strong> attachments → text → widget. Top to bottom. Never rearranged.</li>
-        <li><strong>Attachments</strong> are always above the text. Media thumbnails scroll horizontally. File pills stack vertically (max 320px). Media first, file pills after.</li>
-        <li><strong>Text</strong> is markdown (rendered as prose) or plain text. One text block per message. Large code fences from markdown may render as standalone <code class="code-inline">.term-block</code> cards outside the bubble for readability — they are still text content and do not consume the widget slot. A message can have both a code block and a widget.</li>
-        <li><strong>Widget</strong> is at most one per message. Any type from the widget list above. Placed below text. An artifact and a changeset cannot coexist in one message — both are widgets, split into two messages.</li>
-        <li><strong>Artifact class naming:</strong> artifact pills reuse <code class="code-inline">.chat-attach-files</code> / <code class="code-inline">.attach-artifact--lg</code> CSS classes for pill styling, but in the data model they are <strong>widgets</strong> (<code class="code-inline">widget: .artifact(...)</code>, NOT <code class="code-inline">attachments[]</code>). Render artifacts in the <strong>widget slot</strong> (after text), not the attachment slot (before text). The CSS class name is a styling convenience — it does not reflect data model position.</li>
-        <li><strong>Minimum content:</strong> a message must have at least one of the three parts. Empty messages are invalid.</li>
-        <li><strong>Media bubble modifier:</strong> <code class="code-inline">.chat-msg-bubble--media</code> is used for both media-only and media+caption cases. Without text: image fills the entire bubble edge-to-edge, 0 padding. With caption text: image edge-to-edge at top, caption below with padding. The CSS distinguishes via child presence (<code class="code-inline">:has(p)</code> / <code class="code-inline">:last-child</code>) — native platforms must branch explicitly based on whether a caption exists.</li>
-        <li><strong>Chat bubble content:</strong> for <strong>all senders</strong>, attachments + text are inside the bubble. Widget is always a sibling below the bubble. The bubble is the content container — its visual style changes per sender (transparent for agent, systemFill for peer, chatBubbleUserBackground for outgoing), but the content structure is identical.</li>
-        <li><strong>Chat agent:</strong> bubble has transparent background and minimal padding (<code class="code-inline">space2</code> vertical, 0 horizontal). Media scrolls full width (agent bubble is 100% wide so carousel bleeds to edges). The bubble view exists for layout but is visually invisible. Agent messages use <strong>100% width</strong> (not 85%) — the only sender type exempt from the 85% max. On Web, the CSS reference flattens agent attachments as siblings for convenience — the visual result is identical since the bubble is transparent. Native implementations should keep attachments inside the bubble container.</li>
-        <li><strong>Chat peer/user:</strong> attachments + text inside bubble. Widget as sibling below. Outgoing (user) widgets right-align with the bubble; incoming (peer) widgets left-align. Same content structure as agent — only bubble styling differs.</li>
-        <li><strong>Bubble width:</strong> determined by the widest child — media, text, or file pills — capped at max bubble width (85% for peer/user, 100% for agent). The bubble grows to fit its widest content, never wider than the cap. Widgets are always outside the bubble and size independently — but align to the same edge as the bubble (right for outgoing, left for incoming). Widgets without an explicit max-width (changeset, activity, steps, options) should not exceed the max bubble width for that sender type (85% for peer/user, 100% for agent) — this applies whether or not a bubble is present in the message.</li>
-        <li><strong>Terminal:</strong> inline flow — attach-row → text lines/prose → card.</li>
-        <li><strong>Folds (tool activity):</strong> inline metadata — not attachments, text, or widgets. Folds sit between attachments and text: the full chat order is <strong>attachments → folds → text → widget</strong>. Folds stack tight (0 gap between folds, 0 gap from last fold to text). Unlimited count. They don't occupy any of the three anatomy slots.</li>
-        <li><strong>Terminal anatomy</strong> differs from chat. Terminal has no "message" boundary — output is a continuous stream. Fixed order: <strong>prompt → folds → steps → prose → changeset / activity → artifact.</strong> Folds and steps appear before prose because terminal output is chronological: the agent reads files (fold), plans work (steps), then writes output (prose) and commits (changeset / activity). Chat anatomy (attachments → text → widget) applies to discrete messages — the "max 1 widget per message" rule applies to chat only. Terminal flow applies to continuous output blocks between prompts — a single terminal response can contain both a changeset and an artifact because they are separate output events in the stream, not coexisting widgets in one message.</li>
-        <li><strong>Bubble tails (standalone):</strong> outgoing = tail at bottom-right (<code class="code-inline">chatTailRadius</code>). Peer = tail at top-left. Agent = no tail (transparent bubble, no visible corners). Tail is a single corner set to <code class="code-inline">chatTailRadius</code> (6px) while all other corners use <code class="code-inline">chatBubbleRadius</code> (18px).</li>
-        <li><strong>Capsule variant:</strong> single-line peer or user messages with <strong>no attachments</strong> can use capsule shape (<code class="code-inline">chatCapsuleRadius</code>, 24px). Messages with attachments inside the bubble are multi-content — always use regular bubble. Text-only + widget (widget is outside) can use capsule if the text fits on one line. Not limited to grouped messages. If text exceeds max bubble width, fall back to regular bubble — never truncate. <strong>Capsule eligibility is a code decision:</strong> the rendering layer must measure text width before rendering and choose capsule vs regular bubble — CSS cannot auto-switch. Capsule tails follow the same rules as regular bubbles (outgoing = bottom-right, peer = top-left). Agent messages should not use capsule — the transparent bubble makes the capsule radius invisible, and the only effect (<code class="code-inline">white-space: nowrap</code>) provides no value when agent width is 100%.</li>
-        <li><strong>Agent grouping:</strong> agent messages never group. Each agent message is standalone with its own name label and potential folds/widgets. Grouping applies only to user and peer messages (same sender, &lt;60s apart). <strong>First in group:</strong> shows name label (no timestamp). <strong>Subsequent:</strong> name and timestamp hidden. <strong>Last in group:</strong> timestamp restored. <strong>Avatar:</strong> layout-preserved but visually hidden (<code class="code-inline">visibility: hidden</code>) on grouped messages — maintains horizontal alignment with the first message's visible avatar.</li>
-        <li><strong>Outgoing widgets:</strong> widgets outside the bubble always use their own default styling — they do NOT inherit outgoing blue color scheme. Each widget type defines its own background (<code class="code-inline">tertiarySystemFill</code> for changeset/activity/options, <code class="code-inline">secondarySystemGroupedBackground</code> for link preview/widget card). Only content inside the bubble adapts to outgoing colors.</li>
+        <li><strong>Attachments</strong> above text. Media scrolls horizontally, file pills stack vertically (max 320px).</li>
+        <li><strong>Text</strong> is markdown (prose) or plain text. One per message. Large code fences may render as standalone <code class="code-inline">.term-block</code> cards — still text content, not widgets.</li>
+        <li><strong>Widget</strong> is at most one per message. Placed below text, outside the bubble. An artifact and a changeset cannot coexist — both are widgets, split into two messages.</li>
+        <li><strong>Artifact class naming:</strong> artifacts reuse <code class="code-inline">.chat-attach-files</code> / <code class="code-inline">.attach-artifact--lg</code> CSS for styling, but are <strong>widgets</strong> in the data model (<code class="code-inline">widget: .artifact(...)</code>, NOT <code class="code-inline">attachments[]</code>). Render in the widget slot, not attachment slot.</li>
+        <li><strong>Minimum content:</strong> at least one of the three parts. Empty messages are invalid.</li>
+        <li><strong>Bubble content:</strong> attachments + text inside bubble; widget always sibling below. Bubble style varies by sender (transparent=agent, systemFill=peer, chatBubbleUserBackground=outgoing) but structure is identical.</li>
+        <li><strong>Agent:</strong> transparent bubble, space2/0 padding, 100% width. Visually invisible — exists for layout only.</li>
+        <li><strong>Peer/user:</strong> filled bubble, max 85% width. Outgoing widgets right-align; incoming left-align.</li>
+        <li><strong>Bubble width:</strong> grows to widest child, capped at sender max (85% peer/user, 100% agent). 85% applies to the row container, not the bubble itself.</li>
+        <li><strong>Terminal:</strong> continuous stream, no message boundary. Flow: prompt → folds → steps → prose → changeset/activity → artifact. Multiple widgets per response allowed.</li>
+        <li><strong>Folds:</strong> inline metadata between attachments and text. Stack tight (0 gap). Not a content slot.</li>
+        <li><strong>Tails:</strong> outgoing = bottom-right at <code class="code-inline">chatTailRadius</code> (6px). Peer = top-left. Agent = none. See Messages section for grouped tail specs.</li>
+        <li><strong>Capsule:</strong> single-line peer/user, no attachments, text fits on one line → capsule shape (<code class="code-inline">chatCapsuleRadius</code> 24px). Eligibility is a code decision — measure before rendering.</li>
+        <li><strong>Grouping:</strong> user/peer only (same sender, &lt;60s). Agent never groups. Avatar hidden but layout-preserved on grouped messages.</li>
+        <li><strong>Outgoing widgets:</strong> use their own default styling — never inherit outgoing blue. Only bubble content adapts to outgoing colors.</li>
+        <li><strong>Sender-agnostic:</strong> all content types work for any sender — agent, peer, or user.</li>
       </ul>
     </div>
 
@@ -171,7 +171,7 @@
             <div>
               <div class="chat-msg-name">Agent</div>
               <!-- 1. Attachments -->
-              <div class="chat-attach-media" style="margin-bottom: var(--space4);">
+              <div class="chat-attach-media">
                 <div class="chat-media"><div style="width:var(--chat-media-w, 280px);aspect-ratio:16/9;background:var(--tertiarySystemBackground);display:flex;align-items:center;justify-content:center;color:var(--tertiaryLabel);font-family:var(--fontMono);font-size:var(--typeCaption2);">attachments</div></div>
               </div>
               <!-- 2. Text -->
@@ -205,7 +205,7 @@
           <div class="term-surface">
             <div class="term-prompt"><span class="term-prompt-symbol">$</span><span class="term-prompt-input">build dashboard</span></div>
             <!-- 1. Attachments -->
-            <div class="attach-row attach-row--lg" style="padding: var(--space4) 0;">
+            <div class="attach-row attach-row--lg">
               <div class="attach-thumb" style="aspect-ratio:16/9;"><div style="width:100%;height:100%;background:linear-gradient(135deg, var(--systemBlue), var(--tint));"></div></div>
             </div>
             <!-- 2. Text -->
@@ -226,31 +226,11 @@
     <div class="usage">
       <div class="usage-title">Platform notes</div>
       <ul class="usage-list">
-        <li><span class="tag tag--ios">iOS</span> Message model: <code class="code-inline">attachments: [Attachment]</code>, <code class="code-inline">text: AttributedString?</code>, <code class="code-inline">widget: Widget?</code>. Render in <code class="code-inline">VStack</code> in this exact order. Agent bubble: <code class="code-inline">UIView</code> with <code class="code-inline">.clear</code> background — do not remove the view, it anchors text layout. VoiceOver should not announce it as a separate container.</li>
-        <li><span class="tag tag--android">Android</span> Message data class: <code class="code-inline">attachments: List&lt;Attachment&gt;</code>, <code class="code-inline">text: AnnotatedString?</code>, <code class="code-inline">widget: Widget?</code>. Column composable, top to bottom.</li>
-        <li><span class="tag tag--web">Web</span> Message container: flex column. Slots render conditionally. <code class="code-inline">.chat-msg-attachments</code> → <code class="code-inline">.chat-msg-bubble</code> → <code class="code-inline">.chat-widget</code> / <code class="code-inline">.chat-link-preview</code> / <code class="code-inline">.term-changeset</code>. Outgoing: <code class="code-inline">align-items: flex-end</code> — all children (bubble + widgets) right-align. The CSS reference uses <code class="code-inline">.chat-demo</code> as a wrapper for chat context overrides — native implementations apply these values directly (see table below).</li>
-        <li><span class="tag tag--all">All</span> This order is non-negotiable. Every message, every sender, every context. Violations break scanning patterns.</li>
-        <li><span class="tag tag--all">All</span> <strong>85% max-width applies to the message row container</strong> (not the bubble). All children — bubble and widgets — are constrained by the row. Agent messages force <code class="code-inline">width: 100%</code> (not just max-width — the row does not shrink to content). Peer/user rows are <code class="code-inline">max-width: 85%</code> and shrink to fit their widest child.</li>
-        <li><span class="tag tag--all">All</span> <strong>Incoming bubble cascade:</strong> all incoming messages (agent + peer) start with transparent background and minimal padding (space2 / 0). Peer then overrides to systemFill + standard padding (space12 / space16). On native, apply incoming defaults first, then peer overrides — do not treat agent and peer as independent branches. If the code checks "incoming" and returns early, peer never gets its fill.</li>
-        <li><span class="tag tag--all">All</span> <strong>Outgoing widget color isolation:</strong> apply <code class="code-inline">chatBubbleUserBackground</code> and <code class="code-inline">chatBubbleUserText</code> to the bubble view only, never to the message container. Widgets are siblings of the bubble and must retain their own default color scheme (each widget type defines its own background). If outgoing color is applied at the container level, widgets inherit white text on non-blue backgrounds.</li>
-        <li><span class="tag tag--all">All</span> Terminal components in chat context use different font and radius values. The CSS reference uses <code class="code-inline">.chat-demo</code> as the context selector for these overrides — this is a reference-page artifact. In production, native platforms must apply these overrides based on their own context detection (e.g. a chat view controller vs terminal view controller). Web production code should use a comparable wrapper class. Values:</li>
+        <li><span class="tag tag--ios">iOS</span> Message model: attachments, text, widget — render in VStack in this order. Agent bubble: clear background UIView — keep for layout, hide from VoiceOver.</li>
+        <li><span class="tag tag--android">Android</span> Message model: attachments, text, widget — Column composable, top to bottom.</li>
+        <li><span class="tag tag--web">Web</span> Flex column. Outgoing: <code class="code-inline">align-items: flex-end</code> for right-alignment.</li>
+        <li><span class="tag tag--all">All</span> 85% max-width applies to the message row container (not the bubble). Agent forces 100% width. Incoming bubble cascade: transparent + minimal padding first, peer overrides to systemFill. Outgoing colors apply to bubble only — widgets retain their own backgrounds.</li>
       </ul>
-      <table class="spec-table" style="margin: var(--space8) 0 var(--space4); font-size: var(--typeCaption1);">
-        <thead><tr><th>Component</th><th>Terminal</th><th>Chat</th></tr></thead>
-        <tbody>
-          <tr><td>Fold summary</td><td>fontMono / typeCode</td><td>fontText / caption1</td></tr>
-          <tr><td>Steps</td><td>fontMono / typeCode</td><td>fontText / caption1</td></tr>
-          <tr><td>Options</td><td>fontMono / typeCode</td><td>fontText / caption1</td></tr>
-          <tr><td>Changeset</td><td>fontMono / typeCode</td><td>fontText / caption1</td></tr>
-          <tr><td>Activity card</td><td>fontMono / typeCode</td><td>fontText / caption1</td></tr>
-          <tr><td>Pill (attach-artifact)</td><td>fontMono / r0</td><td>fontText / r10</td></tr>
-          <tr><td>Changeset radius</td><td>radius12</td><td>radius14</td></tr>
-          <tr><td>Activity radius</td><td>radius12</td><td>radius14</td></tr>
-          <tr><td>Standalone code block (.term-block)</td><td>radius10</td><td>radius14</td></tr>
-          <tr><td>Inline pre (inside prose in bubble)</td><td>—</td><td>radius14 (incoming/peer — concentric with bubble) / radius6 (outgoing — tighter inset)</td></tr>
-          <tr><td>Option radius</td><td>0</td><td>radius10</td></tr>
-        </tbody>
-      </table>
     </div>
   </div>
 
@@ -383,10 +363,9 @@
     <div class="usage">
       <div class="usage-title">Platform notes</div>
       <ul class="usage-list">
-        <li><span class="tag tag--ios">iOS</span> Single media: <code class="code-inline">AsyncImage</code> with <code class="code-inline">.clipShape()</code> matching bubble shape. Multiple: <code class="code-inline">UICollectionView</code> with paging-like scroll (70% width cells).</li>
-        <li><span class="tag tag--android">Android</span> Single media: <code class="code-inline">AsyncImage</code> with <code class="code-inline">Modifier.clip()</code>. Multiple: <code class="code-inline">LazyRow</code> with <code class="code-inline">Arrangement.spacedBy(4.dp)</code>, item width = <code class="code-inline">0.7f * maxWidth</code>.</li>
-        <li><span class="tag tag--web">Web</span> Single: <code class="code-inline">width: 100%</code> inside bubble. Multiple: <code class="code-inline">flex-shrink: 0; width: 70%</code> per thumb, <code class="code-inline">overflow-x: auto</code> on container.</li>
-        <li><span class="tag tag--all">All</span> Peek pattern is critical — if the user can't see the next item, they won't know to scroll. 70% is the sweet spot: enough to show the current image, enough peek to hint at more.</li>
+        <li><span class="tag tag--ios">iOS</span> Single media: clip to bubble shape. Multiple: paging-like horizontal scroll, 70% cell width.</li>
+        <li><span class="tag tag--android">Android</span> Single media: clip to bubble shape. Multiple: horizontal scroll, 70% item width.</li>
+        <li><span class="tag tag--web">Web</span> Single: 100% width inside bubble. Multiple: 70% per thumb, horizontal scroll.</li>
       </ul>
     </div>
   </div>
@@ -502,7 +481,6 @@
             <div class="term-prompt"><span class="term-prompt-path">~/project</span><span class="term-prompt-symbol">$</span><span class="term-prompt-input">fork info</span></div>
             <div class="term-line term-line--stdout">FORK Design System v1.0</div>
             <div class="term-line term-line--stdout">Tokens: 127 active</div>
-            <div class="term-line term-line--stdout"></div>
 
             <!-- Peer prompt — new concept -->
             <div class="term-prompt"><span class="term-prompt-user">@julia</span><span class="term-prompt-path">~/project</span><span class="term-prompt-symbol">$</span><span class="term-prompt-input">fork list --tokens spacing</span></div>
@@ -511,12 +489,10 @@
             <div class="term-line term-line--stdout">  space16   16px</div>
             <div class="term-line term-line--stdout">  space24   24px</div>
             <div class="term-line term-line--muted">4 tokens shown</div>
-            <div class="term-line term-line--stdout"></div>
 
             <!-- Back to current user -->
             <div class="term-prompt"><span class="term-prompt-path">~/project</span><span class="term-prompt-symbol">$</span><span class="term-prompt-input">fork audit</span></div>
             <div class="term-line term-line--success">✓ Audit complete — 0 errors</div>
-            <div class="term-line term-line--stdout"></div>
 
             <!-- Peer again -->
             <div class="term-prompt"><span class="term-prompt-user">@julia</span><span class="term-prompt-path">~/project</span><span class="term-prompt-symbol">$</span><span class="term-prompt-input">looks good!</span></div>
@@ -608,14 +584,9 @@
     <div class="usage">
       <div class="usage-title">Platform notes</div>
       <ul class="usage-list">
-        <li><span class="tag tag--ios">iOS</span> Chat: dedicated outgoing-bubble color (not <code class="code-inline">UIColor.systemBlue</code>) — dark mode needs a darker blue for white-text contrast. Do NOT use tint. Agent bubble: <code class="code-inline">UIView</code> with <code class="code-inline">.clear</code> background — keep the view for layout, remove it from VoiceOver. Terminal peer: same mono font, systemBlue for username.</li>
-        <li><span class="tag tag--android">Android</span> Chat: per-corner radii via <code class="code-inline">RoundedCornerShape</code>. Terminal: <code class="code-inline">AnnotatedString</code> with colored spans for usernames.</li>
-        <li><span class="tag tag--web">Web</span> Chat: flex column with <code class="code-inline">align-items: flex-end</code> on outgoing messages — bubble and widgets both right-align. Terminal: <code class="code-inline">.term-prompt-user</code> is inline before path.</li>
-        <li><span class="tag tag--all">All</span> Any user can send any content type — prose, media, widgets, code. The bubble/prompt wrapper changes, not the content inside.</li>
-        <li><span class="tag tag--all">All</span> Terminal line-height is 1.7 (not 1.6 from the type scale) — taller leading keeps dense monospace output scannable. This is an intentional terminal-specific override.</li>
-        <li><span class="tag tag--all">All</span> <strong>Capsule eligibility</strong> is a code decision. Requirements: (1) peer or user sender, (2) text-only content — no attachments inside the bubble, (3) text fits within max bubble width on a single line. If any condition fails, fall back to regular bubble (<code class="code-inline">chatBubbleRadius</code>). A text-only message with a widget (outside the bubble) can use capsule. CSS <code class="code-inline">white-space: nowrap</code> prevents wrapping but cannot auto-switch shape — the rendering layer must branch.</li>
-        <li><span class="tag tag--all">All</span> <strong>Media bubble modifier</strong> (<code class="code-inline">.chat-msg-bubble--media</code>) covers two cases: media-only (0 padding) and media+caption (padding below image for text). On Web, CSS <code class="code-inline">:has()</code> selectors handle both. On native, explicitly branch based on whether a caption exists — this is not a single layout path.</li>
-        <li><span class="tag tag--all">All</span> <strong>Media carousel gap:</strong> space4 for agent flat carousel (full-width, tighter fit), space8 for peer/user bubbled scroll (spaced for peek pattern). This is an intentional split — agent carousel bleeds to edges and needs compact spacing.</li>
+        <li><span class="tag tag--ios">iOS</span> Outgoing bubble: dedicated color (not systemBlue) — dark mode needs darker blue. Agent bubble: clear UIView for layout, hidden from VoiceOver.</li>
+        <li><span class="tag tag--android">Android</span> Per-corner radii for grouped tails.</li>
+        <li><span class="tag tag--web">Web</span> Outgoing: flex-end alignment. Terminal peer: inline username prefix.</li>
       </ul>
     </div>
   </div>
@@ -771,17 +742,15 @@
         <li><span class="token">.prose</span><span class="dash">/</span>Rendered markdown inside chat bubbles — lists, blockquotes, bold, inline code. Resets container padding/background to transparent.</li>
         <li><span class="token">.term-prose</span><span class="dash">/</span>Mono prose in terminal — headings via weight + uppercase, body via secondaryLabel. Hierarchy through weight, not typeface.</li>
         <li><span class="token">.is-streaming</span><span class="dash">/</span>Active generation — appends a tint block cursor via <code class="code-inline">::after</code>. Remove class when stream completes.</li>
-        <li><strong>Any sender</strong> can send rich text — agent, peer, user. Same prose styles in all contexts.</li>
       </ul>
     </div>
 
     <div class="usage">
       <div class="usage-title">Platform notes</div>
       <ul class="usage-list">
-        <li><span class="tag tag--ios">iOS</span> Chat: <code class="code-inline">AttributedString(markdown:)</code> with Inter. Terminal: IBM Plex Mono throughout, bold=600.</li>
-        <li><span class="tag tag--android">Android</span> Chat: <code class="code-inline">AnnotatedString</code> with markdown parser, Inter body font. Terminal: IBM Plex Mono throughout, bold=600.</li>
-        <li><span class="tag tag--web">Web</span> Chat: <code class="code-inline">.prose</code> resets inside bubble. Terminal: <code class="code-inline">.term-prose</code> inherits <code class="code-inline">var(--fontMono)</code>.</li>
-        <li><span class="tag tag--all">All</span> Chat = mixed fonts (Inter + Plex code). Terminal = mono only. Hierarchy via weight, not typeface.</li>
+        <li><span class="tag tag--ios">iOS</span> Chat: Inter markdown. Terminal: Plex Mono, bold=600.</li>
+        <li><span class="tag tag--android">Android</span> Chat: Inter markdown. Terminal: Plex Mono, bold=600.</li>
+        <li><span class="tag tag--web">Web</span> Chat: <code class="code-inline">.prose</code> inside bubble. Terminal: <code class="code-inline">.term-prose</code>.</li>
       </ul>
     </div>
   </div>
@@ -861,7 +830,6 @@
             <div class="term-line">  <span class="term-kw">const</span> <span class="term-param">v</span> <span class="term-op">=</span> <span class="term-fn">getComputedStyle</span><span class="term-punct">(</span><span class="term-param">root</span><span class="term-punct">).</span><span class="term-fn">getPropertyValue</span><span class="term-punct">(</span><span class="term-str">'--'</span> <span class="term-op">+</span> <span class="term-param">name</span><span class="term-punct">);</span></div>
             <div class="term-line">  <span class="term-kw">return</span> <span class="term-param">v</span> <span class="term-op">||</span> <span class="term-str">'undefined'</span><span class="term-punct">;</span></div>
             <div class="term-line"><span class="term-punct">}</span></div>
-            <div class="term-line term-line--stdout"></div>
 
             <!-- Diff block -->
             <div class="term-prompt"><span class="term-prompt-path">~/project</span><span class="term-prompt-symbol">$</span><span class="term-prompt-input">fork diff styles.css</span></div>
@@ -957,10 +925,7 @@
     <div class="usage">
       <div class="usage-title">Platform notes</div>
       <ul class="usage-list">
-        <li><span class="tag tag--web">Web</span> Chat: syntax spans inside <code class="code-inline">.prose pre code</code>. Terminal: syntax spans inside <code class="code-inline">.term-line</code>. Same <code class="code-inline">.term-*</code> classes in both.</li>
-        <li><span class="tag tag--ios">iOS</span> Syntax: <code class="code-inline">NSAttributedString</code> with color spans. Diff: tinted <code class="code-inline">UIColor</code> backgrounds at 6% opacity.</li>
-        <li><span class="tag tag--android">Android</span> Syntax: <code class="code-inline">AnnotatedString</code> with <code class="code-inline">SpanStyle(color = ...)</code>. Diff: <code class="code-inline">Modifier.background()</code> with 6% alpha.</li>
-        <li><span class="tag tag--all">All</span> Code is always Plex Mono regardless of context. Zero new tokens for syntax — all existing system colors. ANSI is terminal-only.</li>
+        <li><span class="tag tag--all">All</span> Code is always Plex Mono. Same syntax classes in chat and terminal. ANSI colors terminal-only. Diff backgrounds use semantic color at 6% fill.</li>
       </ul>
     </div>
   </div>
@@ -1012,17 +977,14 @@
             <div class="term-line term-line--info">ℹ Compiling 42 modules...</div>
             <div class="term-line term-line--warning">⚠ Deprecated token --oldFill</div>
             <div class="term-line term-line--stderr">✕ Build failed: unresolved token</div>
-            <div class="term-line term-line--stdout"></div>
             <div class="term-prompt"><span class="term-prompt-symbol">$</span><span class="term-prompt-input">fork build --fix</span></div>
             <div class="term-line term-line--success">✓ Build complete — 0 errors</div>
-            <div class="term-line term-line--stdout"></div>
             <div class="term-prompt"><span class="term-prompt-symbol">$</span><span class="term-prompt-input">fork deploy</span></div>
             <div class="term-progress">
               <span class="term-progress-title">Uploading</span>
               <div class="term-progress-track"><div class="term-progress-bar" style="width: 73%;"></div></div>
               <span class="term-progress-label">73%</span>
             </div>
-            <div class="term-line term-line--stdout"></div>
             <div class="term-line term-line--muted" style="display:flex; gap:var(--space8); flex-wrap:wrap;">Badges: <span class="term-badge term-badge--success">Success</span> <span class="term-badge term-badge--error">Error</span> <span class="term-badge term-badge--warning">Warning</span> <span class="term-badge term-badge--info">Info</span></div>
           </div>
         </div>
@@ -1078,10 +1040,7 @@
     <div class="usage">
       <div class="usage-title">Platform notes</div>
       <ul class="usage-list">
-        <li><span class="tag tag--ios">iOS</span> Chat peer typing: <code class="code-inline">UIView.animate</code> with bounce. Agent thinking: <code class="code-inline">CABasicAnimation</code> for cursor blink (same as terminal).</li>
-        <li><span class="tag tag--android">Android</span> Chat peer: <code class="code-inline">InfiniteTransition</code> with staggered delays. Agent thinking: <code class="code-inline">animateFloatAsState</code> for cursor opacity.</li>
-        <li><span class="tag tag--web">Web</span> Chat peer: <code class="code-inline">@keyframes chat-typing</code>. Agent + terminal thinking: shared <code class="code-inline">.cursor--block</code> with CSS <code class="code-inline">steps(2)</code> blink, respects <code class="code-inline">prefers-reduced-motion</code>.</li>
-        <li><span class="tag tag--all">All</span> Two distinct indicators: peer dots (human composing) and block cursor (AI/terminal thinking). Cursor is shared between chat agent and terminal.</li>
+        <li><span class="tag tag--web">Web</span> Peer typing: CSS keyframes. Thinking cursor: <code class="code-inline">steps(2)</code> blink, respects <code class="code-inline">prefers-reduced-motion</code>.</li>
       </ul>
     </div>
   </div>
@@ -1185,16 +1144,12 @@
         <li><span class="token">.term-fold</span><span class="dash">/</span>Collapsible block for tool calls, verbose output, logs. Collapsed by default — user reads response first, opens on demand.</li>
         <li><span class="token">.term-fold-tool</span><span class="dash">/</span>Tool name (Read, Edit, Scaffold). SecondaryLabel to recede from the target path.</li>
         <li><span class="token">.term-badge</span><span class="dash">/</span>Status badge right-aligned in fold summary. Success/error for quick scan without expanding.</li>
-        <li>Any sender can share tool results — agent, peer, or user. Same fold structure in all contexts.</li>
       </ul>
     </div>
     <div class="usage">
       <div class="usage-title">Platform notes</div>
       <ul class="usage-list">
-        <li><span class="tag tag--ios">iOS</span> <code class="code-inline">DisclosureGroup</code> with custom label. Chevron: SF Symbol <code class="code-inline">chevron.right</code> with rotation animation.</li>
-        <li><span class="tag tag--android">Android</span> <code class="code-inline">AnimatedVisibility</code> with custom header row. Chevron: <code class="code-inline">animateFloatAsState</code> rotation.</li>
-        <li><span class="tag tag--web">Web</span> Native <code class="code-inline">&lt;details&gt;</code> for free accessibility + keyboard support. Chevron via CSS <code class="code-inline">::before</code> rotation.</li>
-        <li><span class="tag tag--all">All</span> Default collapsed. Any sender can share tool results. Body uses mono font for code output regardless of chat/terminal context.</li>
+        <li><span class="tag tag--web">Web</span> Uses native <code class="code-inline">&lt;details&gt;</code> for accessibility + keyboard support.</li>
       </ul>
     </div>
   </div>
@@ -1257,7 +1212,6 @@
               <div class="term-step term-step--active"><span class="term-step-icon"></span><span>Push</span></div>
               <div class="term-step term-step--pending"><span class="term-step-icon"></span><span>Health check</span></div>
             </div>
-            <div class="term-line term-line--stdout"></div>
             <div class="term-prompt"><span class="term-prompt-user">@julia</span><span class="term-prompt-symbol">$</span><span class="term-prompt-input">review PR #42</span></div>
             <div class="term-steps">
               <div class="term-step term-step--done"><span class="term-step-icon"></span><span>Read PR</span></div>
@@ -1287,16 +1241,12 @@
         <li><span class="token">.term-steps</span><span class="dash">/</span>Multi-step process with visible progress. Each step transitions pending → active → done (or error).</li>
         <li><span class="token">.term-step--active</span><span class="dash">/</span>Currently executing. Tint icon + full-contrast text draw attention.</li>
         <li><span class="token">.term-step--pending</span><span class="dash">/</span>Not yet started. Tertiary color recedes.</li>
-        <li>Always show all steps — don't hide pending ones. Any sender can share step progress.</li>
       </ul>
     </div>
     <div class="usage">
       <div class="usage-title">Platform notes</div>
       <ul class="usage-list">
-        <li><span class="tag tag--ios">iOS</span> <code class="code-inline">VStack(alignment: .leading, spacing: 2)</code>. Icons: SF Symbols <code class="code-inline">circle</code>, <code class="code-inline">circle.inset.filled</code>, <code class="code-inline">checkmark</code>, <code class="code-inline">xmark</code>.</li>
-        <li><span class="tag tag--android">Android</span> <code class="code-inline">Column(verticalArrangement = Arrangement.spacedBy(2.dp))</code>. Material icons for states.</li>
-        <li><span class="tag tag--web">Web</span> Icons via CSS <code class="code-inline">::before</code> — Unicode (○, ◉, ✓, ✕). No icon font needed.</li>
-        <li><span class="tag tag--all">All</span> Steps update in-place as task progresses. Always show all steps — don't hide pending ones.</li>
+        <li><span class="tag tag--web">Web</span> Step icons via CSS <code class="code-inline">::before</code> — Unicode characters, no icon font needed.</li>
       </ul>
     </div>
   </div>
@@ -1357,7 +1307,6 @@
               <div class="term-option term-option--selected"><span class="term-option-key">2</span><span>Landing page</span></div>
               <div class="term-option"><span class="term-option-key">3</span><span>Dashboard</span></div>
             </div>
-            <div class="term-line term-line--stdout"></div>
             <div class="term-prompt"><span class="term-prompt-user">@julia</span><span class="term-prompt-symbol">$</span><span class="term-prompt-input">which tint?</span></div>
             <div class="term-options">
               <div class="term-option term-option--selected"><span class="term-option-key">A</span><span>Coral — warm</span></div>
@@ -1392,18 +1341,14 @@
       <div class="usage-title">When to use</div>
       <ul class="usage-list">
         <li><span class="token">.term-options</span><span class="dash">/</span>Numbered choice list. Present all options at once — never paginate.</li>
-        <li><span class="token">.term-option--selected</span><span class="dash">/</span>User's selection — tint border. Only one selected at a time.</li>
+        <li><span class="token">.term-option--selected</span><span class="dash">/</span>User's selection — tint border. Only one selected at a time. After selection, picker collapses to chosen option as regular text.</li>
         <li><span class="token">.term-option-key</span><span class="dash">/</span>Shortcut key (1, 2, A, B). Left-aligned, secondary color.</li>
-        <li>Any sender can present options — agent asks questions, peer proposes polls, user creates votes.</li>
       </ul>
     </div>
     <div class="usage">
       <div class="usage-title">Platform notes</div>
       <ul class="usage-list">
-        <li><span class="tag tag--ios">iOS</span> <code class="code-inline">VStack</code> of <code class="code-inline">Button</code> elements. Selected: <code class="code-inline">.border(tint, width: 1)</code>.</li>
-        <li><span class="tag tag--android">Android</span> <code class="code-inline">Column</code> of <code class="code-inline">Surface</code> with <code class="code-inline">onClick</code>. Selected: <code class="code-inline">BorderStroke(1.dp, tint)</code>.</li>
-        <li><span class="tag tag--web">Web</span> Keyboard: number keys quick-select, arrow keys navigate, Enter confirms. Focus ring on <code class="code-inline">:focus-visible</code>.</li>
-        <li><span class="tag tag--all">All</span> After selection, picker collapses and chosen option appears as regular text. Any sender can present options — agent, peer, or user.</li>
+        <li><span class="tag tag--web">Web</span> Keyboard: number keys quick-select, arrow keys navigate, Enter confirms.</li>
       </ul>
     </div>
   </div>
@@ -1489,10 +1434,8 @@
     <div class="usage">
       <div class="usage-title">Platform notes</div>
       <ul class="usage-list">
-        <li><span class="tag tag--ios">iOS</span> <code class="code-inline">LPMetadataProvider</code> fetches OpenGraph data. Card: custom <code class="code-inline">UIView</code> matching spec radius and padding.</li>
-        <li><span class="tag tag--android">Android</span> Custom OG-tag fetcher. Card: <code class="code-inline">Surface</code> composable with <code class="code-inline">RoundedCornerShape(14.dp)</code>.</li>
-        <li><span class="tag tag--web">Web</span> Server-side OG fetch (avoid CORS). <code class="code-inline">.chat-link-preview</code> with flex layout. Hover lifts with <code class="code-inline">shadowSmall</code>.</li>
-        <li><span class="tag tag--all">All</span> Fallback: domain + title only when image/description unavailable. Max width 320px. One per message.</li>
+        <li><span class="tag tag--web">Web</span> Server-side OG fetch to avoid CORS.</li>
+        <li><span class="tag tag--all">All</span> Fallback: domain + title when image/description unavailable. Max width 320px.</li>
       </ul>
     </div>
   </div>
@@ -1575,16 +1518,12 @@
         <li><span class="token">.term-changeset-id</span><span class="dash">/</span>Short hash in tint — clickable to view full diff.</li>
         <li><span class="token">.term-changeset-seq</span><span class="dash">/</span>Sequence number (e.g. #4) — tertiaryLabel, right-aligned. Tracks order within session.</li>
         <li><span class="token">.term-changeset-icon</span><span class="dash">/</span>Commit type icon — use a full radial icon (gear/sun) for agent-generated commits, a simpler vertical icon for peer/user pushes. Icon is decorative; the semantic info is in the hash and message.</li>
-        <li>Any sender can share changesets — agent commits, peer pushes, user references.</li>
       </ul>
     </div>
     <div class="usage">
       <div class="usage-title">Platform notes</div>
       <ul class="usage-list">
-        <li><span class="tag tag--ios">iOS</span> <code class="code-inline">VStack</code> with mono font throughout. Tap navigates to diff viewer.</li>
-        <li><span class="tag tag--android">Android</span> <code class="code-inline">Column</code> inside <code class="code-inline">Surface(shape = RoundedCornerShape(12.dp))</code>. Mono font.</li>
-        <li><span class="tag tag--web">Web</span> <code class="code-inline">.term-changeset</code> base radius12; <code class="code-inline">.chat-demo .term-changeset</code> overrides to radius14. Same component, context-aware radius.</li>
-        <li><span class="tag tag--all">All</span> Terminal: mono font throughout. Chat: fontText (caption1) for readability — only fold bodies retain mono. Radius14 in chat (concentric with bubble), radius12 in terminal.</li>
+        <li><span class="tag tag--all">All</span> Terminal: mono font, radius 0. Chat: fontText, radius14 (concentric with bubble).</li>
       </ul>
     </div>
   </div>
@@ -1662,19 +1601,15 @@
     <div class="usage">
       <div class="usage-title">When to use</div>
       <ul class="usage-list">
-        <li><span class="token">.chat-widget</span><span class="dash">/</span>Interactive preview card — dashboard, map, poll. One per message (widget slot).</li>
+        <li><span class="token">.chat-widget</span><span class="dash">/</span>Interactive preview card — dashboard, map, poll. One per message (widget slot). Max width 320px. Chat-only — terminal uses <code class="code-inline">.term-activity</code> for progress.</li>
         <li><span class="token">.chat-widget-preview</span><span class="dash">/</span>160px visual area with tertiarySystemBackground. Hosts live content or placeholder icon.</li>
         <li><span class="token">.chat-widget-meta</span><span class="dash">/</span>Overline status — LIVE, TAP TO OPEN, count. Mono font, tertiaryLabel.</li>
-        <li>Any sender can share cards — agent presents results, peer shares locations, user posts polls.</li>
       </ul>
     </div>
     <div class="usage">
       <div class="usage-title">Platform notes</div>
       <ul class="usage-list">
-        <li><span class="tag tag--ios">iOS</span> Card: <code class="code-inline">UIView</code> with <code class="code-inline">clipsToBounds</code> at radius14. Preview: embedded <code class="code-inline">WKWebView</code> or <code class="code-inline">UIView</code> snapshot.</li>
-        <li><span class="tag tag--android">Android</span> Card: <code class="code-inline">Surface(shape = RoundedCornerShape(14.dp))</code>. Preview: <code class="code-inline">AndroidView</code> or composable snapshot.</li>
-        <li><span class="tag tag--web">Web</span> <code class="code-inline">.chat-widget</code> with <code class="code-inline">overflow: hidden</code> + <code class="code-inline">radius14</code>. Hover: <code class="code-inline">translateY(-1px)</code> + <code class="code-inline">shadowSmall</code>.</li>
-        <li><span class="tag tag--all">All</span> Tap opens full-screen view. Max width 320px. Chat-only component — terminal has no interactive preview card. Terminal renders rich content as prose with links; for progress/status use <code class="code-inline">.term-activity</code> (separate component, see Activity Card).</li>
+        <li><span class="tag tag--all">All</span> Tap opens full-screen view. Chat-only component — terminal uses <code class="code-inline">.term-activity</code> for progress.</li>
       </ul>
     </div>
   </div>
@@ -1782,16 +1717,12 @@
         <li><span class="token">.term-activity</span><span class="dash">/</span>Progress card for long-running tasks — builds, deploys, installs. Shared component in chat and terminal.</li>
         <li><span class="token">.term-activity-bar</span><span class="dash">/</span>Tint-colored progress fill. Width set via inline style (JS-driven). Animates with easeFluent.</li>
         <li><span class="token">.term-badge</span><span class="dash">/</span>Status badge (live, error, etc.) replaces percentage label when task completes.</li>
-        <li>Any sender can share activity — agent builds, peer deploys, user runs tests.</li>
       </ul>
     </div>
     <div class="usage">
       <div class="usage-title">Platform notes</div>
       <ul class="usage-list">
-        <li><span class="tag tag--ios">iOS</span> Card: <code class="code-inline">HStack</code> with icon + body + badge. Progress: <code class="code-inline">ProgressView</code> with custom tint style.</li>
-        <li><span class="tag tag--android">Android</span> Card: <code class="code-inline">Row</code> composable. Progress: <code class="code-inline">LinearProgressIndicator</code> with <code class="code-inline">animateFloatAsState</code>.</li>
-        <li><span class="tag tag--web">Web</span> <code class="code-inline">.term-activity</code> flex row. Bar width via inline <code class="code-inline">style</code>, transitions with <code class="code-inline">easeFluent 0.4s</code>.</li>
-        <li><span class="tag tag--all">All</span> Terminal: mono font throughout. Chat: fontText (caption1) for readability. Radius14 in chat (concentric with bubble), radius12 in terminal. Icon optional. Progress updates in-place — no re-render flicker.</li>
+        <li><span class="tag tag--all">All</span> Shared component in chat and terminal. Progress updates in-place.</li>
       </ul>
     </div>
   </div>
@@ -1838,10 +1769,9 @@
           <div class="term-surface">
             <div class="term-prompt"><span class="term-prompt-symbol">$</span><span class="term-prompt-input">deploy dashboard</span></div>
             <div class="term-line term-line--success">✓ Deployed</div>
-            <div class="attach-row" style="padding:var(--space4) 0;"><a class="attach-artifact attach-artifact--lg" href="#"><div class="attach-artifact-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><div class="attach-artifact-info"><span class="attach-artifact-name">Analytics Dashboard</span><span class="attach-artifact-meta">analytics.fork.site</span></div><span class="attach-artifact-badge"><span class="term-badge term-badge--success">live</span></span></a></div>
-            <div class="term-spacer"></div>
+            <div class="attach-row"><a class="attach-artifact attach-artifact--lg" href="#"><div class="attach-artifact-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><div class="attach-artifact-info"><span class="attach-artifact-name">Analytics Dashboard</span><span class="attach-artifact-meta">analytics.fork.site</span></div><span class="attach-artifact-badge"><span class="term-badge term-badge--success">live</span></span></a></div>
             <div class="term-prompt"><span class="term-prompt-user">@julia</span><span class="term-prompt-symbol">$</span><span class="term-prompt-input">share portfolio</span></div>
-            <div class="attach-row" style="padding:var(--space4) 0;"><a class="attach-artifact attach-artifact--lg" href="#"><div class="attach-artifact-icon" style="background: var(--systemGreen);"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div><div class="attach-artifact-info"><span class="attach-artifact-name">Portfolio Site</span><span class="attach-artifact-meta">julia.fork.site</span></div></a></div>
+            <div class="attach-row"><a class="attach-artifact attach-artifact--lg" href="#"><div class="attach-artifact-icon" style="background: var(--systemGreen);"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div><div class="attach-artifact-info"><span class="attach-artifact-name">Portfolio Site</span><span class="attach-artifact-meta">julia.fork.site</span></div></a></div>
           </div>
         </div>
       </div>
@@ -1873,10 +1803,7 @@
     <div class="usage">
       <div class="usage-title">Platform notes</div>
       <ul class="usage-list">
-        <li><span class="tag tag--ios">iOS</span> Data model: <code class="code-inline">message.widget = .artifact(name:, url:, badge:)</code> — NOT in <code class="code-inline">message.attachments</code>. Icon shape: <code class="code-inline">UISmoothCornerPath</code> (continuous corner) at radius14 to match native app icon. Accepts <code class="code-inline">UIImage</code> or SF Symbol at 24pt.</li>
-        <li><span class="tag tag--android">Android</span> Data model: <code class="code-inline">message.widget = Widget.Artifact(...)</code> — NOT in <code class="code-inline">message.attachments</code>. Icon shape: <code class="code-inline">RoundedCornerShape(14.dp)</code>. Accepts <code class="code-inline">ImageVector</code> or <code class="code-inline">Painter</code> at 24dp.</li>
-        <li><span class="tag tag--web">Web</span> Modifier <code class="code-inline">.attach-artifact--lg</code> overrides <code class="code-inline">--pill-h</code> and icon sizing via CSS custom properties. No JS needed.</li>
-        <li><span class="tag tag--all">All</span> Artifact is a <strong>widget</strong> — it occupies the widget slot (below text), max one per message. Uses <code class="code-inline">.chat-attach-files</code> CSS markup for pill styling, but in the data model it is <code class="code-inline">widget: .artifact(...)</code>, NOT part of <code class="code-inline">attachments[]</code>. An artifact and a changeset cannot coexist in one message (both are widgets — split into two messages). Tap opens the artifact. Badge optional (live, draft, error).</li>
+        <li><span class="tag tag--all">All</span> Data model: <code class="code-inline">message.widget = .artifact(...)</code> — NOT in attachments. Tap opens artifact. Badge optional.</li>
       </ul>
     </div>
 
@@ -1959,7 +1886,6 @@
               <span class="chat-audio-time">0:18</span>
             </div>
 
-            <div class="term-spacer"></div>
             <div class="term-prompt"><span class="term-prompt-symbol">$</span><span class="term-prompt-input">play recording.m4a</span></div>
             <!-- Not played -->
             <div class="term-audio">
@@ -2009,8 +1935,6 @@
         <li><span class="token">.term-audio</span><span class="dash">/</span>Audio player in terminal context. Standalone block with tertiarySystemFill background.</li>
         <li><span class="token">.is-played</span><span class="dash">/</span>Applied to each bar that has been played. Progress fills left-to-right as playback advances.</li>
         <li><strong>States:</strong> not-played (play icon, all bars uncolored, total duration), playing (pause icon, bars fill left-to-right, elapsed time), played (play icon, all bars colored, total duration).</li>
-        <li><strong>With text:</strong> text goes in the bubble above, audio widget below — standard widget pattern (like link preview after text).</li>
-        <li><strong>Widget slot:</strong> audio occupies the widget slot. Cannot coexist with other widgets (link preview, changeset, artifact) in the same message.</li>
         <li><strong>Not for:</strong> audio files (music, podcasts, sound effects) — use file pill with audio icon. Not for transcription — that's text content.</li>
       </ul>
     </div>
@@ -2018,10 +1942,7 @@
     <div class="usage">
       <div class="usage-title">Platform notes</div>
       <ul class="usage-list">
-        <li><span class="tag tag--ios">iOS</span> Playback: <code class="code-inline">AVAudioPlayer</code>. Waveform: <code class="code-inline">CAShapeLayer</code> with bar paths or custom <code class="code-inline">UIView.draw(_:)</code>. Play/pause: <code class="code-inline">UIButton</code> with spring animation on state change. Extend hit area to 44pt via <code class="code-inline">point(inside:with:)</code> override or <code class="code-inline">contentEdgeInsets</code>.</li>
-        <li><span class="tag tag--android">Android</span> Playback: <code class="code-inline">MediaPlayer</code> or <code class="code-inline">ExoPlayer</code>. Waveform: <code class="code-inline">Canvas.drawRoundRect()</code> per bar in custom <code class="code-inline">View</code>, or Compose <code class="code-inline">Canvas</code> composable. Play button: <code class="code-inline">IconButton(modifier = Modifier.size(44.dp))</code> for touch target.</li>
-        <li><span class="tag tag--web">Web</span> Playback: <code class="code-inline">HTMLAudioElement</code> API. Waveform bars: <code class="code-inline">&lt;span&gt;</code> elements with <code class="code-inline">--h</code> custom property. Toggle <code class="code-inline">.is-played</code> per bar on <code class="code-inline">timeupdate</code> event. No audio analysis needed at render — waveform data comes from server.</li>
-        <li><span class="tag tag--all">All</span> Waveform data = peak amplitudes sampled from audio file (typically 25–40 samples, normalized 0–100%). Play button effective tap target ≥ 44pt — 36px button + 12px widget padding = 48px touchable area. Data model: <code class="code-inline">message.widget = .audio(url, duration, waveform)</code> — NOT in <code class="code-inline">attachments[]</code>. Occupies widget slot (max 1 per message).</li>
+        <li><span class="tag tag--all">All</span> Waveform data: 25-40 peak amplitude samples, normalized 0-100%. Play button tap target >= 44pt. Data model: <code class="code-inline">message.widget = .audio(...)</code> — NOT in attachments.</li>
       </ul>
     </div>
 
@@ -2175,10 +2096,7 @@
     <div class="usage">
       <div class="usage-title">Platform notes</div>
       <ul class="usage-list">
-        <li><span class="tag tag--ios">iOS</span> Use a <code class="code-inline">UIButton</code> with <code class="code-inline">.plain</code> style inside a full-width container, centered with auto layout. Background: semantic color at 10% via <code class="code-inline">UIColor.systemRed.withAlphaComponent(0.1)</code>. Corner radius: <code class="code-inline">.capsule</code> (continuous corners, equivalent to <code class="code-inline">radiusFull</code>). Min height 44pt is the default tap target — enforce via height constraint. Use <code class="code-inline">UIButton.Configuration</code> for icon + title + chevron layout.</li>
-        <li><span class="tag tag--android">Android</span> Compose: <code class="code-inline">Surface(onClick, shape = RoundedCornerShape(50%), color = destructive.copy(alpha = 0.1f))</code> with <code class="code-inline">Row(verticalAlignment = CenterVertically)</code> inside. Min height <code class="code-inline">44.dp</code>. Center in parent via <code class="code-inline">Modifier.align(CenterHorizontally)</code>. Ripple indication on tap.</li>
-        <li><span class="tag tag--web">Web</span> Use <code class="code-inline">&lt;a&gt;</code> or <code class="code-inline">&lt;button&gt;</code> for the banner element. Wrap in <code class="code-inline">.chat-msg.chat-msg--system</code> for centering. Hover/active states handled in CSS. Add <code class="code-inline">role="link"</code> if using <code class="code-inline">&lt;div&gt;</code>.</li>
-        <li><span class="tag tag--all">All</span> Banners live in the message stream at the system level — they have no sender. Position: between messages, centered in chat, full-width in terminal. The chevron is a visual affordance only — the entire surface is the tap target, not the chevron.</li>
+        <li><span class="tag tag--all">All</span> System-level — no sender. Centered in chat, full-width in terminal. Entire surface is tap target. Min height 44pt.</li>
       </ul>
     </div>
 
@@ -2273,7 +2191,6 @@
                 </div>
               </div>
             </div>
-            <div class="term-line term-line--stdout"></div>
             <div class="term-prompt"><span class="term-prompt-user">@julia</span><span class="term-prompt-symbol">$</span><span class="term-prompt-input">share docs</span></div>
             <div class="attach-row">
               <div class="attach-artifact">
@@ -2316,19 +2233,14 @@
       <ul class="usage-list">
         <li><span class="token">.chat-attach-media</span><span class="dash">/</span>Media carousel. Agent: full-width flat. Peer/user: inside bubble.</li>
         <li><span class="token">.chat-attach-files</span><span class="dash">/</span>Vertical file pill list. Max 320px. Radius10 pills with fontText.</li>
-        <li><span class="token">.chat-msg-bubble--media</span><span class="dash">/</span>Single media bubble. Image edge-to-edge, text below with padding.</li>
-        <li><span class="token">.chat-msg-bubble--media-scroll</span><span class="dash">/</span>Multi-media bubble. 70% thumb width, peek 30% of next.</li>
         <li><strong>Agent flat:</strong> media + files not inside bubble, scroll full chat width.</li>
-        <li><strong>Terminal:</strong> horizontal waterfall in <code class="code-inline">.attach-row</code>. Files are compact pills in 2-row columns.</li>
+        <li><strong>Terminal:</strong> horizontal waterfall in <code class="code-inline">.attach-row</code>. Files are compact pills in 2-row columns. Thumb size differs: chat = 280px, terminal = 48px (<code class="code-inline">--pill-h</code>).</li>
       </ul>
     </div>
     <div class="usage">
       <div class="usage-title">Platform notes</div>
       <ul class="usage-list">
-        <li><span class="tag tag--ios">iOS</span> Chat: <code class="code-inline">PHPickerViewController</code> for media. File pills: self-sizing <code class="code-inline">UICollectionViewCell</code>. Terminal: <code class="code-inline">UICollectionView</code> horizontal flow.</li>
-        <li><span class="tag tag--android">Android</span> Chat: <code class="code-inline">ActivityResultContracts.GetContent()</code>. Pills: <code class="code-inline">AssistChip</code>. Terminal: <code class="code-inline">LazyRow</code>.</li>
-        <li><span class="tag tag--web">Web</span> Chat: hidden <code class="code-inline">&lt;input type="file"&gt;</code>. <code class="code-inline">overflow-x: auto</code> + hidden scrollbar on carousel.</li>
-        <li><span class="tag tag--all">All</span> Any sender can attach any file type. Unknown types = file pill. Thumb size differs: chat = 280px, terminal = 48px (<code class="code-inline">--pill-h</code>).</li>
+        <li><span class="tag tag--all">All</span> Thumb size: chat = 280px, terminal = 48px (<code class="code-inline">--pill-h</code>).</li>
       </ul>
     </div>
   </div>
@@ -2452,11 +2364,10 @@
                 </div>
               </div>
             </div>
-            <div class="term-spacer"></div>
 
             <!-- Media generating -->
             <div class="term-prompt"><span class="term-prompt-symbol">$</span><span class="term-prompt-input">generate hero image</span></div>
-            <div class="attach-row attach-row--lg" style="padding: var(--space8) 0;">
+            <div class="attach-row attach-row--lg">
               <div class="attach-thumb attach-thumb--generating" style="aspect-ratio: 16/9;">
                 <span class="attach-thumb-label">Generating...</span>
               </div>
@@ -2507,10 +2418,7 @@
     <div class="usage">
       <div class="usage-title">Platform notes</div>
       <ul class="usage-list">
-        <li><span class="tag tag--ios">iOS</span> Media bubble: <code class="code-inline">AsyncImage</code> with <code class="code-inline">.clipShape()</code> matching bubble. Generating: <code class="code-inline">.opacity</code> animation with shimmer gradient.</li>
-        <li><span class="tag tag--android">Android</span> Media: <code class="code-inline">AsyncImage</code> with <code class="code-inline">Modifier.clip()</code>. Scroll: <code class="code-inline">LazyRow</code> with 70% width items.</li>
-        <li><span class="tag tag--web">Web</span> Media bubble: <code class="code-inline">overflow: hidden</code> on bubble clips image to border-radius. Generating: CSS <code class="code-inline">@keyframes</code> opacity pulse.</li>
-        <li><span class="tag tag--all">All</span> Aspect ratio is preserved — never crop or stretch media. If aspect ratio is unknown at load time, render a 4:3 placeholder; once dimensions resolve, animate to actual ratio (easeFluent 0.25s). Generating state must be visually distinct from loaded state.</li>
+        <li><span class="tag tag--all">All</span> Preserve aspect ratio — never crop or stretch. Unknown ratio: 4:3 placeholder, animate to actual on load.</li>
       </ul>
     </div>
   </div>
@@ -2654,10 +2562,7 @@
     <div class="usage">
       <div class="usage-title">Platform notes</div>
       <ul class="usage-list">
-        <li><span class="tag tag--ios">iOS</span> Composer: <code class="code-inline">UITextView</code> with auto-growing height. Send: <code class="code-inline">UIButton</code> with outgoing-bubble color fill (not systemBlue — see Chat Bubbles notes). Safe area: input sits above home indicator via <code class="code-inline">safeAreaLayoutGuide.bottomAnchor</code>.</li>
-        <li><span class="tag tag--android">Android</span> Composer: <code class="code-inline">BasicTextField</code> with <code class="code-inline">Modifier.heightIn(min = 44.dp)</code>. Send: <code class="code-inline">IconButton</code>. Bottom inset: <code class="code-inline">WindowInsets.ime</code> + <code class="code-inline">WindowInsets.navigationBars</code>.</li>
-        <li><span class="tag tag--web">Web</span> Composer: <code class="code-inline">&lt;textarea&gt;</code> with JS auto-resize. Terminal: <code class="code-inline">keydown</code> handler on <code class="code-inline">.term-surface[tabindex]</code>. Bottom safe area: <code class="code-inline">env(safe-area-inset-bottom)</code>.</li>
-        <li><span class="tag tag--all">All</span> Input must stay above keyboard on mobile. Composer min tap target: 44pt. Terminal cursor blinks at 1s via <code class="code-inline">steps(2)</code>, pauses while typing.</li>
+        <li><span class="tag tag--all">All</span> Input must stay above keyboard on mobile. Composer min tap target: 44pt.</li>
       </ul>
     </div>
   </div>
@@ -2782,16 +2687,12 @@
             <div class="term-changeset"><div class="term-changeset-header"><span class="term-changeset-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 3v2m0 14v2m-7.07-3.93l1.41-1.41m9.9-9.9l1.41-1.41M3 12h2m14 0h2m-3.93 7.07l-1.41-1.41M6.34 6.34L4.93 4.93"/></svg></span><span class="term-changeset-id">f4a1b2c</span><span class="term-changeset-seq">#1</span></div><div class="term-changeset-msg">Initial weather dashboard</div><div class="term-changeset-files"><span class="term-changeset-file">api.js</span><span class="term-changeset-file">dashboard.html</span></div></div>
 
             <!-- Agent: artifact (large — created app) -->
-            <div class="attach-row" style="padding:var(--space4) 0;"><a class="attach-artifact attach-artifact--lg" href="#"><div class="attach-artifact-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><div class="attach-artifact-info"><span class="attach-artifact-name">Weather Dashboard</span><span class="attach-artifact-meta">weather.fork.site</span></div><span class="attach-artifact-badge"><span class="term-badge term-badge--success">live</span></span></a></div>
-
-            <div class="term-line term-line--stdout"></div>
+            <div class="attach-row"><a class="attach-artifact attach-artifact--lg" href="#"><div class="attach-artifact-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><div class="attach-artifact-info"><span class="attach-artifact-name">Weather Dashboard</span><span class="attach-artifact-meta">weather.fork.site</span></div><span class="attach-artifact-badge"><span class="term-badge term-badge--success">live</span></span></a></div>
 
             <!-- Peer: fix colors -->
             <div class="term-prompt"><span class="term-prompt-user">@julia</span><span class="term-prompt-path">~/weather-dash</span><span class="term-prompt-symbol">$</span><span class="term-prompt-input">fix the temperature colors</span></div>
             <details class="term-fold"><summary><span class="term-fold-icon">&#9889;</span> <span class="term-fold-tool">Edit</span> <span>styles.css:14</span> <span class="term-badge term-badge--success">done</span></summary><div class="term-fold-body"><div class="term-block"><div class="term-line term-diff-del">-  --tempHot: #FF6B35;</div><div class="term-line term-diff-add">+  --tempHot: #E05248;</div></div></div></details>
             <div class="term-line term-line--success">✓ Colors updated</div>
-
-            <div class="term-line term-line--stdout"></div>
 
             <!-- User: next task → thinking -->
             <div class="term-prompt"><span class="term-prompt-symbol">$</span><span class="term-prompt-input">add wind speed overlay</span></div>
@@ -2815,19 +2716,7 @@
     <div class="usage">
       <div class="usage-title">When to use</div>
       <ul class="usage-list">
-        <li><strong>Chat anatomy per message:</strong> attachments → folds → text → widget. At most 1 widget. Folds are inline metadata, not widgets. Text + changeset = OK. Text + widget = OK. Text + changeset + widget = split into 2 messages.</li>
-        <li><strong>Terminal flow:</strong> prompt → folds → steps → prose → changeset / activity → artifact. All in one continuous stream. No message boundary — output flows naturally.</li>
-        <li><strong>Peer in chat:</strong> media inside bubble (single = edge-to-edge). Peer in terminal: <code class="code-inline">@julia</code> username prefix.</li>
-        <li><strong>Grouping:</strong> consecutive user or peer messages from the same sender (&lt;60s) group (tight spacing, shared timestamp on last). Agent never groups.</li>
-      </ul>
-    </div>
-    <div class="usage">
-      <div class="usage-title">Platform notes</div>
-      <ul class="usage-list">
-        <li><span class="tag tag--ios">iOS</span> Chat: <code class="code-inline">UICollectionView</code> with self-sizing cells. Terminal: <code class="code-inline">NSAttributedString</code>-backed scroll view.</li>
-        <li><span class="tag tag--android">Android</span> Chat: <code class="code-inline">LazyColumn</code> with <code class="code-inline">reverseLayout = true</code>. Terminal: <code class="code-inline">LazyColumn</code> with auto-scroll.</li>
-        <li><span class="tag tag--web">Web</span> Chat: flex column, <code class="code-inline">overflow-y: auto</code>. Terminal: <code class="code-inline">.term-surface</code> with <code class="code-inline">scrollIntoView</code>.</li>
-        <li><span class="tag tag--all">All</span> Virtualize long sessions (&gt;500 items). Input stays above keyboard on mobile.</li>
+        <li>Complete session demonstrating all patterns from this page — message anatomy, terminal flow, grouping, attachments, widgets, and peer interaction.</li>
       </ul>
     </div>
   </div>
